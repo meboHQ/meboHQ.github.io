@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">WebResponse | Mebo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
+<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+  <a href="./">Home</a>
+  <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
+  
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/meboHQ/mebo" class="repo-url-github">Mebo&nbsp;GitHub</a>
+  <div class="search-box">
+  <span>
+    <img src="data/docs/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Input.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Reader.js~Reader.html">Reader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Session.js~Session.html">Session</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Settings.js~Settings.html">Settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NoContent.js~NoContent.html">NoContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/CommandLine.js~CommandLine.html">CommandLine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/Web.js~Web.html">Web</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Any.js~Any.html">Any</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Bool.js~Bool.html">Bool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Buf.js~Buf.html">Buf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Email.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/FilePath.js~FilePath.html">FilePath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hash.js~Hash.html">Hash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hex.js~Hex.html">Hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Ip.js~Ip.html">Ip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Numeric.js~Numeric.html">Numeric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Url.js~Url.html">Url</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Version.js~Version.html">Version</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html">CommandLineArgs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html">CommandLineOutput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/LruCache.js~LruCache.html">LruCache</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="header-notice">
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import WebResponse from &apos;<span><a href="file/src/Ext/Writers/WebResponse.js.html#lineNumber59">mebo/src/Ext/Writers/WebResponse.js</a></span>&apos;</code></pre></div>
+  <span data-ice="access">public</span>
+  <span data-ice="kind">class</span>
+  
+  
+  
+  <span data-ice="source">| <span><a href="file/src/Ext/Writers/WebResponse.js.html#lineNumber59">source</a></span></span>
+</div>
+
+<div class="self-detail detail">
+  <h1 data-ice="name">WebResponse</h1>
+
+  
+
+  
+  
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="class/src/Writer.js~Writer.html">Writer</a></span> &#x2192; WebResponse</div></div>
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <div class="description" data-ice="description"><p>Web output writer.</p>
+<p>This writer is used by the output of the web handler (<span><a href="class/src/Ext/Handlers/Web.js~Web.html">Web</a></span>).</p>
+<p>In case the value is an exception then it&apos;s treated as
+<span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-_errorOutput">WebResponse._errorOutput</a></span> otherwise the value is treated as
+<span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-_successOutput">WebResponse._successOutput</a></span>.</p>
+<p></p><h2>Options Summary</h2>
+
+<p></p>
+<table>
+<thead>
+<tr>
+<th>Option Name</th>
+<th>Description</th>
+<th style="text-align:center">Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>headers</td>
+<td>plain object containing the header names (in camel case convention)  that should be used in the response</td>
+<td style="text-align:center"><code>{}</code></td>
+</tr>
+<tr>
+<td>headersOnly</td>
+<td>if enabled ends the response without any data</td>
+<td style="text-align:center"><img src="data/docs/value/false.png" title="false"></td>
+</tr>
+<tr>
+<td>successStatus</td>
+<td>success status code (the error status code is driven by the  status defined as a member of the exception)</td>
+<td style="text-align:center"><code>200</code></td>
+</tr>
+<tr>
+<td>root</td>
+<td>plain object that gets deep merged at the root of the json output of a success result, for instance:<br><code>{data: {...}, &lt;rootContentsA&gt;: ...,  &lt;rootContentsB&gt; : ...}</code></td>
+<td style="text-align:center"><code>{}</code></td>
+</tr>
+<tr>
+<td>result</td>
+<td>Overrides the value returned by <span><a href="class/src/Writer.js~Writer.html#instance-method-value">Writer.value</a></span> to an  arbitrary value (only affects the success output)</td>
+<td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
+</tr>
+<tr>
+<td>resultLabel</td>
+<td>custom label used by the success output when the value is  serialized using json. This label is used to hold the result  under data, for instance:<br><code>{data: {&lt;resultLabel&gt;: value}}</code><br><br>In case of  undefined (default) then a fallback label is used based on the value type:  <br>- primitive values are held under &apos;value&apos;  <br>- array value is held under &apos;items&apos;  <br>- object is assigned with <code>null</code>  <br>* when a <code>null</code> label is used, the value gets merged to the  result.data</td>
+<td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
+</tr>
+</tbody>
+</table>
+<p><br>When defining options through the metadata support, it can done using
+<code>metadata variables</code>. Mebo comes bundled with pre-defined metadata variables
+for most of the options available for the readers &amp; writers. The complete list
+of metadata variables can be found at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> documentation.</p>
+<p>Example of defining the <code>headers</code> option from inside of an action through
+the metadata support:</p>
+<pre><code><code class="source-code prettyprint">// defining &apos;Content-Type&apos; header
+class MyAction extends Mebo.Action{
+   _perform(data){
+
+     // &apos;Content-Type&apos; header
+     this.setMetadata(&apos;$webHeaders&apos;, {
+       contentType: &apos;application/octet-stream&apos;,
+     });
+
+     // ...
+   }
+}</code>
+</code></pre><p>Also, headers can be defined through &apos;before action middlewares&apos;
+(<span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAction">Web.addBeforeAction</a></span> and <span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAuthAction">Web.addBeforeAuthAction</a></span>)</p>
+</div>
+  
+
+  
+
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+<div data-ice="methodSummary"><h2>Method Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Methods</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-response">response</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Returns the response object created by express</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-setResponse">setResponse</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Sets the response object created by express</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+<table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Protected Methods</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-_errorOutput">_errorOutput</a></span></span><span data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Implements the response for an error value.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-_successOutput">_successOutput</a></span></span><span data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Implements the response for a success value.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div class="inherited-summary" data-ice="inheritedSummary"><h2>Inherited Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3"><span class="toggle closed"></span> From class <span><a href="class/src/Writer.js~Writer.html">Writer</a></span></td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Writer.js~Writer.html#instance-method-option">option</a></span></span><span data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, defaultValue: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Returns an option</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Writer.js~Writer.html#instance-method-serialize">serialize</a></span></span><span data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Serializes a writer value (<span><a href="class/src/Writer.js~Writer.html#instance-method-value">Writer.value</a></span>) in case the value is an
+exception it&apos;s serialize as <span><a href="class/src/Writer.js~Writer.html#instance-method-_errorOutput">Writer._errorOutput</a></span> otherwise it&apos;s serialized
+as <span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput">Writer._successOutput</a></span>.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Writer.js~Writer.html#instance-method-setOption">setOption</a></span></span><span data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, value: <span>*</span>, merge: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Sets a value under the options</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Writer.js~Writer.html#instance-method-value">value</a></span></span><span data-ice="signature">(): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Returns the value that should be serialized (<span><a href="class/src/Writer.js~Writer.html#instance-method-serialize">Writer.serialize</a></span>) by the writer.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Writer.js~Writer.html#instance-method-_errorOutput">_errorOutput</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Translates an <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> to a data structure that is later serialized by a writer
+implementation as output.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput">_successOutput</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span> | <span><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Translates the success value to a data structure that is later serialized
+by a handler implementation as output.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+<div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-response">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">response</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Ext/Writers/WebResponse.js.html#lineNumber90">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Returns the response object created by express</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="http://expressjs.com/en/api.html#res">http://expressjs.com/en/api.html#res</a></span></li></ul></div>
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setResponse">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">setResponse</span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Ext/Writers/WebResponse.js.html#lineNumber80">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Sets the response object created by express</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">value</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>res object</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="http://expressjs.com/en/api.html#res">http://expressjs.com/en/api.html#res</a></span></li></ul></div>
+  
+</div>
+<h2 data-ice="title">Protected Methods</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-_errorOutput">
+    <span class="access" data-ice="access">protected</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">_errorOutput</span><span data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Ext/Writers/WebResponse.js.html#lineNumber112">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Implements the response for an error value.</p>
+<p>Any error can carry a HTTP status code. It is done by defining <code>status</code> to any error
+(for instance <code>err.status = 501;</code>).
+This practice can be found in all errors shipped with mebo (<span><a href="class/src/Error/Conflict.js~Conflict.html">Conflict</a></span>, <span><a href="class/src/Error/NoContent.js~NoContent.html">NoContent</a></span>,
+<span><a href="class/src/Error/NotFound.js~NotFound.html">NotFound</a></span> and <span><a href="class/src/Error/ValidationFail.js~ValidationFail.html">ValidationFail</a></span>). In case none status is found in the error then <code>500</code>
+is used automatically.</p>
+<p>The error response gets automatically encoded using json, following the basics
+of google&apos;s json style guide. In case of an error status <code>500</code> the standard
+result is ignored and a message <code>Internal Server Error</code> is used instead.</p>
+<p>Further information can be found at base class documentation
+<span><a href="class/src/Writer.js~Writer.html#instance-method-_errorOutput">Writer._errorOutput</a></span>.</p>
+</div>
+
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/Writer.js~Writer.html#instance-method-_errorOutput">Writer#_errorOutput</a></span></div>
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-_successOutput">
+    <span class="access" data-ice="access">protected</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">_successOutput</span><span data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Ext/Writers/WebResponse.js.html#lineNumber154">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Implements the response for a success value.</p>
+<p>A readable stream value is piped using &apos;application/octet-stream&apos; by default
+(if it has not been defined by the header option &apos;contentType&apos;),
+otherwise for non-readable stream value it&apos;s automatically encoded
+using json, following the basics of google&apos;s json style guide.</p>
+<p>Further information can be found at base class documentation
+<span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput">Writer._successOutput</a></span>.</p>
+</div>
+
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput">Writer#_successOutput</a></span></div>
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="https://google.github.io/styleguide/jsoncstyleguide.xml">https://google.github.io/styleguide/jsoncstyleguide.xml</a></span></li></ul></div>
+  
+</div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/Session.js | Mebo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
+<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+  <a href="./">Home</a>
+  <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
+  
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/meboHQ/mebo" class="repo-url-github">Mebo&nbsp;GitHub</a>
+  <div class="search-box">
+  <span>
+    <img src="data/docs/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Input.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Reader.js~Reader.html">Reader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Session.js~Session.html">Session</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Settings.js~Settings.html">Settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NoContent.js~NoContent.html">NoContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/CommandLine.js~CommandLine.html">CommandLine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/Web.js~Web.html">Web</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Any.js~Any.html">Any</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Bool.js~Bool.html">Bool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Buf.js~Buf.html">Buf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Email.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/FilePath.js~FilePath.html">FilePath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hash.js~Hash.html">Hash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hex.js~Hex.html">Hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Ip.js~Ip.html">Ip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Numeric.js~Numeric.html">Numeric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Url.js~Url.html">Url</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Version.js~Version.html">Version</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html">CommandLineArgs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html">CommandLineOutput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/LruCache.js~LruCache.html">LruCache</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Session.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const assert = require(&apos;assert&apos;);
+const TypeCheck = require(&apos;js-typecheck&apos;);
+const Tasks = require(&apos;./Tasks&apos;);
+const Settings = require(&apos;./Settings&apos;);
+const LruCache = require(&apos;./Util/LruCache&apos;);
+
+// symbols used for private instance variables to avoid any potential clashing
+// caused by re-implementations
+const _arbitraryData = Symbol(&apos;arbitraryData&apos;);
+const _autofill = Symbol(&apos;autofill&apos;);
+const _wrapup = Symbol(&apos;wrapup&apos;);
+const _resultCache = Symbol(&apos;resultCache&apos;);
+const _terminated = Symbol(&apos;terminated&apos;);
+
+
+/**
+ * A session is used to store the data shared between actions.
+ *
+ * This object is created automatically by {@link Handler.create} and
+ * {@link Action.create}.
+ */
+class Session{
+
+  /**
+   * Creates a session
+   *
+   * @param {Tasks} [wrapup] - task object used to hold actions and promises that are triggered
+   * when finalizing ({@link finalize}) the session
+   * @param {LruCache} [resultCache] - cache used to store results of cacheable actions
+   */
+  constructor(wrapup=null, resultCache=null){
+
+    assert(wrapup === null || wrapup instanceof Tasks, &apos;wrapup needs to defined with a Tasks object or null&apos;);
+    assert(resultCache === null || resultCache instanceof LruCache, &apos;resultCache needs to defined with a LruCache object or null&apos;);
+
+    this[_wrapup] = wrapup || new Tasks();
+    this[_resultCache] = resultCache || new LruCache(Settings.get(&apos;session/lruCacheSize&apos;), Settings.get(&apos;session/lruCacheLifespan&apos;) * 1000);
+    this[_terminated] = false;
+
+    // container used to store autofill values inside of the session
+    this[_autofill] = {};
+
+    // generic container used to store arbitrary inside of the session
+    this[_arbitraryData] = {};
+  }
+
+  /**
+   * Returns the tasks object used to hold actions and promises that are triggered
+   * when finalizing ({@link finalize}) the session. Wrapup actions can be used to avoid
+   * the execution of an action that may be triggered multiple times across
+   * nested actions where ideally it should be executed only once in the end,
+   * after all nested actions are done.
+   *
+   * @return {Tasks}
+   */
+  wrapup(){
+    return this[_wrapup];
+  }
+
+  /**
+   * Returns the {@link LruCache} cache used to store results of cacheable actions
+   *
+   * @return {LruCache}
+   */
+  resultCache(){
+    return this[_resultCache];
+  }
+
+  /**
+   * Returns a value under the autofill data.
+   *
+   * This feature is used to set the initial input value for inputs that contain the `autofill`
+   * property. It works by looking if the value of the autofill input&apos;s property is under the
+   * {@link Session.autofill} then if found it sets the input value with the value of the
+   * {@link Session.autofill}. This process occurs when a session is assigned to the action
+   * ({@link Action.setSession}).
+   *
+   * When inputs that contain the property `autofill` are initialized through the
+   * {@link Handler} they will try to find their values under the autofill,
+   * however if a value is not defined for them they will assign their input value
+   * to the autofill data automatically.
+   *
+   * @param {string} key - key name used to query the autofill value
+   * @param {*} [defaultValue] - optional default value returned in case
+   * the key does not exist
+   * @return {*}
+   */
+  autofill(key, defaultValue=undefined){
+    assert(TypeCheck.isString(key), &apos;key needs to defined as string&apos;);
+
+    if (key in this[_autofill]){
+      return this[_autofill][key];
+    }
+
+    return defaultValue;
+  }
+
+  /**
+   * Returns a boolean telling if the key exists under the autofill data.
+   *
+   * @param {string} key - key name
+   * @return {boolean}
+   */
+  hasAutofill(key){
+    return (key in this[_autofill]);
+  }
+
+  /**
+   * Sets a key &amp; value under the autofill data
+   *
+   * @param {string} key - key name
+   * @param {*} value - value associated with the key
+   *
+   * @see {@link Session.autofill}
+   */
+  setAutofill(key, value){
+    assert(TypeCheck.isString(key), &apos;key needs to defined as string&apos;);
+
+    this[_autofill][key] = value;
+  }
+
+  /**
+   * Returns the keys included in the autofill data
+   *
+   * @return {Array&lt;string&gt;}
+   */
+  autofillKeys(){
+    return Object.keys(this[_autofill]);
+  }
+
+  /**
+   * Sets a key &amp; value under the arbitrary data. This is used to store data
+   * that may be only available in specific handlers, for instance the
+   * request object created by express is assigned to the session through this
+   * method by the web handler.
+   *
+   * @param {string} key - name of the key
+   * @param {*} value - value for the key
+   */
+  set(key, value){
+    assert(TypeCheck.isString(key), &apos;key needs to defined as string&apos;);
+
+    this[_arbitraryData][key] = value;
+  }
+
+  /**
+   * Returns an value assigned for the key inside of the arbitrary data
+   *
+   * @param {string} key - name of the key
+   * @param {*} [defaultValue] - optional value returned when the key is not assigned
+   * @return {*}
+   */
+  get(key, defaultValue=undefined){
+    if (key in this[_arbitraryData]){
+      return this[_arbitraryData][key];
+    }
+
+    return defaultValue;
+  }
+
+  /**
+   * Returns a boolean telling if the input key is under the arbitrary data
+   *
+   * @param {string} key - key name
+   * @return {boolean}
+   */
+  has(key){
+    return (key in this[_arbitraryData]);
+  }
+
+  /**
+   * Returns the keys included in the arbitrary data
+   *
+   * @return {Array&lt;string&gt;}
+   */
+  keys(){
+    return Object.keys(this[_arbitraryData]);
+  }
+
+  /**
+   * Terminates the session by executing the {@link wrapup}
+   * tasks and flushing the {@link lruCache}.
+   *
+   * This is called by the {@link Handler} during the execution of
+   * {@link Handler.output}.
+   *
+   * @return {Promise}
+   */
+  async finalize(){
+
+    if (this[_terminated]){
+      throw new Error(&apos;Session has been already finalized!&apos;);
+    }
+
+    this[_terminated] = true;
+    const wrapup = this.wrapup();
+    if (!wrapup.isEmpty()){
+
+      await wrapup.execute();
+      wrapup.clear();
+    }
+
+    this.resultCache().flush();
+
+    return true;
+  }
+
+  /**
+   * Returns a cloned version of the current session where all autofill
+   * and arbitrary data are transferred to the cloned version.
+   *
+   * This feature is used by the actions during the session assignment
+   * ({@link Action.setSession}) to prevent that modifications done in the session
+   * of nested actions reflect back in the session used by the parent actions.
+   * Therefore, acting as scope for changes in the autofill &amp; arbitrary data.
+   *
+   * The current wrapup and resultCache are also assigned to the cloned version.
+   *
+   * @return {Session}
+   */
+  clone(){
+    const result = new Session(this.wrapup(), this.resultCache());
+
+    // transferring autofill data
+    for (const autofillKey in this[_autofill]){
+      result.setAutofill(autofillKey, this[_autofill][autofillKey]);
+    }
+
+    // transferring arbitrary data
+    for (const arbitraryKey in this[_arbitraryData]){
+      result.set(arbitraryKey, this[_arbitraryData][arbitraryKey]);
+    }
+
+    return result;
+  }
+}
+
+// Setting the default settings:
+
+// lruCacheSize
+// Sets in bytes the size of the LRU cache available for the execution of actions.
+// (default: `20 mb`)
+Settings.set(&apos;session/lruCacheSize&apos;, 20 * 1012 * 1024);
+
+// lruCacheLifespan
+// Sets in seconds the amount of time that an item under LRU cache should
+// be kept alive. This cache is defined by {@link Session.resultCache}
+// (default: `10 seconds`)
+Settings.set(&apos;session/lruCacheLifespan&apos;, 10);
+
+module.exports = Session;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

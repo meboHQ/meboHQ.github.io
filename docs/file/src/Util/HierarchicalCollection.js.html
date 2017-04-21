@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/Util/HierarchicalCollection.js | Mebo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
+<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+  <a href="./">Home</a>
+  <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
+  
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/meboHQ/mebo" class="repo-url-github">Mebo&nbsp;GitHub</a>
+  <div class="search-box">
+  <span>
+    <img src="data/docs/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Input.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Reader.js~Reader.html">Reader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Session.js~Session.html">Session</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Settings.js~Settings.html">Settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NoContent.js~NoContent.html">NoContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/CommandLine.js~CommandLine.html">CommandLine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/Web.js~Web.html">Web</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Any.js~Any.html">Any</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Bool.js~Bool.html">Bool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Buf.js~Buf.html">Buf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Email.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/FilePath.js~FilePath.html">FilePath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hash.js~Hash.html">Hash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hex.js~Hex.html">Hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Ip.js~Ip.html">Ip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Numeric.js~Numeric.html">Numeric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Url.js~Url.html">Url</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Version.js~Version.html">Version</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html">CommandLineArgs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html">CommandLineOutput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/LruCache.js~LruCache.html">LruCache</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Util/HierarchicalCollection.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const assert = require(&apos;assert&apos;);
+const TypeCheck = require(&apos;js-typecheck&apos;);
+const deepMerge = require(&apos;./deepMerge&apos;);
+
+// symbols used for private instance variables to avoid any potential clashing
+// caused by re-implementations
+const _collection = Symbol(&apos;collection&apos;);
+
+
+/**
+ * Provides an interface to deal with data in a multi dimension plain object.
+ *
+ * It automatically creates the intermediate levels when assigning a value under
+ * nested levels to the collection. Also, if the value already exists
+ * under the collection then it allows the value to be merged with the
+ * existing values.
+ * @private
+ */
+class HierarchicalCollection{
+
+  /**
+   * Creates a new instance
+   */
+  constructor(){
+    this[_collection] = {};
+  }
+
+  /**
+   * Inserts a new value to the collection
+   *
+   * @param {string} path - path about where the value should be stored (the levels
+   * must be separated by &apos;.&apos;).
+   * @param {*} value - value that is going to be stored under the collection
+   * @param {boolean} [merge=true] - this option is used to decide in case of the
+   * last level is already existing under the collection, if the value should be
+   * either merged (default) or overridden.
+   */
+  insert(path, value, merge=true){
+    assert(TypeCheck.isString(path), &apos;path needs to be defined as string&apos;);
+    assert(path.length, &apos;path cannot be empty&apos;);
+    assert((/^([\w_\.\-])+$/gi).test(path), `Illegal path name: ${path}`); // eslint-disable-line no-useless-escape
+
+    let currentLevel = this[_collection];
+    let finalLevel = path;
+
+    // building the intermediate levels if necessary
+    if (path.indexOf(&apos;.&apos;) !== -1){
+      const levels = path.split(&apos;.&apos;);
+      for (const level of levels.slice(0, -1)){
+        if (!(level in currentLevel)){
+          currentLevel[level] = {};
+        }
+
+        currentLevel = currentLevel[level];
+      }
+      finalLevel = levels.slice(-1)[0];
+    }
+
+    // assigning value
+    if (merge &amp;&amp; TypeCheck.isPlainObject(value) &amp;&amp; finalLevel in currentLevel){
+      const merged = deepMerge(currentLevel[finalLevel], value);
+      Object.assign(currentLevel[finalLevel], merged);
+    }
+    else{
+      currentLevel[finalLevel] = value;
+    }
+  }
+
+  /**
+   * Returns a value under the collection
+   *
+   * @param {string} path - path about where the value is localized (the levels
+   * must be separated by &apos;.&apos;). In case of empty string the entire collection
+   * is returned.
+   * @param {*} [defaultValue] - default value returned in case a value was
+   * not found for the path
+   * @return {*}
+   */
+  query(path, defaultValue=undefined){
+    assert(TypeCheck.isString(path), &apos;path needs to be defined as string&apos;);
+
+    let currentLevel = this[_collection];
+
+    // returning the entire collection
+    if (!path.length){
+      return currentLevel;
+    }
+
+    // no intermediate levels
+    if (path.indexOf(&apos;.&apos;) === -1){
+      if (!(path in currentLevel)){
+        return defaultValue;
+      }
+      return currentLevel[path];
+    }
+
+    // otherwise find the value going through the intermediate levels
+    const levels = path.split(&apos;.&apos;);
+    for (const level of levels){
+      if (!(level in currentLevel)){
+        return defaultValue;
+      }
+
+      currentLevel = currentLevel[level];
+    }
+
+    return currentLevel;
+  }
+
+  /**
+   * Returns a list of the root levels
+   *
+   * @return {Array&lt;string&gt;}
+   */
+  root(){
+    return Object.keys(this[_collection]);
+  }
+}
+
+module.exports = HierarchicalCollection;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

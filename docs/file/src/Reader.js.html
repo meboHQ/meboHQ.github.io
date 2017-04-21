@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/Reader.js | Mebo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
+<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+  <a href="./">Home</a>
+  <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
+  
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/meboHQ/mebo" class="repo-url-github">Mebo&nbsp;GitHub</a>
+  <div class="search-box">
+  <span>
+    <img src="data/docs/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Input.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Reader.js~Reader.html">Reader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Session.js~Session.html">Session</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Settings.js~Settings.html">Settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NoContent.js~NoContent.html">NoContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/CommandLine.js~CommandLine.html">CommandLine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/Web.js~Web.html">Web</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Any.js~Any.html">Any</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Bool.js~Bool.html">Bool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Buf.js~Buf.html">Buf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Email.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/FilePath.js~FilePath.html">FilePath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hash.js~Hash.html">Hash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hex.js~Hex.html">Hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Ip.js~Ip.html">Ip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Numeric.js~Numeric.html">Numeric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Url.js~Url.html">Url</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Version.js~Version.html">Version</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html">CommandLineArgs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html">CommandLineOutput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/LruCache.js~LruCache.html">LruCache</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Reader.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const assert = require(&apos;assert&apos;);
+const TypeCheck = require(&apos;js-typecheck&apos;);
+const Action = require(&apos;./Action&apos;);
+const Util = require(&apos;./Util&apos;);
+
+// symbols used for private instance variables to avoid any potential clashing
+// caused by re-implementations
+const _action = Symbol(&apos;action&apos;);
+const _options = Symbol(&apos;options&apos;);
+const _result = Symbol(&apos;result&apos;);
+
+
+/**
+ * A reader is used by the handler during the execution ({@link Handler.execute})
+ * to query {@link Input} and {@link Session} information that is going be used
+ * during the execution of the action.
+ *
+ * In case of new implements the only method expected to be implemented is
+ * {@link Reader._perform}. Readers can have custom options
+ * ({@link Reader.setOption}). These options are passed from the handler to the reader
+ * during the execution ({@link Handler.execute}).
+ *
+ * When a value is found for an input it&apos;s decoded using {@link Input.parseValue}
+ * where each input implementation has its own way of parsing the serialized data,
+ * to find out about how a value is serialized for an specific input type you could simply
+ * set an arbitrary value to an input then query it back through
+ * {@link Input.serializeValue}. The reference bellow shows the basic serialization
+ * for the inputs blundled with Mebo:
+ *
+ * Input Type | Scalar Serialization | Vector Serialization (compatible with JSON)
+ * --- | --- | ---
+ * {@link Text} | `&apos;value&apos;` | `&apos;[&quot;valueA&quot;,&quot;valueB&quot;]&apos;`
+ * {@link FilePath} | `&apos;/tmp/a.txt&apos;` | `&apos;[&quot;/tmp/a.txt&quot;,&quot;/tmp/b.txt&quot;]&apos;`
+ * {@link Bool} | `&apos;true`&apos; or `&apos;1&apos;` | `&apos;[true,false]&apos;` or `&apos;[1,0]&apos;`
+ * {@link Numeric} | `&apos;20&apos;` | `&apos;[20,30]&apos;`
+ * {@link Email} | `&apos;test@email.com&apos;` | `&apos;[&quot;test@email.com&quot;,&quot;test2@email.com&quot;]&apos;`
+ * {@link Ip} | `&apos;192.168.0.1&apos;` | `&apos;[&quot;192.168.0.1&quot;,&quot;192.168.0.2&quot;]&apos;`
+ * {@link Timestamp} | `&apos;2017-02-02T22:26:30.431Z&apos;` | \
+ * `&apos;[&quot;2017-02-02T22:26:30.431Z&quot;,&quot;2017-02-02T22:27:19.066Z&quot;]&apos;`
+ * {@link Url} | `&apos;http://www.google.com&apos;` | \
+ * `&apos;[&quot;http://www.google.com&quot;,&quot;http://www.wikipedia.com&quot;]&apos;`
+ * {@link Version} | `&apos;10.1.1&apos;` | `&apos;[&quot;10.1.1&quot;,&quot;10.2&quot;]&apos;`
+ * {@link Buf} | `&apos;aGVsbG8=&apos;` | `&apos;[&quot;aGVsbG8=&quot;,&quot;d29ybGQ=&quot;]&apos;`
+ * {@link Hex} | `&apos;ffff00&apos;` | `&apos;[&quot;ffff00&quot;,&quot;ff&quot;]&apos;`
+ * {@link Hash} | `&apos;d65709ab&apos;` | `&apos;[&quot;d65709ab&quot;,&quot;b94d6fe4&quot;]&apos;`
+ * {@link UUID} | `&apos;075054e0-810a-11e6-8c1d-e5fb28c699ca&apos;` | \
+ * `&apos;[&quot;075054e0-810a-11e6-8c1d-e5fb28c699ca&quot;,&quot;98e631d3-6255-402a-88bd-66056e1ca9df&quot;]&apos;`
+ *
+ * &lt;br/&gt;**Hidding inputs from readers:**
+ * A reader only sees inputs that are capable of serialization
+ * ({@link Input.isSerializable}) or visible inputs. Therefore, any input assigned
+ * with the property `hidden` is not visible by readers, for instance:
+ *
+ * ```
+ * class Example extends Mebo.Action{
+ *   constructor(){
+ *     super();
+ *     this.createInput(&apos;readerCantSeeMe: numeric&apos;, {hidden: true});
+ *     this.createInput(&apos;readerSeeMe: numeric&apos;);
+ *   }
+ * ```
+ */
+class Reader{
+
+  /**
+   * Creates a reader.
+   *
+   * @param {Action} action - action used for the querying of the value
+   */
+  constructor(action){
+    assert(action instanceof Action, &apos;Invalid action instance&apos;);
+
+    // note: currently reader &amp; writer are completely separated entities that don&apos;t
+    // have a common parent class (aka HandlerOperation). The reason for
+    // that is currently they are so distinctive from each other that the only member in
+    // common is the option. In case they start to share more characteristics in common
+    // then a base class should be created.
+
+    this[_action] = action;
+    this[_result] = null;
+    this[_options] = new Util.HierarchicalCollection();
+  }
+
+  /**
+   * Returns the action that is associated with the reader.
+   *
+   * @return {Action}
+   */
+  action(){
+    return this[_action];
+  }
+
+  /**
+   * Returns an option
+   *
+   * @param {string} path - path about where the option is localized (the levels
+   * must be separated by &apos;.&apos;). In case of an empty string it returns the
+   * entire options
+   * @param {*} [defaultValue] - default value returned in case a value was
+   * not found for the path
+   * @return {*}
+   */
+  option(path, defaultValue=undefined){
+    assert(TypeCheck.isString(path), &apos;path needs to be defined as string&apos;);
+    return this[_options].query(path, defaultValue);
+  }
+
+  /**
+   * Sets a value under the options
+   *
+   * @param {string} path - path about where the option should be stored under
+   * the options (the levels must be separated by &apos;.&apos;)
+   * @param {*} value - value that is going to be stored under the collection
+   * @param {boolean} [merge=true] - this option is used to decide in case of the
+   * last level is already existing under the collection, if the value should be
+   * either merged (default) or overridden.
+   */
+  setOption(path, value, merge=true){
+    assert(TypeCheck.isString(path), &apos;path needs to be defined as string&apos;);
+
+    this[_options].insert(path, value, merge);
+  }
+
+  /**
+   * Returns a list of valid input names that should be used for the parsing.
+   * This avoids hidden inputs to get exposed in the parsing.
+   *
+   * @return {Array&lt;string&gt;}
+   */
+  validInputNames(){
+
+    const inputs = [];
+    for (const inputName of this[_action].inputNames()){
+      const input = this[_action].input(inputName);
+
+      if (input.isSerializable() &amp;&amp; !input.property(&apos;hidden&apos;)){
+        inputs.push(input);
+      }
+    }
+
+    return inputs;
+  }
+
+  /**
+   * Reads the input values and returns it through a plain object.
+   *
+   * @return {Promise&lt;object&gt;}
+   */
+  async inputValues(){
+
+    if (!this[_result]){
+      await this._parse();
+    }
+
+    return this[_result];
+  }
+
+  /**
+   * Reads the autofill information and returns it through a plain object.
+   *
+   * If the autofill information is already assigned under autofill ({@link Action.session})
+   * then that information is skipped otherwise it adds the parsed information the result.
+   *
+   * @return {Promise&lt;Object&gt;}
+   */
+  async autofillValues(){
+    if (!this[_result]){
+      await this._parse();
+    }
+
+    const result = Object.create(null);
+    const action = this.action();
+    const session = action.session();
+    for (const inputName in this[_result]){
+
+      const autofillName = action.input(inputName).property(&apos;autofill&apos;);
+
+      if (autofillName){
+
+        // if the input name is already under autofill (assigned previously
+        // then not overriding them)
+        if (session &amp;&amp; session.hasAutofill(autofillName)){
+          continue;
+        }
+        result[autofillName] = this[_result][inputName];
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * This method should be re-implemented by derived classes to perform the handler parsing.
+   *
+   * It should return a plain object containing the input name and the value for that.
+   * Where any input value from either String or Array types are considered valid values that
+   * are later ({@link Reader.inputValues}, {@link Reader.autofillValues})
+   * used to parse the value of the input ({@link Input.parseValue}), otherwise the value
+   * is ignored.
+   *
+   * Only return the ones that were found by the parsing. Also, in case of any error
+   * during the parsing then an exception should be raised.
+   *
+   * @param {Array&lt;Input&gt;} inputList - Valid list of inputs that should be used for
+   * the parsing
+   * @return {Promise&lt;Object&gt;}
+   *
+   * @protected
+   */
+  _perform(inputList){
+    return Promise.reject(new Error(&apos;Not implemented&apos;));
+  }
+
+  /**
+   * Auxiliary method that triggers the parsing if needed (in case it has not been
+   * triggered yet).
+   *
+   * @return {Promise}
+   * @private
+   */
+  async _parse(){
+    if (!this._parsed){
+      this[_result] = await this._perform(this.validInputNames());
+      const action = this.action();
+
+      // decoding the values if needed
+      for (const inputName in this[_result]){
+        const input = action.input(inputName);
+        const value = this[_result][inputName];
+
+        if (TypeCheck.isString(value)){
+          this[_result][inputName] = input.parseValue(value, false);
+        }
+        else if (TypeCheck.isList(value)){
+          // currently it&apos;s converting any array to a JSON string which is supported
+          // by the input parsing. Lets keep an eye on this for now, since it may cause
+          // an overhead
+          this[_result][inputName] = input.parseValue(JSON.stringify(value), false);
+        }
+      }
+    }
+
+    return this[_result];
+  }
+}
+
+module.exports = Reader;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+
+# removing current version
+rm -drf ./docs
+
+# building latest version
+git clone https://github.com/meboHQ/mebo.git
+
+cd ./mebo
+npm install
+npm run docs
+cd ..
+mv ./mebo/esdoc ./docs
+
+# removing temporary version
+rm -drf ./mebo
+
+# copying badge to the root of the project
+cp ./docs/badge.svg ./badge.svg
+
+# marking any removed file as deleted in git
+git rm $(git ls-files --deleted)

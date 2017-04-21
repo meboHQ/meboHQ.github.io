@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/Ext/Inputs/Url.js | Mebo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
+<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+  <a href="./">Home</a>
+  <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
+  
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/meboHQ/mebo" class="repo-url-github">Mebo&nbsp;GitHub</a>
+  <div class="search-box">
+  <span>
+    <img src="data/docs/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Input.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Reader.js~Reader.html">Reader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Session.js~Session.html">Session</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Settings.js~Settings.html">Settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Error</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NoContent.js~NoContent.html">NoContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Error/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/CommandLine.js~CommandLine.html">CommandLine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Handlers/Web.js~Web.html">Web</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Any.js~Any.html">Any</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Bool.js~Bool.html">Bool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Buf.js~Buf.html">Buf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Email.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/FilePath.js~FilePath.html">FilePath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hash.js~Hash.html">Hash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Hex.js~Hex.html">Hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Ip.js~Ip.html">Ip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Numeric.js~Numeric.html">Numeric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Url.js~Url.html">Url</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Inputs/Version.js~Version.html">Version</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html">CommandLineArgs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Ext/Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html">CommandLineOutput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Util/LruCache.js~LruCache.html">LruCache</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Ext/Inputs/Url.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const util = require(&apos;util&apos;);
+const path = require(&apos;path&apos;);
+const url = require(&apos;url&apos;);
+const http = require(&apos;http&apos;);
+const https = require(&apos;https&apos;);
+const debug = require(&apos;debug&apos;)(&apos;Mebo&apos;);
+const TypeCheck = require(&apos;js-typecheck&apos;);
+const Input = require(&apos;../../Input&apos;);
+const ValidationFail = require(&apos;../../Error/ValidationFail&apos;);
+const BaseText = require(&apos;./BaseText&apos;);
+
+
+/**
+* Url Input.
+*
+* It supports the protocols: `http`, `https`
+*
+* ```javascript
+* const input = Input.create(&apos;myInput: url&apos;);
+* input.setValue(&apos;http://www.google.com&apos;);
+* ```
+*
+* &lt;h2&gt;Property Summary&lt;/h2&gt;
+*
+* Property Name | Description | Defined&amp;nbsp;by Default | Default Value
+* --- | --- | :---: | :---:
+* maxContentSize | maximum file size of url&apos;s content in bytes | <img src="data/docs/toggle/on.png" title="yes"> | `5242880` (5mb)
+* exists | checks if the url is valid | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
+* allowedExtensions | specific list of extensions for the input \
+* (this check is case insensitive) example: [&apos;jpg&apos;, &apos;png&apos;] | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
+*
+* All properties including the inherited ones can be listed via
+* {@link registeredPropertyNames}
+*/
+class Url extends BaseText{
+
+  /**
+   * Returns the url extension (for instance: jpg) or empty string
+   *
+   * @param {null|number} [at] - index used when input has been created as a vector that
+   * tells which value should be used
+   * @return {string}
+   */
+  extension(at=null){
+
+    if (!this._isCached(&apos;extension&apos;, at)){
+      let extension = &apos;&apos;;
+      const value = this.valueAt(at);
+
+      // computing the value and caching it
+      if (TypeCheck.isString(value)){
+        this._parseUrl(at);
+
+        const ext = path.extname(this._getFromCache(&apos;urlParsed&apos;, at).pathname);
+        if (ext.length &gt; 1){
+          extension = ext.slice(1);
+        }
+      }
+
+      this._setToCache(&apos;extension&apos;, extension, at);
+    }
+
+    return this._getFromCache(&apos;extension&apos;, at);
+  }
+
+  /**
+   * Returns the url protocol `http:` or `https:`
+   *
+   * @param {null|number} [at] - index used when input has been created as a vector that
+   * tells which value should be used
+   * @return {string}
+   */
+  protocol(at=null){
+
+    if (!this._isCached(&apos;protocol&apos;, at)){
+      let protocol = &apos;&apos;;
+      const value = this.valueAt(at);
+
+      if (TypeCheck.isString(value)){
+        if (value.startsWith(&apos;http:&apos;)){
+          protocol = &apos;http:&apos;;
+        }
+
+        /* istanbul ignore next */
+        else if (value.startsWith(&apos;https:&apos;)){
+          protocol = &apos;https:&apos;;
+        }
+      }
+
+      this._setToCache(&apos;protocol&apos;, protocol, at);
+    }
+
+    return this._getFromCache(&apos;protocol&apos;, at);
+  }
+
+  /**
+   * Returns the headers
+   *
+   * @param {null|number} [at] - index used when input has been created as a vector that
+   * tells which value should be used
+   * @return {Promise&lt;Object&gt;}
+   */
+  headers(at=null){
+
+    return new Promise((resolve, reject) =&gt; {
+
+      if (!this._isCached(&apos;headers&apos;, at)){
+        this._parseUrl(at);
+
+        const options = Object.create(null);
+        options.method = &apos;HEAD&apos;;
+        options.protocol = this._getFromCache(&apos;urlParsed&apos;, at).protocol;
+        options.host = this._getFromCache(&apos;urlParsed&apos;, at).hostname;
+        options.port = this._getFromCache(&apos;urlParsed&apos;, at).port;
+        options.path = this._getFromCache(&apos;urlParsed&apos;, at).path;
+
+        // checking the protocol
+        const protocol = this.protocol(at);
+        if ([&apos;http:&apos;, &apos;https:&apos;].includes(protocol)){
+
+          /* istanbul ignore next */
+          const httpModule = (protocol === &apos;http:&apos;) ? http : https;
+
+          // doing the request
+          const request = httpModule.request(options, (response) =&gt; {
+
+            let errorStatus = null;
+            let headers = Object.create(null);
+            if (response.statusCode === 200){
+              headers = response.headers;
+            }
+            else{
+              errorStatus = new Error(&apos;Could not connect to the url&apos;);
+            }
+
+            this._setToCache(&apos;headers&apos;, headers, at);
+            this._setToCache(&apos;errorStatus&apos;, errorStatus, at);
+
+            if (errorStatus){
+              reject(errorStatus);
+            }
+            else{
+              resolve(headers);
+            }
+          });
+
+          /* istanbul ignore next */
+          request.on(&apos;error&apos;, (err) =&gt; {
+            debug(err);
+
+            this._setToCache(&apos;headers&apos;, {}, at);
+            this._setToCache(&apos;errorStatus&apos;, new Error(&apos;Web error&apos;), at);
+
+            reject(this._getFromCache(&apos;errorStatus&apos;, at));
+          });
+          request.end();
+        }
+        else{
+          this._setToCache(&apos;headers&apos;, {}, at);
+          this._setToCache(&apos;errorStatus&apos;, new Error(&apos;Invalid protocol&apos;), at);
+
+          reject(this._getFromCache(&apos;errorStatus&apos;, at));
+        }
+      }
+      else{
+        if (this._getFromCache(&apos;errorStatus&apos;, at)){
+          reject(this._getFromCache(&apos;errorStatus&apos;, at));
+        }
+        else{
+          resolve(this._getFromCache(&apos;headers&apos;, at));
+        }
+      }
+    });
+  }
+
+  /**
+   * Parses the current url data
+   * @param {null|number} at - index used when input has been created as a vector that
+   * tells which value should be used
+   *
+   * @private
+   */
+  _parseUrl(at){
+    if (!this._isCached(&apos;urlParsed&apos;, at)){
+      const value = this.valueAt(at);
+      this._setToCache(&apos;urlParsed&apos;, url.parse(value), at);
+    }
+  }
+
+  /**
+   * Implements input&apos;s validations
+   *
+   * @param {null|number} at - index used when input has been created as a vector that
+   * tells which value should be used
+   * @return {Promise&lt;*&gt;} value held by the input based on the current context (at)
+   * @protected
+   */
+  async _validation(at){
+
+    // calling super class validations
+    // todo: babel does not support &apos;await&apos; calling a method under &apos;super&apos;
+    // https://github.com/babel/babel/issues/3930
+    // const value = await super._validation(at);
+    const value = await BaseText.prototype._validation.call(this, at);
+
+    // supported extensions check
+    if (this.property(&apos;allowedExtensions&apos;) &amp;&amp; !this.property(&apos;allowedExtensions&apos;).map(x =&gt; x.toLowerCase()).includes(this.extension(at).toLowerCase())){
+      throw new ValidationFail(util.format(&quot;Extension &apos;%s&apos; is not supported! (supported extensions: %s)&quot;, this.extension(at), this.property(&apos;allowedExtensions&apos;)), Url.errorCodes[0]);
+    }
+
+    // url exists &amp; maximum content size
+    if (this.property(&apos;exists&apos;)){
+
+      let urlHeaders = null;
+      let err = null;
+
+      try{
+        urlHeaders = await this.headers(at);
+      }
+      catch(errr){
+        err = errr;
+      }
+
+      if (this.property(&apos;exists&apos;) &amp;&amp; err){
+        err = new ValidationFail(&apos;Could not connect to the URL&apos;, Url.errorCodes[1]);
+      }
+      else if (!err &amp;&amp; this.property(&apos;maxContentSize&apos;) &amp;&amp; urlHeaders[&apos;content-length&apos;] &gt; this.property(&apos;maxContentSize&apos;)){
+        err = new ValidationFail(util.format(&apos;URL content size (%.1f mb) exceeds the limit allowed (%.1f mb)&apos;, urlHeaders[&apos;content-length&apos;]/1024/1024, this.property(&apos;maxContentSize&apos;)/1024/1024), Url.errorCodes[2]);
+      }
+
+      if (err){
+        throw err;
+      }
+    }
+
+    return value;
+  }
+
+  static errorCodes = [
+    &apos;fb833b76-2ebb-4f27-be45-dac510bda816&apos;,
+    &apos;8471d8f6-3902-45dc-81f7-802e1de73f69&apos;,
+    &apos;7d860f72-a562-4bb3-940d-15dd3bd8bed1&apos;,
+  ];
+}
+
+// registering the input
+Input.registerInput(Url);
+
+// registering properties
+Input.registerProperty(Url, &apos;exists&apos;, true);
+Input.registerProperty(Url, &apos;maxContentSize&apos;, 5 * 1024 * 1024);
+Input.registerProperty(Url, &apos;allowedExtensions&apos;);
+
+module.exports = Url;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
