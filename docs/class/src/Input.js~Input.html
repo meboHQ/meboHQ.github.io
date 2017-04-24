@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -2677,12 +2677,12 @@ be renamed)</p>
 This method is called by the <span><a href="class/src/Handler.js~Handler.html">Handler</a></span> or when an action is loaded/created using
 <span><a href="class/src/Action.js~Action.html#instance-method-fromJSON">Action.fromJSON</a></span>/<span><a href="class/src/Action.js~Action.html#static-method-createFromJSON">Action.createFromJSON</a></span>. In case the input
 is defined as vector then the value can be defined using an array encoded in JSON.
-The parsed value gets returned and assigned to the input (you can control it by
-the <code>assignValue</code> argument).</p>
+The parsed value gets returned and assigned to the input as well (you can control this
+by the <code>assignValue</code> argument).</p>
 <p>The implementation of the decoding is done by the method <span><a href="class/src/Input.js~Input.html#static-method-_decode">Input._decode</a></span>.
 To know if an input supports decoding checkout the <span><a href="class/src/Input.js~Input.html#instance-method-isSerializable">Input.isSerializable</a></span>.</p>
-<p>Also, in case you want to know the serialization form for the inputs bundled with
-Mebo checkout <span><a href="class/src/Reader.js~Reader.html">Reader</a></span>.</p>
+<p>To know how the serialization is done for the inputs bundled with
+Mebo take a look at <span><a href="class/src/Reader.js~Reader.html">Reader</a></span> documentation.</p>
 </div>
 
   

@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -106,8 +106,8 @@
 exceptions are interpreted as error output, otherwise the value is interpreted
 as success value. Therefore, new implements are expected to implement both a success
 (<span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput">Writer._successOutput</a></span>) and error (<span><a href="class/src/Writer.js~Writer.html#instance-method-_errorOutput">Writer._errorOutput</a></span>) outputs.</p>
-<p>Custom options can be assigned to writers (<span><a href="class/src/Writer.js~Writer.html#instance-method-setOption">Writer.setOption</a></span>). They are
-passed from the handler to the writer during the output process
+<p><strong>Options:</strong> Custom options can be assigned to writers (<span><a href="class/src/Writer.js~Writer.html#instance-method-setOption">Writer.setOption</a></span>).
+They are passed from the handler to the writer during the output process
 (<span><a href="class/src/Handler.js~Handler.html#instance-method-output">Handler.output</a></span>).</p>
 <pre><code><code class="source-code prettyprint">const myHandler = Mebo.createHandler(&apos;someHandler&apos;);
 
@@ -115,9 +115,9 @@ passed from the handler to the writer during the output process
 myHandler.output(value, {
  someOption: 10,
 });</code>
-</code></pre><p>When executing the handler output you can use the action&apos;s result
-<span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> to drive the writer options. Detailed information about the
-metadata support can be found at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>:</p>
+</code></pre><p>When an action is executed through a handler it can define options via
+the <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> support. Detailed information about that can be found
+at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>:</p>
 <pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
    _perform(data){
 

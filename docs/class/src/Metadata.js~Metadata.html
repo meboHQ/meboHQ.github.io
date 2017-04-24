@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Metadata from &apos;<span><a href="file/src/Metadata.js.html#lineNumber94">mebo/src/Metadata.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Metadata from &apos;<span><a href="file/src/Metadata.js.html#lineNumber93">mebo/src/Metadata.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Metadata.js.html#lineNumber94">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Metadata.js.html#lineNumber93">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -108,8 +108,8 @@ differently per action basis.</p>
 <p>This is done by defining <span><a href="class/src/Reader.js~Reader.html">Reader</a></span> &amp; <span><a href="class/src/Writer.js~Writer.html">Writer</a></span> options through
 the metadata. By doing that the options are passed from the action to the
 handler during the handler&apos;s execution (<span><a href="class/src/Handler.js~Handler.html#instance-method-execute">Handler.execute</a></span>).</p>
-<p>You can define options by either using the full option location or using a
-<code>metadata variable</code>:</p>
+<p>You can define options by either using the full option location or using
+option variables:</p>
 <p><strong>Full option location:</strong>
 Uses a convention interpreted by the <span><a href="class/src/Handler.js~Handler.html#instance-method-metadata">Handler.metadata</a></span> to describe
 where the option is localized:</p>
@@ -118,8 +118,7 @@ where the option is localized:</p>
 <pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
    _perform(data){
 
-     // defining a custom header using full option
-     // location (not recommended, see metadata variable)
+     // location (not recommended, see option var)
      this.setMetadata(&apos;handler.web.writeOptions.headers&apos;, {
        someOption: &apos;foo&apos;,
      });
@@ -127,7 +126,7 @@ where the option is localized:</p>
      // ...
    }
 }</code>
-</code></pre><p><strong>Metadata variable (recommended):</strong>
+</code></pre><p><strong>Option var (recommended):</strong>
 Eliminates the need of using convoluted long names to define the options by
 simply using a variable that represents a full option location:</p>
 <pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
@@ -142,9 +141,9 @@ simply using a variable that represents a full option location:</p>
      // ...
    }
 }</code>
-</code></pre><p>The complete list of the available variables can be found bellow, it&apos;s
+</code></pre><p>The complete list of the available option variables can be found bellow, it&apos;s
 separated by handler type. Also, new variables can be assigned through
-<span><a href="class/src/Metadata.js~Metadata.html#static-method-registerPathVar">Metadata.registerPathVar</a></span>.</p>
+<span><a href="class/src/Metadata.js~Metadata.html#static-method-registerOptionVar">Metadata.registerOptionVar</a></span>.</p>
 <p></p><h2>Web Variables</h2>
 
 <p></p>
@@ -278,7 +277,7 @@ separated by handler type. Also, new variables can be assigned through
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-hasPathVar">hasPathVar</a></span></span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-hasOptionVar">hasOptionVar</a></span></span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
         </p>
       </div>
       <div>
@@ -306,13 +305,13 @@ separated by handler type. Also, new variables can be assigned through
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-pathVar">pathVar</a></span></span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, processValue: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-optionVar">optionVar</a></span></span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, processValue: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Returns the value for a path variable</p>
+        <div data-ice="description"><p>Returns the value for an option variable</p>
 </div>
       </div>
     </td>
@@ -334,13 +333,13 @@ separated by handler type. Also, new variables can be assigned through
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-registerPathVar">registerPathVar</a></span></span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-registerOptionVar">registerOptionVar</a></span></span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>register a path variable to under metadata</p>
+        <div data-ice="description"><p>register an option variable under metadata</p>
 </div>
       </div>
     </td>
@@ -362,7 +361,7 @@ separated by handler type. Also, new variables can be assigned through
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-registeredPathVars">registeredPathVars</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+          <span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html#static-method-registeredOptionVars">registeredOptionVars</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
         </p>
       </div>
       <div>
@@ -514,18 +513,18 @@ separated by handler type. Also, new variables can be assigned through
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-hasPathVar">
+  <h3 data-ice="anchor" id="static-method-hasOptionVar">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span data-ice="name">hasPathVar</span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span data-ice="name">hasOptionVar</span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber207">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber206">source</a></span></span>
     </span>
   </h3>
 
@@ -587,27 +586,27 @@ separated by handler type. Also, new variables can be assigned through
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-pathVar">
+  <h3 data-ice="anchor" id="static-method-optionVar">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span data-ice="name">pathVar</span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, processValue: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span data-ice="name">optionVar</span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, processValue: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber187">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber186">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Returns the value for a path variable</p>
+  <div data-ice="description"><p>Returns the value for an option variable</p>
 <p>for instance:</p>
-<pre><code><code class="source-code prettyprint">const myVariableValue = Mebo.Metadata.pathVar(&apos;$myVariable&apos;);
+<pre><code><code class="source-code prettyprint">const myVariableValue = Mebo.Metadata.optionVar(&apos;$myVariable&apos;);
 console.log(myVariableValue)</code>
 </code></pre></div>
 
@@ -685,28 +684,28 @@ under the metadata.</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-registerPathVar">
+  <h3 data-ice="anchor" id="static-method-registerOptionVar">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span data-ice="name">registerPathVar</span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
+    <span data-ice="name">registerOptionVar</span><span data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber156">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber155">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>register a path variable to under metadata</p>
-<p>The value of the variable can contain other pre-defined path variables,
+  <div data-ice="description"><p>register an option variable under metadata</p>
+<p>The value of the variable can contain other pre-defined option variables,
 for instance:</p>
-<pre><code><code class="source-code prettyprint">Mebo.Metadata.registerPathVar(&apos;$myVar&apos;, &apos;$otherVar.data&apos;)</code>
+<pre><code><code class="source-code prettyprint">Mebo.Metadata.registerOptionVar(&apos;$myVar&apos;, &apos;$otherVar.data&apos;)</code>
 </code></pre></div>
 
   
@@ -756,18 +755,18 @@ for instance:</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-registeredPathVars">
+  <h3 data-ice="anchor" id="static-method-registeredOptionVars">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span data-ice="name">registeredPathVars</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+    <span data-ice="name">registeredOptionVars</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber218">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber217">source</a></span></span>
     </span>
   </h3>
 
@@ -826,7 +825,7 @@ for instance:</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber99">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber98">source</a></span></span>
     </span>
   </h3>
 
@@ -874,7 +873,7 @@ for instance:</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber140">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber139">source</a></span></span>
     </span>
   </h3>
 
@@ -930,7 +929,7 @@ for instance:</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber129">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber128">source</a></span></span>
     </span>
   </h3>
 
@@ -1009,7 +1008,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber113">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Metadata.js.html#lineNumber112">source</a></span></span>
     </span>
   </h3>
 

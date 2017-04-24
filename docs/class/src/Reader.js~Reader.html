@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Reader from &apos;<span><a href="file/src/Reader.js.html#lineNumber60">mebo/src/Reader.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Reader from &apos;<span><a href="file/src/Reader.js.html#lineNumber92">mebo/src/Reader.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Reader.js.html#lineNumber60">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Reader.js.html#lineNumber92">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -104,10 +104,7 @@
   <div class="description" data-ice="description"><p>A reader is used by the handler during the execution (<span><a href="class/src/Handler.js~Handler.html#instance-method-execute">Handler.execute</a></span>)
 to query <span><a href="class/src/Input.js~Input.html">Input</a></span> and <span><a href="class/src/Session.js~Session.html">Session</a></span> information that is going be used
 during the execution of the action.</p>
-<p>In case of new implements the only method expected to be implemented is
-<span><a href="class/src/Reader.js~Reader.html#instance-method-_perform">Reader._perform</a></span>. Readers can have custom options
-(<span><a href="class/src/Reader.js~Reader.html#instance-method-setOption">Reader.setOption</a></span>). These options are passed from the handler to the reader
-during the execution (<span><a href="class/src/Handler.js~Handler.html#instance-method-execute">Handler.execute</a></span>).</p>
+<p>In case of new implements it&apos;s expected to implement the <span><a href="class/src/Reader.js~Reader.html#instance-method-_perform">Reader._perform</a></span>.</p>
 <p>When a value is found for an input it&apos;s decoded using <span><a href="class/src/Input.js~Input.html#instance-method-parseValue">Input.parseValue</a></span>
 where each input implementation has its own way of parsing the serialized data,
 to find out about how a value is serialized for an specific input type you could simply
@@ -190,7 +187,33 @@ for the inputs blundled with Mebo:</p>
 </tr>
 </tbody>
 </table>
-<p><br><strong>Hidding inputs from readers:</strong>
+<p><br><strong>Options:</strong>
+Custom options can be assigned to readers (<span><a href="class/src/Reader.js~Reader.html#instance-method-setOption">Reader.setOption</a></span>). They are
+passed from the handler to the reader during the handler&apos;s execution
+(<span><a href="class/src/Handler.js~Handler.html#instance-method-execute">Handler.execute</a></span>).</p>
+<pre><code><code class="source-code prettyprint">const myHandler = Mebo.createHandler(&apos;someHandler&apos;);
+
+// setting reading options
+myHandler.execute(&apos;myAction&apos;, {
+ someOption: 10,
+});</code>
+</code></pre><p>When an action is executed through a handler it can define options via
+the <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> support. Detailed information about that can be found
+at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>:</p>
+<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+   constructor(){
+     super();
+
+     // defining a custom reading option
+     this.setMetadata(&apos;$myOption&apos;, {
+       someOption: 10,
+     });
+
+     // ...
+   }
+}
+Mebo.registerAction(MyAction);</code>
+</code></pre><p><strong>Hiding inputs from readers:</strong>
 A reader only sees inputs that are capable of serialization
 (<span><a href="class/src/Input.js~Input.html#instance-method-isSerializable">Input.isSerializable</a></span>) or visible inputs. Therefore, any input assigned
 with the property <code>hidden</code> is not visible by readers, for instance:</p>
@@ -199,7 +222,8 @@ with the property <code>hidden</code> is not visible by readers, for instance:</
     super();
     this.createInput(&apos;readerCantSeeMe: numeric&apos;, {hidden: true});
     this.createInput(&apos;readerSeeMe: numeric&apos;);
-  }</code>
+  }
+}</code>
 </code></pre></div>
   
 
@@ -478,7 +502,7 @@ with the property <code>hidden</code> is not visible by readers, for instance:</
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber99">source</a></span></span>
     </span>
   </h3>
 
@@ -543,7 +567,7 @@ with the property <code>hidden</code> is not visible by readers, for instance:</
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber86">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber118">source</a></span></span>
     </span>
   </h3>
 
@@ -599,7 +623,7 @@ with the property <code>hidden</code> is not visible by readers, for instance:</
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber163">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber195">source</a></span></span>
     </span>
   </h3>
 
@@ -657,7 +681,7 @@ then that information is skipped otherwise it adds the parsed information the re
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber146">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber178">source</a></span></span>
     </span>
   </h3>
 
@@ -713,7 +737,7 @@ then that information is skipped otherwise it adds the parsed information the re
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber100">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber132">source</a></span></span>
     </span>
   </h3>
 
@@ -796,7 +820,7 @@ not found for the path</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber115">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber147">source</a></span></span>
     </span>
   </h3>
 
@@ -875,7 +899,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber127">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber159">source</a></span></span>
     </span>
   </h3>
 
@@ -934,7 +958,7 @@ This avoids hidden inputs to get exposed in the parsing.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber207">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Reader.js.html#lineNumber239">source</a></span></span>
     </span>
   </h3>
 

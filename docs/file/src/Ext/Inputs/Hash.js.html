@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -94,7 +94,7 @@ const Hex = require(&apos;./Hex&apos;);
  *
  * Property Name | Description | Defined&amp;nbsp;by Default | Default Value
  * --- | --- | :---: | :---:
- * size | size of the hash in bits. This property needs to be defined at constructor \
+ * size | bit size of the hash. This property needs to be defined at constructor \
  *  time | <img src="data/docs/value/true.png" title="true"> | <img src="data/docs/value/none.png" title="none">
  *
  * All properties including the inherited ones can be listed via
@@ -142,7 +142,7 @@ class Hash extends Hex{
 
       // size checking
       if (this.property(&apos;size&apos;) !== (value.length / 2) * 8){
-        throw new ValidationFail(&apos;Invalid hash value size&apos;, Hash.errorCodes[0]);
+        throw new ValidationFail(&apos;Invalid hash size&apos;, Hash.errorCodes[0]);
       }
 
       return value;

@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -93,14 +93,15 @@ const _response = Symbol(&apos;response&apos;);
 /**
  * Handles the web integration through expressjs and passportjs.
  *
- * It enables the execution of actions that are triggered by web requests by reading
- * ({@link WebRequest}) the information that is passed to the action
+ * It enables the execution of actions triggered by web requests.
+ * The request information is read by {@link WebRequest}, this information
+ * is passed to the action during the execution of the web handler
  * ({@link Web.execute}). The output of this handler ({@link Web.output}) is done
  * through the {@link WebResponse} writer.
  *
  * In order to tell which actions are visible by this handler, they are required to
- * be registered via a webfication process that describes their request method,
- * route and if it requires authentication.
+ * be registered beforehand via a webfication process that describes their
+ * request method, rest route and if it requires authentication.
  *
  * ```
  * Mebo.webfyAction(&apos;myRegisteredAction&apos;, &apos;get&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true});
@@ -124,26 +125,28 @@ const _response = Symbol(&apos;response&apos;);
  * After the webfication process, actions can be triggered in two ways:
  *
  * - *Rest support* ({@link Web.restful}):
- * Executing through a rest route, it happens when an action is webfied with `restRoute`
- * where it becomes automatically visible as part of the restful support. In order to
- * activated the restful support you need to tell Mebo what is the expressjs app
- * you want to use for the rest routes:
+ * Executes an action through a rest route, it happens when an action is webfied
+ * with `restRoute` where it becomes automatically visible as part of the
+ * restful support. In order to activated the restful support you need to tel
+ * Mebo what is the expressjs app you want to register the rest routes:
  * ```javascript
  * const app = express();
  * // this process registers the rest route for the webfied actions
  * Mebo.restful(app);
  * ```
- * The result of webfied actions through the restful support is automatically
- * serialized using google&apos;s json style guide. The only exceptions are readable stream
+ * The result of webfied actions is done through the restful support is automatically
+ * by using google&apos;s json style guide. The only exceptions are readable stream
  * and buffer that are piped to the response
  * ({@link Web._successOutput}, {@link Web._errorOutput}).
  *
  * - *Middleware support* ({@link Web.middleware}):
- * Executing through an arbitrary route. Actions can be executed as expressjs middlewares.
- * It&apos;s done by using `Mebo.middleware` where you tell what is action&apos;s registration name that
- * should be executed for the express route (make sure the action has
- * been webfied before hand). By using this feature you control the response
- * of the request, since the result of the action flows to the middleware:
+ * Executes an action through an arbitrary route. Actions can be executed as
+ * expressjs middlewares.
+ * It&apos;s done by using `Mebo.middleware` where you tell what is the action&apos;s
+ * registration name that should be executed for the express route
+ * (make sure the action has been webfied before hand). By using this feature
+ * you control the response of the request, since the result of the action
+ * is passed to the middleware:
  * ```javascript
  * const app = express();
  * app.get(
@@ -649,18 +652,18 @@ Settings.set(&apos;handler/web/requireAuthByDefault&apos;, false); // &#x26A0; B
 Input.registerProperty(&apos;filePath&apos;, &apos;restrictWebAccess&apos;, true);
 
 // registering path vars
-Metadata.registerPathVar(&apos;$web&apos;, &apos;handler.web&apos;);
-Metadata.registerPathVar(&apos;$webUploadDirectory&apos;, &apos;$web.readOptions.uploadDirectory&apos;);
-Metadata.registerPathVar(&apos;$webUploadPreserveName&apos;, &apos;$web.readOptions.uploadPreserveName&apos;);
-Metadata.registerPathVar(&apos;$webUploadMaxFileSize&apos;, &apos;$web.readOptions.uploadMaxFileSize&apos;);
-Metadata.registerPathVar(&apos;$webMaxFields&apos;, &apos;$web.readOptions.maxFields&apos;);
-Metadata.registerPathVar(&apos;$webMaxFieldsSize&apos;, &apos;$web.readOptions.maxFieldsSize&apos;);
-Metadata.registerPathVar(&apos;$webHeaders&apos;, &apos;$web.writeOptions.headers&apos;);
-Metadata.registerPathVar(&apos;$webHeadersOnly&apos;, &apos;$web.writeOptions.headersOnly&apos;);
-Metadata.registerPathVar(&apos;$webResult&apos;, &apos;$web.writeOptions.result&apos;);
-Metadata.registerPathVar(&apos;$webRoot&apos;, &apos;$web.writeOptions.root&apos;);
-Metadata.registerPathVar(&apos;$webSuccessStatus&apos;, &apos;$web.writeOptions.successStatus&apos;);
-Metadata.registerPathVar(&apos;$webResultLabel&apos;, &apos;$web.writeOptions.resultLabel&apos;);
+Metadata.registerOptionVar(&apos;$web&apos;, &apos;handler.web&apos;);
+Metadata.registerOptionVar(&apos;$webUploadDirectory&apos;, &apos;$web.readOptions.uploadDirectory&apos;);
+Metadata.registerOptionVar(&apos;$webUploadPreserveName&apos;, &apos;$web.readOptions.uploadPreserveName&apos;);
+Metadata.registerOptionVar(&apos;$webUploadMaxFileSize&apos;, &apos;$web.readOptions.uploadMaxFileSize&apos;);
+Metadata.registerOptionVar(&apos;$webMaxFields&apos;, &apos;$web.readOptions.maxFields&apos;);
+Metadata.registerOptionVar(&apos;$webMaxFieldsSize&apos;, &apos;$web.readOptions.maxFieldsSize&apos;);
+Metadata.registerOptionVar(&apos;$webHeaders&apos;, &apos;$web.writeOptions.headers&apos;);
+Metadata.registerOptionVar(&apos;$webHeadersOnly&apos;, &apos;$web.writeOptions.headersOnly&apos;);
+Metadata.registerOptionVar(&apos;$webResult&apos;, &apos;$web.writeOptions.result&apos;);
+Metadata.registerOptionVar(&apos;$webRoot&apos;, &apos;$web.writeOptions.root&apos;);
+Metadata.registerOptionVar(&apos;$webSuccessStatus&apos;, &apos;$web.writeOptions.successStatus&apos;);
+Metadata.registerOptionVar(&apos;$webResultLabel&apos;, &apos;$web.writeOptions.resultLabel&apos;);
 
 // registering handler
 Handler.registerHandler(Web);

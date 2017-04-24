@@ -1830,27 +1830,27 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/metadata.js~metadata.haspathvar",
-    "class/src/Metadata.js~Metadata.html#static-method-hasPathVar",
-    "src/Metadata.js~Metadata.hasPathVar",
+    "src/metadata.js~metadata.hasoptionvar",
+    "class/src/Metadata.js~Metadata.html#static-method-hasOptionVar",
+    "src/Metadata.js~Metadata.hasOptionVar",
     "method"
   ],
   [
-    "src/metadata.js~metadata.pathvar",
-    "class/src/Metadata.js~Metadata.html#static-method-pathVar",
-    "src/Metadata.js~Metadata.pathVar",
+    "src/metadata.js~metadata.optionvar",
+    "class/src/Metadata.js~Metadata.html#static-method-optionVar",
+    "src/Metadata.js~Metadata.optionVar",
     "method"
   ],
   [
-    "src/metadata.js~metadata.registerpathvar",
-    "class/src/Metadata.js~Metadata.html#static-method-registerPathVar",
-    "src/Metadata.js~Metadata.registerPathVar",
+    "src/metadata.js~metadata.registeroptionvar",
+    "class/src/Metadata.js~Metadata.html#static-method-registerOptionVar",
+    "src/Metadata.js~Metadata.registerOptionVar",
     "method"
   ],
   [
-    "src/metadata.js~metadata.registeredpathvars",
-    "class/src/Metadata.js~Metadata.html#static-method-registeredPathVars",
-    "src/Metadata.js~Metadata.registeredPathVars",
+    "src/metadata.js~metadata.registeredoptionvars",
+    "class/src/Metadata.js~Metadata.html#static-method-registeredOptionVars",
+    "src/Metadata.js~Metadata.registeredOptionVars",
     "method"
   ],
   [

@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -832,7 +832,7 @@ a new session instance</p>
   
   
   <div data-ice="description"><p>Adds a listener to an exception raised during the <span><a href="class/src/Handler.js~Handler.html#instance-method-output">Handler.output</a></span> process.
-It can happen by either during the serialization process (<span><a href="class/src/Writer.js~Writer.html#instance-method-serialize">Writer.serialize</a></span>)
+It can happen either during the serialization process (<span><a href="class/src/Writer.js~Writer.html#instance-method-serialize">Writer.serialize</a></span>)
 or during the finalization of the session (<span><a href="class/src/Session.js~Session.html#instance-method-finalize">Session.finalize</a></span>).
 This event passes as argument: error, handlerName and handlerMask.</p>
 <p>Currently this event is static to make easy for developers to hook it when
@@ -1693,7 +1693,7 @@ for the handler should be fetched.</p>
       <td data-ice="description"><p>path about where the value is localized (the levels
 must be separated by &apos;.&apos;). In case of an empty string it returns the
 entire metadata. The path can be defined using <code>path vars</code>
-(<span><a href="class/src/Metadata.js~Metadata.html#static-method-pathVar">Metadata.pathVar</a></span>).</p>
+(<span><a href="class/src/Metadata.js~Metadata.html#static-method-optionVar">Metadata.optionVar</a></span>).</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
@@ -1924,7 +1924,7 @@ by the output where each handler implementation contains their own set of option
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>path about where the value should be stored under the metadata
 (the levels must be separated by &apos;.&apos;). The path can be defined using <code>path vars</code>
-(<span><a href="class/src/Metadata.js~Metadata.html#static-method-pathVar">Metadata.pathVar</a></span>).</p>
+(<span><a href="class/src/Metadata.js~Metadata.html#static-method-optionVar">Metadata.optionVar</a></span>).</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">

@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container manual-root" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -62,7 +62,7 @@
   <div data-ice="content"><h2 id="tl-dr-version">TL;DR version</h2>
 <ul>
 <li><a href="https://github.com/meboHQ/example-hello-world">Hello World</a></li>
-<li><a href="https://github.com/meboHQ/example-rest">REST</a></li>
+<li><a href="https://github.com/meboHQ/example-restful-using-express-mongodb">RESTful using Express and Mongodb</a></li>
 <li><a href="https://github.com/meboHQ/example-middleware">Middleware integration</a></li>
 <li><a href="https://github.com/meboHQ/example-auth">Authentication</a></li>
 <li><a href="https://github.com/meboHQ/example-uploads">Uploads</a></li>
@@ -172,10 +172,6 @@ class MyAction extends Mebo.Action {
   }
 
   _perform(data){
-
-    // using it inside of the evalutation
-    const value = data.myInput;
-
     return Promise.resolve(`hello ${data.myInput}`);
   }
 }</code>

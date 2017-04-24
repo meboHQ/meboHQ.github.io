@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -102,7 +102,7 @@
   
   
   <div class="description" data-ice="description"><p>Hexadecimal input.</p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">const input = Input.create(&apos;myInput: hex&apos;, {size: 24});
+<pre><code class="lang-javascript"><code class="source-code prettyprint">const input = Input.create(&apos;myInput: hex&apos;);
 input.setValue(&apos;ffff00&apos;);</code>
 </code></pre>
 <p></p><h2>Property Summary</h2>
@@ -120,7 +120,7 @@ input.setValue(&apos;ffff00&apos;);</code>
 <tbody>
 <tr>
 <td>size</td>
-<td>optional maximum size of the value in bits</td>
+<td>optional maximum bit size of the value</td>
 <td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
 <td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
 </tr>

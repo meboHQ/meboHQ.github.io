@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -427,7 +427,7 @@ class Action{
    * @param {string} path - path about where the value is localized (the levels
    * must be separated by &apos;.&apos;). In case of an empty string it returns the
    * entire metadata. The path can be defined using `path vars`
-   * ({@link Metadata.pathVar}).
+   * ({@link Metadata.optionVar}).
    * @param {*} [defaultValue] - default value returned in case a value was
    * not found for the path
    * @return {*}
@@ -446,7 +446,7 @@ class Action{
    *
    * @param {string} path - path about where the value should be stored under the metadata
    * (the levels must be separated by &apos;.&apos;). The path can be defined using `path vars`
-   * ({@link Metadata.pathVar}).
+   * ({@link Metadata.optionVar}).
    * @param {*} value - value that is going to be stored under the collection
    * @param {boolean} [merge=true] - this option is used to decide in case of the
    * last level is already existing under the collection, if the value should be

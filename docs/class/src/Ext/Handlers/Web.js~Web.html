@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber88">mebo/src/Ext/Handlers/Web.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber91">mebo/src/Ext/Handlers/Web.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber88">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber91">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -102,13 +102,14 @@
   
   
   <div class="description" data-ice="description"><p>Handles the web integration through expressjs and passportjs.</p>
-<p>It enables the execution of actions that are triggered by web requests by reading
-(<span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span>) the information that is passed to the action
+<p>It enables the execution of actions triggered by web requests.
+The request information is read by <span><a href="class/src/Ext/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span>, this information
+is passed to the action during the execution of the web handler
 (<span><a href="class/src/Handler.js~Handler.html#instance-method-execute">Web.execute</a></span>). The output of this handler (<span><a href="class/src/Handler.js~Handler.html#instance-method-output">Web.output</a></span>) is done
 through the <span><a href="class/src/Ext/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span> writer.</p>
 <p>In order to tell which actions are visible by this handler, they are required to
-be registered via a webfication process that describes their request method,
-route and if it requires authentication.</p>
+be registered beforehand via a webfication process that describes their
+request method, rest route and if it requires authentication.</p>
 <pre><code><code class="source-code prettyprint">Mebo.webfyAction(&apos;myRegisteredAction&apos;, &apos;get&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true});</code>
 </code></pre><p>In case of actions that require authentication (<code>auth: true</code>) Mebo checks if
 the authentication has ben executed. Therefore a passport authentication middleware
@@ -120,25 +121,27 @@ can be defined via <span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-
 </code></pre><p>After the webfication process, actions can be triggered in two ways:</p>
 <ul>
 <li><p><em>Rest support</em> (<span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-restful">Web.restful</a></span>):
-Executing through a rest route, it happens when an action is webfied with <code>restRoute</code>
-where it becomes automatically visible as part of the restful support. In order to
-activated the restful support you need to tell Mebo what is the expressjs app
-you want to use for the rest routes:</p>
+Executes an action through a rest route, it happens when an action is webfied
+with <code>restRoute</code> where it becomes automatically visible as part of the
+restful support. In order to activated the restful support you need to tel
+Mebo what is the expressjs app you want to register the rest routes:</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">const app = express();
 // this process registers the rest route for the webfied actions
 Mebo.restful(app);</code>
 </code></pre>
-<p>The result of webfied actions through the restful support is automatically
-serialized using google&apos;s json style guide. The only exceptions are readable stream
+<p>The result of webfied actions is done through the restful support is automatically
+by using google&apos;s json style guide. The only exceptions are readable stream
 and buffer that are piped to the response
 (<span>Web._successOutput</span>, <span>Web._errorOutput</span>).</p>
 </li>
 <li><p><em>Middleware support</em> (<span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-middleware">Web.middleware</a></span>):
-Executing through an arbitrary route. Actions can be executed as expressjs middlewares.
-It&apos;s done by using <code>Mebo.middleware</code> where you tell what is action&apos;s registration name that
-should be executed for the express route (make sure the action has
-been webfied before hand). By using this feature you control the response
-of the request, since the result of the action flows to the middleware:</p>
+Executes an action through an arbitrary route. Actions can be executed as
+expressjs middlewares.
+It&apos;s done by using <code>Mebo.middleware</code> where you tell what is the action&apos;s
+registration name that should be executed for the express route
+(make sure the action has been webfied before hand). By using this feature
+you control the response of the request, since the result of the action
+is passed to the middleware:</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">const app = express();
 app.get(
  &apos;/foo&apos;,
@@ -1089,7 +1092,7 @@ based on an arbitrary express route.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber308">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber311">source</a></span></span>
     </span>
   </h3>
 
@@ -1170,7 +1173,7 @@ before the action</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber353">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber356">source</a></span></span>
     </span>
   </h3>
 
@@ -1253,7 +1256,7 @@ before an action that requires authentication</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber368">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber371">source</a></span></span>
     </span>
   </h3>
 
@@ -1312,7 +1315,7 @@ the middlewares added through <span><a href="class/src/Ext/Handlers/Web.js~Web.h
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber381">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber384">source</a></span></span>
     </span>
   </h3>
 
@@ -1371,7 +1374,7 @@ the middlewares added through <span><a href="class/src/Ext/Handlers/Web.js~Web.h
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber268">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber271">source</a></span></span>
     </span>
   </h3>
 
@@ -1465,7 +1468,7 @@ function(err, result, req, res, next){...}</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber406">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber409">source</a></span></span>
     </span>
   </h3>
 
@@ -1544,7 +1547,7 @@ registration of the rest routes</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber182">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber185">source</a></span></span>
     </span>
   </h3>
 
@@ -1645,7 +1648,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber94">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber97">source</a></span></span>
     </span>
   </h3>
 
@@ -1710,7 +1713,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber134">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber137">source</a></span></span>
     </span>
   </h3>
 
@@ -1766,7 +1769,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber159">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber162">source</a></span></span>
     </span>
   </h3>
 
@@ -1822,7 +1825,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber109">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber112">source</a></span></span>
     </span>
   </h3>
 
@@ -1884,7 +1887,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber146">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber149">source</a></span></span>
     </span>
   </h3>
 
@@ -1948,7 +1951,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber432">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber435">source</a></span></span>
     </span>
   </h3>
 
@@ -2029,7 +2032,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber452">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber455">source</a></span></span>
     </span>
   </h3>
 

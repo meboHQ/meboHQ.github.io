@@ -11,10 +11,10 @@
   
   <script src="script/manual.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
-<link rel="icon" type="image/png" sizes="256x256" href="data/thumbnail.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
 <body class="layout-container" data-ice="rootContainer">
 
-<header><a href="./index.html"><img src="data/thumbnail.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+<header><a href="./index.html"><img src="data/icon.png" id="meboSmallLogo" width="40" height="40" align="top"/></a>
   <a href="./">Home</a>
   <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
   
@@ -95,8 +95,8 @@ const _value = Symbol(&apos;value&apos;);
  * as success value. Therefore, new implements are expected to implement both a success
  * ({@link Writer._successOutput}) and error ({@link Writer._errorOutput}) outputs.
  *
- * Custom options can be assigned to writers ({@link Writer.setOption}). They are
- * passed from the handler to the writer during the output process
+ * **Options:** Custom options can be assigned to writers ({@link Writer.setOption}).
+ * They are passed from the handler to the writer during the output process
  * ({@link Handler.output}).
  *
  * ```
@@ -108,9 +108,9 @@ const _value = Symbol(&apos;value&apos;);
  * });
  * ```
  *
- * When executing the handler output you can use the action&apos;s result
- * {@link Metadata} to drive the writer options. Detailed information about the
- * metadata support can be found at {@link Metadata}:
+ * When an action is executed through a handler it can define options via
+ * the {@link Metadata} support. Detailed information about that can be found
+ * at {@link Metadata}:
  *
  * ```
  * class MyAction extends Mebo.Action{
