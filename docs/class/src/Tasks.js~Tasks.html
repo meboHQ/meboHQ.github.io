@@ -172,7 +172,7 @@ promises that are triggered when a <span><a href="class/src/Session.js~Session.h
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-addAction">addAction</a></span></span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, runOnlyOnce: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-addAction">addAction</a></span></span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -200,7 +200,7 @@ promises that are triggered when a <span><a href="class/src/Session.js~Session.h
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-addWrappedPromise">addWrappedPromise</a></span></span><span data-ice="signature">(wrappedPromise: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-addWrappedPromise">addWrappedPromise</a></span></span><span data-ice="signature">(wrappedPromise: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -262,8 +262,8 @@ promises that are triggered when a <span><a href="class/src/Session.js~Session.h
       <div>
         
         
-        <div data-ice="description"><p>Returns a list ordered by inclusion that contains the actions and
-promises which are executed through <span><a href="class/src/Action.js~Action.html#instance-method-execute">execute</a></span></p>
+        <div data-ice="description"><p>Returns a list sorted by priority and inclusion order about the actions and
+promises that are executed through <span><a href="class/src/Action.js~Action.html#instance-method-execute">execute</a></span></p>
 </div>
       </div>
     </td>
@@ -291,7 +291,8 @@ promises which are executed through <span><a href="class/src/Action.js~Action.ht
       <div>
         
         
-        <div data-ice="description"><p>Executes the actions and promises inside of the tasks (provided by <span><a href="class/src/Tasks.js~Tasks.html#instance-method-contents">contents</a></span>)</p>
+        <div data-ice="description"><p>Executes the actions and promises inside of the tasks
+(provided by <span><a href="class/src/Tasks.js~Tasks.html#instance-method-contents">contents</a></span>).</p>
 </div>
       </div>
     </td>
@@ -394,11 +395,11 @@ promises which are executed through <span><a href="class/src/Action.js~Action.ht
     
     
     
-    <span data-ice="name">addAction</span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, runOnlyOnce: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>)</span>
+    <span data-ice="name">addAction</span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber36">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber39">source</a></span></span>
     </span>
   </h3>
 
@@ -429,12 +430,28 @@ it&apos;s done by using the action&apos;s id (<span><a href="class/src/Action.js
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">runOnlyOnce</td>
+      <td data-ice="name" data-depth="0">options</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>custom options</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.runOnlyOnce</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"><ul><li>optional</li>
 <li>default: true</li></ul></td>
       <td data-ice="description"><p>tells if the action should be ignore in case
 it has already been executed previously (it&apos;s done by matching the <span><a href="class/src/Action.js~Action.html#instance-method-id">Action.id</a></span>)</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.priority</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: 100</li></ul></td>
+      <td data-ice="description"><p>tells the priority of the action, this affects
+the execution order where a lower numeric value means a higher priority.</p>
 </td>
     </tr>
 </tbody>
@@ -467,11 +484,11 @@ it has already been executed previously (it&apos;s done by matching the <span><a
     
     
     
-    <span data-ice="name">addWrappedPromise</span><span data-ice="signature">(wrappedPromise: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>)</span>
+    <span data-ice="name">addWrappedPromise</span><span data-ice="signature">(wrappedPromise: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber50">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber61">source</a></span></span>
     </span>
   </h3>
 
@@ -498,6 +515,22 @@ it has already been executed previously (it&apos;s done by matching the <span><a
       <td data-ice="description"><p>function that should return a promise, ex:</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">tasks.addWrappedPromise(() =&gt; Promise.resolve(3))</code>
 </code></pre>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">options</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>custom options</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.priority</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: 100</li></ul></td>
+      <td data-ice="description"><p>tells the priority of the action, this affects
+the execution order where a lower numeric value means a higher priority.</p>
 </td>
     </tr>
 </tbody>
@@ -534,7 +567,7 @@ it has already been executed previously (it&apos;s done by matching the <span><a
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber126">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber155">source</a></span></span>
     </span>
   </h3>
 
@@ -578,15 +611,15 @@ it has already been executed previously (it&apos;s done by matching the <span><a
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber64">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber79">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Returns a list ordered by inclusion that contains the actions and
-promises which are executed through <span><a href="class/src/Action.js~Action.html#instance-method-execute">execute</a></span></p>
+  <div data-ice="description"><p>Returns a list sorted by priority and inclusion order about the actions and
+promises that are executed through <span><a href="class/src/Action.js~Action.html#instance-method-execute">execute</a></span></p>
 </div>
 
   
@@ -661,14 +694,19 @@ promises which are executed through <span><a href="class/src/Action.js~Action.ht
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber135">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber170">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Executes the actions and promises inside of the tasks (provided by <span><a href="class/src/Tasks.js~Tasks.html#instance-method-contents">contents</a></span>)</p>
+  <div data-ice="description"><p>Executes the actions and promises inside of the tasks
+(provided by <span><a href="class/src/Tasks.js~Tasks.html#instance-method-contents">contents</a></span>). All tasks get executed even if an error occurs
+during the execution of an specific task.</p>
+<p>Failed tasks are reported through an exception raised after all tasks have been executed,
+this error provides the <code>taskErrors</code> member that contains a list about the errors raised
+during the execution of the tasks.</p>
 </div>
 
   
@@ -718,7 +756,7 @@ promises which are executed through <span><a href="class/src/Action.js~Action.ht
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber118">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber147">source</a></span></span>
     </span>
   </h3>
 

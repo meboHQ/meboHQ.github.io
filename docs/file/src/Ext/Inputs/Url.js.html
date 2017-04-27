@@ -80,7 +80,6 @@ const path = require(&apos;path&apos;);
 const url = require(&apos;url&apos;);
 const http = require(&apos;http&apos;);
 const https = require(&apos;https&apos;);
-const debug = require(&apos;debug&apos;)(&apos;Mebo&apos;);
 const TypeCheck = require(&apos;js-typecheck&apos;);
 const Input = require(&apos;../../Input&apos;);
 const ValidationFail = require(&apos;../../Error/ValidationFail&apos;);
@@ -179,73 +178,59 @@ class Url extends BaseText{
    */
   headers(at=null){
 
+    // returning from cache
+    if (this._isCached(&apos;headers&apos;, at)){
+      return Promise.resolve(this._getFromCache(&apos;headers&apos;, at));
+    }
+
+    // otherwise processing headers
     return new Promise((resolve, reject) =&gt; {
 
-      if (!this._isCached(&apos;headers&apos;, at)){
-        this._parseUrl(at);
+      this._parseUrl(at);
 
-        const options = Object.create(null);
-        options.method = &apos;HEAD&apos;;
-        options.protocol = this._getFromCache(&apos;urlParsed&apos;, at).protocol;
-        options.host = this._getFromCache(&apos;urlParsed&apos;, at).hostname;
-        options.port = this._getFromCache(&apos;urlParsed&apos;, at).port;
-        options.path = this._getFromCache(&apos;urlParsed&apos;, at).path;
+      const options = Object.create(null);
+      options.method = &apos;HEAD&apos;;
+      options.protocol = this._getFromCache(&apos;urlParsed&apos;, at).protocol;
+      options.host = this._getFromCache(&apos;urlParsed&apos;, at).hostname;
+      options.port = this._getFromCache(&apos;urlParsed&apos;, at).port;
+      options.path = this._getFromCache(&apos;urlParsed&apos;, at).path;
 
-        // checking the protocol
-        const protocol = this.protocol(at);
-        if ([&apos;http:&apos;, &apos;https:&apos;].includes(protocol)){
+      // checking the protocol
+      const protocol = this.protocol(at);
+      if ([&apos;http:&apos;, &apos;https:&apos;].includes(protocol)){
 
-          /* istanbul ignore next */
-          const httpModule = (protocol === &apos;http:&apos;) ? http : https;
+        /* istanbul ignore next */
+        const httpModule = (protocol === &apos;http:&apos;) ? http : https;
 
-          // doing the request
-          const request = httpModule.request(options, (response) =&gt; {
+        // doing the request
+        const request = httpModule.request(options, (response) =&gt; {
 
-            let errorStatus = null;
-            let headers = Object.create(null);
-            if (response.statusCode === 200){
-              headers = response.headers;
-            }
-            else{
-              errorStatus = new Error(&apos;Could not connect to the url&apos;);
-            }
+          let errorStatus = null;
+          let headers = Object.create(null);
+          if (response.statusCode === 200){
+            headers = response.headers;
+          }
+          else{
+            errorStatus = new Error(&apos;Could not connect to the url&apos;);
+          }
 
+          if (errorStatus){
+            reject(errorStatus);
+          }
+          else{
             this._setToCache(&apos;headers&apos;, headers, at);
-            this._setToCache(&apos;errorStatus&apos;, errorStatus, at);
+            resolve(headers);
+          }
+        });
 
-            if (errorStatus){
-              reject(errorStatus);
-            }
-            else{
-              resolve(headers);
-            }
-          });
-
-          /* istanbul ignore next */
-          request.on(&apos;error&apos;, (err) =&gt; {
-            debug(err);
-
-            this._setToCache(&apos;headers&apos;, {}, at);
-            this._setToCache(&apos;errorStatus&apos;, new Error(&apos;Web error&apos;), at);
-
-            reject(this._getFromCache(&apos;errorStatus&apos;, at));
-          });
-          request.end();
-        }
-        else{
-          this._setToCache(&apos;headers&apos;, {}, at);
-          this._setToCache(&apos;errorStatus&apos;, new Error(&apos;Invalid protocol&apos;), at);
-
-          reject(this._getFromCache(&apos;errorStatus&apos;, at));
-        }
+        /* istanbul ignore next */
+        request.on(&apos;error&apos;, (err) =&gt; {
+          reject(err);
+        });
+        request.end();
       }
       else{
-        if (this._getFromCache(&apos;errorStatus&apos;, at)){
-          reject(this._getFromCache(&apos;errorStatus&apos;, at));
-        }
-        else{
-          resolve(this._getFromCache(&apos;headers&apos;, at));
-        }
+        reject(new Error(&apos;Invalid protocol&apos;));
       }
     });
   }

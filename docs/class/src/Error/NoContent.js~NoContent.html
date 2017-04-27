@@ -209,7 +209,7 @@ level action (an action that has not been created from another action).</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Error/NoContent.js.html#lineNumber43">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Error/NoContent.js.html#lineNumber45">source</a></span></span>
     </span>
   </h3>
 
@@ -218,7 +218,9 @@ level action (an action that has not been created from another action).</p>
   
   <div data-ice="description"><p>Boolean telling if this error is not allowed as output (<span><a href="class/src/Handler.js~Handler.html#instance-method-output">Handler.output</a></span>)
 when it has been raised from a nested action (an action created from another
-action (<span><a href="class/src/Action.js~Action.html#instance-method-createAction">Action.createAction</a></span>)).</p>
+action (<span><a href="class/src/Action.js~Action.html#instance-method-createAction">Action.createAction</a></span>)). When output is disabled the error
+will not be handled by the <span><a href="class/src/Writer.js~Writer.html">Writer</a></span>, therefore the error will be
+emitted by the signal <span><a href="class/src/Handler.js~Handler.html#static-method-onErrorDuringOutput">Handler.onErrorDuringOutput</a></span>.</p>
 <p>Value driven by:
 <code>Settings.get(&apos;error/noContent/disableOutputInNested&apos;)</code>
 (default: <code>false</code>)</p>

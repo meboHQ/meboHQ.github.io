@@ -202,7 +202,7 @@
         "leadingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\n * Resources bundled with mebo\n ",
+            "value": "*\n * Resources bundled with Mebo\n ",
             "start": 0,
             "end": 38,
             "loc": {
@@ -728,7 +728,7 @@
   "comments": [
     {
       "type": "CommentBlock",
-      "value": "*\n * Resources bundled with mebo\n ",
+      "value": "*\n * Resources bundled with Mebo\n ",
       "start": 0,
       "end": 38,
       "loc": {
@@ -746,7 +746,7 @@
   "tokens": [
     {
       "type": "CommentBlock",
-      "value": "*\n * Resources bundled with mebo\n ",
+      "value": "*\n * Resources bundled with Mebo\n ",
       "start": 0,
       "end": 38,
       "loc": {

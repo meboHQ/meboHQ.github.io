@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber91">mebo/src/Ext/Handlers/Web.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber92">mebo/src/Ext/Handlers/Web.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber91">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber92">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -112,8 +112,9 @@ be registered beforehand via a webfication process that describes their
 request method, rest route and if it requires authentication.</p>
 <pre><code><code class="source-code prettyprint">Mebo.webfyAction(&apos;myRegisteredAction&apos;, &apos;get&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true});</code>
 </code></pre><p>In case of actions that require authentication (<code>auth: true</code>) Mebo checks if
-the authentication has ben executed. Therefore a passport authentication middleware
-can be defined via <span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAuthAction">addBeforeAuthAction</a></span>:</p>
+the authentication has been executed before executing the action. Therefore,
+a passport authentication is required to be defined beforehand which can
+be done through <span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAuthAction">addBeforeAuthAction</a></span>:</p>
 <pre><code><code class="source-code prettyprint">Mebo.addBeforeAuthAction(passport);</code>
 </code></pre><p>Also, custom middlewares can be added before the execution of any action through
 <span><a href="class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAction">addBeforeAction</a></span>:</p>
@@ -1092,7 +1093,7 @@ based on an arbitrary express route.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber311">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber312">source</a></span></span>
     </span>
   </h3>
 
@@ -1173,7 +1174,7 @@ before the action</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber356">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber357">source</a></span></span>
     </span>
   </h3>
 
@@ -1256,7 +1257,7 @@ before an action that requires authentication</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber371">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber372">source</a></span></span>
     </span>
   </h3>
 
@@ -1315,7 +1316,7 @@ the middlewares added through <span><a href="class/src/Ext/Handlers/Web.js~Web.h
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber384">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber385">source</a></span></span>
     </span>
   </h3>
 
@@ -1374,7 +1375,7 @@ the middlewares added through <span><a href="class/src/Ext/Handlers/Web.js~Web.h
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber271">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber272">source</a></span></span>
     </span>
   </h3>
 
@@ -1468,7 +1469,7 @@ function(err, result, req, res, next){...}</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber409">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber410">source</a></span></span>
     </span>
   </h3>
 
@@ -1547,7 +1548,7 @@ registration of the rest routes</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber185">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber186">source</a></span></span>
     </span>
   </h3>
 
@@ -1648,7 +1649,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber97">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber98">source</a></span></span>
     </span>
   </h3>
 
@@ -1713,7 +1714,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber137">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber138">source</a></span></span>
     </span>
   </h3>
 
@@ -1769,7 +1770,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber162">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber163">source</a></span></span>
     </span>
   </h3>
 
@@ -1825,7 +1826,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber112">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber113">source</a></span></span>
     </span>
   </h3>
 
@@ -1887,7 +1888,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber149">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber150">source</a></span></span>
     </span>
   </h3>
 
@@ -1951,7 +1952,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber435">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber436">source</a></span></span>
     </span>
   </h3>
 
@@ -2032,7 +2033,7 @@ input values to further information take a look at (<span><a href="class/src/Ext
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber455">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Ext/Handlers/Web.js.html#lineNumber456">source</a></span></span>
     </span>
   </h3>
 
