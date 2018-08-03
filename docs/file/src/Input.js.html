@@ -46,7 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Web.js~Web.html">Web</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Any.js~Any.html">Any</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
@@ -64,11 +64,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Url.js~Url.html">Url</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Version.js~Version.html">Version</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/AppArgs.js~AppArgs.html">AppArgs</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html">CliArgs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/LruCache.js~LruCache.html">LruCache</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/AppOutput.js~AppOutput.html">AppOutput</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
 </ul>
 </div>
@@ -159,7 +159,7 @@ const _cache = Symbol(&apos;cache&apos;);
  * the input value setter, in order to prevent it you can set an input as \
  * {@link readOnly} | <img src="data/docs/toggle/on.png" title="yes"> | <img src="data/docs/value/true.png" title="true">
  * defaultValue | default value of the input | <img src="data/docs/toggle/on.png" title="yes"> | <img src="data/docs/value/null.png" title="null">
- * elementType | tells how the input should be presented via {@link App}: \
+ * elementType | tells how the input should be presented via {@link Cli}: \
  * `&apos;option&apos;` or `&apos;argument&apos;` ({@link http://docopt.org}) | <img src="data/docs/toggle/on.png" title="yes"> | `&apos;option&apos;`
  * vector | boolean telling if the input holds a vector value (defined \
  * at the construction time) | <img src="data/docs/toggle/on.png" title="yes"> | <img src="data/docs/value/auto.png" title="auto">
@@ -169,9 +169,9 @@ const _cache = Symbol(&apos;cache&apos;);
  * value is used to initialize the input. It occurs when a session is assigned \
  * to an action ({@link Action.setSession}) | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
  * description | description about the input, currently this information is displayed \
- * when an action is running through {@link App} | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
+ * when an action is running through {@link Cli} | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
  * shortOption | short version of the input name used to speficy when running \
- * through the {@link App} | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
+ * through the {@link Cli} | <img src="data/docs/toggle/off.png" title="no"> | <img src="data/docs/value/none.png" title="none">
  *
  * &lt;br/&gt;The assignment of a property value can be done at construction time or through
  * the setter {@link Input.assignProperty}. A property value can be queried by the

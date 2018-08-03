@@ -46,7 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Web.js~Web.html">Web</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Any.js~Any.html">Any</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
@@ -64,11 +64,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Url.js~Url.html">Url</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Version.js~Version.html">Version</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/AppArgs.js~AppArgs.html">AppArgs</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html">CliArgs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/LruCache.js~LruCache.html">LruCache</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/AppOutput.js~AppOutput.html">AppOutput</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
 </ul>
 </div>
@@ -173,7 +173,7 @@ of the options described above can be defined at construction time via propertie
 </tr>
 <tr>
 <td>elementType</td>
-<td>tells how the input should be presented via <span><a href="class/src/Handlers/App.js~App.html">App</a></span>:  <code>&apos;option&apos;</code> or <code>&apos;argument&apos;</code> (<span><a href="http://docopt.org">http://docopt.org</a></span>)</td>
+<td>tells how the input should be presented via <span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span>:  <code>&apos;option&apos;</code> or <code>&apos;argument&apos;</code> (<span><a href="http://docopt.org">http://docopt.org</a></span>)</td>
 <td style="text-align:center"><img src="data/docs/toggle/on.png" title="yes"></td>
 <td style="text-align:center"><code>&apos;option&apos;</code></td>
 </tr>
@@ -197,13 +197,13 @@ of the options described above can be defined at construction time via propertie
 </tr>
 <tr>
 <td>description</td>
-<td>description about the input, currently this information is displayed  when an action is running through <span><a href="class/src/Handlers/App.js~App.html">App</a></span></td>
+<td>description about the input, currently this information is displayed  when an action is running through <span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span></td>
 <td style="text-align:center"><img src="data/docs/toggle/off.png" title="no"></td>
 <td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
 </tr>
 <tr>
 <td>shortOption</td>
-<td>short version of the input name used to speficy when running  through the <span><a href="class/src/Handlers/App.js~App.html">App</a></span></td>
+<td>short version of the input name used to speficy when running  through the <span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span></td>
 <td style="text-align:center"><img src="data/docs/toggle/off.png" title="no"></td>
 <td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
 </tr>

@@ -13,21 +13,6 @@
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Handlers/App.js": {
-      "expectCount": 12,
-      "actualCount": 12,
-      "undocumentLines": []
-    },
-    "src/Readers/AppArgs.js": {
-      "expectCount": 5,
-      "actualCount": 5,
-      "undocumentLines": []
-    },
-    "src/Writers/AppOutput.js": {
-      "expectCount": 6,
-      "actualCount": 6,
-      "undocumentLines": []
-    },
     "src/Inputs/BaseText.js": {
       "expectCount": 3,
       "actualCount": 3,
@@ -41,6 +26,21 @@
     "src/Inputs/Buf.js": {
       "expectCount": 5,
       "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/Handlers/Cli.js": {
+      "expectCount": 12,
+      "actualCount": 12,
+      "undocumentLines": []
+    },
+    "src/Readers/CliArgs.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/Writers/CliOutput.js": {
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "src/Errors/Conflict.js": {

@@ -46,7 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Web.js~Web.html">Web</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Any.js~Any.html">Any</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
@@ -64,11 +64,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Url.js~Url.html">Url</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Version.js~Version.html">Version</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/AppArgs.js~AppArgs.html">AppArgs</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html">CliArgs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/LruCache.js~LruCache.html">LruCache</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/AppOutput.js~AppOutput.html">AppOutput</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
 </ul>
 </div>
@@ -92,7 +92,7 @@
   
   
   
-  <div class="flat-list" data-ice="directSubclass"><h4>Direct Subclass:</h4><div><span><a href="class/src/Handlers/App.js~App.html">App</a></span>, <span><a href="class/src/Handlers/Web.js~Web.html">Web</a></span></div></div>
+  <div class="flat-list" data-ice="directSubclass"><h4>Direct Subclass:</h4><div><span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span>, <span><a href="class/src/Handlers/Web.js~Web.html">Web</a></span></div></div>
   
   
   
@@ -192,7 +192,7 @@ traceback information included in the error output.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Handler.js~Handler.html#static-method-create">create</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, mask: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span>): <span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Handler.js~Handler.html#static-method-create">create</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, mask: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span>): <span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span>
         </p>
       </div>
       <div>
@@ -248,7 +248,7 @@ traceback information included in the error output.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Handler.js~Handler.html#static-method-grantAction">grantAction</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/Handler.js~Handler.html#static-method-grantAction">grantAction</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span>)</span>
         </p>
       </div>
       <div>
@@ -562,7 +562,7 @@ traceback information included in the error output.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Handler.js~Handler.html#static-method-_grantingAction">_grantingAction</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/Handler.js~Handler.html#static-method-_grantingAction">_grantingAction</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span>)</span>
         </p>
       </div>
       <div>
@@ -870,7 +870,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     
     
     
-    <span data-ice="name">create</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, mask: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span>): <span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span>
+    <span data-ice="name">create</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, mask: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span>): <span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span>
     <span class="right-info">
       
       
@@ -918,7 +918,7 @@ custom handler implementations for specific masks)</p>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">args</td>
-      <td data-ice="type">...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span></td>
+      <td data-ice="type">...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>custom args passed to the constructor during factoring</p>
 </td>
@@ -1046,7 +1046,7 @@ custom handler implementations for specific masks)</p>
     
     
     
-    <span data-ice="name">grantAction</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span>)</span>
+    <span data-ice="name">grantAction</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span>)</span>
     <span class="right-info">
       
       
@@ -1086,7 +1086,7 @@ custom handler implementations for specific masks)</p>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">args</td>
-      <td data-ice="type">...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span></td>
+      <td data-ice="type">...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>custom args passed to <span><a href="class/src/Handler.js~Handler.html#static-method-_grantingAction">Handler._grantingAction</a></span></p>
 </td>
@@ -1879,7 +1879,7 @@ to match a custom registered handler</p>
     
     
     
-    <span data-ice="name">_grantingAction</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span>)</span>
+    <span data-ice="name">_grantingAction</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, args: ...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span>)</span>
     <span class="right-info">
       
       
@@ -1920,7 +1920,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">args</td>
-      <td data-ice="type">...<span><a href="class/src/Handlers/App.js~App.html#instance-method-args">args</a></span></td>
+      <td data-ice="type">...<span><a href="class/src/Handlers/Cli.js~Cli.html#instance-method-args">args</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>custom args passed during <span><a href="class/src/Handler.js~Handler.html#static-method-grantAction">Handler.grantAction</a></span></p>
 </td>

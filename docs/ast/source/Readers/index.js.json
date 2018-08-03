@@ -134,9 +134,9 @@
                   "line": 1,
                   "column": 22
                 },
-                "identifierName": "AppArgs"
+                "identifierName": "CliArgs"
               },
-              "name": "AppArgs"
+              "name": "CliArgs"
             },
             "computed": false
           },
@@ -187,10 +187,10 @@
                   }
                 },
                 "extra": {
-                  "rawValue": "./AppArgs",
-                  "raw": "'./AppArgs'"
+                  "rawValue": "./CliArgs",
+                  "raw": "'./CliArgs'"
                 },
-                "value": "./AppArgs"
+                "value": "./CliArgs"
               }
             ]
           }
@@ -485,7 +485,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "AppArgs",
+      "value": "CliArgs",
       "start": 15,
       "end": 22,
       "loc": {
@@ -590,7 +590,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./AppArgs",
+      "value": "./CliArgs",
       "start": 33,
       "end": 44,
       "loc": {

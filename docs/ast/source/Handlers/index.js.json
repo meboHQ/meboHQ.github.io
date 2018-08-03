@@ -134,9 +134,9 @@
                   "line": 1,
                   "column": 18
                 },
-                "identifierName": "App"
+                "identifierName": "Cli"
               },
-              "name": "App"
+              "name": "Cli"
             },
             "computed": false
           },
@@ -187,10 +187,10 @@
                   }
                 },
                 "extra": {
-                  "rawValue": "./App",
-                  "raw": "'./App'"
+                  "rawValue": "./Cli",
+                  "raw": "'./Cli'"
                 },
-                "value": "./App"
+                "value": "./Cli"
               }
             ]
           }
@@ -485,7 +485,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "App",
+      "value": "Cli",
       "start": 15,
       "end": 18,
       "loc": {
@@ -590,7 +590,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./App",
+      "value": "./Cli",
       "start": 29,
       "end": 36,
       "loc": {

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/Readers/CliArgs.js | Mebo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-style.css">
+<link rel="icon" type="image/png" sizes="64x64" href="data/icon.png?v=1"><script async defer src="https://buttons.github.io/buttons.js"></script></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header><a href="./index.html"><img src="data/icon.png?v=1" id="meboSmallLogo" width="40" height="40" align="top"/></a>
+  <a href="./">Home</a>
+  <a href="./manual/overview/INTRODUCTION.html" data-ice="manualHeaderLink">Intro</a>
+  
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/meboHQ/mebo" class="repo-url-github">Mebo&nbsp;GitHub</a>
+  <div class="search-box">
+  <span>
+    <img src="data/docs/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Action.js~Action.html">Action</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handler.js~Handler.html">Handler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Input.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Reader.js~Reader.html">Reader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Session.js~Session.html">Session</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Settings.js~Settings.html">Settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Handlers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html">Cli</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Handlers/Web.js~Web.html">Web</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Inputs</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Any.js~Any.html">Any</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/BaseText.js~BaseText.html">BaseText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Bool.js~Bool.html">Bool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Buf.js~Buf.html">Buf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Email.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/FilePath.js~FilePath.html">FilePath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Hash.js~Hash.html">Hash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Hex.js~Hex.html">Hex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Ip.js~Ip.html">Ip</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Numeric.js~Numeric.html">Numeric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Stream.js~Stream.html">Stream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/UUID.js~UUID.html">UUID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Url.js~Url.html">Url</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Inputs/Version.js~Version.html">Version</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Readers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html">CliArgs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Readers/WebRequest.js~WebRequest.html">WebRequest</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/ImmutableMap.js~ImmutableMap.html">ImmutableMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utils/LruCache.js~LruCache.html">LruCache</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Writers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writers/WebResponse.js~WebResponse.html">WebResponse</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Readers/CliArgs.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const path = require(&apos;path&apos;);
+const neodoc = require(&apos;neodoc&apos;);
+const assert = require(&apos;assert&apos;);
+const TypeCheck = require(&apos;js-typecheck&apos;);
+const Inputs = require(&apos;../Inputs&apos;);
+const Settings = require(&apos;../Settings&apos;);
+const Handler = require(&apos;../Handler&apos;);
+const Reader = require(&apos;../Reader&apos;);
+
+
+// symbols used for private instance variables to avoid any potential clashing
+// caused by re-implementations
+const _args = Symbol(&apos;args&apos;);
+
+/**
+ * command-line arguments reader.
+ *
+ * This reader is used by the {@link Cli} handler. It supports most of
+ * the docopt specification. Also, if the reader finds an error it&apos;s capable of
+ * reporting it in user-friendly way. This is used to report `-h/--help` and
+ * missing arguments.
+ *
+ * All serializable inputs are supported by this handler, they can be displayed
+ * either as `argument` or `option` element. This is done by setting the input
+ * property `elementType` (option is the default one).
+ *
+ * You can define the description displayed in the help of the element by
+ * setting the input property `description`.
+ *
+ * The `option` elements support `short option` by setting the input property
+ * `shortOption`.
+ *
+ * In order to accommodate how vector values are represented in a command-line
+ * interface, this reader expects vector elements to be separated by
+ * the space character.
+ *
+ * Any {@link Bool} input specified as an `option` element behaves in a
+ * special mode, since it&apos;s treated as a toogle option in command-line.
+ * Therefore if the Bool input is assigned with a `true` then the option
+ * gets the prefix `no-`.
+ *
+ * When a value is found for the input, it gets loaded via {@link Input.parseValue}
+ * where each input implementation has its own way of parsing the serialized data,
+ * to find out about how a value is serialized for an specific input type you could simply
+ * set an arbitrary value to the input you are interested then query it back through
+ * {@link Input.serializeValue}. Also, Mebo provides a reference datasheet
+ * about the serialization forms for the inputs bundled with it, found at {@link Reader}.
+ *
+ * &lt;h2&gt;Options Summary&lt;/h2&gt;
+ *
+ * Option Name | Description | Default Value
+ * --- | --- | :---:
+ * description | description about the program displayed at the header of the help \
+ * | <img src="data/docs/value/none.png" title="none">
+ * parsingErrorStatusCode | Custom error status code used to identify when the \
+ * app args could not be parsed | `700`
+ *
+ * @see http://docopt.org
+ */
+class CliArgs extends Reader{
+
+  /**
+   * Creates an args reader
+   *
+   * @param {Action} action - action that should be used by the reader
+   * @param {Array&lt;string&gt;} argv - list of arguments that should be used by
+   * the reader
+   */
+  constructor(action, argv){
+    super(action);
+
+    this._setArgs(argv);
+
+    // default options
+    this.setOption(&apos;description&apos;, &apos;&apos;);
+    this.setOption(&apos;parsingErrorStatusCode&apos;, 700);
+  }
+
+  /**
+   * Returns a list of args used by the reader, by default it uses
+   * `process.argv`.
+   *
+   * @return {Array&lt;string&gt;}
+   */
+  args(){
+    return this[_args];
+  }
+
+  /**
+   * Returns the executable name based on the args
+   *
+   * @return {string}
+   */
+  executableName(){
+    return path.basename(this.args()[1]);
+  }
+
+  /**
+   * Implements the reader
+   *
+   * @param {Array&lt;Input&gt;} inputList - Valid list of inputs that should be used for
+   * the parsing
+   * @return {Promise&lt;Object&gt;}
+   * @protected
+   */
+  async _perform(inputList){
+    const helpElements = await this.constructor._helpElements(inputList);
+    const helpString = await this._helpInterface(helpElements);
+
+    let parsedArgs = Object.create(null);
+    // it thrown an exception if something went wrong (like missing a required parameter)
+    try{
+      parsedArgs = neodoc.run(helpString, {
+        argv: (this.args().includes(&apos;--help&apos;) || this.args().includes(&apos;-h&apos;)) ? [&apos;-h&apos;] : this.args().slice(2),
+        dontExit: true,
+        smartOptions: true,
+        repeatableOptions: true,
+        version: Settings.get(&apos;apiVersion&apos;),
+      });
+    }
+    catch(err){
+      // adding a custom status code for the parsing error
+      // the error does not come as an instance of error, for this reason
+      // creating a new error and copying the contents
+      const error = Object.assign(new Error(), err);
+      error.status = this.option(&apos;parsingErrorStatusCode&apos;);
+      throw error;
+    }
+
+    // however when the user asks for the help it does not raises an exception
+    if (&apos;.help&apos; in parsedArgs){
+      const error = new Error(parsedArgs[&apos;.help&apos;]);
+      error.status = this.option(&apos;parsingErrorStatusCode&apos;);
+      throw error;
+    }
+
+    for (const input of inputList){
+      if (input instanceof Inputs.Bool &amp;&amp; !input.isVector()){
+        input.setValue(Boolean(input.value()));
+      }
+    }
+
+    const alreadyParsed = [];
+    const result = Object.create(null);
+
+    // collecting the input values
+    for (const elementName in parsedArgs){
+      let foundInputName;
+
+      // finding the input name
+      for (const elementType in helpElements){
+        for (const inputName in helpElements[elementType]){
+          const inputData = helpElements[elementType][inputName];
+          if (inputData.usageDisplay.split(&apos;=&apos;)[0] === elementName || inputData.shortOption === elementName){
+            foundInputName = inputName;
+            break;
+          }
+        }
+
+        if (foundInputName){
+          break;
+        }
+      }
+
+      // querying the input value
+      const inputNames = inputList.map(x =&gt; x.name());
+      if (foundInputName &amp;&amp; !alreadyParsed.includes(foundInputName)){
+        alreadyParsed.push(foundInputName);
+
+        const input = inputList[inputNames.indexOf(foundInputName)];
+
+        let value;
+        if (TypeCheck.isBool(parsedArgs[elementName]) &amp;&amp; !input.isVector()){
+          value = String(!input.value());
+        }
+        else{
+          if (input.isVector() &amp;&amp; !TypeCheck.isList(parsedArgs[elementName])){
+            value = [parsedArgs[elementName]];
+          }
+          else{
+            value = parsedArgs[elementName];
+          }
+        }
+        result[foundInputName] = value;
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Sets a list of argument values used by the reader. It must follow
+   * the same pattern found at `process.argv`
+   *
+   * @param {Array&lt;string&gt;} value - argument list
+   * @private
+   */
+  _setArgs(value){
+    assert(TypeCheck.isList(value), &apos;value needs to be a list&apos;);
+    assert(value.length &gt;= 2, &apos;missing first argument process.execPath and second argument javaScript file being executed&apos;);
+
+    this[_args] = value.slice(0);
+  }
+
+  /**
+   * Returns an object containing the elements that can be used by the command
+   *
+   * @param {Array&lt;Input&gt;} inputList - list of input that should be used to build
+   * query the help
+   * @return {Object}
+   * @private
+   */
+  static async _helpElements(inputList){
+
+    const elements = {
+      argument: {},
+      option: {},
+    };
+
+    // building inputs
+    const addedArgs = [];
+    const descriptions = await Promise.all(inputList.map(x =&gt; this._computeInfoDisplay(x)));
+
+    let currentIndex = 0;
+    for (const input of inputList){
+
+      const inputName = input.name();
+      let argName = this._camelCaseToArgument(inputName);
+
+      // in case of a boolean input that is true by default adding
+      // the `no` prefix to the input name automatically. For boolean inputs they
+      // work as toggles when represented through the command line
+      if (input instanceof Inputs.Bool &amp;&amp; !input.isVector() &amp;&amp; input.value()){
+        argName = `no-${argName}`;
+      }
+
+      assert(!addedArgs.includes(argName), `Ambiguous argument name (${argName}), used multiple times!`);
+      addedArgs.push(argName);
+
+      const elementType = input.property(&apos;elementType&apos;);
+
+      const inputData = Object.create(null);
+      inputData.description = descriptions[currentIndex];
+      inputData.elementDisplay = this._elementDisplay(argName, input);
+      inputData.usageDisplay = this._usageDisplay(argName, input);
+      inputData.required = ((input.isRequired() &amp;&amp; input.isEmpty()) &amp;&amp; !(input instanceof Inputs.Bool &amp;&amp; !input.isVector()));
+      inputData.vector = input.isVector();
+
+      if (elementType === &apos;option&apos;){
+        inputData.shortOptionDisplay = this._shortOptionDisplay(input);
+        inputData.shortOption = this._shortOption(input);
+      }
+
+      elements[elementType][inputName] = inputData;
+
+      currentIndex++;
+    }
+
+    return elements;
+  }
+
+  /**
+   * Returns the help interface displayed when `-h\--help` is required
+   *
+   * @param {Object} elements - elements holder object
+   * @return {string}
+   * @private
+   */
+  _helpInterface(elements){
+    let output = &apos;&apos;;
+    output += this._buildDescription(elements);
+    output += this._buildUsage(elements);
+    output += this.constructor._buildColumns(elements);
+
+    return output;
+  }
+
+  /**
+   * Returns a string containing the full assembled info for the input
+   *
+   * @param {Input} input - input that should be used
+   * @return {Promise&lt;string&gt;}
+   * @private
+   */
+  static async _computeInfoDisplay(input){
+
+    const inputTypeName = input.property(&apos;type&apos;);
+
+    // adding the value type to the argument
+    const isBoolInput = input instanceof Inputs.Bool;
+    let description = input.property(&apos;description&apos;) || &apos;&apos;;
+
+    if ((isBoolInput &amp;&amp; input.isVector()) || !isBoolInput){
+
+      // adding the default value as part of the description
+      if (!input.isEmpty()){
+        let serializedValue = await input.serializeValue();
+        serializedValue = (input.isVector()) ? JSON.parse(serializedValue) : [serializedValue];
+        const defaultValue = [];
+
+        for (const value of serializedValue){
+
+          if (TypeCheck.isString(value) &amp;&amp; Number.isNaN(Number(value))){
+            const scapedValue = value.replace(new RegExp(&apos;&quot;&apos;, &apos;g&apos;), &apos;\\&quot;&apos;);
+            defaultValue.push(`&quot;${scapedValue}&quot;`);
+          }
+          else{
+            defaultValue.push(value);
+          }
+        }
+
+        if (description.length){
+          description += &apos; &apos;;
+        }
+        description += `[default: ${defaultValue.join(&apos; &apos;)}]`;
+      }
+    }
+
+    const inputTypeDisplay = input.isVector() ? `${inputTypeName}[]` : inputTypeName;
+
+    if (description.length){
+      description += &apos; &apos;;
+    }
+    description += `(${inputTypeDisplay} type).`;
+
+    return description;
+  }
+
+  /**
+   * Returns a string containing the full element display for either an option
+   * or argument
+   *
+   * @param {string} name - element given name
+   * @param {Input} input - input that should be used
+   * @return {string}
+   * @private
+   */
+  static _elementDisplay(name, input){
+
+    let result = &apos;&apos;;
+
+    if (input.property(&apos;elementType&apos;) === &apos;option&apos;){
+      const shortOption = this._shortOptionDisplay(input);
+
+      const isBoolInput = input instanceof Inputs.Bool;
+      if ((isBoolInput &amp;&amp; input.isVector()) || !isBoolInput){
+
+        // adding short option
+        if (shortOption){
+          result += shortOption;
+
+          if (input.isVector()){
+            result += &apos;...&apos;;
+          }
+
+          result += &apos;, &apos;;
+        }
+
+        result += this._usageDisplay(name, input);
+
+        if (input.isVector()){
+          result += &apos;...&apos;;
+        }
+      }
+      else{
+        if (shortOption){
+          result += shortOption;
+          result += &apos;, &apos;;
+        }
+
+        result += this._usageDisplay(name, input);
+      }
+    }
+    else{
+      result = name;
+    }
+
+    return result;
+  }
+
+  /**
+   * Returns a string containing the usage display for either
+   * the option or argument
+   *
+   * @param {string} name - how the element should be called
+   * @param {Input} input - input that should be used
+   * @return {string}
+   * @private
+   */
+  static _usageDisplay(name, input){
+    let result = &apos;&apos;;
+
+    if (input.property(&apos;elementType&apos;) === &apos;option&apos;){
+      // adding long option
+      result = `--${name}`;
+
+      const isBoolInput = input instanceof Inputs.Bool;
+      if ((isBoolInput &amp;&amp; input.isVector()) || !isBoolInput){
+        result = `${result}=&lt;value&gt;`;
+      }
+    }
+    else{
+      result = `&lt;${name}&gt;`;
+    }
+
+    return result;
+  }
+
+  /**
+   * Returns a string containing the the short option, in case the input
+   * does not have a short option property defined then an empty string
+   * is returned instead
+   *
+   * @param {Input} input - input that should be used
+   * @return {string}
+   * @private
+   */
+  static _shortOption(input){
+    const shortOption = input.property(&apos;shortOption&apos;);
+    if (shortOption){
+      return `-${shortOption}`;
+    }
+
+    return &apos;&apos;;
+  }
+
+  /**
+   * Returns a string containing the display of the short option,
+   * This is used when listing the element options
+   *
+   * @param {Input} input - input that should be used
+   * @return {string}
+   * @private
+   */
+  static _shortOptionDisplay(input){
+    let result = this._shortOption(input);
+    if (result.length &amp;&amp; !(input instanceof Inputs.Bool &amp;&amp; !input.isVector())){
+      result = `${result}=&lt;value&gt;`;
+    }
+
+    return result;
+  }
+
+  /**
+   * Returns a string containing the description of the command
+   *
+   * @param {Object} elements - elements holder object
+   * @return {string}
+   * @private
+   */
+  _buildDescription(elements){
+    let output = &apos;&apos;;
+    const description = this.option(&apos;description&apos;);
+    if (description.length){
+      output += description;
+      if (!description.endsWith(&apos;.&apos;)){
+        output += &apos;.&apos;;
+      }
+      output += &apos;\n\n&apos;;
+    }
+
+    return output;
+  }
+
+  /**
+   * Builds a string containing the usage
+   *
+   * @param {Object} elements - elements holder object
+   * @return {string}
+   * @private
+   */
+  _buildUsage(elements){
+    let output = `Usage: ${this.executableName()} `;
+
+    const requiredArguments = Object.create(null);
+    const optionalArguments = Object.create(null);
+    const requiredOptions = Object.keys(elements.option).filter(x =&gt; elements.option[x].required);
+    let requiredArgumentsOrder = [];
+    let optionalArgumentsOrder = [];
+
+    if (requiredOptions.length){
+      output += requiredOptions.map(x =&gt; elements.option[x].usageDisplay).join(&apos; &apos;);
+      output += &apos; &apos;;
+    }
+    output += &apos;[options]&apos;;
+
+    // building arguments
+    if (Object.keys(elements.argument).length){
+      for (const inputName in elements.argument){
+        if (elements.argument[inputName].required){
+          requiredArguments[inputName] = elements.argument[inputName];
+        }
+        else{
+          optionalArguments[inputName] = elements.argument[inputName];
+        }
+      }
+
+      const requiredArgumentNames = Object.keys(requiredArguments);
+      requiredArgumentsOrder = requiredArgumentNames.filter(x =&gt; !requiredArguments[x].vector);
+      requiredArgumentsOrder = requiredArgumentsOrder.concat(requiredArgumentNames.filter(x =&gt; !requiredArgumentsOrder.includes(x)));
+
+      // first adding the required arguments
+      let hasVectorRequiredArgument = false;
+      for (const inputName of requiredArgumentsOrder){
+        output += &apos; &apos;;
+        output += requiredArguments[inputName].usageDisplay;
+
+        if (requiredArguments[inputName].vector &amp;&amp; Object.keys(optionalArguments).length === 0){
+          if (requiredArgumentsOrder.indexOf(inputName) === requiredArgumentsOrder.length - 1){
+            output += &apos;...&apos;;
+            hasVectorRequiredArgument = true;
+          }
+        }
+      }
+
+      // then adding the optional ones
+      const optionalArgumentNames = Object.keys(optionalArguments);
+      optionalArgumentsOrder = optionalArgumentNames.filter(x =&gt; !optionalArguments[x].vector);
+      optionalArgumentsOrder = optionalArgumentsOrder.concat(optionalArgumentNames.filter(x =&gt; !optionalArgumentsOrder.includes(x)));
+
+      for (const inputName in optionalArguments){
+        output += &apos; [&apos;;
+        output += optionalArguments[inputName].usageDisplay;
+        output += &apos;]&apos;;
+
+        if (optionalArguments[inputName].vector &amp;&amp; !hasVectorRequiredArgument){
+          if (optionalArgumentsOrder.indexOf(inputName) === optionalArgumentsOrder.length - 1){
+            output += &apos;...&apos;;
+          }
+        }
+      }
+    }
+
+    output += this._buildUsageVectorOptions(elements, requiredArgumentsOrder, requiredOptions);
+
+    return output;
+  }
+
+  /**
+   * Builds a string containing the usage for the vector options
+   *
+   * @param {Object} elements - elements holder object
+   * @param {Array&lt;string&gt;} argumentNames - list of argument names
+   * @param {Array&lt;string&gt;} requiredOptionNames - list of required option names
+   * @return {string}
+   * @private
+   */
+  _buildUsageVectorOptions(elements, argumentNames, requiredOptionNames){
+    let output = &apos;&apos;;
+
+    // adding the usage for the vector options
+    for (const inputName in elements.option){
+
+      if (elements.option[inputName].vector){
+        output += `\n       ${this.executableName()} `;
+
+        for (const requiredArg of argumentNames){
+          output += elements.argument[requiredArg].usageDisplay;
+          output += &apos; &apos;;
+        }
+
+        output += &apos;[options] &apos;;
+        if (requiredOptionNames.length){
+          output += requiredOptionNames.filter(y =&gt; y !== inputName).map(x =&gt; elements.option[x].usageDisplay).join(&apos; &apos;);
+          output += &apos; &apos;;
+        }
+
+        if (!requiredOptionNames.includes(inputName)){
+          output += &apos;[&apos;;
+        }
+
+        output += elements.option[inputName].usageDisplay;
+        output += &apos;...&apos;;
+
+        if (!requiredOptionNames.includes(inputName)){
+          output += &apos;]&apos;;
+        }
+      }
+    }
+
+    return output;
+  }
+
+  /**
+   * Builds a string containing the columns displayed by the arguments and options
+   *
+   * @param {Object} elements - elements holder object
+   * @return {string}
+   * @private
+   */
+  static _buildColumns(elements){
+    let columns = &apos;\n&apos;;
+    const elementTypeDisplayName = Object.create(null);
+    elementTypeDisplayName.option = &apos;Options:&apos;;
+    elementTypeDisplayName.argument = &apos;Arguments:&apos;;
+
+    // figuring out the element column width
+    const elementTypeWidth = this._computeElementsWidth(elements);
+
+    for (const element in elements){
+
+      if (Object.keys(elements[element]).length){
+        columns += &apos;\n&apos;;
+        columns += elementTypeDisplayName[element];
+        columns += &apos;\n&apos;;
+
+        for (const inputName in elements[element]){
+
+          const elementData = elements[element][inputName];
+
+          // element
+          columns += &apos;  &apos;;
+          columns += elementData.elementDisplay;
+          columns += &apos; &apos;.repeat(elementTypeWidth[element] - elementData.elementDisplay.length);
+
+          // description
+          // the second separator is actually a `hair space` char, this is necessary to separate
+          // the element from the description in neodoc
+          columns += &apos; &#x2002;&apos;;
+          columns += elementData.description;
+          columns += &apos;\n&apos;;
+        }
+      }
+    }
+
+    return columns;
+  }
+
+  /**
+   * Returns a plain object containing the width for each of the element types
+   * (argument and option)
+   *
+   * @param {Object} elements - elements holder object
+   * @return {Object}
+   * @private
+   */
+  static _computeElementsWidth(elements){
+    const elementTypeWidth = Object.create(null);
+    for (const elementType in elements){
+      for (const inputName in elements[elementType]){
+        elementTypeWidth[elementType] = Math.max(elementTypeWidth[elementType] || 0,
+          elements[elementType][inputName].elementDisplay.length);
+      }
+    }
+
+    return elementTypeWidth;
+  }
+
+  /**
+   * Converts the input text from camelCase to dash-convention used
+   * in CLI applications
+   *
+   * @param {string} text - text that should be converted
+   * @return {string}
+   * @private
+   */
+  static _camelCaseToArgument(text){
+    return text.replace(/([a-z])([A-Z])/g, &apos;$1-$2&apos;).toLowerCase();
+  }
+}
+
+// registering reader
+Handler.registerReader(CliArgs, &apos;cli&apos;);
+
+module.exports = CliArgs;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

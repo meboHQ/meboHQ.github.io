@@ -12,24 +12,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/handlers/app.js~app",
-    "class/src/Handlers/App.js~App.html",
-    "<span>App</span> <span class=\"search-result-import-path\">mebo/src/Handlers/App.js</span>",
-    "class"
-  ],
-  [
-    "mebo/src/readers/appargs.js~appargs",
-    "class/src/Readers/AppArgs.js~AppArgs.html",
-    "<span>AppArgs</span> <span class=\"search-result-import-path\">mebo/src/Readers/AppArgs.js</span>",
-    "class"
-  ],
-  [
-    "mebo/src/writers/appoutput.js~appoutput",
-    "class/src/Writers/AppOutput.js~AppOutput.html",
-    "<span>AppOutput</span> <span class=\"search-result-import-path\">mebo/src/Writers/AppOutput.js</span>",
-    "class"
-  ],
-  [
     "mebo/src/inputs/basetext.js~basetext",
     "class/src/Inputs/BaseText.js~BaseText.html",
     "<span>BaseText</span> <span class=\"search-result-import-path\">mebo/src/Inputs/BaseText.js</span>",
@@ -45,6 +27,24 @@ window.esdocSearchIndex = [
     "mebo/src/inputs/buf.js~buf",
     "class/src/Inputs/Buf.js~Buf.html",
     "<span>Buf</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Buf.js</span>",
+    "class"
+  ],
+  [
+    "mebo/src/handlers/cli.js~cli",
+    "class/src/Handlers/Cli.js~Cli.html",
+    "<span>Cli</span> <span class=\"search-result-import-path\">mebo/src/Handlers/Cli.js</span>",
+    "class"
+  ],
+  [
+    "mebo/src/readers/cliargs.js~cliargs",
+    "class/src/Readers/CliArgs.js~CliArgs.html",
+    "<span>CliArgs</span> <span class=\"search-result-import-path\">mebo/src/Readers/CliArgs.js</span>",
+    "class"
+  ],
+  [
+    "mebo/src/writers/clioutput.js~clioutput",
+    "class/src/Writers/CliOutput.js~CliOutput.html",
+    "<span>CliOutput</span> <span class=\"search-result-import-path\">mebo/src/Writers/CliOutput.js</span>",
     "class"
   ],
   [
@@ -966,75 +966,75 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/handlers/app.js",
-    "file/src/Handlers/App.js.html",
-    "src/Handlers/App.js",
+    "src/handlers/cli.js",
+    "file/src/Handlers/Cli.js.html",
+    "src/Handlers/Cli.js",
     "file"
   ],
   [
-    "src/handlers/app.js~app#_createreader",
-    "class/src/Handlers/App.js~App.html#instance-method-_createReader",
-    "src/Handlers/App.js~App#_createReader",
+    "src/handlers/cli.js~cli#_createreader",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-_createReader",
+    "src/Handlers/Cli.js~Cli#_createReader",
     "method"
   ],
   [
-    "src/handlers/app.js~app#_createwriter",
-    "class/src/Handlers/App.js~App.html#instance-method-_createWriter",
-    "src/Handlers/App.js~App#_createWriter",
+    "src/handlers/cli.js~cli#_createwriter",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-_createWriter",
+    "src/Handlers/Cli.js~Cli#_createWriter",
     "method"
   ],
   [
-    "src/handlers/app.js~app#args",
-    "class/src/Handlers/App.js~App.html#instance-method-args",
-    "src/Handlers/App.js~App#args",
+    "src/handlers/cli.js~cli#args",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-args",
+    "src/Handlers/Cli.js~Cli#args",
     "method"
   ],
   [
-    "src/handlers/app.js~app#constructor",
-    "class/src/Handlers/App.js~App.html#instance-constructor-constructor",
-    "src/Handlers/App.js~App#constructor",
+    "src/handlers/cli.js~cli#constructor",
+    "class/src/Handlers/Cli.js~Cli.html#instance-constructor-constructor",
+    "src/Handlers/Cli.js~Cli#constructor",
     "method"
   ],
   [
-    "src/handlers/app.js~app#setargs",
-    "class/src/Handlers/App.js~App.html#instance-method-setArgs",
-    "src/Handlers/App.js~App#setArgs",
+    "src/handlers/cli.js~cli#setargs",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-setArgs",
+    "src/Handlers/Cli.js~Cli#setArgs",
     "method"
   ],
   [
-    "src/handlers/app.js~app#setstderr",
-    "class/src/Handlers/App.js~App.html#instance-method-setStderr",
-    "src/Handlers/App.js~App#setStderr",
+    "src/handlers/cli.js~cli#setstderr",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-setStderr",
+    "src/Handlers/Cli.js~Cli#setStderr",
     "method"
   ],
   [
-    "src/handlers/app.js~app#setstdout",
-    "class/src/Handlers/App.js~App.html#instance-method-setStdout",
-    "src/Handlers/App.js~App#setStdout",
+    "src/handlers/cli.js~cli#setstdout",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-setStdout",
+    "src/Handlers/Cli.js~Cli#setStdout",
     "method"
   ],
   [
-    "src/handlers/app.js~app#stderr",
-    "class/src/Handlers/App.js~App.html#instance-method-stderr",
-    "src/Handlers/App.js~App#stderr",
+    "src/handlers/cli.js~cli#stderr",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-stderr",
+    "src/Handlers/Cli.js~Cli#stderr",
     "method"
   ],
   [
-    "src/handlers/app.js~app#stdout",
-    "class/src/Handlers/App.js~App.html#instance-method-stdout",
-    "src/Handlers/App.js~App#stdout",
+    "src/handlers/cli.js~cli#stdout",
+    "class/src/Handlers/Cli.js~Cli.html#instance-method-stdout",
+    "src/Handlers/Cli.js~Cli#stdout",
     "method"
   ],
   [
-    "src/handlers/app.js~app._grantingaction",
-    "class/src/Handlers/App.js~App.html#static-method-_grantingAction",
-    "src/Handlers/App.js~App._grantingAction",
+    "src/handlers/cli.js~cli._grantingaction",
+    "class/src/Handlers/Cli.js~Cli.html#static-method-_grantingAction",
+    "src/Handlers/Cli.js~Cli._grantingAction",
     "method"
   ],
   [
-    "src/handlers/app.js~app.init",
-    "class/src/Handlers/App.js~App.html#static-method-init",
-    "src/Handlers/App.js~App.init",
+    "src/handlers/cli.js~cli.init",
+    "class/src/Handlers/Cli.js~Cli.html#static-method-init",
+    "src/Handlers/Cli.js~Cli.init",
     "method"
   ],
   [
@@ -1836,33 +1836,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/readers/appargs.js",
-    "file/src/Readers/AppArgs.js.html",
-    "src/Readers/AppArgs.js",
+    "src/readers/cliargs.js",
+    "file/src/Readers/CliArgs.js.html",
+    "src/Readers/CliArgs.js",
     "file"
   ],
   [
-    "src/readers/appargs.js~appargs#_perform",
-    "class/src/Readers/AppArgs.js~AppArgs.html#instance-method-_perform",
-    "src/Readers/AppArgs.js~AppArgs#_perform",
+    "src/readers/cliargs.js~cliargs#_perform",
+    "class/src/Readers/CliArgs.js~CliArgs.html#instance-method-_perform",
+    "src/Readers/CliArgs.js~CliArgs#_perform",
     "method"
   ],
   [
-    "src/readers/appargs.js~appargs#args",
-    "class/src/Readers/AppArgs.js~AppArgs.html#instance-method-args",
-    "src/Readers/AppArgs.js~AppArgs#args",
+    "src/readers/cliargs.js~cliargs#args",
+    "class/src/Readers/CliArgs.js~CliArgs.html#instance-method-args",
+    "src/Readers/CliArgs.js~CliArgs#args",
     "method"
   ],
   [
-    "src/readers/appargs.js~appargs#constructor",
-    "class/src/Readers/AppArgs.js~AppArgs.html#instance-constructor-constructor",
-    "src/Readers/AppArgs.js~AppArgs#constructor",
+    "src/readers/cliargs.js~cliargs#constructor",
+    "class/src/Readers/CliArgs.js~CliArgs.html#instance-constructor-constructor",
+    "src/Readers/CliArgs.js~CliArgs#constructor",
     "method"
   ],
   [
-    "src/readers/appargs.js~appargs#executablename",
-    "class/src/Readers/AppArgs.js~AppArgs.html#instance-method-executableName",
-    "src/Readers/AppArgs.js~AppArgs#executableName",
+    "src/readers/cliargs.js~cliargs#executablename",
+    "class/src/Readers/CliArgs.js~CliArgs.html#instance-method-executableName",
+    "src/Readers/CliArgs.js~CliArgs#executableName",
     "method"
   ],
   [
@@ -2202,39 +2202,39 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/writers/appoutput.js",
-    "file/src/Writers/AppOutput.js.html",
-    "src/Writers/AppOutput.js",
+    "src/writers/clioutput.js",
+    "file/src/Writers/CliOutput.js.html",
+    "src/Writers/CliOutput.js",
     "file"
   ],
   [
-    "src/writers/appoutput.js~appoutput#_erroroutput",
-    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-_errorOutput",
-    "src/Writers/AppOutput.js~AppOutput#_errorOutput",
+    "src/writers/clioutput.js~clioutput#_erroroutput",
+    "class/src/Writers/CliOutput.js~CliOutput.html#instance-method-_errorOutput",
+    "src/Writers/CliOutput.js~CliOutput#_errorOutput",
     "method"
   ],
   [
-    "src/writers/appoutput.js~appoutput#_successoutput",
-    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-_successOutput",
-    "src/Writers/AppOutput.js~AppOutput#_successOutput",
+    "src/writers/clioutput.js~clioutput#_successoutput",
+    "class/src/Writers/CliOutput.js~CliOutput.html#instance-method-_successOutput",
+    "src/Writers/CliOutput.js~CliOutput#_successOutput",
     "method"
   ],
   [
-    "src/writers/appoutput.js~appoutput#constructor",
-    "class/src/Writers/AppOutput.js~AppOutput.html#instance-constructor-constructor",
-    "src/Writers/AppOutput.js~AppOutput#constructor",
+    "src/writers/clioutput.js~clioutput#constructor",
+    "class/src/Writers/CliOutput.js~CliOutput.html#instance-constructor-constructor",
+    "src/Writers/CliOutput.js~CliOutput#constructor",
     "method"
   ],
   [
-    "src/writers/appoutput.js~appoutput#stderr",
-    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-stderr",
-    "src/Writers/AppOutput.js~AppOutput#stderr",
+    "src/writers/clioutput.js~clioutput#stderr",
+    "class/src/Writers/CliOutput.js~CliOutput.html#instance-method-stderr",
+    "src/Writers/CliOutput.js~CliOutput#stderr",
     "method"
   ],
   [
-    "src/writers/appoutput.js~appoutput#stdout",
-    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-stdout",
-    "src/Writers/AppOutput.js~AppOutput#stdout",
+    "src/writers/clioutput.js~clioutput#stdout",
+    "class/src/Writers/CliOutput.js~CliOutput.html#instance-method-stdout",
+    "src/Writers/CliOutput.js~CliOutput#stdout",
     "method"
   ],
   [
