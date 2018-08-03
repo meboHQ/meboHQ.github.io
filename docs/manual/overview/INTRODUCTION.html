@@ -94,63 +94,63 @@ of the action.</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="class/src/Ext/Inputs/Bool.js~Bool.html">Bool</a></td>
+<td><a href="class/src/Inputs/Bool.js~Bool.html">Bool</a></td>
 <td><code>true</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Numeric.js~Numeric.html">Numeric</a></td>
+<td><a href="class/src/Inputs/Numeric.js~Numeric.html">Numeric</a></td>
 <td><code>10</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Text.js~Text.html">Text</a></td>
+<td><a href="class/src/Inputs/Text.js~Text.html">Text</a></td>
 <td><code>&apos;Test&apos;</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/FilePath.js~FilePath.html">FilePath</a></td>
+<td><a href="class/src/Inputs/FilePath.js~FilePath.html">FilePath</a></td>
 <td><code>/tmp/someFile.txt</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Url.js~Url.html">Url</a></td>
+<td><a href="class/src/Inputs/Url.js~Url.html">Url</a></td>
 <td><code>http://www.google.com</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Email.js~Email.html">Email</a></td>
+<td><a href="class/src/Inputs/Email.js~Email.html">Email</a></td>
 <td><code>user@domain.com</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Ip.js~Ip.html">Ip</a></td>
+<td><a href="class/src/Inputs/Ip.js~Ip.html">Ip</a></td>
 <td><code>192.168.0.1</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></td>
+<td><a href="class/src/Inputs/Timestamp.js~Timestamp.html">Timestamp</a></td>
 <td><code>new Date()</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Hex.js~Hex.html">Hex</a></td>
+<td><a href="class/src/Inputs/Hex.js~Hex.html">Hex</a></td>
 <td><code>ffff00</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Hash.js~Hash.html">Hash</a></td>
+<td><a href="class/src/Inputs/Hash.js~Hash.html">Hash</a></td>
 <td><code>d41d8cd98f00b204e9800998ecf8427e</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/UUID.js~UUID.html">UUID</a></td>
+<td><a href="class/src/Inputs/UUID.js~UUID.html">UUID</a></td>
 <td><code>10ec58a-a0f2-4ac4-8393-c866d813b8d1</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Version.js~Version.html">Version</a></td>
+<td><a href="class/src/Inputs/Version.js~Version.html">Version</a></td>
 <td><code>0.1.12</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Stream.js~Stream.html">Stream</a></td>
+<td><a href="class/src/Inputs/Stream.js~Stream.html">Stream</a></td>
 <td><code>new stream.Writable()</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Buf.js~Buf.html">Buffer</a></td>
+<td><a href="class/src/Inputs/Buf.js~Buf.html">Buffer</a></td>
 <td><code>new Buffer([2, 3, 4])</code></td>
 </tr>
 <tr>
-<td><a href="class/src/Ext/Inputs/Any.js~Any.html">Any</a></td>
+<td><a href="class/src/Inputs/Any.js~Any.html">Any</a></td>
 <td><code>{a: 1, b: 2}</code></td>
 </tr>
 </tbody>
@@ -201,7 +201,8 @@ type. It&apos;s done by using the extendedValidation callback.</p>
 any validation that&apos;s bundled with the input.</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">const Mebo = require(&apos;mebo&apos;);
 
-class CustomAction extends Mebo.Action{
+@Mebo.register(&apos;myAction&apos;)
+class MyAction extends Mebo.Action{
   constructor(){
     super();
 
@@ -219,12 +220,12 @@ class CustomAction extends Mebo.Action{
 <p><a href="class/src/Input.js~Input.html">Input Documentation</a></p>
 <h2 id="how-to-execute-actions-">How to execute actions ?</h2>
 <p><strong>Executing an action a registerd action</strong></p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">const myAction = Mebo.createAction(&apos;myAction&apos;);
+<pre><code class="lang-javascript"><code class="source-code prettyprint">const myAction = Mebo.Action.create(&apos;myAction&apos;);
 
 myAction.input(&apos;myInput&apos;).setValue(&apos;Some Text&apos;);
 
 // executing the action
-myAction.execute().then((result) =&gt; {
+myAction.run().then((result) =&gt; {
   console.log(result);
 }).catch((err) =&gt; {
   throw err;
@@ -233,32 +234,44 @@ myAction.execute().then((result) =&gt; {
 <p><strong>Executing from Web</strong></p>
 <p>First we need to tell our Action to be available through
 web requests, it&apos;s done by webfying them:</p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">
-// In the registration of the action add the line bellow
-Mebo.webfyAction(MyAction, &apos;get&apos;);</code>
+<p><em>Decorator support:</em></p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">// In the registration of the action add the handler support:
+@Mebo.grant(&apos;web&apos;, {auth: true})
+@Mebo.register(&apos;myAction&apos;)
+class MyAction extends Mebo.Action{
+  // ...
+}</code>
+</code></pre>
+<p><em>Registration support:</em></p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+  // ...
+}
+
+Mebo.Action.register(MyAction, &apos;myAction&apos;);
+Mebo.Handler.grantAction(&apos;web&apos;, &apos;myAction&apos;, {auth: true});</code>
 </code></pre>
 <p>You can enable authentication prior to the execution of any action, this is done
 by webfying the action with the option <code>auth=true</code>:</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// In the registration of the action add the line bellow
-Mebo.webfyAction(MyAction, &apos;get&apos;, {auth: true});</code>
+Mebo.Handler.grantAction(&apos;web&apos;, &apos;myAction&apos;, {auth: true});</code>
 </code></pre>
 <p>Also, you can tell if the action is visible by the restful support, by defining
 a route for it <code>restRoute=&apos;/api/myAction&apos;</code>.</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// In the registration of the action add the line bellow
-Mebo.webfyAction(MyAction, &apos;get&apos;, {auth: true, restRoute: &apos;/api/myAction&apos;});</code>
+Mebo.Handler.grantAction(&apos;web&apos;, &apos;myAction&apos;, {auth: true, restRoute: &apos;/api/myAction&apos;});</code>
 </code></pre>
 <p>When an action requires auth you need to tell what is the passport
 authentication that should be used for the webfied actions flagged with <code>auth=true</code>,
 this is done by adding a middleware that gets executed before the action</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">const passport = require(&apos;passport&apos;);
-Mebo.addBeforeAuthAction(passport.authenticate(&apos;...&apos;));</code>
+Mebo.Handler.get(&apos;web&apos;).addBeforeAuthAction(passport.authenticate(&apos;...&apos;));</code>
 </code></pre>
 <p>Alternatively a custom authentication method can be defined per handler basis, if
-you are interested checkout about the <a href="class/src/Ext/Handlers/Web.js~Web.html">Web Handler</a></p>
+you are interested checkout about the <a href="class/src/Handlers/Web.js~Web.html">Web Handler</a></p>
 <p><strong>Calling the action through middleware</strong></p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// adding add a middleware which is going to execute the action
 const app = express();
-app.get(&apos;/xxx&apos;, Mebo.middleware(&apos;myAction&apos;, (err, result, req, res) =&gt; {
+app.get(&apos;/xxx&apos;, Mebo.Handler.get(&apos;web&apos;).middleware(&apos;myAction&apos;, (err, result, req, res) =&gt; {
   if (err) return next(err);
   res.send(`result: ${result}`);
 }));</code>
@@ -269,11 +282,11 @@ app.get(&apos;/xxx&apos;, Mebo.middleware(&apos;myAction&apos;, (err, result, re
 <p>When webfying an action you need to define the rest route that should be used
 to access the action.</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// webfying an action with support for rest requests
-Mebo.webfyAction(MyAction, &apos;get&apos;, {auth: true, restRoute: &apos;/api/myAction&apos;});</code>
+Mebo.Handler.grantAction(&apos;web&apos;, &apos;myAction&apos;, {auth: true, restRoute: &apos;/api/myAction&apos;});</code>
 </code></pre>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// adding the rest support to the express app
 const app = express();
-app.use(Mebo.restful());</code>
+app.use(Mebo.Handler.get(&apos;web&apos;).restful());</code>
 </code></pre>
 <p>Executing it</p>
 <pre><code><code class="source-code prettyprint">https://.../api/myAction?myInput=world</code>
@@ -292,7 +305,7 @@ assigned with the path about where the file has been uploaded to.</p>
 <p><strong>Calling actions from a serialized JSON form</strong></p>
 <p>Mebo lets you to postpone an action execution by baking them into JSON, it can be used for
 console operations</p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">const myAction = Mebo.createAction(&apos;myAction&apos;);
+<pre><code class="lang-javascript"><code class="source-code prettyprint">const myAction = Mebo.Action.create(&apos;myAction&apos;);
 myAction.input(&apos;myInput&apos;).setValue(&apos;Text&apos;);
 
 // serializing the action into json
@@ -302,7 +315,7 @@ actionA.bakeToJSON().then((json) =&gt; {
   const myAction2 = Mebo.Action.createFromJSON(json);
 
   // executing it
-  return myAction2.execute();
+  return myAction2.run();
 
 }).catch((err) =&gt; {
   throw err;

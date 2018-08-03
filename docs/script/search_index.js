@@ -6,63 +6,63 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/ext/inputs/any.js~any",
-    "class/src/Ext/Inputs/Any.js~Any.html",
-    "<span>Any</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Any.js</span>",
+    "mebo/src/inputs/any.js~any",
+    "class/src/Inputs/Any.js~Any.html",
+    "<span>Any</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Any.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/basetext.js~basetext",
-    "class/src/Ext/Inputs/BaseText.js~BaseText.html",
-    "<span>BaseText</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/BaseText.js</span>",
+    "mebo/src/handlers/app.js~app",
+    "class/src/Handlers/App.js~App.html",
+    "<span>App</span> <span class=\"search-result-import-path\">mebo/src/Handlers/App.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/bool.js~bool",
-    "class/src/Ext/Inputs/Bool.js~Bool.html",
-    "<span>Bool</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Bool.js</span>",
+    "mebo/src/readers/appargs.js~appargs",
+    "class/src/Readers/AppArgs.js~AppArgs.html",
+    "<span>AppArgs</span> <span class=\"search-result-import-path\">mebo/src/Readers/AppArgs.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/buf.js~buf",
-    "class/src/Ext/Inputs/Buf.js~Buf.html",
-    "<span>Buf</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Buf.js</span>",
+    "mebo/src/writers/appoutput.js~appoutput",
+    "class/src/Writers/AppOutput.js~AppOutput.html",
+    "<span>AppOutput</span> <span class=\"search-result-import-path\">mebo/src/Writers/AppOutput.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/handlers/commandline.js~commandline",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html",
-    "<span>CommandLine</span> <span class=\"search-result-import-path\">mebo/src/Ext/Handlers/CommandLine.js</span>",
+    "mebo/src/inputs/basetext.js~basetext",
+    "class/src/Inputs/BaseText.js~BaseText.html",
+    "<span>BaseText</span> <span class=\"search-result-import-path\">mebo/src/Inputs/BaseText.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/readers/commandlineargs.js~commandlineargs",
-    "class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html",
-    "<span>CommandLineArgs</span> <span class=\"search-result-import-path\">mebo/src/Ext/Readers/CommandLineArgs.js</span>",
+    "mebo/src/inputs/bool.js~bool",
+    "class/src/Inputs/Bool.js~Bool.html",
+    "<span>Bool</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Bool.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/writers/commandlineoutput.js~commandlineoutput",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html",
-    "<span>CommandLineOutput</span> <span class=\"search-result-import-path\">mebo/src/Ext/Writers/CommandLineOutput.js</span>",
+    "mebo/src/inputs/buf.js~buf",
+    "class/src/Inputs/Buf.js~Buf.html",
+    "<span>Buf</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Buf.js</span>",
     "class"
   ],
   [
-    "mebo/src/error/conflict.js~conflict",
-    "class/src/Error/Conflict.js~Conflict.html",
-    "<span>Conflict</span> <span class=\"search-result-import-path\">mebo/src/Error/Conflict.js</span>",
+    "mebo/src/errors/conflict.js~conflict",
+    "class/src/Errors/Conflict.js~Conflict.html",
+    "<span>Conflict</span> <span class=\"search-result-import-path\">mebo/src/Errors/Conflict.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/email.js~email",
-    "class/src/Ext/Inputs/Email.js~Email.html",
-    "<span>Email</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Email.js</span>",
+    "mebo/src/inputs/email.js~email",
+    "class/src/Inputs/Email.js~Email.html",
+    "<span>Email</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Email.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/filepath.js~filepath",
-    "class/src/Ext/Inputs/FilePath.js~FilePath.html",
-    "<span>FilePath</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/FilePath.js</span>",
+    "mebo/src/inputs/filepath.js~filepath",
+    "class/src/Inputs/FilePath.js~FilePath.html",
+    "<span>FilePath</span> <span class=\"search-result-import-path\">mebo/src/Inputs/FilePath.js</span>",
     "class"
   ],
   [
@@ -72,21 +72,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/ext/inputs/hash.js~hash",
-    "class/src/Ext/Inputs/Hash.js~Hash.html",
-    "<span>Hash</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Hash.js</span>",
+    "mebo/src/inputs/hash.js~hash",
+    "class/src/Inputs/Hash.js~Hash.html",
+    "<span>Hash</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Hash.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/hex.js~hex",
-    "class/src/Ext/Inputs/Hex.js~Hex.html",
-    "<span>Hex</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Hex.js</span>",
+    "mebo/src/inputs/hex.js~hex",
+    "class/src/Inputs/Hex.js~Hex.html",
+    "<span>Hex</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Hex.js</span>",
     "class"
   ],
   [
-    "mebo/src/util/immutablemap.js~immutablemap",
-    "class/src/Util/ImmutableMap.js~ImmutableMap.html",
-    "<span>ImmutableMap</span> <span class=\"search-result-import-path\">mebo/src/Util/ImmutableMap.js</span>",
+    "mebo/src/utils/immutablemap.js~immutablemap",
+    "class/src/Utils/ImmutableMap.js~ImmutableMap.html",
+    "<span>ImmutableMap</span> <span class=\"search-result-import-path\">mebo/src/Utils/ImmutableMap.js</span>",
     "class"
   ],
   [
@@ -96,15 +96,15 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/ext/inputs/ip.js~ip",
-    "class/src/Ext/Inputs/Ip.js~Ip.html",
-    "<span>Ip</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Ip.js</span>",
+    "mebo/src/inputs/ip.js~ip",
+    "class/src/Inputs/Ip.js~Ip.html",
+    "<span>Ip</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Ip.js</span>",
     "class"
   ],
   [
-    "mebo/src/util/lrucache.js~lrucache",
-    "class/src/Util/LruCache.js~LruCache.html",
-    "<span>LruCache</span> <span class=\"search-result-import-path\">mebo/src/Util/LruCache.js</span>",
+    "mebo/src/utils/lrucache.js~lrucache",
+    "class/src/Utils/LruCache.js~LruCache.html",
+    "<span>LruCache</span> <span class=\"search-result-import-path\">mebo/src/Utils/LruCache.js</span>",
     "class"
   ],
   [
@@ -114,21 +114,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/error/nocontent.js~nocontent",
-    "class/src/Error/NoContent.js~NoContent.html",
-    "<span>NoContent</span> <span class=\"search-result-import-path\">mebo/src/Error/NoContent.js</span>",
+    "mebo/src/errors/nocontent.js~nocontent",
+    "class/src/Errors/NoContent.js~NoContent.html",
+    "<span>NoContent</span> <span class=\"search-result-import-path\">mebo/src/Errors/NoContent.js</span>",
     "class"
   ],
   [
-    "mebo/src/error/notfound.js~notfound",
-    "class/src/Error/NotFound.js~NotFound.html",
-    "<span>NotFound</span> <span class=\"search-result-import-path\">mebo/src/Error/NotFound.js</span>",
+    "mebo/src/errors/notfound.js~notfound",
+    "class/src/Errors/NotFound.js~NotFound.html",
+    "<span>NotFound</span> <span class=\"search-result-import-path\">mebo/src/Errors/NotFound.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/numeric.js~numeric",
-    "class/src/Ext/Inputs/Numeric.js~Numeric.html",
-    "<span>Numeric</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Numeric.js</span>",
+    "mebo/src/inputs/numeric.js~numeric",
+    "class/src/Inputs/Numeric.js~Numeric.html",
+    "<span>Numeric</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Numeric.js</span>",
     "class"
   ],
   [
@@ -150,9 +150,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/ext/inputs/stream.js~stream",
-    "class/src/Ext/Inputs/Stream.js~Stream.html",
-    "<span>Stream</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Stream.js</span>",
+    "mebo/src/inputs/stream.js~stream",
+    "class/src/Inputs/Stream.js~Stream.html",
+    "<span>Stream</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Stream.js</span>",
     "class"
   ],
   [
@@ -162,57 +162,57 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/ext/inputs/text.js~text",
-    "class/src/Ext/Inputs/Text.js~Text.html",
-    "<span>Text</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Text.js</span>",
+    "mebo/src/inputs/text.js~text",
+    "class/src/Inputs/Text.js~Text.html",
+    "<span>Text</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Text.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/timestamp.js~timestamp",
-    "class/src/Ext/Inputs/Timestamp.js~Timestamp.html",
-    "<span>Timestamp</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Timestamp.js</span>",
+    "mebo/src/inputs/timestamp.js~timestamp",
+    "class/src/Inputs/Timestamp.js~Timestamp.html",
+    "<span>Timestamp</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Timestamp.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/uuid.js~uuid",
-    "class/src/Ext/Inputs/UUID.js~UUID.html",
-    "<span>UUID</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/UUID.js</span>",
+    "mebo/src/inputs/uuid.js~uuid",
+    "class/src/Inputs/UUID.js~UUID.html",
+    "<span>UUID</span> <span class=\"search-result-import-path\">mebo/src/Inputs/UUID.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/url.js~url",
-    "class/src/Ext/Inputs/Url.js~Url.html",
-    "<span>Url</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Url.js</span>",
+    "mebo/src/inputs/url.js~url",
+    "class/src/Inputs/Url.js~Url.html",
+    "<span>Url</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Url.js</span>",
     "class"
   ],
   [
-    "mebo/src/error/validationfail.js~validationfail",
-    "class/src/Error/ValidationFail.js~ValidationFail.html",
-    "<span>ValidationFail</span> <span class=\"search-result-import-path\">mebo/src/Error/ValidationFail.js</span>",
+    "mebo/src/errors/validationfail.js~validationfail",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html",
+    "<span>ValidationFail</span> <span class=\"search-result-import-path\">mebo/src/Errors/ValidationFail.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/inputs/version.js~version",
-    "class/src/Ext/Inputs/Version.js~Version.html",
-    "<span>Version</span> <span class=\"search-result-import-path\">mebo/src/Ext/Inputs/Version.js</span>",
+    "mebo/src/inputs/version.js~version",
+    "class/src/Inputs/Version.js~Version.html",
+    "<span>Version</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Version.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/handlers/web.js~web",
-    "class/src/Ext/Handlers/Web.js~Web.html",
-    "<span>Web</span> <span class=\"search-result-import-path\">mebo/src/Ext/Handlers/Web.js</span>",
+    "mebo/src/handlers/web.js~web",
+    "class/src/Handlers/Web.js~Web.html",
+    "<span>Web</span> <span class=\"search-result-import-path\">mebo/src/Handlers/Web.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/readers/webrequest.js~webrequest",
-    "class/src/Ext/Readers/WebRequest.js~WebRequest.html",
-    "<span>WebRequest</span> <span class=\"search-result-import-path\">mebo/src/Ext/Readers/WebRequest.js</span>",
+    "mebo/src/readers/webrequest.js~webrequest",
+    "class/src/Readers/WebRequest.js~WebRequest.html",
+    "<span>WebRequest</span> <span class=\"search-result-import-path\">mebo/src/Readers/WebRequest.js</span>",
     "class"
   ],
   [
-    "mebo/src/ext/writers/webresponse.js~webresponse",
-    "class/src/Ext/Writers/WebResponse.js~WebResponse.html",
-    "<span>WebResponse</span> <span class=\"search-result-import-path\">mebo/src/Ext/Writers/WebResponse.js</span>",
+    "mebo/src/writers/webresponse.js~webresponse",
+    "class/src/Writers/WebResponse.js~WebResponse.html",
+    "<span>WebResponse</span> <span class=\"search-result-import-path\">mebo/src/Writers/WebResponse.js</span>",
     "class"
   ],
   [
@@ -600,12 +600,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/action.js~action#execute",
-    "class/src/Action.js~Action.html#instance-method-execute",
-    "src/Action.js~Action#execute",
-    "method"
-  ],
-  [
     "src/action.js~action#fromjson",
     "class/src/Action.js~Action.html#instance-method-fromJSON",
     "src/Action.js~Action#fromJSON",
@@ -636,9 +630,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/action.js~action#metadata",
-    "class/src/Action.js~Action.html#instance-method-metadata",
-    "src/Action.js~Action#metadata",
+    "src/action.js~action#meta",
+    "class/src/Action.js~Action.html#instance-method-meta",
+    "src/Action.js~Action#meta",
+    "method"
+  ],
+  [
+    "src/action.js~action#run",
+    "class/src/Action.js~Action.html#instance-method-run",
+    "src/Action.js~Action#run",
     "method"
   ],
   [
@@ -648,15 +648,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/action.js~action#setmetadata",
-    "class/src/Action.js~Action.html#instance-method-setMetadata",
-    "src/Action.js~Action#setMetadata",
+    "src/action.js~action#setmeta",
+    "class/src/Action.js~Action.html#instance-method-setMeta",
+    "src/Action.js~Action#setMeta",
     "method"
   ],
   [
     "src/action.js~action#setsession",
     "class/src/Action.js~Action.html#instance-method-setSession",
     "src/Action.js~Action#setSession",
+    "method"
+  ],
+  [
+    "src/action.js~action#validate",
+    "class/src/Action.js~Action.html#instance-method-validate",
+    "src/Action.js~Action#validate",
     "method"
   ],
   [
@@ -672,9 +678,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/action.js~action.registeraction",
-    "class/src/Action.js~Action.html#static-method-registerAction",
-    "src/Action.js~Action.registerAction",
+    "src/action.js~action.register",
+    "class/src/Action.js~Action.html#static-method-register",
+    "src/Action.js~Action.register",
     "method"
   ],
   [
@@ -684,789 +690,135 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/action.js~action.registeredactionname",
+    "class/src/Action.js~Action.html#static-method-registeredActionName",
+    "src/Action.js~Action.registeredActionName",
+    "method"
+  ],
+  [
     "src/action.js~action.registeredactionnames",
     "class/src/Action.js~Action.html#static-method-registeredActionNames",
     "src/Action.js~Action.registeredActionNames",
     "method"
   ],
   [
-    "src/error/conflict.js",
-    "file/src/Error/Conflict.js.html",
-    "src/Error/Conflict.js",
+    "src/errors/conflict.js",
+    "file/src/Errors/Conflict.js.html",
+    "src/Errors/Conflict.js",
     "file"
   ],
   [
-    "src/error/conflict.js~conflict#disableoutputinnested",
-    "class/src/Error/Conflict.js~Conflict.html#instance-member-disableOutputInNested",
-    "src/Error/Conflict.js~Conflict#disableOutputInNested",
+    "src/errors/conflict.js~conflict#disableoutputinnested",
+    "class/src/Errors/Conflict.js~Conflict.html#instance-member-disableOutputInNested",
+    "src/Errors/Conflict.js~Conflict#disableOutputInNested",
     "member"
   ],
   [
-    "src/error/conflict.js~conflict#status",
-    "class/src/Error/Conflict.js~Conflict.html#instance-member-status",
-    "src/Error/Conflict.js~Conflict#status",
+    "src/errors/conflict.js~conflict#status",
+    "class/src/Errors/Conflict.js~Conflict.html#instance-member-status",
+    "src/Errors/Conflict.js~Conflict#status",
     "member"
   ],
   [
-    "src/error/nocontent.js",
-    "file/src/Error/NoContent.js.html",
-    "src/Error/NoContent.js",
+    "src/errors/nocontent.js",
+    "file/src/Errors/NoContent.js.html",
+    "src/Errors/NoContent.js",
     "file"
   ],
   [
-    "src/error/nocontent.js~nocontent#disableoutputinnested",
-    "class/src/Error/NoContent.js~NoContent.html#instance-member-disableOutputInNested",
-    "src/Error/NoContent.js~NoContent#disableOutputInNested",
+    "src/errors/nocontent.js~nocontent#disableoutputinnested",
+    "class/src/Errors/NoContent.js~NoContent.html#instance-member-disableOutputInNested",
+    "src/Errors/NoContent.js~NoContent#disableOutputInNested",
     "member"
   ],
   [
-    "src/error/nocontent.js~nocontent#status",
-    "class/src/Error/NoContent.js~NoContent.html#instance-member-status",
-    "src/Error/NoContent.js~NoContent#status",
+    "src/errors/nocontent.js~nocontent#status",
+    "class/src/Errors/NoContent.js~NoContent.html#instance-member-status",
+    "src/Errors/NoContent.js~NoContent#status",
     "member"
   ],
   [
-    "src/error/notfound.js",
-    "file/src/Error/NotFound.js.html",
-    "src/Error/NotFound.js",
+    "src/errors/notfound.js",
+    "file/src/Errors/NotFound.js.html",
+    "src/Errors/NotFound.js",
     "file"
   ],
   [
-    "src/error/notfound.js~notfound#disableoutputinnested",
-    "class/src/Error/NotFound.js~NotFound.html#instance-member-disableOutputInNested",
-    "src/Error/NotFound.js~NotFound#disableOutputInNested",
+    "src/errors/notfound.js~notfound#disableoutputinnested",
+    "class/src/Errors/NotFound.js~NotFound.html#instance-member-disableOutputInNested",
+    "src/Errors/NotFound.js~NotFound#disableOutputInNested",
     "member"
   ],
   [
-    "src/error/notfound.js~notfound#status",
-    "class/src/Error/NotFound.js~NotFound.html#instance-member-status",
-    "src/Error/NotFound.js~NotFound#status",
+    "src/errors/notfound.js~notfound#status",
+    "class/src/Errors/NotFound.js~NotFound.html#instance-member-status",
+    "src/Errors/NotFound.js~NotFound#status",
     "member"
   ],
   [
-    "src/error/validationfail.js",
-    "file/src/Error/ValidationFail.js.html",
-    "src/Error/ValidationFail.js",
+    "src/errors/validationfail.js",
+    "file/src/Errors/ValidationFail.js.html",
+    "src/Errors/ValidationFail.js",
     "file"
   ],
   [
-    "src/error/validationfail.js~validationfail#code",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-get-code",
-    "src/Error/ValidationFail.js~ValidationFail#code",
+    "src/errors/validationfail.js~validationfail#code",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-code",
+    "src/Errors/ValidationFail.js~ValidationFail#code",
     "member"
   ],
   [
-    "src/error/validationfail.js~validationfail#code",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-set-code",
-    "src/Error/ValidationFail.js~ValidationFail#code",
+    "src/errors/validationfail.js~validationfail#code",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-code",
+    "src/Errors/ValidationFail.js~ValidationFail#code",
     "member"
   ],
   [
-    "src/error/validationfail.js~validationfail#constructor",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-constructor-constructor",
-    "src/Error/ValidationFail.js~ValidationFail#constructor",
+    "src/errors/validationfail.js~validationfail#constructor",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-constructor-constructor",
+    "src/Errors/ValidationFail.js~ValidationFail#constructor",
     "method"
   ],
   [
-    "src/error/validationfail.js~validationfail#disableoutputinnested",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-member-disableOutputInNested",
-    "src/Error/ValidationFail.js~ValidationFail#disableOutputInNested",
+    "src/errors/validationfail.js~validationfail#disableoutputinnested",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-member-disableOutputInNested",
+    "src/Errors/ValidationFail.js~ValidationFail#disableOutputInNested",
     "member"
   ],
   [
-    "src/error/validationfail.js~validationfail#inputname",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-set-inputName",
-    "src/Error/ValidationFail.js~ValidationFail#inputName",
+    "src/errors/validationfail.js~validationfail#inputname",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
+    "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
   [
-    "src/error/validationfail.js~validationfail#inputname",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-get-inputName",
-    "src/Error/ValidationFail.js~ValidationFail#inputName",
+    "src/errors/validationfail.js~validationfail#inputname",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
+    "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
   [
-    "src/error/validationfail.js~validationfail#status",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-member-status",
-    "src/Error/ValidationFail.js~ValidationFail#status",
+    "src/errors/validationfail.js~validationfail#status",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-member-status",
+    "src/Errors/ValidationFail.js~ValidationFail#status",
     "member"
   ],
   [
-    "src/error/validationfail.js~validationfail#tojson",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#instance-method-toJSON",
-    "src/Error/ValidationFail.js~ValidationFail#toJSON",
+    "src/errors/validationfail.js~validationfail#tojson",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-method-toJSON",
+    "src/Errors/ValidationFail.js~ValidationFail#toJSON",
     "method"
   ],
   [
-    "src/error/validationfail.js~validationfail.fromjson",
-    "class/src/Error/ValidationFail.js~ValidationFail.html#static-method-fromJSON",
-    "src/Error/ValidationFail.js~ValidationFail.fromJSON",
+    "src/errors/validationfail.js~validationfail.fromjson",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#static-method-fromJSON",
+    "src/Errors/ValidationFail.js~ValidationFail.fromJSON",
     "method"
   ],
   [
-    "src/error/index.js",
-    "file/src/Error/index.js.html",
-    "src/Error/index.js",
-    "file"
-  ],
-  [
-    "src/ext/handlers/commandline.js",
-    "file/src/Ext/Handlers/CommandLine.js.html",
-    "src/Ext/Handlers/CommandLine.js",
-    "file"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#_createreader",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-_createReader",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#_createReader",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#_createwriter",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-_createWriter",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#_createWriter",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#args",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-args",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#args",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#constructor",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-constructor-constructor",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#constructor",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#setargs",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-setArgs",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#setArgs",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#setstderr",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-setStderr",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#setStderr",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#setstdout",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-setStdout",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#setStdout",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#stderr",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-stderr",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#stderr",
-    "method"
-  ],
-  [
-    "src/ext/handlers/commandline.js~commandline#stdout",
-    "class/src/Ext/Handlers/CommandLine.js~CommandLine.html#instance-method-stdout",
-    "src/Ext/Handlers/CommandLine.js~CommandLine#stdout",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js",
-    "file/src/Ext/Handlers/Web.js.html",
-    "src/Ext/Handlers/Web.js",
-    "file"
-  ],
-  [
-    "src/ext/handlers/web.js~web#_createreader",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-method-_createReader",
-    "src/Ext/Handlers/Web.js~Web#_createReader",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web#_createwriter",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-method-_createWriter",
-    "src/Ext/Handlers/Web.js~Web#_createWriter",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web#constructor",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-constructor-constructor",
-    "src/Ext/Handlers/Web.js~Web#constructor",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web#request",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-method-request",
-    "src/Ext/Handlers/Web.js~Web#request",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web#response",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-method-response",
-    "src/Ext/Handlers/Web.js~Web#response",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web#setrequest",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-method-setRequest",
-    "src/Ext/Handlers/Web.js~Web#setRequest",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web#setresponse",
-    "class/src/Ext/Handlers/Web.js~Web.html#instance-method-setResponse",
-    "src/Ext/Handlers/Web.js~Web#setResponse",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.addbeforeaction",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAction",
-    "src/Ext/Handlers/Web.js~Web.addBeforeAction",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.addbeforeauthaction",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-addBeforeAuthAction",
-    "src/Ext/Handlers/Web.js~Web.addBeforeAuthAction",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.beforeaction",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-beforeAction",
-    "src/Ext/Handlers/Web.js~Web.beforeAction",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.beforeauthaction",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-beforeAuthAction",
-    "src/Ext/Handlers/Web.js~Web.beforeAuthAction",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.middleware",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-middleware",
-    "src/Ext/Handlers/Web.js~Web.middleware",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.restful",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-restful",
-    "src/Ext/Handlers/Web.js~Web.restful",
-    "method"
-  ],
-  [
-    "src/ext/handlers/web.js~web.webfyaction",
-    "class/src/Ext/Handlers/Web.js~Web.html#static-method-webfyAction",
-    "src/Ext/Handlers/Web.js~Web.webfyAction",
-    "method"
-  ],
-  [
-    "src/ext/handlers/index.js",
-    "file/src/Ext/Handlers/index.js.html",
-    "src/Ext/Handlers/index.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/any.js",
-    "file/src/Ext/Inputs/Any.js.html",
-    "src/Ext/Inputs/Any.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/any.js~any#_validation",
-    "class/src/Ext/Inputs/Any.js~Any.html#instance-method-_validation",
-    "src/Ext/Inputs/Any.js~Any#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/any.js~any#isserializable",
-    "class/src/Ext/Inputs/Any.js~Any.html#instance-method-isSerializable",
-    "src/Ext/Inputs/Any.js~Any#isSerializable",
-    "method"
-  ],
-  [
-    "src/ext/inputs/basetext.js",
-    "file/src/Ext/Inputs/BaseText.js.html",
-    "src/Ext/Inputs/BaseText.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/basetext.js~basetext#_validation",
-    "class/src/Ext/Inputs/BaseText.js~BaseText.html#instance-method-_validation",
-    "src/Ext/Inputs/BaseText.js~BaseText#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/basetext.js~basetext#isempty",
-    "class/src/Ext/Inputs/BaseText.js~BaseText.html#instance-method-isEmpty",
-    "src/Ext/Inputs/BaseText.js~BaseText#isEmpty",
-    "method"
-  ],
-  [
-    "src/ext/inputs/bool.js",
-    "file/src/Ext/Inputs/Bool.js.html",
-    "src/Ext/Inputs/Bool.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/bool.js~bool#_validation",
-    "class/src/Ext/Inputs/Bool.js~Bool.html#instance-method-_validation",
-    "src/Ext/Inputs/Bool.js~Bool#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/bool.js~bool._decode",
-    "class/src/Ext/Inputs/Bool.js~Bool.html#static-method-_decode",
-    "src/Ext/Inputs/Bool.js~Bool._decode",
-    "method"
-  ],
-  [
-    "src/ext/inputs/bool.js~bool._encode",
-    "class/src/Ext/Inputs/Bool.js~Bool.html#static-method-_encode",
-    "src/Ext/Inputs/Bool.js~Bool._encode",
-    "method"
-  ],
-  [
-    "src/ext/inputs/buf.js",
-    "file/src/Ext/Inputs/Buf.js.html",
-    "src/Ext/Inputs/Buf.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/buf.js~buf#_validation",
-    "class/src/Ext/Inputs/Buf.js~Buf.html#instance-method-_validation",
-    "src/Ext/Inputs/Buf.js~Buf#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/buf.js~buf#isempty",
-    "class/src/Ext/Inputs/Buf.js~Buf.html#instance-method-isEmpty",
-    "src/Ext/Inputs/Buf.js~Buf#isEmpty",
-    "method"
-  ],
-  [
-    "src/ext/inputs/buf.js~buf._decode",
-    "class/src/Ext/Inputs/Buf.js~Buf.html#static-method-_decode",
-    "src/Ext/Inputs/Buf.js~Buf._decode",
-    "method"
-  ],
-  [
-    "src/ext/inputs/buf.js~buf._encode",
-    "class/src/Ext/Inputs/Buf.js~Buf.html#static-method-_encode",
-    "src/Ext/Inputs/Buf.js~Buf._encode",
-    "method"
-  ],
-  [
-    "src/ext/inputs/email.js",
-    "file/src/Ext/Inputs/Email.js.html",
-    "src/Ext/Inputs/Email.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/email.js~email#_validation",
-    "class/src/Ext/Inputs/Email.js~Email.html#instance-method-_validation",
-    "src/Ext/Inputs/Email.js~Email#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/filepath.js",
-    "file/src/Ext/Inputs/FilePath.js.html",
-    "src/Ext/Inputs/FilePath.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/filepath.js~filepath#_validation",
-    "class/src/Ext/Inputs/FilePath.js~FilePath.html#instance-method-_validation",
-    "src/Ext/Inputs/FilePath.js~FilePath#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/filepath.js~filepath#basename",
-    "class/src/Ext/Inputs/FilePath.js~FilePath.html#instance-method-basename",
-    "src/Ext/Inputs/FilePath.js~FilePath#basename",
-    "method"
-  ],
-  [
-    "src/ext/inputs/filepath.js~filepath#dirname",
-    "class/src/Ext/Inputs/FilePath.js~FilePath.html#instance-method-dirname",
-    "src/Ext/Inputs/FilePath.js~FilePath#dirname",
-    "method"
-  ],
-  [
-    "src/ext/inputs/filepath.js~filepath#extension",
-    "class/src/Ext/Inputs/FilePath.js~FilePath.html#instance-method-extension",
-    "src/Ext/Inputs/FilePath.js~FilePath#extension",
-    "method"
-  ],
-  [
-    "src/ext/inputs/filepath.js~filepath#stat",
-    "class/src/Ext/Inputs/FilePath.js~FilePath.html#instance-method-stat",
-    "src/Ext/Inputs/FilePath.js~FilePath#stat",
-    "method"
-  ],
-  [
-    "src/ext/inputs/hash.js",
-    "file/src/Ext/Inputs/Hash.js.html",
-    "src/Ext/Inputs/Hash.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/hash.js~hash#_validation",
-    "class/src/Ext/Inputs/Hash.js~Hash.html#instance-method-_validation",
-    "src/Ext/Inputs/Hash.js~Hash#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/hash.js~hash#setrandom",
-    "class/src/Ext/Inputs/Hash.js~Hash.html#instance-method-setRandom",
-    "src/Ext/Inputs/Hash.js~Hash#setRandom",
-    "method"
-  ],
-  [
-    "src/ext/inputs/hex.js",
-    "file/src/Ext/Inputs/Hex.js.html",
-    "src/Ext/Inputs/Hex.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/hex.js~hex#_validation",
-    "class/src/Ext/Inputs/Hex.js~Hex.html#instance-method-_validation",
-    "src/Ext/Inputs/Hex.js~Hex#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/hex.js~hex#decimalvalue",
-    "class/src/Ext/Inputs/Hex.js~Hex.html#instance-method-decimalValue",
-    "src/Ext/Inputs/Hex.js~Hex#decimalValue",
-    "method"
-  ],
-  [
-    "src/ext/inputs/hex.js~hex#setvaluefromdecimal",
-    "class/src/Ext/Inputs/Hex.js~Hex.html#instance-method-setValueFromDecimal",
-    "src/Ext/Inputs/Hex.js~Hex#setValueFromDecimal",
-    "method"
-  ],
-  [
-    "src/ext/inputs/ip.js",
-    "file/src/Ext/Inputs/Ip.js.html",
-    "src/Ext/Inputs/Ip.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/ip.js~ip#_validation",
-    "class/src/Ext/Inputs/Ip.js~Ip.html#instance-method-_validation",
-    "src/Ext/Inputs/Ip.js~Ip#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/ip.js~ip#isprivate",
-    "class/src/Ext/Inputs/Ip.js~Ip.html#instance-method-isPrivate",
-    "src/Ext/Inputs/Ip.js~Ip#isPrivate",
-    "method"
-  ],
-  [
-    "src/ext/inputs/ip.js~ip#isv4",
-    "class/src/Ext/Inputs/Ip.js~Ip.html#instance-method-isV4",
-    "src/Ext/Inputs/Ip.js~Ip#isV4",
-    "method"
-  ],
-  [
-    "src/ext/inputs/ip.js~ip#isv6",
-    "class/src/Ext/Inputs/Ip.js~Ip.html#instance-method-isV6",
-    "src/Ext/Inputs/Ip.js~Ip#isV6",
-    "method"
-  ],
-  [
-    "src/ext/inputs/numeric.js",
-    "file/src/Ext/Inputs/Numeric.js.html",
-    "src/Ext/Inputs/Numeric.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/numeric.js~numeric#_validation",
-    "class/src/Ext/Inputs/Numeric.js~Numeric.html#instance-method-_validation",
-    "src/Ext/Inputs/Numeric.js~Numeric#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/numeric.js~numeric._decode",
-    "class/src/Ext/Inputs/Numeric.js~Numeric.html#static-method-_decode",
-    "src/Ext/Inputs/Numeric.js~Numeric._decode",
-    "method"
-  ],
-  [
-    "src/ext/inputs/stream.js",
-    "file/src/Ext/Inputs/Stream.js.html",
-    "src/Ext/Inputs/Stream.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/stream.js~stream#_validation",
-    "class/src/Ext/Inputs/Stream.js~Stream.html#instance-method-_validation",
-    "src/Ext/Inputs/Stream.js~Stream#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/stream.js~stream#isserializable",
-    "class/src/Ext/Inputs/Stream.js~Stream.html#instance-method-isSerializable",
-    "src/Ext/Inputs/Stream.js~Stream#isSerializable",
-    "method"
-  ],
-  [
-    "src/ext/inputs/text.js",
-    "file/src/Ext/Inputs/Text.js.html",
-    "src/Ext/Inputs/Text.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/text.js~text#_validation",
-    "class/src/Ext/Inputs/Text.js~Text.html#instance-method-_validation",
-    "src/Ext/Inputs/Text.js~Text#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/timestamp.js",
-    "file/src/Ext/Inputs/Timestamp.js.html",
-    "src/Ext/Inputs/Timestamp.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/timestamp.js~timestamp#_validation",
-    "class/src/Ext/Inputs/Timestamp.js~Timestamp.html#instance-method-_validation",
-    "src/Ext/Inputs/Timestamp.js~Timestamp#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/timestamp.js~timestamp._decode",
-    "class/src/Ext/Inputs/Timestamp.js~Timestamp.html#static-method-_decode",
-    "src/Ext/Inputs/Timestamp.js~Timestamp._decode",
-    "method"
-  ],
-  [
-    "src/ext/inputs/uuid.js",
-    "file/src/Ext/Inputs/UUID.js.html",
-    "src/Ext/Inputs/UUID.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/uuid.js~uuid#_validation",
-    "class/src/Ext/Inputs/UUID.js~UUID.html#instance-method-_validation",
-    "src/Ext/Inputs/UUID.js~UUID#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/uuid.js~uuid#setrandom",
-    "class/src/Ext/Inputs/UUID.js~UUID.html#instance-method-setRandom",
-    "src/Ext/Inputs/UUID.js~UUID#setRandom",
-    "method"
-  ],
-  [
-    "src/ext/inputs/uuid.js~uuid#settimebasedrandom",
-    "class/src/Ext/Inputs/UUID.js~UUID.html#instance-method-setTimeBasedRandom",
-    "src/Ext/Inputs/UUID.js~UUID#setTimeBasedRandom",
-    "method"
-  ],
-  [
-    "src/ext/inputs/url.js",
-    "file/src/Ext/Inputs/Url.js.html",
-    "src/Ext/Inputs/Url.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/url.js~url#_validation",
-    "class/src/Ext/Inputs/Url.js~Url.html#instance-method-_validation",
-    "src/Ext/Inputs/Url.js~Url#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/url.js~url#extension",
-    "class/src/Ext/Inputs/Url.js~Url.html#instance-method-extension",
-    "src/Ext/Inputs/Url.js~Url#extension",
-    "method"
-  ],
-  [
-    "src/ext/inputs/url.js~url#headers",
-    "class/src/Ext/Inputs/Url.js~Url.html#instance-method-headers",
-    "src/Ext/Inputs/Url.js~Url#headers",
-    "method"
-  ],
-  [
-    "src/ext/inputs/url.js~url#protocol",
-    "class/src/Ext/Inputs/Url.js~Url.html#instance-method-protocol",
-    "src/Ext/Inputs/Url.js~Url#protocol",
-    "method"
-  ],
-  [
-    "src/ext/inputs/version.js",
-    "file/src/Ext/Inputs/Version.js.html",
-    "src/Ext/Inputs/Version.js",
-    "file"
-  ],
-  [
-    "src/ext/inputs/version.js~version#_validation",
-    "class/src/Ext/Inputs/Version.js~Version.html#instance-method-_validation",
-    "src/Ext/Inputs/Version.js~Version#_validation",
-    "method"
-  ],
-  [
-    "src/ext/inputs/index.js",
-    "file/src/Ext/Inputs/index.js.html",
-    "src/Ext/Inputs/index.js",
-    "file"
-  ],
-  [
-    "src/ext/readers/commandlineargs.js",
-    "file/src/Ext/Readers/CommandLineArgs.js.html",
-    "src/Ext/Readers/CommandLineArgs.js",
-    "file"
-  ],
-  [
-    "src/ext/readers/commandlineargs.js~commandlineargs#_perform",
-    "class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html#instance-method-_perform",
-    "src/Ext/Readers/CommandLineArgs.js~CommandLineArgs#_perform",
-    "method"
-  ],
-  [
-    "src/ext/readers/commandlineargs.js~commandlineargs#args",
-    "class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html#instance-method-args",
-    "src/Ext/Readers/CommandLineArgs.js~CommandLineArgs#args",
-    "method"
-  ],
-  [
-    "src/ext/readers/commandlineargs.js~commandlineargs#constructor",
-    "class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html#instance-constructor-constructor",
-    "src/Ext/Readers/CommandLineArgs.js~CommandLineArgs#constructor",
-    "method"
-  ],
-  [
-    "src/ext/readers/commandlineargs.js~commandlineargs#executablename",
-    "class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html#instance-method-executableName",
-    "src/Ext/Readers/CommandLineArgs.js~CommandLineArgs#executableName",
-    "method"
-  ],
-  [
-    "src/ext/readers/commandlineargs.js~commandlineargs#setargs",
-    "class/src/Ext/Readers/CommandLineArgs.js~CommandLineArgs.html#instance-method-setArgs",
-    "src/Ext/Readers/CommandLineArgs.js~CommandLineArgs#setArgs",
-    "method"
-  ],
-  [
-    "src/ext/readers/webrequest.js",
-    "file/src/Ext/Readers/WebRequest.js.html",
-    "src/Ext/Readers/WebRequest.js",
-    "file"
-  ],
-  [
-    "src/ext/readers/webrequest.js~webrequest#_perform",
-    "class/src/Ext/Readers/WebRequest.js~WebRequest.html#instance-method-_perform",
-    "src/Ext/Readers/WebRequest.js~WebRequest#_perform",
-    "method"
-  ],
-  [
-    "src/ext/readers/webrequest.js~webrequest#constructor",
-    "class/src/Ext/Readers/WebRequest.js~WebRequest.html#instance-constructor-constructor",
-    "src/Ext/Readers/WebRequest.js~WebRequest#constructor",
-    "method"
-  ],
-  [
-    "src/ext/readers/webrequest.js~webrequest#request",
-    "class/src/Ext/Readers/WebRequest.js~WebRequest.html#instance-method-request",
-    "src/Ext/Readers/WebRequest.js~WebRequest#request",
-    "method"
-  ],
-  [
-    "src/ext/readers/webrequest.js~webrequest#setrequest",
-    "class/src/Ext/Readers/WebRequest.js~WebRequest.html#instance-method-setRequest",
-    "src/Ext/Readers/WebRequest.js~WebRequest#setRequest",
-    "method"
-  ],
-  [
-    "src/ext/readers/index.js",
-    "file/src/Ext/Readers/index.js.html",
-    "src/Ext/Readers/index.js",
-    "file"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js",
-    "file/src/Ext/Writers/CommandLineOutput.js.html",
-    "src/Ext/Writers/CommandLineOutput.js",
-    "file"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js~commandlineoutput#_erroroutput",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html#instance-method-_errorOutput",
-    "src/Ext/Writers/CommandLineOutput.js~CommandLineOutput#_errorOutput",
-    "method"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js~commandlineoutput#_successoutput",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html#instance-method-_successOutput",
-    "src/Ext/Writers/CommandLineOutput.js~CommandLineOutput#_successOutput",
-    "method"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js~commandlineoutput#setstderr",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html#instance-method-setStderr",
-    "src/Ext/Writers/CommandLineOutput.js~CommandLineOutput#setStderr",
-    "method"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js~commandlineoutput#setstdout",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html#instance-method-setStdout",
-    "src/Ext/Writers/CommandLineOutput.js~CommandLineOutput#setStdout",
-    "method"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js~commandlineoutput#stderr",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html#instance-method-stderr",
-    "src/Ext/Writers/CommandLineOutput.js~CommandLineOutput#stderr",
-    "method"
-  ],
-  [
-    "src/ext/writers/commandlineoutput.js~commandlineoutput#stdout",
-    "class/src/Ext/Writers/CommandLineOutput.js~CommandLineOutput.html#instance-method-stdout",
-    "src/Ext/Writers/CommandLineOutput.js~CommandLineOutput#stdout",
-    "method"
-  ],
-  [
-    "src/ext/writers/webresponse.js",
-    "file/src/Ext/Writers/WebResponse.js.html",
-    "src/Ext/Writers/WebResponse.js",
-    "file"
-  ],
-  [
-    "src/ext/writers/webresponse.js~webresponse#_erroroutput",
-    "class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-_errorOutput",
-    "src/Ext/Writers/WebResponse.js~WebResponse#_errorOutput",
-    "method"
-  ],
-  [
-    "src/ext/writers/webresponse.js~webresponse#_successoutput",
-    "class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-_successOutput",
-    "src/Ext/Writers/WebResponse.js~WebResponse#_successOutput",
-    "method"
-  ],
-  [
-    "src/ext/writers/webresponse.js~webresponse#response",
-    "class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-response",
-    "src/Ext/Writers/WebResponse.js~WebResponse#response",
-    "method"
-  ],
-  [
-    "src/ext/writers/webresponse.js~webresponse#setresponse",
-    "class/src/Ext/Writers/WebResponse.js~WebResponse.html#instance-method-setResponse",
-    "src/Ext/Writers/WebResponse.js~WebResponse#setResponse",
-    "method"
-  ],
-  [
-    "src/ext/writers/index.js",
-    "file/src/Ext/Writers/index.js.html",
-    "src/Ext/Writers/index.js",
-    "file"
-  ],
-  [
-    "src/ext/index.js",
-    "file/src/Ext/index.js.html",
-    "src/Ext/index.js",
+    "src/errors/index.js",
+    "file/src/Errors/index.js.html",
+    "src/Errors/index.js",
     "file"
   ],
   [
@@ -1494,15 +846,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/handler.js~handler#execute",
-    "class/src/Handler.js~Handler.html#instance-method-execute",
-    "src/Handler.js~Handler#execute",
-    "method"
-  ],
-  [
-    "src/handler.js~handler#metadata",
-    "class/src/Handler.js~Handler.html#instance-method-metadata",
-    "src/Handler.js~Handler#metadata",
+    "src/handler.js~handler#meta",
+    "class/src/Handler.js~Handler.html#instance-method-meta",
+    "src/Handler.js~Handler#meta",
     "method"
   ],
   [
@@ -1512,15 +858,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/handler.js~handler#runaction",
+    "class/src/Handler.js~Handler.html#instance-method-runAction",
+    "src/Handler.js~Handler#runAction",
+    "method"
+  ],
+  [
     "src/handler.js~handler#session",
     "class/src/Handler.js~Handler.html#instance-method-session",
     "src/Handler.js~Handler#session",
     "method"
   ],
   [
-    "src/handler.js~handler#setmetadata",
-    "class/src/Handler.js~Handler.html#instance-method-setMetadata",
-    "src/Handler.js~Handler#setMetadata",
+    "src/handler.js~handler#setmeta",
+    "class/src/Handler.js~Handler.html#instance-method-setMeta",
+    "src/Handler.js~Handler#setMeta",
+    "method"
+  ],
+  [
+    "src/handler.js~handler#setsession",
+    "class/src/Handler.js~Handler.html#instance-method-setSession",
+    "src/Handler.js~Handler#setSession",
+    "method"
+  ],
+  [
+    "src/handler.js~handler._grantingaction",
+    "class/src/Handler.js~Handler.html#static-method-_grantingAction",
+    "src/Handler.js~Handler._grantingAction",
     "method"
   ],
   [
@@ -1530,15 +894,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/handler.js~handler.get",
+    "class/src/Handler.js~Handler.html#static-method-get",
+    "src/Handler.js~Handler.get",
+    "method"
+  ],
+  [
+    "src/handler.js~handler.grantaction",
+    "class/src/Handler.js~Handler.html#static-method-grantAction",
+    "src/Handler.js~Handler.grantAction",
+    "method"
+  ],
+  [
+    "src/handler.js~handler.grantedactionnames",
+    "class/src/Handler.js~Handler.html#static-method-grantedActionNames",
+    "src/Handler.js~Handler.grantedActionNames",
+    "method"
+  ],
+  [
     "src/handler.js~handler.onerrorduringoutput",
     "class/src/Handler.js~Handler.html#static-method-onErrorDuringOutput",
     "src/Handler.js~Handler.onErrorDuringOutput",
     "method"
   ],
   [
-    "src/handler.js~handler.registerhandler",
-    "class/src/Handler.js~Handler.html#static-method-registerHandler",
-    "src/Handler.js~Handler.registerHandler",
+    "src/handler.js~handler.register",
+    "class/src/Handler.js~Handler.html#static-method-register",
+    "src/Handler.js~Handler.register",
     "method"
   ],
   [
@@ -1582,6 +964,174 @@ window.esdocSearchIndex = [
     "class/src/Handler.js~Handler.html#static-method-registeredWriter",
     "src/Handler.js~Handler.registeredWriter",
     "method"
+  ],
+  [
+    "src/handlers/app.js",
+    "file/src/Handlers/App.js.html",
+    "src/Handlers/App.js",
+    "file"
+  ],
+  [
+    "src/handlers/app.js~app#_createreader",
+    "class/src/Handlers/App.js~App.html#instance-method-_createReader",
+    "src/Handlers/App.js~App#_createReader",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#_createwriter",
+    "class/src/Handlers/App.js~App.html#instance-method-_createWriter",
+    "src/Handlers/App.js~App#_createWriter",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#args",
+    "class/src/Handlers/App.js~App.html#instance-method-args",
+    "src/Handlers/App.js~App#args",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#constructor",
+    "class/src/Handlers/App.js~App.html#instance-constructor-constructor",
+    "src/Handlers/App.js~App#constructor",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#setargs",
+    "class/src/Handlers/App.js~App.html#instance-method-setArgs",
+    "src/Handlers/App.js~App#setArgs",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#setstderr",
+    "class/src/Handlers/App.js~App.html#instance-method-setStderr",
+    "src/Handlers/App.js~App#setStderr",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#setstdout",
+    "class/src/Handlers/App.js~App.html#instance-method-setStdout",
+    "src/Handlers/App.js~App#setStdout",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#stderr",
+    "class/src/Handlers/App.js~App.html#instance-method-stderr",
+    "src/Handlers/App.js~App#stderr",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app#stdout",
+    "class/src/Handlers/App.js~App.html#instance-method-stdout",
+    "src/Handlers/App.js~App#stdout",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app._grantingaction",
+    "class/src/Handlers/App.js~App.html#static-method-_grantingAction",
+    "src/Handlers/App.js~App._grantingAction",
+    "method"
+  ],
+  [
+    "src/handlers/app.js~app.init",
+    "class/src/Handlers/App.js~App.html#static-method-init",
+    "src/Handlers/App.js~App.init",
+    "method"
+  ],
+  [
+    "src/handlers/web.js",
+    "file/src/Handlers/Web.js.html",
+    "src/Handlers/Web.js",
+    "file"
+  ],
+  [
+    "src/handlers/web.js~web#_createreader",
+    "class/src/Handlers/Web.js~Web.html#instance-method-_createReader",
+    "src/Handlers/Web.js~Web#_createReader",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web#_createwriter",
+    "class/src/Handlers/Web.js~Web.html#instance-method-_createWriter",
+    "src/Handlers/Web.js~Web#_createWriter",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web#constructor",
+    "class/src/Handlers/Web.js~Web.html#instance-constructor-constructor",
+    "src/Handlers/Web.js~Web#constructor",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web#request",
+    "class/src/Handlers/Web.js~Web.html#instance-method-request",
+    "src/Handlers/Web.js~Web#request",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web#response",
+    "class/src/Handlers/Web.js~Web.html#instance-method-response",
+    "src/Handlers/Web.js~Web#response",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web#setrequest",
+    "class/src/Handlers/Web.js~Web.html#instance-method-setRequest",
+    "src/Handlers/Web.js~Web#setRequest",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web#setresponse",
+    "class/src/Handlers/Web.js~Web.html#instance-method-setResponse",
+    "src/Handlers/Web.js~Web#setResponse",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web._grantingaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-_grantingAction",
+    "src/Handlers/Web.js~Web._grantingAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.addbeforeaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-addBeforeAction",
+    "src/Handlers/Web.js~Web.addBeforeAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.addbeforeauthaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-addBeforeAuthAction",
+    "src/Handlers/Web.js~Web.addBeforeAuthAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.beforeaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-beforeAction",
+    "src/Handlers/Web.js~Web.beforeAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.beforeauthaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-beforeAuthAction",
+    "src/Handlers/Web.js~Web.beforeAuthAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.middleware",
+    "class/src/Handlers/Web.js~Web.html#static-method-middleware",
+    "src/Handlers/Web.js~Web.middleware",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.restful",
+    "class/src/Handlers/Web.js~Web.html#static-method-restful",
+    "src/Handlers/Web.js~Web.restful",
+    "method"
+  ],
+  [
+    "src/handlers/index.js",
+    "file/src/Handlers/index.js.html",
+    "src/Handlers/index.js",
+    "file"
   ],
   [
     "src/input.js",
@@ -1770,9 +1320,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/input.js~input.registerinput",
-    "class/src/Input.js~Input.html#static-method-registerInput",
-    "src/Input.js~Input.registerInput",
+    "src/input.js~input.register",
+    "class/src/Input.js~Input.html#static-method-register",
+    "src/Input.js~Input.register",
     "method"
   ],
   [
@@ -1798,6 +1348,354 @@ window.esdocSearchIndex = [
     "class/src/Input.js~Input.html#static-method-registeredPropertyNames",
     "src/Input.js~Input.registeredPropertyNames",
     "method"
+  ],
+  [
+    "src/inputs/any.js",
+    "file/src/Inputs/Any.js.html",
+    "src/Inputs/Any.js",
+    "file"
+  ],
+  [
+    "src/inputs/any.js~any#_validation",
+    "class/src/Inputs/Any.js~Any.html#instance-method-_validation",
+    "src/Inputs/Any.js~Any#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/any.js~any#isserializable",
+    "class/src/Inputs/Any.js~Any.html#instance-method-isSerializable",
+    "src/Inputs/Any.js~Any#isSerializable",
+    "method"
+  ],
+  [
+    "src/inputs/basetext.js",
+    "file/src/Inputs/BaseText.js.html",
+    "src/Inputs/BaseText.js",
+    "file"
+  ],
+  [
+    "src/inputs/basetext.js~basetext#_validation",
+    "class/src/Inputs/BaseText.js~BaseText.html#instance-method-_validation",
+    "src/Inputs/BaseText.js~BaseText#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/basetext.js~basetext#isempty",
+    "class/src/Inputs/BaseText.js~BaseText.html#instance-method-isEmpty",
+    "src/Inputs/BaseText.js~BaseText#isEmpty",
+    "method"
+  ],
+  [
+    "src/inputs/bool.js",
+    "file/src/Inputs/Bool.js.html",
+    "src/Inputs/Bool.js",
+    "file"
+  ],
+  [
+    "src/inputs/bool.js~bool#_validation",
+    "class/src/Inputs/Bool.js~Bool.html#instance-method-_validation",
+    "src/Inputs/Bool.js~Bool#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/bool.js~bool._decode",
+    "class/src/Inputs/Bool.js~Bool.html#static-method-_decode",
+    "src/Inputs/Bool.js~Bool._decode",
+    "method"
+  ],
+  [
+    "src/inputs/bool.js~bool._encode",
+    "class/src/Inputs/Bool.js~Bool.html#static-method-_encode",
+    "src/Inputs/Bool.js~Bool._encode",
+    "method"
+  ],
+  [
+    "src/inputs/buf.js",
+    "file/src/Inputs/Buf.js.html",
+    "src/Inputs/Buf.js",
+    "file"
+  ],
+  [
+    "src/inputs/buf.js~buf#_validation",
+    "class/src/Inputs/Buf.js~Buf.html#instance-method-_validation",
+    "src/Inputs/Buf.js~Buf#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/buf.js~buf#isempty",
+    "class/src/Inputs/Buf.js~Buf.html#instance-method-isEmpty",
+    "src/Inputs/Buf.js~Buf#isEmpty",
+    "method"
+  ],
+  [
+    "src/inputs/buf.js~buf._decode",
+    "class/src/Inputs/Buf.js~Buf.html#static-method-_decode",
+    "src/Inputs/Buf.js~Buf._decode",
+    "method"
+  ],
+  [
+    "src/inputs/buf.js~buf._encode",
+    "class/src/Inputs/Buf.js~Buf.html#static-method-_encode",
+    "src/Inputs/Buf.js~Buf._encode",
+    "method"
+  ],
+  [
+    "src/inputs/email.js",
+    "file/src/Inputs/Email.js.html",
+    "src/Inputs/Email.js",
+    "file"
+  ],
+  [
+    "src/inputs/email.js~email#_validation",
+    "class/src/Inputs/Email.js~Email.html#instance-method-_validation",
+    "src/Inputs/Email.js~Email#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/filepath.js",
+    "file/src/Inputs/FilePath.js.html",
+    "src/Inputs/FilePath.js",
+    "file"
+  ],
+  [
+    "src/inputs/filepath.js~filepath#_validation",
+    "class/src/Inputs/FilePath.js~FilePath.html#instance-method-_validation",
+    "src/Inputs/FilePath.js~FilePath#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/filepath.js~filepath#basename",
+    "class/src/Inputs/FilePath.js~FilePath.html#instance-method-basename",
+    "src/Inputs/FilePath.js~FilePath#basename",
+    "method"
+  ],
+  [
+    "src/inputs/filepath.js~filepath#dirname",
+    "class/src/Inputs/FilePath.js~FilePath.html#instance-method-dirname",
+    "src/Inputs/FilePath.js~FilePath#dirname",
+    "method"
+  ],
+  [
+    "src/inputs/filepath.js~filepath#extension",
+    "class/src/Inputs/FilePath.js~FilePath.html#instance-method-extension",
+    "src/Inputs/FilePath.js~FilePath#extension",
+    "method"
+  ],
+  [
+    "src/inputs/filepath.js~filepath#stat",
+    "class/src/Inputs/FilePath.js~FilePath.html#instance-method-stat",
+    "src/Inputs/FilePath.js~FilePath#stat",
+    "method"
+  ],
+  [
+    "src/inputs/hash.js",
+    "file/src/Inputs/Hash.js.html",
+    "src/Inputs/Hash.js",
+    "file"
+  ],
+  [
+    "src/inputs/hash.js~hash#_validation",
+    "class/src/Inputs/Hash.js~Hash.html#instance-method-_validation",
+    "src/Inputs/Hash.js~Hash#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/hash.js~hash#setrandom",
+    "class/src/Inputs/Hash.js~Hash.html#instance-method-setRandom",
+    "src/Inputs/Hash.js~Hash#setRandom",
+    "method"
+  ],
+  [
+    "src/inputs/hex.js",
+    "file/src/Inputs/Hex.js.html",
+    "src/Inputs/Hex.js",
+    "file"
+  ],
+  [
+    "src/inputs/hex.js~hex#_validation",
+    "class/src/Inputs/Hex.js~Hex.html#instance-method-_validation",
+    "src/Inputs/Hex.js~Hex#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/hex.js~hex#decimalvalue",
+    "class/src/Inputs/Hex.js~Hex.html#instance-method-decimalValue",
+    "src/Inputs/Hex.js~Hex#decimalValue",
+    "method"
+  ],
+  [
+    "src/inputs/hex.js~hex#setvaluefromdecimal",
+    "class/src/Inputs/Hex.js~Hex.html#instance-method-setValueFromDecimal",
+    "src/Inputs/Hex.js~Hex#setValueFromDecimal",
+    "method"
+  ],
+  [
+    "src/inputs/ip.js",
+    "file/src/Inputs/Ip.js.html",
+    "src/Inputs/Ip.js",
+    "file"
+  ],
+  [
+    "src/inputs/ip.js~ip#_validation",
+    "class/src/Inputs/Ip.js~Ip.html#instance-method-_validation",
+    "src/Inputs/Ip.js~Ip#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/ip.js~ip#isprivate",
+    "class/src/Inputs/Ip.js~Ip.html#instance-method-isPrivate",
+    "src/Inputs/Ip.js~Ip#isPrivate",
+    "method"
+  ],
+  [
+    "src/inputs/ip.js~ip#isv4",
+    "class/src/Inputs/Ip.js~Ip.html#instance-method-isV4",
+    "src/Inputs/Ip.js~Ip#isV4",
+    "method"
+  ],
+  [
+    "src/inputs/ip.js~ip#isv6",
+    "class/src/Inputs/Ip.js~Ip.html#instance-method-isV6",
+    "src/Inputs/Ip.js~Ip#isV6",
+    "method"
+  ],
+  [
+    "src/inputs/numeric.js",
+    "file/src/Inputs/Numeric.js.html",
+    "src/Inputs/Numeric.js",
+    "file"
+  ],
+  [
+    "src/inputs/numeric.js~numeric#_validation",
+    "class/src/Inputs/Numeric.js~Numeric.html#instance-method-_validation",
+    "src/Inputs/Numeric.js~Numeric#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/numeric.js~numeric._decode",
+    "class/src/Inputs/Numeric.js~Numeric.html#static-method-_decode",
+    "src/Inputs/Numeric.js~Numeric._decode",
+    "method"
+  ],
+  [
+    "src/inputs/stream.js",
+    "file/src/Inputs/Stream.js.html",
+    "src/Inputs/Stream.js",
+    "file"
+  ],
+  [
+    "src/inputs/stream.js~stream#_validation",
+    "class/src/Inputs/Stream.js~Stream.html#instance-method-_validation",
+    "src/Inputs/Stream.js~Stream#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/stream.js~stream#isserializable",
+    "class/src/Inputs/Stream.js~Stream.html#instance-method-isSerializable",
+    "src/Inputs/Stream.js~Stream#isSerializable",
+    "method"
+  ],
+  [
+    "src/inputs/text.js",
+    "file/src/Inputs/Text.js.html",
+    "src/Inputs/Text.js",
+    "file"
+  ],
+  [
+    "src/inputs/text.js~text#_validation",
+    "class/src/Inputs/Text.js~Text.html#instance-method-_validation",
+    "src/Inputs/Text.js~Text#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/timestamp.js",
+    "file/src/Inputs/Timestamp.js.html",
+    "src/Inputs/Timestamp.js",
+    "file"
+  ],
+  [
+    "src/inputs/timestamp.js~timestamp#_validation",
+    "class/src/Inputs/Timestamp.js~Timestamp.html#instance-method-_validation",
+    "src/Inputs/Timestamp.js~Timestamp#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/timestamp.js~timestamp._decode",
+    "class/src/Inputs/Timestamp.js~Timestamp.html#static-method-_decode",
+    "src/Inputs/Timestamp.js~Timestamp._decode",
+    "method"
+  ],
+  [
+    "src/inputs/uuid.js",
+    "file/src/Inputs/UUID.js.html",
+    "src/Inputs/UUID.js",
+    "file"
+  ],
+  [
+    "src/inputs/uuid.js~uuid#_validation",
+    "class/src/Inputs/UUID.js~UUID.html#instance-method-_validation",
+    "src/Inputs/UUID.js~UUID#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/uuid.js~uuid#setrandom",
+    "class/src/Inputs/UUID.js~UUID.html#instance-method-setRandom",
+    "src/Inputs/UUID.js~UUID#setRandom",
+    "method"
+  ],
+  [
+    "src/inputs/uuid.js~uuid#settimebasedrandom",
+    "class/src/Inputs/UUID.js~UUID.html#instance-method-setTimeBasedRandom",
+    "src/Inputs/UUID.js~UUID#setTimeBasedRandom",
+    "method"
+  ],
+  [
+    "src/inputs/url.js",
+    "file/src/Inputs/Url.js.html",
+    "src/Inputs/Url.js",
+    "file"
+  ],
+  [
+    "src/inputs/url.js~url#_validation",
+    "class/src/Inputs/Url.js~Url.html#instance-method-_validation",
+    "src/Inputs/Url.js~Url#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/url.js~url#extension",
+    "class/src/Inputs/Url.js~Url.html#instance-method-extension",
+    "src/Inputs/Url.js~Url#extension",
+    "method"
+  ],
+  [
+    "src/inputs/url.js~url#headers",
+    "class/src/Inputs/Url.js~Url.html#instance-method-headers",
+    "src/Inputs/Url.js~Url#headers",
+    "method"
+  ],
+  [
+    "src/inputs/url.js~url#protocol",
+    "class/src/Inputs/Url.js~Url.html#instance-method-protocol",
+    "src/Inputs/Url.js~Url#protocol",
+    "method"
+  ],
+  [
+    "src/inputs/version.js",
+    "file/src/Inputs/Version.js.html",
+    "src/Inputs/Version.js",
+    "file"
+  ],
+  [
+    "src/inputs/version.js~version#_validation",
+    "class/src/Inputs/Version.js~Version.html#instance-method-_validation",
+    "src/Inputs/Version.js~Version#_validation",
+    "method"
+  ],
+  [
+    "src/inputs/index.js",
+    "file/src/Inputs/index.js.html",
+    "src/Inputs/index.js",
+    "file"
   ],
   [
     "src/metadata.js",
@@ -1854,6 +1752,36 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/outputs/buf.js",
+    "file/src/Outputs/Buf.js.html",
+    "src/Outputs/Buf.js",
+    "file"
+  ],
+  [
+    "src/outputs/none.js",
+    "file/src/Outputs/None.js.html",
+    "src/Outputs/None.js",
+    "file"
+  ],
+  [
+    "src/outputs/numeric.js",
+    "file/src/Outputs/Numeric.js.html",
+    "src/Outputs/Numeric.js",
+    "file"
+  ],
+  [
+    "src/outputs/object.js",
+    "file/src/Outputs/Object.js.html",
+    "src/Outputs/Object.js",
+    "file"
+  ],
+  [
+    "src/outputs/text.js",
+    "file/src/Outputs/Text.js.html",
+    "src/Outputs/Text.js",
+    "file"
+  ],
+  [
     "src/reader.js",
     "file/src/Reader.js.html",
     "src/Reader.js",
@@ -1906,6 +1834,66 @@ window.esdocSearchIndex = [
     "class/src/Reader.js~Reader.html#instance-method-validInputNames",
     "src/Reader.js~Reader#validInputNames",
     "method"
+  ],
+  [
+    "src/readers/appargs.js",
+    "file/src/Readers/AppArgs.js.html",
+    "src/Readers/AppArgs.js",
+    "file"
+  ],
+  [
+    "src/readers/appargs.js~appargs#_perform",
+    "class/src/Readers/AppArgs.js~AppArgs.html#instance-method-_perform",
+    "src/Readers/AppArgs.js~AppArgs#_perform",
+    "method"
+  ],
+  [
+    "src/readers/appargs.js~appargs#args",
+    "class/src/Readers/AppArgs.js~AppArgs.html#instance-method-args",
+    "src/Readers/AppArgs.js~AppArgs#args",
+    "method"
+  ],
+  [
+    "src/readers/appargs.js~appargs#constructor",
+    "class/src/Readers/AppArgs.js~AppArgs.html#instance-constructor-constructor",
+    "src/Readers/AppArgs.js~AppArgs#constructor",
+    "method"
+  ],
+  [
+    "src/readers/appargs.js~appargs#executablename",
+    "class/src/Readers/AppArgs.js~AppArgs.html#instance-method-executableName",
+    "src/Readers/AppArgs.js~AppArgs#executableName",
+    "method"
+  ],
+  [
+    "src/readers/webrequest.js",
+    "file/src/Readers/WebRequest.js.html",
+    "src/Readers/WebRequest.js",
+    "file"
+  ],
+  [
+    "src/readers/webrequest.js~webrequest#_perform",
+    "class/src/Readers/WebRequest.js~WebRequest.html#instance-method-_perform",
+    "src/Readers/WebRequest.js~WebRequest#_perform",
+    "method"
+  ],
+  [
+    "src/readers/webrequest.js~webrequest#constructor",
+    "class/src/Readers/WebRequest.js~WebRequest.html#instance-constructor-constructor",
+    "src/Readers/WebRequest.js~WebRequest#constructor",
+    "method"
+  ],
+  [
+    "src/readers/webrequest.js~webrequest#request",
+    "class/src/Readers/WebRequest.js~WebRequest.html#instance-method-request",
+    "src/Readers/WebRequest.js~WebRequest#request",
+    "method"
+  ],
+  [
+    "src/readers/index.js",
+    "file/src/Readers/index.js.html",
+    "src/Readers/index.js",
+    "file"
   ],
   [
     "src/session.js",
@@ -1968,12 +1956,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/session.js~session#resultcache",
-    "class/src/Session.js~Session.html#instance-method-resultCache",
-    "src/Session.js~Session#resultCache",
-    "method"
-  ],
-  [
     "src/session.js~session#set",
     "class/src/Session.js~Session.html#instance-method-set",
     "src/Session.js~Session#set",
@@ -2028,12 +2010,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/tasks.js~tasks#addaction",
-    "class/src/Tasks.js~Tasks.html#instance-method-addAction",
-    "src/Tasks.js~Tasks#addAction",
-    "method"
-  ],
-  [
     "src/tasks.js~tasks#addwrappedpromise",
     "class/src/Tasks.js~Tasks.html#instance-method-addWrappedPromise",
     "src/Tasks.js~Tasks#addWrappedPromise",
@@ -2058,9 +2034,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tasks.js~tasks#execute",
-    "class/src/Tasks.js~Tasks.html#instance-method-execute",
-    "src/Tasks.js~Tasks#execute",
+    "src/tasks.js~tasks#grantaction",
+    "class/src/Tasks.js~Tasks.html#instance-method-grantAction",
+    "src/Tasks.js~Tasks#grantAction",
     "method"
   ],
   [
@@ -2070,105 +2046,111 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/util/hierarchicalcollection.js",
-    "file/src/Util/HierarchicalCollection.js.html",
-    "src/Util/HierarchicalCollection.js",
+    "src/tasks.js~tasks#run",
+    "class/src/Tasks.js~Tasks.html#instance-method-run",
+    "src/Tasks.js~Tasks#run",
+    "method"
+  ],
+  [
+    "src/utils/hierarchicalcollection.js",
+    "file/src/Utils/HierarchicalCollection.js.html",
+    "src/Utils/HierarchicalCollection.js",
     "file"
   ],
   [
-    "src/util/immutablemap.js",
-    "file/src/Util/ImmutableMap.js.html",
-    "src/Util/ImmutableMap.js",
+    "src/utils/immutablemap.js",
+    "file/src/Utils/ImmutableMap.js.html",
+    "src/Utils/ImmutableMap.js",
     "file"
   ],
   [
-    "src/util/immutablemap.js~immutablemap#set",
-    "class/src/Util/ImmutableMap.js~ImmutableMap.html#instance-method-set",
-    "src/Util/ImmutableMap.js~ImmutableMap#set",
+    "src/utils/immutablemap.js~immutablemap#set",
+    "class/src/Utils/ImmutableMap.js~ImmutableMap.html#instance-method-set",
+    "src/Utils/ImmutableMap.js~ImmutableMap#set",
     "method"
   ],
   [
-    "src/util/lrucache.js",
-    "file/src/Util/LruCache.js.html",
-    "src/Util/LruCache.js",
+    "src/utils/lrucache.js",
+    "file/src/Utils/LruCache.js.html",
+    "src/Utils/LruCache.js",
     "file"
   ],
   [
-    "src/util/lrucache.js~lrucache#constructor",
-    "class/src/Util/LruCache.js~LruCache.html#instance-constructor-constructor",
-    "src/Util/LruCache.js~LruCache#constructor",
+    "src/utils/lrucache.js~lrucache#constructor",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-constructor-constructor",
+    "src/Utils/LruCache.js~LruCache#constructor",
     "method"
   ],
   [
-    "src/util/lrucache.js~lrucache#flush",
-    "class/src/Util/LruCache.js~LruCache.html#instance-method-flush",
-    "src/Util/LruCache.js~LruCache#flush",
+    "src/utils/lrucache.js~lrucache#flush",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-method-flush",
+    "src/Utils/LruCache.js~LruCache#flush",
     "method"
   ],
   [
-    "src/util/lrucache.js~lrucache#get",
-    "class/src/Util/LruCache.js~LruCache.html#instance-method-get",
-    "src/Util/LruCache.js~LruCache#get",
+    "src/utils/lrucache.js~lrucache#get",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-method-get",
+    "src/Utils/LruCache.js~LruCache#get",
     "method"
   ],
   [
-    "src/util/lrucache.js~lrucache#has",
-    "class/src/Util/LruCache.js~LruCache.html#instance-method-has",
-    "src/Util/LruCache.js~LruCache#has",
+    "src/utils/lrucache.js~lrucache#has",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-method-has",
+    "src/Utils/LruCache.js~LruCache#has",
     "method"
   ],
   [
-    "src/util/lrucache.js~lrucache#keys",
-    "class/src/Util/LruCache.js~LruCache.html#instance-method-keys",
-    "src/Util/LruCache.js~LruCache#keys",
+    "src/utils/lrucache.js~lrucache#keys",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-method-keys",
+    "src/Utils/LruCache.js~LruCache#keys",
     "method"
   ],
   [
-    "src/util/lrucache.js~lrucache#length",
-    "class/src/Util/LruCache.js~LruCache.html#instance-get-length",
-    "src/Util/LruCache.js~LruCache#length",
+    "src/utils/lrucache.js~lrucache#length",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-get-length",
+    "src/Utils/LruCache.js~LruCache#length",
     "member"
   ],
   [
-    "src/util/lrucache.js~lrucache#lifespan",
-    "class/src/Util/LruCache.js~LruCache.html#instance-get-lifespan",
-    "src/Util/LruCache.js~LruCache#lifespan",
+    "src/utils/lrucache.js~lrucache#lifespan",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-get-lifespan",
+    "src/Utils/LruCache.js~LruCache#lifespan",
     "member"
   ],
   [
-    "src/util/lrucache.js~lrucache#set",
-    "class/src/Util/LruCache.js~LruCache.html#instance-method-set",
-    "src/Util/LruCache.js~LruCache#set",
+    "src/utils/lrucache.js~lrucache#set",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-method-set",
+    "src/Utils/LruCache.js~LruCache#set",
     "method"
   ],
   [
-    "src/util/lrucache.js~lrucache#size",
-    "class/src/Util/LruCache.js~LruCache.html#instance-get-size",
-    "src/Util/LruCache.js~LruCache#size",
+    "src/utils/lrucache.js~lrucache#size",
+    "class/src/Utils/LruCache.js~LruCache.html#instance-get-size",
+    "src/Utils/LruCache.js~LruCache#size",
     "member"
   ],
   [
-    "src/util/deepmerge.js",
-    "file/src/Util/deepMerge.js.html",
-    "src/Util/deepMerge.js",
+    "src/utils/deepmerge.js",
+    "file/src/Utils/deepMerge.js.html",
+    "src/Utils/deepMerge.js",
     "file"
   ],
   [
-    "src/util/hash.js",
-    "file/src/Util/hash.js.html",
-    "src/Util/hash.js",
+    "src/utils/hash.js",
+    "file/src/Utils/hash.js.html",
+    "src/Utils/hash.js",
     "file"
   ],
   [
-    "src/util/index.js",
-    "file/src/Util/index.js.html",
-    "src/Util/index.js",
+    "src/utils/index.js",
+    "file/src/Utils/index.js.html",
+    "src/Utils/index.js",
     "file"
   ],
   [
-    "src/util/mkdirs.js",
-    "file/src/Util/mkdirs.js.html",
-    "src/Util/mkdirs.js",
+    "src/utils/mkdirs.js",
+    "file/src/Utils/mkdirs.js.html",
+    "src/Utils/mkdirs.js",
     "file"
   ],
   [
@@ -2218,6 +2200,84 @@ window.esdocSearchIndex = [
     "class/src/Writer.js~Writer.html#instance-method-value",
     "src/Writer.js~Writer#value",
     "method"
+  ],
+  [
+    "src/writers/appoutput.js",
+    "file/src/Writers/AppOutput.js.html",
+    "src/Writers/AppOutput.js",
+    "file"
+  ],
+  [
+    "src/writers/appoutput.js~appoutput#_erroroutput",
+    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-_errorOutput",
+    "src/Writers/AppOutput.js~AppOutput#_errorOutput",
+    "method"
+  ],
+  [
+    "src/writers/appoutput.js~appoutput#_successoutput",
+    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-_successOutput",
+    "src/Writers/AppOutput.js~AppOutput#_successOutput",
+    "method"
+  ],
+  [
+    "src/writers/appoutput.js~appoutput#constructor",
+    "class/src/Writers/AppOutput.js~AppOutput.html#instance-constructor-constructor",
+    "src/Writers/AppOutput.js~AppOutput#constructor",
+    "method"
+  ],
+  [
+    "src/writers/appoutput.js~appoutput#stderr",
+    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-stderr",
+    "src/Writers/AppOutput.js~AppOutput#stderr",
+    "method"
+  ],
+  [
+    "src/writers/appoutput.js~appoutput#stdout",
+    "class/src/Writers/AppOutput.js~AppOutput.html#instance-method-stdout",
+    "src/Writers/AppOutput.js~AppOutput#stdout",
+    "method"
+  ],
+  [
+    "src/writers/webresponse.js",
+    "file/src/Writers/WebResponse.js.html",
+    "src/Writers/WebResponse.js",
+    "file"
+  ],
+  [
+    "src/writers/webresponse.js~webresponse#_erroroutput",
+    "class/src/Writers/WebResponse.js~WebResponse.html#instance-method-_errorOutput",
+    "src/Writers/WebResponse.js~WebResponse#_errorOutput",
+    "method"
+  ],
+  [
+    "src/writers/webresponse.js~webresponse#_successoutput",
+    "class/src/Writers/WebResponse.js~WebResponse.html#instance-method-_successOutput",
+    "src/Writers/WebResponse.js~WebResponse#_successOutput",
+    "method"
+  ],
+  [
+    "src/writers/webresponse.js~webresponse#constructor",
+    "class/src/Writers/WebResponse.js~WebResponse.html#instance-constructor-constructor",
+    "src/Writers/WebResponse.js~WebResponse#constructor",
+    "method"
+  ],
+  [
+    "src/writers/webresponse.js~webresponse#response",
+    "class/src/Writers/WebResponse.js~WebResponse.html#instance-method-response",
+    "src/Writers/WebResponse.js~WebResponse#response",
+    "method"
+  ],
+  [
+    "src/writers/index.js",
+    "file/src/Writers/index.js.html",
+    "src/Writers/index.js",
+    "file"
+  ],
+  [
+    "src/decorators.js",
+    "file/src/decorators.js.html",
+    "src/decorators.js",
+    "file"
   ],
   [
     "src/index.js",

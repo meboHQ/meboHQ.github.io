@@ -1,79 +1,79 @@
 {
   "coverage": "100%",
-  "expectCount": 267,
-  "actualCount": 267,
+  "expectCount": 272,
+  "actualCount": 272,
   "files": {
     "src/Action.js": {
-      "expectCount": 23,
-      "actualCount": 23,
+      "expectCount": 25,
+      "actualCount": 25,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Any.js": {
+    "src/Inputs/Any.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/BaseText.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+    "src/Handlers/App.js": {
+      "expectCount": 12,
+      "actualCount": 12,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Bool.js": {
-      "expectCount": 4,
-      "actualCount": 4,
-      "undocumentLines": []
-    },
-    "src/Ext/Inputs/Buf.js": {
+    "src/Readers/AppArgs.js": {
       "expectCount": 5,
       "actualCount": 5,
       "undocumentLines": []
     },
-    "src/Ext/Handlers/CommandLine.js": {
-      "expectCount": 10,
-      "actualCount": 10,
-      "undocumentLines": []
-    },
-    "src/Ext/Readers/CommandLineArgs.js": {
+    "src/Writers/AppOutput.js": {
       "expectCount": 6,
       "actualCount": 6,
       "undocumentLines": []
     },
-    "src/Ext/Writers/CommandLineOutput.js": {
-      "expectCount": 7,
-      "actualCount": 7,
-      "undocumentLines": []
-    },
-    "src/Error/Conflict.js": {
+    "src/Inputs/BaseText.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Email.js": {
+    "src/Inputs/Bool.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
+    "src/Inputs/Buf.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/Errors/Conflict.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/Inputs/Email.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/FilePath.js": {
+    "src/Inputs/FilePath.js": {
       "expectCount": 6,
       "actualCount": 6,
       "undocumentLines": []
     },
     "src/Handler.js": {
-      "expectCount": 19,
-      "actualCount": 19,
+      "expectCount": 24,
+      "actualCount": 24,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Hash.js": {
+    "src/Inputs/Hash.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Hex.js": {
+    "src/Inputs/Hex.js": {
       "expectCount": 4,
       "actualCount": 4,
       "undocumentLines": []
     },
-    "src/Util/ImmutableMap.js": {
+    "src/Utils/ImmutableMap.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -83,12 +83,12 @@
       "actualCount": 36,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Ip.js": {
+    "src/Inputs/Ip.js": {
       "expectCount": 5,
       "actualCount": 5,
       "undocumentLines": []
     },
-    "src/Util/LruCache.js": {
+    "src/Utils/LruCache.js": {
       "expectCount": 10,
       "actualCount": 10,
       "undocumentLines": []
@@ -98,17 +98,17 @@
       "actualCount": 9,
       "undocumentLines": []
     },
-    "src/Error/NoContent.js": {
+    "src/Errors/NoContent.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Error/NotFound.js": {
+    "src/Errors/NotFound.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Numeric.js": {
+    "src/Inputs/Numeric.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
@@ -119,8 +119,8 @@
       "undocumentLines": []
     },
     "src/Session.js": {
-      "expectCount": 14,
-      "actualCount": 14,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/Settings.js": {
@@ -128,7 +128,7 @@
       "actualCount": 5,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Stream.js": {
+    "src/Inputs/Stream.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
@@ -138,47 +138,47 @@
       "actualCount": 8,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Text.js": {
+    "src/Inputs/Text.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Timestamp.js": {
+    "src/Inputs/Timestamp.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/UUID.js": {
+    "src/Inputs/UUID.js": {
       "expectCount": 4,
       "actualCount": 4,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Url.js": {
+    "src/Inputs/Url.js": {
       "expectCount": 5,
       "actualCount": 5,
       "undocumentLines": []
     },
-    "src/Error/ValidationFail.js": {
+    "src/Errors/ValidationFail.js": {
       "expectCount": 10,
       "actualCount": 10,
       "undocumentLines": []
     },
-    "src/Ext/Inputs/Version.js": {
+    "src/Inputs/Version.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "src/Ext/Handlers/Web.js": {
+    "src/Handlers/Web.js": {
       "expectCount": 15,
       "actualCount": 15,
       "undocumentLines": []
     },
-    "src/Ext/Readers/WebRequest.js": {
-      "expectCount": 5,
-      "actualCount": 5,
+    "src/Readers/WebRequest.js": {
+      "expectCount": 4,
+      "actualCount": 4,
       "undocumentLines": []
     },
-    "src/Ext/Writers/WebResponse.js": {
+    "src/Writers/WebResponse.js": {
       "expectCount": 5,
       "actualCount": 5,
       "undocumentLines": []
