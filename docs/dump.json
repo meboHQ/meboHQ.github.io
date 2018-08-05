@@ -11138,7 +11138,7 @@
     "__docId__": 408,
     "kind": "file",
     "name": "src/Metadata.js",
-    "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst Utils = require('./Utils');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _collection = Symbol('collection');\n\n\n/**\n * Metadata provides a way for actions ({@link Action}) to control about how a\n * handler should perform the reading ({@link Reader}) and writing\n * ({@link Writer}) operations. Therefore, making possible handlers to perform\n * differently per action basis.\n *\n * This is done by defining {@link Reader} & {@link Writer} options through\n * the metadata. By doing that the options are passed from the action to the\n * handler during the handler's execution ({@link Handler.runAction}).\n *\n * You can define options by either using the full option location or using\n * option variables:\n *\n * **Full option location:**\n * Uses a convention interpreted by the {@link Handler.metadata} to describe\n * where the option is localized:\n * ```\n * handler.<HANDLER_NAME>.<OPERATION>Options.<OPTION_NAME>\n * ```\n *\n * Example:\n * ```\n * class MyAction extends Mebo.Action{\n *    _perform(data){\n *\n *      // location (not recommended, see option var)\n *      this.setMeta('handler.web.writeOptions.headers', {\n *        someOption: 'foo',\n *      });\n *\n *      // ...\n *    }\n * }\n * ```\n *\n * **Option var (recommended):**\n * Eliminates the need of using convoluted long names to define the options by\n * simply using a variable that represents a full option location:\n *\n * ```\n * class MyAction extends Mebo.Action{\n *    _perform(data){\n *\n *      // defining a custom header by using the `$webHeaders` variable, rather\n *      // than the full option location (`handler.web.writeOptions.headers`)\n *      this.setMeta('$webHeaders', {\n *        someOption: 'foo',\n *      });\n *\n *      // ...\n *    }\n * }\n * ```\n *\n * The complete list of the available option variables can be found bellow, it's\n * separated by handler type. Also, new variables can be assigned through\n * {@link Metadata.registerOptionVar}.\n *\n * <h2>Web Variables</h2>\n *\n * Variable name | Value | Value used by\n * --- | --- | ---\n * $web | `handler.web` |\n * $webUploadDirectory | `$web.readOptions.uploadDirectory` | {@link WebRequest}\n * $webUploadPreserveName | `$web.readOptions.uploadPreserveName` | {@link WebRequest}\n * $webUploadMaxFileSize | `$web.readOptions.uploadMaxFileSize` | {@link WebRequest}\n * $webMaxFields | `$web.readOptions.maxFields` | {@link WebRequest}\n * $webMaxFieldsSize | `$web.readOptions.maxFieldsSize` | {@link WebRequest}\n * $webHeaders | `$web.writeOptions.headers` | {@link WebResponse}\n * $webHeadersOnly | `$web.writeOptions.headersOnly`| {@link WebResponse}\n * $webResult | `$web.writeOptions.result`| {@link WebResponse}\n * $webRoot | `$web.writeOptions.root`| {@link WebResponse}\n * $webStatus | `$web.writeOptions.status`| {@link WebResponse}\n * $webResultLabel | `$web.writeOptions.resultLabel`| {@link WebResponse}\n *\n * <h2>Cli Variables</h2>\n *\n * Variable name | Value | Value used by\n * --- | --- | ---\n * $cli` | `handler.cli` |\n * $cliDescription` | `$cli.readOptions.description` | {@link CliArgs}\n * $cliResult` | `$cli.writeOptions.result` | {@link CliOutput}\n */\nclass Metadata{\n\n  /**\n   * Creates a metadata\n   */\n  constructor(){\n    this[_collection] = new Utils.HierarchicalCollection();\n  }\n\n  /**\n   * Returns a value under the metadata.\n   *\n   * @param {string} path - path about where the value is localized (the levels\n   * must be separated by '.'). In case of empty string the entire metadata\n   * is returned.\n   * @param {*} [defaultValue] - default value returned in case a value was\n   * not found for the path\n   * @return {*}\n   */\n  value(path, defaultValue=undefined){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    return this[_collection].query(Metadata._resolvePath(path), defaultValue);\n  }\n\n  /**\n   * Sets a value to the metadata.\n   *\n   * @param {string} path - path about where the value should be stored under the metadata\n   * (the levels must be separated by '.')\n   * @param {*} value - value that is going to be stored under the collection\n   * @param {boolean} [merge=true] - this option is used to decide in case of the\n   * last level is already existing under the collection, if the value should be\n   * either merged (default) or overridden.\n   */\n  setValue(path, value, merge=true){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    this[_collection].insert(Metadata._resolvePath(path), value, merge);\n  }\n\n  /**\n   * Returns a list of the root levels under the metadata\n   *\n   * @return {Array<string>}\n   */\n  root(){\n    return this[_collection].root();\n  }\n\n  /**\n   * register an option variable under metadata\n   *\n   * The value of the variable can contain other pre-defined option variables,\n   * for instance:\n   * ```\n   * Mebo.Metadata.registerOptionVar('$myVar', '$otherVar.data')\n   * ```\n   *\n   * @param {string} name - name of the variable\n   * @param {string} value - value for the variable\n   */\n  static registerOptionVar(name, value){\n    assert(TypeCheck.isString(name), 'name needs to be defined as string');\n    assert(TypeCheck.isString(value), 'value needs to be defined as string');\n    assert((/^([\\w_\\$\\.\\-])+$/gi).test(value), `Illegal characters found variable (${name}) value: ${value}`); // eslint-disable-line no-useless-escape\n\n    this._validateOptionVarName(name);\n\n    // flushing cache\n    this._cachedOptionVariables = {};\n\n    // assigning variable\n    this._optionVariables[name] = value;\n  }\n\n  /**\n   * Returns the value for an option variable\n   *\n   * for instance:\n   * ```\n   * const myVariableValue = Mebo.Metadata.optionVar('$myVariable');\n   * console.log(myVariableValue)\n   * ```\n   *\n   * @param {string} name - name of the variable\n   * @param {boolean} [processValue=true] - process any variables that may be\n   * defined as part of the value\n   * @return {string}\n   *\n   * @throws {Error} throws an error if the var name is undefined\n   * under the metadata.\n   */\n  static optionVar(name, processValue=true){\n\n    this._validateOptionVarName(name);\n    if (!(name in this._optionVariables)){\n      throw new Error(`Option variable ${name} is undefined`);\n    }\n\n    if (processValue){\n      return this._resolveOptionVar(name);\n    }\n\n    return this._optionVariables[name];\n  }\n\n  /**\n   * Returns a boolean telling if the variable name is defined\n   *\n   * @param {string} name - variable name\n   * @return {boolean}\n   */\n  static hasOptionVar(name){\n    this._validateOptionVarName(name);\n\n    return (name in this._optionVariables);\n  }\n\n  /**\n   * Returns a list of the registered variable names under the metadata\n   *\n   * @return {Array<string>}\n   */\n  static registeredOptionVars(){\n    return Object.keys(this._optionVariables);\n  }\n\n  /**\n   * Returns the path resolved by processing any variables that may\n   * be defined as part of the path\n   *\n   * @param {string} path - path to be resolved\n   * @return {string}\n   */\n  static _resolvePath(path){\n\n    // if the path contains variables lets process it\n    if (path.indexOf('$') !== -1){\n      const processedPath = [];\n      for (const part of path.split('.')){\n        if (part.startsWith('$')){\n          processedPath.push(Metadata.optionVar(part));\n        }\n        else{\n          processedPath.push(part);\n        }\n      }\n\n      // processed path\n      return processedPath.join('.');\n    }\n\n    return path;\n  }\n\n  /**\n   * Returns the value of the variable by processing any variables\n   * that may be defined as part of the value\n   *\n   * @param {string} name - variable name\n   * @param {string} [rootName] - root variable name used to report the origin\n   * of the circular reference error\n   * @param {number} [depth=0] - deep used to identify max recursion caused\n   * by circular references\n   * @return {string}\n   * @private\n   */\n  static _resolveOptionVar(name, rootName, depth=0){\n\n    // detecting circular references\n    if (depth >= this._maxDepth){\n      const error = new Error(`Circular reference detected while processing the value for $${rootName}`);\n\n      // processing the stack of the error to get rid of the duplicated entries\n      // caused by the recursion (we don't need to show 1000+ lines of the same\n      // thing, the error explanation should be good enough)\n      const stackContents = error.stack.split('\\n');\n      error.stack = stackContents.slice(0, 2).concat(stackContents.slice(this._maxDepth + 1)).join('\\n');\n      throw error;\n    }\n\n    // processing value\n    const rawValue = this._optionVariables[name];\n\n    // in case the value is not under the cache, lets process it\n    if (!(name in this._cachedOptionVariables)){\n\n      // checking if the value contains any variable\n      let processedValue = rawValue;\n      if (rawValue.indexOf('$') !== -1){\n\n        // splitting the levels of the value that are separated by '.'\n        const processedValueParts = [];\n        for (const part of rawValue.split('.')){\n          let processedPartValue;\n\n          // in case of a variable\n          if (part.startsWith('$')){\n\n            this._validateOptionVarName(part);\n            // processing variable value\n            processedPartValue = this._resolveOptionVar(part, rootName || name, depth + 1);\n          }\n          // otherwise just use the part without any processing\n          else{\n            processedPartValue = part;\n          }\n          processedValueParts.push(processedPartValue);\n        }\n\n        // building back the structure of the value\n        processedValue = processedValueParts.join('.');\n      }\n\n      // adding processed value to the cache\n      this._cachedOptionVariables[name] = processedValue;\n    }\n\n    // returning value from cache\n    return this._cachedOptionVariables[name];\n  }\n\n  /**\n   * Check if the variable is defined using the proper syntax, otherwise in case\n   * of any issues an exception is raised\n   *\n   * @param {string} name - variable name\n   * @private\n   */\n  static _validateOptionVarName(name){\n    assert(TypeCheck.isString(name), 'name needs to be a string');\n\n    // check if variable name starts with $\n    if (!name.startsWith('$')){\n      throw new Error(`Option variable (${name}) needs to start with: $`);\n    }\n\n    // checking if variable is empty\n    const cleanVarName = name.slice(1);\n    if (!cleanVarName.length){\n      throw new Error('Option variable cannot be empty');\n    }\n\n    // checking for invalid syntax\n    else if (!(/^([\\w_])+$/gi).test(cleanVarName)){\n      throw new Error(`Option variable (${name}) contains invalid characters`);\n    }\n  }\n\n  static _optionVariables = {};\n\n  static _cachedOptionVariables = {};\n\n  static _maxDepth = 1000;\n}\n\nmodule.exports = Metadata;\n",
+    "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst Utils = require('./Utils');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _collection = Symbol('collection');\n\n\n/**\n * Metadata provides a way for actions ({@link Action}) to control about how a\n * handler should perform the reading ({@link Reader}) and writing\n * ({@link Writer}) operations. Therefore, making possible handlers to perform\n * differently per action basis.\n *\n * This is done by defining {@link Reader} & {@link Writer} options through\n * the metadata. By doing that the options are passed from the action to the\n * handler during the handler's execution ({@link Handler.runAction}).\n *\n * You can define options by either using the full option location or using\n * option variables:\n *\n * **Full option location:**\n * Uses a convention interpreted by the {@link Handler.metadata} to describe\n * where the option is localized:\n * ```\n * handler.<HANDLER_NAME>.<OPERATION>Options.<OPTION_NAME>\n * ```\n *\n * Example:\n * ```\n * class MyAction extends Mebo.Action{\n *    _perform(data){\n *\n *      // location (not recommended, see option var)\n *      this.setMeta('handler.web.writeOptions.headers', {\n *        someOption: 'foo',\n *      });\n *\n *      // ...\n *    }\n * }\n * ```\n *\n * **Option var (recommended):**\n * Eliminates the need of using convoluted long names to define the options by\n * simply using a variable that represents a full option location:\n *\n * ```\n * class MyAction extends Mebo.Action{\n *    _perform(data){\n *\n *      // defining a custom header by using the `$webHeaders` variable, rather\n *      // than the full option location (`handler.web.writeOptions.headers`)\n *      this.setMeta('$webHeaders', {\n *        someOption: 'foo',\n *      });\n *\n *      // ...\n *    }\n * }\n * ```\n *\n * The complete list of the available option variables can be found bellow, it's\n * separated by handler type. Also, new variables can be assigned through\n * {@link Metadata.registerOptionVar}.\n *\n * <h2>Web Variables</h2>\n *\n * Variable name | Value | Value used by\n * --- | --- | ---\n * $web | `handler.web` |\n * $webUploadDirectory | `$web.readOptions.uploadDirectory` | {@link WebRequest}\n * $webUploadPreserveName | `$web.readOptions.uploadPreserveName` | {@link WebRequest}\n * $webUploadMaxFileSize | `$web.readOptions.uploadMaxFileSize` | {@link WebRequest}\n * $webMaxFields | `$web.readOptions.maxFields` | {@link WebRequest}\n * $webMaxFieldsSize | `$web.readOptions.maxFieldsSize` | {@link WebRequest}\n * $webHeaders | `$web.writeOptions.headers` | {@link WebResponse}\n * $webHeadersOnly | `$web.writeOptions.headersOnly`| {@link WebResponse}\n * $webResult | `$web.writeOptions.result`| {@link WebResponse}\n * $webRoot | `$web.writeOptions.root`| {@link WebResponse}\n * $webStatus | `$web.writeOptions.status`| {@link WebResponse}\n * $webResultLabel | `$web.writeOptions.resultLabel`| {@link WebResponse}\n *\n * <h2>Cli Variables</h2>\n *\n * Variable name | Value | Value used by\n * --- | --- | ---\n * $cli | `handler.cli` |\n * $cliDescription | `$cli.readOptions.description` | {@link CliArgs}\n * $cliResult | `$cli.writeOptions.result` | {@link CliOutput}\n */\nclass Metadata{\n\n  /**\n   * Creates a metadata\n   */\n  constructor(){\n    this[_collection] = new Utils.HierarchicalCollection();\n  }\n\n  /**\n   * Returns a value under the metadata.\n   *\n   * @param {string} path - path about where the value is localized (the levels\n   * must be separated by '.'). In case of empty string the entire metadata\n   * is returned.\n   * @param {*} [defaultValue] - default value returned in case a value was\n   * not found for the path\n   * @return {*}\n   */\n  value(path, defaultValue=undefined){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    return this[_collection].query(Metadata._resolvePath(path), defaultValue);\n  }\n\n  /**\n   * Sets a value to the metadata.\n   *\n   * @param {string} path - path about where the value should be stored under the metadata\n   * (the levels must be separated by '.')\n   * @param {*} value - value that is going to be stored under the collection\n   * @param {boolean} [merge=true] - this option is used to decide in case of the\n   * last level is already existing under the collection, if the value should be\n   * either merged (default) or overridden.\n   */\n  setValue(path, value, merge=true){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    this[_collection].insert(Metadata._resolvePath(path), value, merge);\n  }\n\n  /**\n   * Returns a list of the root levels under the metadata\n   *\n   * @return {Array<string>}\n   */\n  root(){\n    return this[_collection].root();\n  }\n\n  /**\n   * register an option variable under metadata\n   *\n   * The value of the variable can contain other pre-defined option variables,\n   * for instance:\n   * ```\n   * Mebo.Metadata.registerOptionVar('$myVar', '$otherVar.data')\n   * ```\n   *\n   * @param {string} name - name of the variable\n   * @param {string} value - value for the variable\n   */\n  static registerOptionVar(name, value){\n    assert(TypeCheck.isString(name), 'name needs to be defined as string');\n    assert(TypeCheck.isString(value), 'value needs to be defined as string');\n    assert((/^([\\w_\\$\\.\\-])+$/gi).test(value), `Illegal characters found variable (${name}) value: ${value}`); // eslint-disable-line no-useless-escape\n\n    this._validateOptionVarName(name);\n\n    // flushing cache\n    this._cachedOptionVariables = {};\n\n    // assigning variable\n    this._optionVariables[name] = value;\n  }\n\n  /**\n   * Returns the value for an option variable\n   *\n   * for instance:\n   * ```\n   * const myVariableValue = Mebo.Metadata.optionVar('$myVariable');\n   * console.log(myVariableValue)\n   * ```\n   *\n   * @param {string} name - name of the variable\n   * @param {boolean} [processValue=true] - process any variables that may be\n   * defined as part of the value\n   * @return {string}\n   *\n   * @throws {Error} throws an error if the var name is undefined\n   * under the metadata.\n   */\n  static optionVar(name, processValue=true){\n\n    this._validateOptionVarName(name);\n    if (!(name in this._optionVariables)){\n      throw new Error(`Option variable ${name} is undefined`);\n    }\n\n    if (processValue){\n      return this._resolveOptionVar(name);\n    }\n\n    return this._optionVariables[name];\n  }\n\n  /**\n   * Returns a boolean telling if the variable name is defined\n   *\n   * @param {string} name - variable name\n   * @return {boolean}\n   */\n  static hasOptionVar(name){\n    this._validateOptionVarName(name);\n\n    return (name in this._optionVariables);\n  }\n\n  /**\n   * Returns a list of the registered variable names under the metadata\n   *\n   * @return {Array<string>}\n   */\n  static registeredOptionVars(){\n    return Object.keys(this._optionVariables);\n  }\n\n  /**\n   * Returns the path resolved by processing any variables that may\n   * be defined as part of the path\n   *\n   * @param {string} path - path to be resolved\n   * @return {string}\n   */\n  static _resolvePath(path){\n\n    // if the path contains variables lets process it\n    if (path.indexOf('$') !== -1){\n      const processedPath = [];\n      for (const part of path.split('.')){\n        if (part.startsWith('$')){\n          processedPath.push(Metadata.optionVar(part));\n        }\n        else{\n          processedPath.push(part);\n        }\n      }\n\n      // processed path\n      return processedPath.join('.');\n    }\n\n    return path;\n  }\n\n  /**\n   * Returns the value of the variable by processing any variables\n   * that may be defined as part of the value\n   *\n   * @param {string} name - variable name\n   * @param {string} [rootName] - root variable name used to report the origin\n   * of the circular reference error\n   * @param {number} [depth=0] - deep used to identify max recursion caused\n   * by circular references\n   * @return {string}\n   * @private\n   */\n  static _resolveOptionVar(name, rootName, depth=0){\n\n    // detecting circular references\n    if (depth >= this._maxDepth){\n      const error = new Error(`Circular reference detected while processing the value for $${rootName}`);\n\n      // processing the stack of the error to get rid of the duplicated entries\n      // caused by the recursion (we don't need to show 1000+ lines of the same\n      // thing, the error explanation should be good enough)\n      const stackContents = error.stack.split('\\n');\n      error.stack = stackContents.slice(0, 2).concat(stackContents.slice(this._maxDepth + 1)).join('\\n');\n      throw error;\n    }\n\n    // processing value\n    const rawValue = this._optionVariables[name];\n\n    // in case the value is not under the cache, lets process it\n    if (!(name in this._cachedOptionVariables)){\n\n      // checking if the value contains any variable\n      let processedValue = rawValue;\n      if (rawValue.indexOf('$') !== -1){\n\n        // splitting the levels of the value that are separated by '.'\n        const processedValueParts = [];\n        for (const part of rawValue.split('.')){\n          let processedPartValue;\n\n          // in case of a variable\n          if (part.startsWith('$')){\n\n            this._validateOptionVarName(part);\n            // processing variable value\n            processedPartValue = this._resolveOptionVar(part, rootName || name, depth + 1);\n          }\n          // otherwise just use the part without any processing\n          else{\n            processedPartValue = part;\n          }\n          processedValueParts.push(processedPartValue);\n        }\n\n        // building back the structure of the value\n        processedValue = processedValueParts.join('.');\n      }\n\n      // adding processed value to the cache\n      this._cachedOptionVariables[name] = processedValue;\n    }\n\n    // returning value from cache\n    return this._cachedOptionVariables[name];\n  }\n\n  /**\n   * Check if the variable is defined using the proper syntax, otherwise in case\n   * of any issues an exception is raised\n   *\n   * @param {string} name - variable name\n   * @private\n   */\n  static _validateOptionVarName(name){\n    assert(TypeCheck.isString(name), 'name needs to be a string');\n\n    // check if variable name starts with $\n    if (!name.startsWith('$')){\n      throw new Error(`Option variable (${name}) needs to start with: $`);\n    }\n\n    // checking if variable is empty\n    const cleanVarName = name.slice(1);\n    if (!cleanVarName.length){\n      throw new Error('Option variable cannot be empty');\n    }\n\n    // checking for invalid syntax\n    else if (!(/^([\\w_])+$/gi).test(cleanVarName)){\n      throw new Error(`Option variable (${name}) contains invalid characters`);\n    }\n  }\n\n  static _optionVariables = {};\n\n  static _cachedOptionVariables = {};\n\n  static _maxDepth = 1000;\n}\n\nmodule.exports = Metadata;\n",
     "static": true,
     "longname": "src/Metadata.js",
     "access": null,
@@ -11260,7 +11260,7 @@
     "export": true,
     "importPath": "mebo/src/Metadata.js",
     "importStyle": "Metadata",
-    "description": "Metadata provides a way for actions ({@link Action}) to control about how a\nhandler should perform the reading ({@link Reader}) and writing\n({@link Writer}) operations. Therefore, making possible handlers to perform\ndifferently per action basis.\n\nThis is done by defining {@link Reader} & {@link Writer} options through\nthe metadata. By doing that the options are passed from the action to the\nhandler during the handler's execution ({@link Handler.runAction}).\n\nYou can define options by either using the full option location or using\noption variables:\n\n**Full option location:**\nUses a convention interpreted by the {@link Handler.metadata} to describe\nwhere the option is localized:\n```\nhandler.<HANDLER_NAME>.<OPERATION>Options.<OPTION_NAME>\n```\n\nExample:\n```\nclass MyAction extends Mebo.Action{\n   _perform(data){\n\n     // location (not recommended, see option var)\n     this.setMeta('handler.web.writeOptions.headers', {\n       someOption: 'foo',\n     });\n\n     // ...\n   }\n}\n```\n\n**Option var (recommended):**\nEliminates the need of using convoluted long names to define the options by\nsimply using a variable that represents a full option location:\n\n```\nclass MyAction extends Mebo.Action{\n   _perform(data){\n\n     // defining a custom header by using the `$webHeaders` variable, rather\n     // than the full option location (`handler.web.writeOptions.headers`)\n     this.setMeta('$webHeaders', {\n       someOption: 'foo',\n     });\n\n     // ...\n   }\n}\n```\n\nThe complete list of the available option variables can be found bellow, it's\nseparated by handler type. Also, new variables can be assigned through\n{@link Metadata.registerOptionVar}.\n\n<h2>Web Variables</h2>\n\nVariable name | Value | Value used by\n--- | --- | ---\n$web | `handler.web` |\n$webUploadDirectory | `$web.readOptions.uploadDirectory` | {@link WebRequest}\n$webUploadPreserveName | `$web.readOptions.uploadPreserveName` | {@link WebRequest}\n$webUploadMaxFileSize | `$web.readOptions.uploadMaxFileSize` | {@link WebRequest}\n$webMaxFields | `$web.readOptions.maxFields` | {@link WebRequest}\n$webMaxFieldsSize | `$web.readOptions.maxFieldsSize` | {@link WebRequest}\n$webHeaders | `$web.writeOptions.headers` | {@link WebResponse}\n$webHeadersOnly | `$web.writeOptions.headersOnly`| {@link WebResponse}\n$webResult | `$web.writeOptions.result`| {@link WebResponse}\n$webRoot | `$web.writeOptions.root`| {@link WebResponse}\n$webStatus | `$web.writeOptions.status`| {@link WebResponse}\n$webResultLabel | `$web.writeOptions.resultLabel`| {@link WebResponse}\n\n<h2>Cli Variables</h2>\n\nVariable name | Value | Value used by\n--- | --- | ---\n$cli` | `handler.cli` |\n$cliDescription` | `$cli.readOptions.description` | {@link CliArgs}\n$cliResult` | `$cli.writeOptions.result` | {@link CliOutput}",
+    "description": "Metadata provides a way for actions ({@link Action}) to control about how a\nhandler should perform the reading ({@link Reader}) and writing\n({@link Writer}) operations. Therefore, making possible handlers to perform\ndifferently per action basis.\n\nThis is done by defining {@link Reader} & {@link Writer} options through\nthe metadata. By doing that the options are passed from the action to the\nhandler during the handler's execution ({@link Handler.runAction}).\n\nYou can define options by either using the full option location or using\noption variables:\n\n**Full option location:**\nUses a convention interpreted by the {@link Handler.metadata} to describe\nwhere the option is localized:\n```\nhandler.<HANDLER_NAME>.<OPERATION>Options.<OPTION_NAME>\n```\n\nExample:\n```\nclass MyAction extends Mebo.Action{\n   _perform(data){\n\n     // location (not recommended, see option var)\n     this.setMeta('handler.web.writeOptions.headers', {\n       someOption: 'foo',\n     });\n\n     // ...\n   }\n}\n```\n\n**Option var (recommended):**\nEliminates the need of using convoluted long names to define the options by\nsimply using a variable that represents a full option location:\n\n```\nclass MyAction extends Mebo.Action{\n   _perform(data){\n\n     // defining a custom header by using the `$webHeaders` variable, rather\n     // than the full option location (`handler.web.writeOptions.headers`)\n     this.setMeta('$webHeaders', {\n       someOption: 'foo',\n     });\n\n     // ...\n   }\n}\n```\n\nThe complete list of the available option variables can be found bellow, it's\nseparated by handler type. Also, new variables can be assigned through\n{@link Metadata.registerOptionVar}.\n\n<h2>Web Variables</h2>\n\nVariable name | Value | Value used by\n--- | --- | ---\n$web | `handler.web` |\n$webUploadDirectory | `$web.readOptions.uploadDirectory` | {@link WebRequest}\n$webUploadPreserveName | `$web.readOptions.uploadPreserveName` | {@link WebRequest}\n$webUploadMaxFileSize | `$web.readOptions.uploadMaxFileSize` | {@link WebRequest}\n$webMaxFields | `$web.readOptions.maxFields` | {@link WebRequest}\n$webMaxFieldsSize | `$web.readOptions.maxFieldsSize` | {@link WebRequest}\n$webHeaders | `$web.writeOptions.headers` | {@link WebResponse}\n$webHeadersOnly | `$web.writeOptions.headersOnly`| {@link WebResponse}\n$webResult | `$web.writeOptions.result`| {@link WebResponse}\n$webRoot | `$web.writeOptions.root`| {@link WebResponse}\n$webStatus | `$web.writeOptions.status`| {@link WebResponse}\n$webResultLabel | `$web.writeOptions.resultLabel`| {@link WebResponse}\n\n<h2>Cli Variables</h2>\n\nVariable name | Value | Value used by\n--- | --- | ---\n$cli | `handler.cli` |\n$cliDescription | `$cli.readOptions.description` | {@link CliArgs}\n$cliResult | `$cli.writeOptions.result` | {@link CliOutput}",
     "lineNumber": 93,
     "interface": false
   },
@@ -11764,61 +11764,6 @@
   {
     "__docId__": 430,
     "kind": "file",
-    "name": "src/Outputs/Buf.js",
-    "content": "",
-    "static": true,
-    "longname": "src/Outputs/Buf.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 431,
-    "kind": "file",
-    "name": "src/Outputs/None.js",
-    "content": "",
-    "static": true,
-    "longname": "src/Outputs/None.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 432,
-    "kind": "file",
-    "name": "src/Outputs/Numeric.js",
-    "content": "",
-    "static": true,
-    "longname": "src/Outputs/Numeric.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 433,
-    "kind": "file",
-    "name": "src/Outputs/Object.js",
-    "content": "",
-    "static": true,
-    "longname": "src/Outputs/Object.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 434,
-    "kind": "file",
-    "name": "src/Outputs/Text.js",
-    "content": "",
-    "static": true,
-    "longname": "src/Outputs/Text.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 435,
-    "kind": "file",
     "name": "src/Reader.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst Action = require('./Action');\nconst Utils = require('./Utils');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _action = Symbol('action');\nconst _options = Symbol('options');\nconst _result = Symbol('result');\n\n\n/**\n * A reader is used by the handler during the execution ({@link Handler.runAction})\n * to query {@link Input} and {@link Session} information that is going be used\n * during the execution of the action.\n *\n * In case of new implements it's expected to implement the {@link Reader._perform}.\n *\n * When a value is found for an input it's decoded using {@link Input.parseValue}\n * where each input implementation has its own way of parsing the serialized data,\n * to find out about how a value is serialized for an specific input type you could simply\n * set an arbitrary value to an input then query it back through\n * {@link Input.serializeValue}. The reference bellow shows the basic serialization\n * for the inputs blundled with Mebo:\n *\n * Input Type | Scalar Serialization | Vector Serialization (compatible with JSON)\n * --- | --- | ---\n * {@link Text} | `'value'` | `'[\"valueA\",\"valueB\"]'`\n * {@link FilePath} | `'/tmp/a.txt'` | `'[\"/tmp/a.txt\",\"/tmp/b.txt\"]'`\n * {@link Bool} | `'true`' or `'1'` | `'[true,false]'` or `'[1,0]'`\n * {@link Numeric} | `'20'` | `'[20,30]'`\n * {@link Email} | `'test@email.com'` | `'[\"test@email.com\",\"test2@email.com\"]'`\n * {@link Ip} | `'192.168.0.1'` | `'[\"192.168.0.1\",\"192.168.0.2\"]'`\n * {@link Timestamp} | `'2017-02-02T22:26:30.431Z'` | \\\n * `'[\"2017-02-02T22:26:30.431Z\",\"2017-02-02T22:27:19.066Z\"]'`\n * {@link Url} | `'#http#://www.google.com'` | \\\n * `'[\"#http#://www.google.com\",\"#http#://www.wikipedia.com\"]'`\n * {@link Version} | `'10.1.1'` | `'[\"10.1.1\",\"10.2\"]'`\n * {@link Buf} | `'aGVsbG8='` | `'[\"aGVsbG8=\",\"d29ybGQ=\"]'`\n * {@link Hex} | `'ffff00'` | `'[\"ffff00\",\"ff\"]'`\n * {@link Hash} | `'d65709ab'` | `'[\"d65709ab\",\"b94d6fe4\"]'`\n * {@link UUID} | `'075054e0-810a-11e6-8c1d-e5fb28c699ca'` | \\\n * `'[\"075054e0-810a-11e6-8c1d-e5fb28c699ca\",\"98e631d3-6255-402a-88bd-66056e1ca9df\"]'`\n *\n * <br/>**Options:**\n * Custom options can be assigned to readers ({@link Reader.setOption}). They are\n * passed from the handler to the reader during the handler's execution\n * ({@link Handler.runAction}).\n *\n * ```\n * const myHandler = Mebo.Handler.create('someHandler');\n *\n * // setting reading options\n * myHandler.runAction('myAction', {\n *  someOption: 10,\n * });\n * ```\n *\n * When an action is executed through a handler it can define options via\n * the {@link Metadata} support. Detailed information about that can be found\n * at {@link Metadata}:\n *\n * ```\n * class MyAction extends Mebo.Action{\n *    constructor(){\n *      super();\n *\n *      // defining a custom reading option\n *      this.setMeta('$myOption', {\n *        someOption: 10,\n *      });\n *\n *      // ...\n *    }\n * }\n * Mebo.Action.register(MyAction, 'myAction');\n * ```\n *\n * **Hiding inputs from readers:**\n * A reader only sees inputs that are capable of serialization\n * ({@link Input.isSerializable}) or visible inputs. Therefore, any input assigned\n * with the property `hidden` is not visible by readers, for instance:\n *\n * ```\n * class Example extends Mebo.Action{\n *   constructor(){\n *     super();\n *     this.createInput('readerCantSeeMe: numeric', {hidden: true});\n *     this.createInput('readerSeeMe: numeric');\n *   }\n * }\n * ```\n */\nclass Reader{\n\n  /**\n   * Creates a reader.\n   *\n   * @param {Action} action - action used for the querying the values\n   */\n  constructor(action){\n\n    // note: currently reader & writer are completely separated entities that don't\n    // have a common parent class (aka HandlerOperation). The reason for\n    // that is currently they are so distinctive from each other that the only member in\n    // common is the option. In case they start to share more characteristics in common\n    // then a base class should be created.\n\n    this._setAction(action);\n    this[_result] = null;\n    this[_options] = new Utils.HierarchicalCollection();\n  }\n\n  /**\n   * Returns the action associated with the reader.\n   *\n   * @return {Action}\n   */\n  action(){\n    return this[_action];\n  }\n\n  /**\n   * Returns an option\n   *\n   * @param {string} path - path about where the option is localized (the levels\n   * must be separated by '.'). In case of an empty string it returns the\n   * entire options\n   * @param {*} [defaultValue] - default value returned in case a value was\n   * not found for the path\n   * @return {*}\n   */\n  option(path, defaultValue=undefined){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n    return this[_options].query(path, defaultValue);\n  }\n\n  /**\n   * Sets a value under the options\n   *\n   * @param {string} path - path about where the option should be stored under\n   * the options (the levels must be separated by '.')\n   * @param {*} value - value that is going to be stored under the collection\n   * @param {boolean} [merge=true] - this option is used to decide in case of the\n   * last level is already existing under the collection, if the value should be\n   * either merged (default) or overridden.\n   */\n  setOption(path, value, merge=true){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    this[_options].insert(path, value, merge);\n  }\n\n  /**\n   * Returns a list of valid input names that should be used for the parsing.\n   * This avoids hidden inputs to get exposed in the parsing.\n   *\n   * @return {Array<string>}\n   */\n  validInputNames(){\n\n    const inputs = [];\n    for (const inputName of this[_action].inputNames()){\n      const input = this[_action].input(inputName);\n\n      if (input.isSerializable() && !input.property('hidden')){\n        inputs.push(input);\n      }\n    }\n\n    return inputs;\n  }\n\n  /**\n   * Reads the input values and returns it through a plain object.\n   *\n   * @return {Promise<object>}\n   */\n  async inputValues(){\n\n    if (!this[_result]){\n      await this._parse();\n    }\n\n    return this[_result];\n  }\n\n  /**\n   * Reads the autofill information and returns it through a plain object.\n   *\n   * If the autofill information is already assigned under autofill ({@link Action.session})\n   * then that information is skipped otherwise it adds the parsed information the result.\n   *\n   * @return {Promise<Object>}\n   */\n  async autofillValues(){\n    if (!this[_result]){\n      await this._parse();\n    }\n\n    const result = Object.create(null);\n    const action = this.action();\n    const session = action.session();\n    for (const inputName in this[_result]){\n\n      const autofillName = action.input(inputName).property('autofill');\n\n      if (autofillName){\n\n        // if the input name is already under autofill (assigned previously\n        // then not overriding them)\n        if (session && session.hasAutofill(autofillName)){\n          continue;\n        }\n        result[autofillName] = this[_result][inputName];\n      }\n    }\n\n    return result;\n  }\n\n  /**\n   * This method should be re-implemented by derived classes to perform the handler parsing.\n   *\n   * It should return a plain object containing the input name and the value for that.\n   * Where any input value from either String or Array types are considered valid values that\n   * are later ({@link Reader.inputValues}, {@link Reader.autofillValues})\n   * used to parse the value of the input ({@link Input.parseValue}), otherwise the value\n   * is ignored.\n   *\n   * Only return the ones that were found by the parsing. Also, in case of any error\n   * during the parsing then an exception should be raised.\n   *\n   * @param {Array<Input>} inputList - Valid list of inputs that should be used for\n   * the parsing\n   * @return {Promise<Object>}\n   *\n   * @protected\n   */\n  _perform(inputList){\n    return Promise.reject(new Error('Not implemented'));\n  }\n\n  /**\n   * Sets the action associated with the reader.\n   *\n   * @param {Action} value - action instance\n   */\n  _setAction(value){\n    assert(value instanceof Action, 'Invalid action');\n\n    this[_action] = value;\n  }\n\n  /**\n   * Auxiliary method that triggers the parsing if needed (in case it has not been\n   * triggered yet).\n   *\n   * @return {Promise}\n   * @private\n   */\n  async _parse(){\n    if (!this._parsed){\n      this[_result] = await this._perform(this.validInputNames());\n      const action = this.action();\n\n      // decoding the values if needed\n      for (const inputName in this[_result]){\n        const input = action.input(inputName);\n        const value = this[_result][inputName];\n\n        if (TypeCheck.isString(value)){\n          this[_result][inputName] = input.parseValue(value, false);\n        }\n        else if (TypeCheck.isList(value)){\n          // currently it's converting any array to a JSON string which is supported\n          // by the input parsing. Lets keep an eye on this for now, since it may cause\n          // an overhead\n          this[_result][inputName] = input.parseValue(JSON.stringify(value), false);\n        }\n      }\n    }\n\n    return this[_result];\n  }\n}\n\nmodule.exports = Reader;\n",
     "static": true,
@@ -11828,7 +11773,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 436,
+    "__docId__": 431,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Reader.js",
@@ -11854,7 +11799,7 @@
     }
   },
   {
-    "__docId__": 437,
+    "__docId__": 432,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Reader.js",
@@ -11880,7 +11825,7 @@
     }
   },
   {
-    "__docId__": 438,
+    "__docId__": 433,
     "kind": "variable",
     "name": "__import_module__Action",
     "memberof": "src/Reader.js",
@@ -11906,7 +11851,7 @@
     }
   },
   {
-    "__docId__": 439,
+    "__docId__": 434,
     "kind": "variable",
     "name": "__import_module__Utils",
     "memberof": "src/Reader.js",
@@ -11932,7 +11877,7 @@
     }
   },
   {
-    "__docId__": 440,
+    "__docId__": 435,
     "kind": "variable",
     "name": "_action",
     "memberof": "src/Reader.js",
@@ -11958,7 +11903,7 @@
     }
   },
   {
-    "__docId__": 441,
+    "__docId__": 436,
     "kind": "variable",
     "name": "_options",
     "memberof": "src/Reader.js",
@@ -11984,7 +11929,7 @@
     }
   },
   {
-    "__docId__": 442,
+    "__docId__": 437,
     "kind": "variable",
     "name": "_result",
     "memberof": "src/Reader.js",
@@ -12010,7 +11955,7 @@
     }
   },
   {
-    "__docId__": 443,
+    "__docId__": 438,
     "kind": "class",
     "name": "Reader",
     "memberof": "src/Reader.js",
@@ -12025,7 +11970,7 @@
     "interface": false
   },
   {
-    "__docId__": 444,
+    "__docId__": 439,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Reader.js~Reader",
@@ -12050,7 +11995,7 @@
     ]
   },
   {
-    "__docId__": 445,
+    "__docId__": 440,
     "kind": "member",
     "name": "[_result]",
     "memberof": "src/Reader.js~Reader",
@@ -12073,7 +12018,7 @@
     }
   },
   {
-    "__docId__": 446,
+    "__docId__": 441,
     "kind": "member",
     "name": "[_options]",
     "memberof": "src/Reader.js~Reader",
@@ -12096,7 +12041,7 @@
     }
   },
   {
-    "__docId__": 447,
+    "__docId__": 442,
     "kind": "method",
     "name": "action",
     "memberof": "src/Reader.js~Reader",
@@ -12118,7 +12063,7 @@
     }
   },
   {
-    "__docId__": 448,
+    "__docId__": 443,
     "kind": "method",
     "name": "option",
     "memberof": "src/Reader.js~Reader",
@@ -12161,7 +12106,7 @@
     }
   },
   {
-    "__docId__": 449,
+    "__docId__": 444,
     "kind": "method",
     "name": "setOption",
     "memberof": "src/Reader.js~Reader",
@@ -12208,7 +12153,7 @@
     ]
   },
   {
-    "__docId__": 450,
+    "__docId__": 445,
     "kind": "method",
     "name": "validInputNames",
     "memberof": "src/Reader.js~Reader",
@@ -12230,7 +12175,7 @@
     }
   },
   {
-    "__docId__": 451,
+    "__docId__": 446,
     "kind": "method",
     "name": "inputValues",
     "memberof": "src/Reader.js~Reader",
@@ -12252,7 +12197,7 @@
     }
   },
   {
-    "__docId__": 452,
+    "__docId__": 447,
     "kind": "method",
     "name": "autofillValues",
     "memberof": "src/Reader.js~Reader",
@@ -12274,7 +12219,7 @@
     }
   },
   {
-    "__docId__": 453,
+    "__docId__": 448,
     "kind": "method",
     "name": "_perform",
     "memberof": "src/Reader.js~Reader",
@@ -12307,7 +12252,7 @@
     }
   },
   {
-    "__docId__": 454,
+    "__docId__": 449,
     "kind": "method",
     "name": "_setAction",
     "memberof": "src/Reader.js~Reader",
@@ -12332,7 +12277,7 @@
     ]
   },
   {
-    "__docId__": 455,
+    "__docId__": 450,
     "kind": "member",
     "name": "[_action]",
     "memberof": "src/Reader.js~Reader",
@@ -12355,7 +12300,7 @@
     }
   },
   {
-    "__docId__": 456,
+    "__docId__": 451,
     "kind": "method",
     "name": "_parse",
     "memberof": "src/Reader.js~Reader",
@@ -12377,7 +12322,7 @@
     }
   },
   {
-    "__docId__": 457,
+    "__docId__": 452,
     "kind": "member",
     "name": "[_result]",
     "memberof": "src/Reader.js~Reader",
@@ -12400,7 +12345,7 @@
     }
   },
   {
-    "__docId__": 458,
+    "__docId__": 453,
     "kind": "file",
     "name": "src/Readers/CliArgs.js",
     "content": "const path = require('path');\nconst neodoc = require('neodoc');\nconst assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst Inputs = require('../Inputs');\nconst Settings = require('../Settings');\nconst Handler = require('../Handler');\nconst Reader = require('../Reader');\n\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _args = Symbol('args');\n\n/**\n * command-line arguments reader.\n *\n * This reader is used by the {@link Cli} handler. It supports most of\n * the docopt specification. Also, if the reader finds an error it's capable of\n * reporting it in user-friendly way. This is used to report `-h/--help` and\n * missing arguments.\n *\n * All serializable inputs are supported by this handler, they can be displayed\n * either as `argument` or `option` element. This is done by setting the input\n * property `elementType` (option is the default one).\n *\n * You can define the description displayed in the help of the element by\n * setting the input property `description`.\n *\n * The `option` elements support `short option` by setting the input property\n * `shortOption`.\n *\n * In order to accommodate how vector values are represented in a command-line\n * interface, this reader expects vector elements to be separated by\n * the space character.\n *\n * Any {@link Bool} input specified as an `option` element behaves in a\n * special mode, since it's treated as a toogle option in command-line.\n * Therefore if the Bool input is assigned with a `true` then the option\n * gets the prefix `no-`.\n *\n * When a value is found for the input, it gets loaded via {@link Input.parseValue}\n * where each input implementation has its own way of parsing the serialized data,\n * to find out about how a value is serialized for an specific input type you could simply\n * set an arbitrary value to the input you are interested then query it back through\n * {@link Input.serializeValue}. Also, Mebo provides a reference datasheet\n * about the serialization forms for the inputs bundled with it, found at {@link Reader}.\n *\n * <h2>Options Summary</h2>\n *\n * Option Name | Description | Default Value\n * --- | --- | :---:\n * description | description about the program displayed at the header of the help \\\n * | ::none::\n * parsingErrorStatusCode | Custom error status code used to identify when the \\\n * app args could not be parsed | `700`\n *\n * @see http://docopt.org\n */\nclass CliArgs extends Reader{\n\n  /**\n   * Creates an args reader\n   *\n   * @param {Action} action - action that should be used by the reader\n   * @param {Array<string>} argv - list of arguments that should be used by\n   * the reader\n   */\n  constructor(action, argv){\n    super(action);\n\n    this._setArgs(argv);\n\n    // default options\n    this.setOption('description', '');\n    this.setOption('parsingErrorStatusCode', 700);\n  }\n\n  /**\n   * Returns a list of args used by the reader, by default it uses\n   * `process.argv`.\n   *\n   * @return {Array<string>}\n   */\n  args(){\n    return this[_args];\n  }\n\n  /**\n   * Returns the executable name based on the args\n   *\n   * @return {string}\n   */\n  executableName(){\n    return path.basename(this.args()[1]);\n  }\n\n  /**\n   * Implements the reader\n   *\n   * @param {Array<Input>} inputList - Valid list of inputs that should be used for\n   * the parsing\n   * @return {Promise<Object>}\n   * @protected\n   */\n  async _perform(inputList){\n    const helpElements = await this.constructor._helpElements(inputList);\n    const helpString = await this._helpInterface(helpElements);\n\n    let parsedArgs = Object.create(null);\n    // it thrown an exception if something went wrong (like missing a required parameter)\n    try{\n      parsedArgs = neodoc.run(helpString, {\n        argv: (this.args().includes('--help') || this.args().includes('-h')) ? ['-h'] : this.args().slice(2),\n        dontExit: true,\n        smartOptions: true,\n        repeatableOptions: true,\n        version: Settings.get('apiVersion'),\n      });\n    }\n    catch(err){\n      // adding a custom status code for the parsing error\n      // the error does not come as an instance of error, for this reason\n      // creating a new error and copying the contents\n      const error = Object.assign(new Error(), err);\n      error.status = this.option('parsingErrorStatusCode');\n      throw error;\n    }\n\n    // however when the user asks for the help it does not raises an exception\n    if ('.help' in parsedArgs){\n      const error = new Error(parsedArgs['.help']);\n      error.status = this.option('parsingErrorStatusCode');\n      throw error;\n    }\n\n    for (const input of inputList){\n      if (input instanceof Inputs.Bool && !input.isVector()){\n        input.setValue(Boolean(input.value()));\n      }\n    }\n\n    const alreadyParsed = [];\n    const result = Object.create(null);\n\n    // collecting the input values\n    for (const elementName in parsedArgs){\n      let foundInputName;\n\n      // finding the input name\n      for (const elementType in helpElements){\n        for (const inputName in helpElements[elementType]){\n          const inputData = helpElements[elementType][inputName];\n          if (inputData.usageDisplay.split('=')[0] === elementName || inputData.shortOption === elementName){\n            foundInputName = inputName;\n            break;\n          }\n        }\n\n        if (foundInputName){\n          break;\n        }\n      }\n\n      // querying the input value\n      const inputNames = inputList.map(x => x.name());\n      if (foundInputName && !alreadyParsed.includes(foundInputName)){\n        alreadyParsed.push(foundInputName);\n\n        const input = inputList[inputNames.indexOf(foundInputName)];\n\n        let value;\n        if (TypeCheck.isBool(parsedArgs[elementName]) && !input.isVector()){\n          value = String(!input.value());\n        }\n        else{\n          if (input.isVector() && !TypeCheck.isList(parsedArgs[elementName])){\n            value = [parsedArgs[elementName]];\n          }\n          else{\n            value = parsedArgs[elementName];\n          }\n        }\n        result[foundInputName] = value;\n      }\n    }\n\n    return result;\n  }\n\n  /**\n   * Sets a list of argument values used by the reader. It must follow\n   * the same pattern found at `process.argv`\n   *\n   * @param {Array<string>} value - argument list\n   * @private\n   */\n  _setArgs(value){\n    assert(TypeCheck.isList(value), 'value needs to be a list');\n    assert(value.length >= 2, 'missing first argument process.execPath and second argument javaScript file being executed');\n\n    this[_args] = value.slice(0);\n  }\n\n  /**\n   * Returns an object containing the elements that can be used by the command\n   *\n   * @param {Array<Input>} inputList - list of input that should be used to build\n   * query the help\n   * @return {Object}\n   * @private\n   */\n  static async _helpElements(inputList){\n\n    const elements = {\n      argument: {},\n      option: {},\n    };\n\n    // building inputs\n    const addedArgs = [];\n    const descriptions = await Promise.all(inputList.map(x => this._computeInfoDisplay(x)));\n\n    let currentIndex = 0;\n    for (const input of inputList){\n\n      const inputName = input.name();\n      let argName = this._camelCaseToArgument(inputName);\n\n      // in case of a boolean input that is true by default adding\n      // the `no` prefix to the input name automatically. For boolean inputs they\n      // work as toggles when represented through the command line\n      if (input instanceof Inputs.Bool && !input.isVector() && input.value()){\n        argName = `no-${argName}`;\n      }\n\n      assert(!addedArgs.includes(argName), `Ambiguous argument name (${argName}), used multiple times!`);\n      addedArgs.push(argName);\n\n      const elementType = input.property('elementType');\n\n      const inputData = Object.create(null);\n      inputData.description = descriptions[currentIndex];\n      inputData.elementDisplay = this._elementDisplay(argName, input);\n      inputData.usageDisplay = this._usageDisplay(argName, input);\n      inputData.required = ((input.isRequired() && input.isEmpty()) && !(input instanceof Inputs.Bool && !input.isVector()));\n      inputData.vector = input.isVector();\n\n      if (elementType === 'option'){\n        inputData.shortOptionDisplay = this._shortOptionDisplay(input);\n        inputData.shortOption = this._shortOption(input);\n      }\n\n      elements[elementType][inputName] = inputData;\n\n      currentIndex++;\n    }\n\n    return elements;\n  }\n\n  /**\n   * Returns the help interface displayed when `-h\\--help` is required\n   *\n   * @param {Object} elements - elements holder object\n   * @return {string}\n   * @private\n   */\n  _helpInterface(elements){\n    let output = '';\n    output += this._buildDescription(elements);\n    output += this._buildUsage(elements);\n    output += this.constructor._buildColumns(elements);\n\n    return output;\n  }\n\n  /**\n   * Returns a string containing the full assembled info for the input\n   *\n   * @param {Input} input - input that should be used\n   * @return {Promise<string>}\n   * @private\n   */\n  static async _computeInfoDisplay(input){\n\n    const inputTypeName = input.property('type');\n\n    // adding the value type to the argument\n    const isBoolInput = input instanceof Inputs.Bool;\n    let description = input.property('description') || '';\n\n    if ((isBoolInput && input.isVector()) || !isBoolInput){\n\n      // adding the default value as part of the description\n      if (!input.isEmpty()){\n        let serializedValue = await input.serializeValue();\n        serializedValue = (input.isVector()) ? JSON.parse(serializedValue) : [serializedValue];\n        const defaultValue = [];\n\n        for (const value of serializedValue){\n\n          if (TypeCheck.isString(value) && Number.isNaN(Number(value))){\n            const scapedValue = value.replace(new RegExp('\"', 'g'), '\\\\\"');\n            defaultValue.push(`\"${scapedValue}\"`);\n          }\n          else{\n            defaultValue.push(value);\n          }\n        }\n\n        if (description.length){\n          description += ' ';\n        }\n        description += `[default: ${defaultValue.join(' ')}]`;\n      }\n    }\n\n    const inputTypeDisplay = input.isVector() ? `${inputTypeName}[]` : inputTypeName;\n\n    if (description.length){\n      description += ' ';\n    }\n    description += `(${inputTypeDisplay} type).`;\n\n    return description;\n  }\n\n  /**\n   * Returns a string containing the full element display for either an option\n   * or argument\n   *\n   * @param {string} name - element given name\n   * @param {Input} input - input that should be used\n   * @return {string}\n   * @private\n   */\n  static _elementDisplay(name, input){\n\n    let result = '';\n\n    if (input.property('elementType') === 'option'){\n      const shortOption = this._shortOptionDisplay(input);\n\n      const isBoolInput = input instanceof Inputs.Bool;\n      if ((isBoolInput && input.isVector()) || !isBoolInput){\n\n        // adding short option\n        if (shortOption){\n          result += shortOption;\n\n          if (input.isVector()){\n            result += '...';\n          }\n\n          result += ', ';\n        }\n\n        result += this._usageDisplay(name, input);\n\n        if (input.isVector()){\n          result += '...';\n        }\n      }\n      else{\n        if (shortOption){\n          result += shortOption;\n          result += ', ';\n        }\n\n        result += this._usageDisplay(name, input);\n      }\n    }\n    else{\n      result = name;\n    }\n\n    return result;\n  }\n\n  /**\n   * Returns a string containing the usage display for either\n   * the option or argument\n   *\n   * @param {string} name - how the element should be called\n   * @param {Input} input - input that should be used\n   * @return {string}\n   * @private\n   */\n  static _usageDisplay(name, input){\n    let result = '';\n\n    if (input.property('elementType') === 'option'){\n      // adding long option\n      result = `--${name}`;\n\n      const isBoolInput = input instanceof Inputs.Bool;\n      if ((isBoolInput && input.isVector()) || !isBoolInput){\n        result = `${result}=<value>`;\n      }\n    }\n    else{\n      result = `<${name}>`;\n    }\n\n    return result;\n  }\n\n  /**\n   * Returns a string containing the the short option, in case the input\n   * does not have a short option property defined then an empty string\n   * is returned instead\n   *\n   * @param {Input} input - input that should be used\n   * @return {string}\n   * @private\n   */\n  static _shortOption(input){\n    const shortOption = input.property('shortOption');\n    if (shortOption){\n      return `-${shortOption}`;\n    }\n\n    return '';\n  }\n\n  /**\n   * Returns a string containing the display of the short option,\n   * This is used when listing the element options\n   *\n   * @param {Input} input - input that should be used\n   * @return {string}\n   * @private\n   */\n  static _shortOptionDisplay(input){\n    let result = this._shortOption(input);\n    if (result.length && !(input instanceof Inputs.Bool && !input.isVector())){\n      result = `${result}=<value>`;\n    }\n\n    return result;\n  }\n\n  /**\n   * Returns a string containing the description of the command\n   *\n   * @param {Object} elements - elements holder object\n   * @return {string}\n   * @private\n   */\n  _buildDescription(elements){\n    let output = '';\n    const description = this.option('description');\n    if (description.length){\n      output += description;\n      if (!description.endsWith('.')){\n        output += '.';\n      }\n      output += '\\n\\n';\n    }\n\n    return output;\n  }\n\n  /**\n   * Builds a string containing the usage\n   *\n   * @param {Object} elements - elements holder object\n   * @return {string}\n   * @private\n   */\n  _buildUsage(elements){\n    let output = `Usage: ${this.executableName()} `;\n\n    const requiredArguments = Object.create(null);\n    const optionalArguments = Object.create(null);\n    const requiredOptions = Object.keys(elements.option).filter(x => elements.option[x].required);\n    let requiredArgumentsOrder = [];\n    let optionalArgumentsOrder = [];\n\n    if (requiredOptions.length){\n      output += requiredOptions.map(x => elements.option[x].usageDisplay).join(' ');\n      output += ' ';\n    }\n    output += '[options]';\n\n    // building arguments\n    if (Object.keys(elements.argument).length){\n      for (const inputName in elements.argument){\n        if (elements.argument[inputName].required){\n          requiredArguments[inputName] = elements.argument[inputName];\n        }\n        else{\n          optionalArguments[inputName] = elements.argument[inputName];\n        }\n      }\n\n      const requiredArgumentNames = Object.keys(requiredArguments);\n      requiredArgumentsOrder = requiredArgumentNames.filter(x => !requiredArguments[x].vector);\n      requiredArgumentsOrder = requiredArgumentsOrder.concat(requiredArgumentNames.filter(x => !requiredArgumentsOrder.includes(x)));\n\n      // first adding the required arguments\n      let hasVectorRequiredArgument = false;\n      for (const inputName of requiredArgumentsOrder){\n        output += ' ';\n        output += requiredArguments[inputName].usageDisplay;\n\n        if (requiredArguments[inputName].vector && Object.keys(optionalArguments).length === 0){\n          if (requiredArgumentsOrder.indexOf(inputName) === requiredArgumentsOrder.length - 1){\n            output += '...';\n            hasVectorRequiredArgument = true;\n          }\n        }\n      }\n\n      // then adding the optional ones\n      const optionalArgumentNames = Object.keys(optionalArguments);\n      optionalArgumentsOrder = optionalArgumentNames.filter(x => !optionalArguments[x].vector);\n      optionalArgumentsOrder = optionalArgumentsOrder.concat(optionalArgumentNames.filter(x => !optionalArgumentsOrder.includes(x)));\n\n      for (const inputName in optionalArguments){\n        output += ' [';\n        output += optionalArguments[inputName].usageDisplay;\n        output += ']';\n\n        if (optionalArguments[inputName].vector && !hasVectorRequiredArgument){\n          if (optionalArgumentsOrder.indexOf(inputName) === optionalArgumentsOrder.length - 1){\n            output += '...';\n          }\n        }\n      }\n    }\n\n    output += this._buildUsageVectorOptions(elements, requiredArgumentsOrder, requiredOptions);\n\n    return output;\n  }\n\n  /**\n   * Builds a string containing the usage for the vector options\n   *\n   * @param {Object} elements - elements holder object\n   * @param {Array<string>} argumentNames - list of argument names\n   * @param {Array<string>} requiredOptionNames - list of required option names\n   * @return {string}\n   * @private\n   */\n  _buildUsageVectorOptions(elements, argumentNames, requiredOptionNames){\n    let output = '';\n\n    // adding the usage for the vector options\n    for (const inputName in elements.option){\n\n      if (elements.option[inputName].vector){\n        output += `\\n       ${this.executableName()} `;\n\n        for (const requiredArg of argumentNames){\n          output += elements.argument[requiredArg].usageDisplay;\n          output += ' ';\n        }\n\n        output += '[options] ';\n        if (requiredOptionNames.length){\n          output += requiredOptionNames.filter(y => y !== inputName).map(x => elements.option[x].usageDisplay).join(' ');\n          output += ' ';\n        }\n\n        if (!requiredOptionNames.includes(inputName)){\n          output += '[';\n        }\n\n        output += elements.option[inputName].usageDisplay;\n        output += '...';\n\n        if (!requiredOptionNames.includes(inputName)){\n          output += ']';\n        }\n      }\n    }\n\n    return output;\n  }\n\n  /**\n   * Builds a string containing the columns displayed by the arguments and options\n   *\n   * @param {Object} elements - elements holder object\n   * @return {string}\n   * @private\n   */\n  static _buildColumns(elements){\n    let columns = '\\n';\n    const elementTypeDisplayName = Object.create(null);\n    elementTypeDisplayName.option = 'Options:';\n    elementTypeDisplayName.argument = 'Arguments:';\n\n    // figuring out the element column width\n    const elementTypeWidth = this._computeElementsWidth(elements);\n\n    for (const element in elements){\n\n      if (Object.keys(elements[element]).length){\n        columns += '\\n';\n        columns += elementTypeDisplayName[element];\n        columns += '\\n';\n\n        for (const inputName in elements[element]){\n\n          const elementData = elements[element][inputName];\n\n          // element\n          columns += '  ';\n          columns += elementData.elementDisplay;\n          columns += ' '.repeat(elementTypeWidth[element] - elementData.elementDisplay.length);\n\n          // description\n          // the second separator is actually a `hair space` char, this is necessary to separate\n          // the element from the description in neodoc\n          columns += '  ';\n          columns += elementData.description;\n          columns += '\\n';\n        }\n      }\n    }\n\n    return columns;\n  }\n\n  /**\n   * Returns a plain object containing the width for each of the element types\n   * (argument and option)\n   *\n   * @param {Object} elements - elements holder object\n   * @return {Object}\n   * @private\n   */\n  static _computeElementsWidth(elements){\n    const elementTypeWidth = Object.create(null);\n    for (const elementType in elements){\n      for (const inputName in elements[elementType]){\n        elementTypeWidth[elementType] = Math.max(elementTypeWidth[elementType] || 0,\n          elements[elementType][inputName].elementDisplay.length);\n      }\n    }\n\n    return elementTypeWidth;\n  }\n\n  /**\n   * Converts the input text from camelCase to dash-convention used\n   * in CLI applications\n   *\n   * @param {string} text - text that should be converted\n   * @return {string}\n   * @private\n   */\n  static _camelCaseToArgument(text){\n    return text.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();\n  }\n}\n\n// registering reader\nHandler.registerReader(CliArgs, 'cli');\n\nmodule.exports = CliArgs;\n",
@@ -12411,7 +12356,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 459,
+    "__docId__": 454,
     "kind": "variable",
     "name": "__import_module__path",
     "memberof": "src/Readers/CliArgs.js",
@@ -12437,7 +12382,7 @@
     }
   },
   {
-    "__docId__": 460,
+    "__docId__": 455,
     "kind": "variable",
     "name": "__import_module__neodoc",
     "memberof": "src/Readers/CliArgs.js",
@@ -12463,7 +12408,7 @@
     }
   },
   {
-    "__docId__": 461,
+    "__docId__": 456,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Readers/CliArgs.js",
@@ -12489,7 +12434,7 @@
     }
   },
   {
-    "__docId__": 462,
+    "__docId__": 457,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Readers/CliArgs.js",
@@ -12515,7 +12460,7 @@
     }
   },
   {
-    "__docId__": 463,
+    "__docId__": 458,
     "kind": "variable",
     "name": "__import_module__Inputs",
     "memberof": "src/Readers/CliArgs.js",
@@ -12541,7 +12486,7 @@
     }
   },
   {
-    "__docId__": 464,
+    "__docId__": 459,
     "kind": "variable",
     "name": "__import_module__Settings",
     "memberof": "src/Readers/CliArgs.js",
@@ -12567,7 +12512,7 @@
     }
   },
   {
-    "__docId__": 465,
+    "__docId__": 460,
     "kind": "variable",
     "name": "__import_module__Handler",
     "memberof": "src/Readers/CliArgs.js",
@@ -12593,7 +12538,7 @@
     }
   },
   {
-    "__docId__": 466,
+    "__docId__": 461,
     "kind": "variable",
     "name": "__import_module__Reader",
     "memberof": "src/Readers/CliArgs.js",
@@ -12619,7 +12564,7 @@
     }
   },
   {
-    "__docId__": 467,
+    "__docId__": 462,
     "kind": "variable",
     "name": "_args",
     "memberof": "src/Readers/CliArgs.js",
@@ -12645,7 +12590,7 @@
     }
   },
   {
-    "__docId__": 468,
+    "__docId__": 463,
     "kind": "class",
     "name": "CliArgs",
     "memberof": "src/Readers/CliArgs.js",
@@ -12666,7 +12611,7 @@
     ]
   },
   {
-    "__docId__": 469,
+    "__docId__": 464,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12701,7 +12646,7 @@
     ]
   },
   {
-    "__docId__": 470,
+    "__docId__": 465,
     "kind": "method",
     "name": "args",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12723,7 +12668,7 @@
     }
   },
   {
-    "__docId__": 471,
+    "__docId__": 466,
     "kind": "method",
     "name": "executableName",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12745,7 +12690,7 @@
     }
   },
   {
-    "__docId__": 472,
+    "__docId__": 467,
     "kind": "method",
     "name": "_perform",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12778,7 +12723,7 @@
     }
   },
   {
-    "__docId__": 473,
+    "__docId__": 468,
     "kind": "method",
     "name": "_setArgs",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12803,7 +12748,7 @@
     ]
   },
   {
-    "__docId__": 474,
+    "__docId__": 469,
     "kind": "member",
     "name": "[_args]",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12826,7 +12771,7 @@
     }
   },
   {
-    "__docId__": 475,
+    "__docId__": 470,
     "kind": "method",
     "name": "_helpElements",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12859,7 +12804,7 @@
     }
   },
   {
-    "__docId__": 476,
+    "__docId__": 471,
     "kind": "method",
     "name": "_helpInterface",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12892,7 +12837,7 @@
     }
   },
   {
-    "__docId__": 477,
+    "__docId__": 472,
     "kind": "method",
     "name": "_computeInfoDisplay",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12925,7 +12870,7 @@
     }
   },
   {
-    "__docId__": 478,
+    "__docId__": 473,
     "kind": "method",
     "name": "_elementDisplay",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -12968,7 +12913,7 @@
     }
   },
   {
-    "__docId__": 479,
+    "__docId__": 474,
     "kind": "method",
     "name": "_usageDisplay",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13011,7 +12956,7 @@
     }
   },
   {
-    "__docId__": 480,
+    "__docId__": 475,
     "kind": "method",
     "name": "_shortOption",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13044,7 +12989,7 @@
     }
   },
   {
-    "__docId__": 481,
+    "__docId__": 476,
     "kind": "method",
     "name": "_shortOptionDisplay",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13077,7 +13022,7 @@
     }
   },
   {
-    "__docId__": 482,
+    "__docId__": 477,
     "kind": "method",
     "name": "_buildDescription",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13110,7 +13055,7 @@
     }
   },
   {
-    "__docId__": 483,
+    "__docId__": 478,
     "kind": "method",
     "name": "_buildUsage",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13143,7 +13088,7 @@
     }
   },
   {
-    "__docId__": 484,
+    "__docId__": 479,
     "kind": "method",
     "name": "_buildUsageVectorOptions",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13196,7 +13141,7 @@
     }
   },
   {
-    "__docId__": 485,
+    "__docId__": 480,
     "kind": "method",
     "name": "_buildColumns",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13229,7 +13174,7 @@
     }
   },
   {
-    "__docId__": 486,
+    "__docId__": 481,
     "kind": "method",
     "name": "_computeElementsWidth",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13262,7 +13207,7 @@
     }
   },
   {
-    "__docId__": 487,
+    "__docId__": 482,
     "kind": "method",
     "name": "_camelCaseToArgument",
     "memberof": "src/Readers/CliArgs.js~CliArgs",
@@ -13295,7 +13240,7 @@
     }
   },
   {
-    "__docId__": 488,
+    "__docId__": 483,
     "kind": "file",
     "name": "src/Readers/WebRequest.js",
     "content": "const os = require('os');\nconst fs = require('fs');\nconst util = require('util');\nconst path = require('path');\nconst assert = require('assert');\nconst formidable = require('formidable');\nconst TypeCheck = require('js-typecheck');\nconst Settings = require('../Settings');\nconst Handler = require('../Handler');\nconst Reader = require('../Reader');\nconst Utils = require('../Utils');\n\n// promisifying\nconst mkdtemp = util.promisify(fs.mkdtemp);\nconst rename = util.promisify(fs.rename);\nconst stat = util.promisify(fs.stat);\nconst rmdir = util.promisify(fs.rmdir);\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _temporaryFolders = Symbol('temporaryFolders');\nconst _request = Symbol('request');\n\n\n/**\n * Web request reader.\n *\n * This reader is used by the {@link Web} handler to query values from a request.\n *\n * This reader supports all serializable inputs. It deals with file uploads\n * automatically; therefore any {@link FilePath} input becomes a potential\n * upload field. When that is the case the input gets assigned with the file path\n * about where the file has been uploaded to. By default it tries to keep the original\n * uploaded file name by replacing any illegal character with underscore, however you can\n * control this behavior via `uploadPreserveName` (if disabled each uploaded file\n * gets named with an unique name).\n *\n * This reader works by looking for the input names in the request, for instance:\n *\n * `http://.../?myInput=10&myOtherInput=20`\n *\n * ```\n * class MyAction extends Mebo.Action {\n *   constructor(){\n *     super();\n *     this.createInput('myInput: numeric');\n *     this.createInput('myOtherInput: numeric');\n *   }\n * }\n * ```\n *\n * When a value is found for the input, it gets loaded via {@link Input.parseValue}\n * where each input implementation has its own way of parsing the serialized data,\n * to find out about how a value is serialized for an specific input type you could simply\n * set an arbitrary value to the input you are interested then query it back through\n * {@link Input.serializeValue}. Also, Mebo provides a reference datasheet\n * about the serialization forms for the inputs bundled with it, found at {@link Reader}.\n *\n * **Route parameters:**\n * If an webfied action contains route parameters defined (`/users/:userId/books/:bookId`)\n * this reader is going to try to find them under the action input names.\n * Therefore when a route parameter matches to the name of an input then the value of\n * the parameter is loaded to the input.\n *\n * **Vector Inputs:**\n * Supported conventions for array parameters:\n *\n * - *Serialized vector value (JSON Style)*\n * ```\n * http://.../?vectorInput=[\"a\", \"b\", \"c\"]\n * ```\n *\n * - *Repeated param names*\n * ```\n * http://.../?vectorInput[]=a&vectorInput[]=b&vectorInput[]=c\n * ```\n * *or*\n * ```\n * http://.../?vectorInput=a&vectorInput=b&vectorInput=c\n * ```\n *\n * <h2>Options Summary</h2>\n *\n * Option Name | Description\n * --- | ---\n * uploadDirectory | directory used for placing file uploads in, default value\\\n * (`TMP_DIR/upload`) driven by:\\\n * <br>`Settings.get('reader/webRequest/uploadDirectory')`\n * uploadPreserveName | enabled by default it tries to keep the original final name of \\\n * uploads, any illegal character is replaced by underscore, otherwise if disabled \\\n * it gives a random name to the upload, default value driven by: \\\n * <br>`Settings.get('reader/webRequest/uploadPreserveName')`\n * uploadMaxFileSize | total maximum file size about all uploads in bytes, \\\n * default value (`4 mb`) driven by: \\\n * <br>`Settings.get('reader/webRequest/uploadMaxFileSize')`\n * maxFields | Limits the number of fields that the querystring parser will decode, \\\n * default value (`1000`) driven by: \\\n * <br>`Settings.get('reader/webRequest/maxFields')`\n * maxFieldsSize | Limits the amount of memory all fields together (except files) can\\\n * allocate in bytes, default value (`2 mb`) driven by:\\\n * <br>`Settings.get('reader/webRequest/maxFieldsSize')` [`2 mb`]\n *\n * <br/>Example about defining a custom `uploadMaxFileSize` option from inside of an\n * action through the metadata support:\n *\n * ```\n * class MyAction extends Mebo.Action{\n *    constructor(){\n *      super();\n *\n *      // 'uploadMaxFileSize' option\n *      this.setMeta('handler.web.readOptions', {\n *        uploadMaxFileSize: 10 * 1024 * 1024,\n *      });\n *    }\n * }\n * ```\n */\nclass WebRequest extends Reader{\n\n  /**\n   * Creates a web request reader\n   *\n   * @param {Action} action - action that should be used by the reader\n   * @param {Object} req - request object created by express-js\n   */\n  constructor(action, req){\n    super(action);\n\n    this._setRequest(req);\n\n    // default options\n    this.setOption('uploadDirectory', Settings.get('reader/webRequest/uploadDirectory'));\n    this.setOption('uploadPreserveName', Settings.get('reader/webRequest/uploadPreserveName'));\n    this.setOption('uploadMaxFileSize', Settings.get('reader/webRequest/uploadMaxFileSize'));\n    this.setOption('maxFields', Settings.get('reader/webRequest/maxFields'));\n    this.setOption('maxFieldsSize', Settings.get('reader/webRequest/maxFieldsSize'));\n\n    this[_temporaryFolders] = [];\n  }\n\n  /**\n   * Returns the request object created by express\n   *\n   * @return {Object}\n   * @see http://expressjs.com/en/api.html#req\n   */\n  request(){\n    return this[_request];\n  }\n\n  /**\n   * Implements the web request reader\n   *\n   * @param {Array<Input>} inputList - Valid list of inputs that should be used for\n   * the parsing\n   * @return {Promise<Object>}\n   * @protected\n   */\n  async _perform(inputList){\n    const result = Object.create(null);\n    const request = this.request();\n\n    // handling body fields\n    let bodyFields = null;\n    if (['POST', 'PUT', 'PATCH'].includes(request.method)){\n      bodyFields = await this._bodyFields(inputList);\n    }\n\n    // setting the action inputs based on the request parameters\n    for (const input of inputList){\n      const inputName = input.name();\n\n      // value set by the request\n      let requestInputValue;\n      const restrictWebAccess = input.hasProperty('restrictWebAccess') ? input.property('restrictWebAccess') : false;\n\n      // mapping param to input names\n      if (!restrictWebAccess && inputName in request.params){\n        requestInputValue = request.params[inputName];\n      }\n      // body fields\n      else if (bodyFields !== null){\n        if (restrictWebAccess && inputName in bodyFields.files){\n          requestInputValue = bodyFields.files[inputName];\n        }\n        else if (!restrictWebAccess){\n\n          if (inputName in bodyFields.files){\n            requestInputValue = bodyFields.files[inputName];\n          }\n          else if (inputName in bodyFields.fields){\n            requestInputValue = bodyFields.fields[inputName];\n          }\n        }\n      }\n\n      // GET, DELETE ...\n      else if (!restrictWebAccess && inputName in request.query){\n        requestInputValue = request.query[inputName];\n      }\n\n      if (requestInputValue !== undefined){\n        result[inputName] = requestInputValue;\n      }\n    }\n\n    return result;\n  }\n\n  /**\n   * Sets the request object created by express\n   *\n   * @param {Object} value - req object\n   * @see http://expressjs.com/en/api.html#req\n   * @private\n   */\n  _setRequest(value){\n    assert(TypeCheck.isObject(value) && value.method, 'Invalid request object');\n\n    this[_request] = value;\n  }\n\n  /**\n   * Returns an object containing the processed body fields parsed, this object separates\n   * the fields from the files\n   *\n   * @return {Promise<Object>}\n   * @private\n   */\n  async _bodyFields(){\n\n    // making sure the upload directory exists\n    const uploadDirectory = this.option('uploadDirectory');\n    if (uploadDirectory && !WebRequest._checkedUploadDirectories.includes(uploadDirectory)){\n\n      // in case the stat fails it will try to recreate the folders\n      let needsToCreate = false;\n      try{\n        await stat(uploadDirectory);\n      }\n      // otherwise tries to create it\n      catch(err){\n\n        // file not found\n        if (err.code === 'ENOENT'){\n          needsToCreate = true;\n        }\n        else{\n          /* istanbul ignore next */\n          throw err;\n        }\n      }\n\n      if (needsToCreate){\n        await Utils.mkdirs(uploadDirectory);\n      }\n\n      WebRequest._checkedUploadDirectories.push(uploadDirectory);\n    }\n\n    // parsing the body fields\n    const bodyFields = await this._parseForm();\n\n    // normalizing multiple values for the fields\n    this._normalizeFieldMultipleValues(bodyFields);\n\n    // handling the uploaded files\n    await this._handleUploadedFiles(bodyFields);\n\n    return bodyFields;\n  }\n\n  /**\n   * Normalizing multiple values for the fields by adding the values to an array\n   * followed by the name of the field (field=[value1, value2...]) rather than\n   * having an individual field entry for each of the indexes of the array\n   * (field[0]=value1, field[1]=value2...)\n   *\n   * @param {Object} bodyFields - parsed body object\n   * @private\n   */\n  _normalizeFieldMultipleValues(bodyFields){\n\n    const multipleValueFields = Object.create(null);\n\n    for (const inputName in bodyFields.fields){\n\n      // checking if there is any array field if so extracting their name and value\n      if (inputName.endsWith(']')){\n        const inputParts = inputName.split('[');\n        if (inputParts.length === 2){\n          if (!(inputParts[0] in multipleValueFields)){\n            multipleValueFields[inputParts[0]] = [];\n          }\n\n          multipleValueFields[inputParts[0]].push(bodyFields.fields[inputName]);\n        }\n      }\n    }\n\n    // merging the normalized multiple values to the original fields\n    Object.assign(bodyFields.fields, multipleValueFields);\n  }\n\n  /**\n   * Handles the uploaded files (changes bodyFields in-place)\n   *\n   * @param {Object} bodyFields - parsed body object\n   * @private\n   */\n  async _handleUploadedFiles(bodyFields){\n    const keepOrignalNamePromises = new Map();\n\n    const preserveFileName = this.option('uploadPreserveName');\n    for (const inputName in bodyFields.files){\n      // multiple files\n      if (TypeCheck.isList(bodyFields.files[inputName])){\n\n        for (const index in bodyFields.files[inputName]){\n          if (preserveFileName){\n            keepOrignalNamePromises.set([inputName, index], this._keepOriginalUploadName(bodyFields.files[inputName][index]));\n          }\n          else{\n            bodyFields.files[inputName][index] = bodyFields.files[inputName][index].path;\n          }\n        }\n      }\n\n      // single file\n      else{\n        if (preserveFileName){\n          keepOrignalNamePromises.set([inputName], this._keepOriginalUploadName(bodyFields.files[inputName]));\n        }\n        else{\n          bodyFields.files[inputName] = bodyFields.files[inputName].path;\n        }\n      }\n    }\n\n    // 'keep original name' is done in parallel for all files at once\n    if (keepOrignalNamePromises.size){\n      const originalNameKeys = Array.from(keepOrignalNamePromises.keys());\n      const originalNameValues = await Promise.all(keepOrignalNamePromises.values());\n\n      for (let i=0, len=keepOrignalNamePromises.size; i < len; ++i){\n        // single\n        if (originalNameKeys[i].length === 1){\n          bodyFields.files[originalNameKeys[i][0]] = originalNameValues[i];\n        }\n        // multi\n        else{\n          bodyFields.files[originalNameKeys[i][0]][originalNameKeys[i][1]] = originalNameValues[i];\n        }\n      }\n    }\n\n    // adding the cleanup temporary folders to the wrapup tasks\n    if (this[_temporaryFolders].length){\n      this.action().session().wrapup().addWrappedPromise(\n        this._cleanupTemporaryFolders.bind(this),\n        {\n          priority: 1000,\n        },\n      );\n    }\n  }\n\n  /**\n   * Auxiliary method used to promisify formidable's form.parse call\n   *\n   * @return {Promise<Object>}\n   * @private\n   */\n  _parseForm(){\n    return new Promise((resolve, reject) => {\n\n      const form = new formidable.IncomingForm();\n\n      // formidable settings\n      form.uploadDir = this.option('uploadDirectory');\n      form.maxFileSize = this.option('uploadMaxFileSize');\n      form.keepExtensions = true;\n      form.multiples = true;\n      form.encoding = 'utf-8';\n      form.maxFields = this.option('maxFields');\n      form.maxFieldsSize = this.option('maxFieldsSize');\n\n      form.parse(this.request(), (err, formFields, formFiles) => {\n\n        // in case of any error\n        /* istanbul ignore next */\n        if (err){\n          err.status = err.status || 500;\n          reject(err);\n          return;\n        }\n\n        const result = Object.create(null);\n        result.files = formFiles;\n        result.fields = formFields;\n\n        resolve(result);\n      });\n    });\n  }\n\n  /**\n   * Renames the uploaded file names which receive random unique names to the original uploaded file name,\n   * this is done by creating an intermediated unique name folder for each of the upload files then\n   * renaming them back to the original name.\n   * This method is called when `uploadPreserveName` returns true\n   *\n   * @param {string} uploadFile - input file name\n   * @return {string} output file name\n   * @private\n   */\n  async _keepOriginalUploadName(uploadFile){\n    const uploadFolder = await mkdtemp(path.join(this.option('uploadDirectory'), 'file-'));\n    const finalName = path.join(uploadFolder, uploadFile.name.replace(/[^a-zA-Z0-9 _.-]/g, '_'));\n    await rename(uploadFile.path, finalName);\n\n    // temporary folders removed at the end of the request\n    this[_temporaryFolders].push(uploadFolder);\n\n    return finalName;\n  }\n\n  /**\n   * Promise based method that removes the temporary folders that are created\n   * when `uploadPreserveName` is enabled\n   *\n   * @return {Promise}\n   * @private\n   */\n  _cleanupTemporaryFolders(){\n    const result = Promise.all(\n      this[_temporaryFolders].map(x => this._deleteTemporaryFolder(x)),\n    );\n\n    // theoretically this method can be called multiple times by handler.run\n    // for the same request\n    this[_temporaryFolders] = [];\n\n    return result;\n  }\n\n  /**\n   * Deletes a temporary folder\n   *\n   * @param {string} folder - folder to be deleted\n   * @return {Promise}\n   * @private\n   */\n  _deleteTemporaryFolder(folder){\n    return rmdir(folder).then((result) => {\n      // runaway promise\n      return null;\n    }).catch(/* istanbul ignore next */ (err) => {\n      if (!(['ENOTEMPTY', 'ENOENT'].includes(err.code))){\n        throw err;\n      }\n    });\n  }\n\n  static _checkedUploadDirectories = [];\n}\n\n// default settings\nSettings.set('reader/webRequest/uploadDirectory', path.join(os.tmpdir(), 'upload'));\nSettings.set('reader/webRequest/uploadMaxFileSize', 4 * 1024 * 1024);\nSettings.set('reader/webRequest/uploadPreserveName', true);\nSettings.set('reader/webRequest/maxFields', 1000);\nSettings.set('reader/webRequest/maxFieldsSize', 2 * 1024 * 1024);\n\n// registering reader\nHandler.registerReader(WebRequest, 'web');\n\nmodule.exports = WebRequest;\n",
@@ -13306,7 +13251,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 489,
+    "__docId__": 484,
     "kind": "variable",
     "name": "__import_module__os",
     "memberof": "src/Readers/WebRequest.js",
@@ -13332,7 +13277,7 @@
     }
   },
   {
-    "__docId__": 490,
+    "__docId__": 485,
     "kind": "variable",
     "name": "__import_module__fs",
     "memberof": "src/Readers/WebRequest.js",
@@ -13358,7 +13303,7 @@
     }
   },
   {
-    "__docId__": 491,
+    "__docId__": 486,
     "kind": "variable",
     "name": "__import_module__util",
     "memberof": "src/Readers/WebRequest.js",
@@ -13384,7 +13329,7 @@
     }
   },
   {
-    "__docId__": 492,
+    "__docId__": 487,
     "kind": "variable",
     "name": "__import_module__path",
     "memberof": "src/Readers/WebRequest.js",
@@ -13410,7 +13355,7 @@
     }
   },
   {
-    "__docId__": 493,
+    "__docId__": 488,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Readers/WebRequest.js",
@@ -13436,7 +13381,7 @@
     }
   },
   {
-    "__docId__": 494,
+    "__docId__": 489,
     "kind": "variable",
     "name": "__import_module__formidable",
     "memberof": "src/Readers/WebRequest.js",
@@ -13462,7 +13407,7 @@
     }
   },
   {
-    "__docId__": 495,
+    "__docId__": 490,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Readers/WebRequest.js",
@@ -13488,7 +13433,7 @@
     }
   },
   {
-    "__docId__": 496,
+    "__docId__": 491,
     "kind": "variable",
     "name": "__import_module__Settings",
     "memberof": "src/Readers/WebRequest.js",
@@ -13514,7 +13459,7 @@
     }
   },
   {
-    "__docId__": 497,
+    "__docId__": 492,
     "kind": "variable",
     "name": "__import_module__Handler",
     "memberof": "src/Readers/WebRequest.js",
@@ -13540,7 +13485,7 @@
     }
   },
   {
-    "__docId__": 498,
+    "__docId__": 493,
     "kind": "variable",
     "name": "__import_module__Reader",
     "memberof": "src/Readers/WebRequest.js",
@@ -13566,7 +13511,7 @@
     }
   },
   {
-    "__docId__": 499,
+    "__docId__": 494,
     "kind": "variable",
     "name": "__import_module__Utils",
     "memberof": "src/Readers/WebRequest.js",
@@ -13592,7 +13537,7 @@
     }
   },
   {
-    "__docId__": 500,
+    "__docId__": 495,
     "kind": "variable",
     "name": "mkdtemp",
     "memberof": "src/Readers/WebRequest.js",
@@ -13618,7 +13563,7 @@
     }
   },
   {
-    "__docId__": 501,
+    "__docId__": 496,
     "kind": "variable",
     "name": "rename",
     "memberof": "src/Readers/WebRequest.js",
@@ -13644,7 +13589,7 @@
     }
   },
   {
-    "__docId__": 502,
+    "__docId__": 497,
     "kind": "variable",
     "name": "stat",
     "memberof": "src/Readers/WebRequest.js",
@@ -13670,7 +13615,7 @@
     }
   },
   {
-    "__docId__": 503,
+    "__docId__": 498,
     "kind": "variable",
     "name": "rmdir",
     "memberof": "src/Readers/WebRequest.js",
@@ -13696,7 +13641,7 @@
     }
   },
   {
-    "__docId__": 504,
+    "__docId__": 499,
     "kind": "variable",
     "name": "_temporaryFolders",
     "memberof": "src/Readers/WebRequest.js",
@@ -13722,7 +13667,7 @@
     }
   },
   {
-    "__docId__": 505,
+    "__docId__": 500,
     "kind": "variable",
     "name": "_request",
     "memberof": "src/Readers/WebRequest.js",
@@ -13748,7 +13693,7 @@
     }
   },
   {
-    "__docId__": 506,
+    "__docId__": 501,
     "kind": "class",
     "name": "WebRequest",
     "memberof": "src/Readers/WebRequest.js",
@@ -13766,7 +13711,7 @@
     ]
   },
   {
-    "__docId__": 507,
+    "__docId__": 502,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13801,7 +13746,7 @@
     ]
   },
   {
-    "__docId__": 508,
+    "__docId__": 503,
     "kind": "member",
     "name": "[_temporaryFolders]",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13824,7 +13769,7 @@
     }
   },
   {
-    "__docId__": 509,
+    "__docId__": 504,
     "kind": "method",
     "name": "request",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13849,7 +13794,7 @@
     }
   },
   {
-    "__docId__": 510,
+    "__docId__": 505,
     "kind": "method",
     "name": "_perform",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13882,7 +13827,7 @@
     }
   },
   {
-    "__docId__": 511,
+    "__docId__": 506,
     "kind": "method",
     "name": "_setRequest",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13910,7 +13855,7 @@
     ]
   },
   {
-    "__docId__": 512,
+    "__docId__": 507,
     "kind": "member",
     "name": "[_request]",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13933,7 +13878,7 @@
     }
   },
   {
-    "__docId__": 513,
+    "__docId__": 508,
     "kind": "method",
     "name": "_bodyFields",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13955,7 +13900,7 @@
     }
   },
   {
-    "__docId__": 514,
+    "__docId__": 509,
     "kind": "method",
     "name": "_normalizeFieldMultipleValues",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -13980,7 +13925,7 @@
     ]
   },
   {
-    "__docId__": 515,
+    "__docId__": 510,
     "kind": "method",
     "name": "_handleUploadedFiles",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14005,7 +13950,7 @@
     ]
   },
   {
-    "__docId__": 516,
+    "__docId__": 511,
     "kind": "method",
     "name": "_parseForm",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14027,7 +13972,7 @@
     }
   },
   {
-    "__docId__": 517,
+    "__docId__": 512,
     "kind": "method",
     "name": "_keepOriginalUploadName",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14060,7 +14005,7 @@
     }
   },
   {
-    "__docId__": 518,
+    "__docId__": 513,
     "kind": "method",
     "name": "_cleanupTemporaryFolders",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14082,7 +14027,7 @@
     }
   },
   {
-    "__docId__": 519,
+    "__docId__": 514,
     "kind": "member",
     "name": "[_temporaryFolders]",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14105,7 +14050,7 @@
     }
   },
   {
-    "__docId__": 520,
+    "__docId__": 515,
     "kind": "method",
     "name": "_deleteTemporaryFolder",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14138,7 +14083,7 @@
     }
   },
   {
-    "__docId__": 521,
+    "__docId__": 516,
     "kind": "member",
     "name": "_checkedUploadDirectories",
     "memberof": "src/Readers/WebRequest.js~WebRequest",
@@ -14161,7 +14106,7 @@
     }
   },
   {
-    "__docId__": 522,
+    "__docId__": 517,
     "kind": "file",
     "name": "src/Readers/index.js",
     "content": "module.exports.CliArgs = require('./CliArgs');\nmodule.exports.WebRequest = require('./WebRequest');\n",
@@ -14172,7 +14117,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 523,
+    "__docId__": 518,
     "kind": "file",
     "name": "src/Session.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst Tasks = require('./Tasks');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _arbitraryData = Symbol('arbitraryData');\nconst _autofill = Symbol('autofill');\nconst _wrapup = Symbol('wrapup');\nconst _terminated = Symbol('terminated');\n\n\n/**\n * A session is used to store the data shared between actions.\n *\n * This object is created automatically by {@link Handler.create} and\n * {@link Action.create}.\n */\nclass Session{\n\n  /**\n   * Creates a session\n   *\n   * @param {Tasks} [wrapup] - task object used to hold actions and promises that are triggered\n   * when finalizing ({@link finalize}) the session\n   */\n  constructor(wrapup=null){\n\n    assert(wrapup === null || wrapup instanceof Tasks, 'wrapup needs to defined with a Tasks object or null');\n\n    this[_wrapup] = wrapup || new Tasks();\n    this[_terminated] = false;\n\n    // container used to store autofill values inside of the session\n    this[_autofill] = {};\n\n    // generic container used to store arbitrary inside of the session\n    this[_arbitraryData] = {};\n  }\n\n  /**\n   * Returns the tasks object used to hold actions and promises that are triggered\n   * when finalizing ({@link finalize}) the session. Wrapup actions can be used to avoid\n   * the execution of an action that may be triggered multiple times across\n   * nested actions where ideally it should be executed only once in the end,\n   * after all nested actions are done.\n   *\n   * @return {Tasks}\n   */\n  wrapup(){\n    return this[_wrapup];\n  }\n\n  /**\n   * Returns a value under the autofill data.\n   *\n   * This feature is used to set the initial input value for inputs that contain the `autofill`\n   * property. It works by looking if the value of the autofill input's property is under the\n   * {@link Session.autofill} then if found it sets the input value with the value of the\n   * {@link Session.autofill}. This process occurs when a session is assigned to the action\n   * ({@link Action.setSession}).\n   *\n   * When inputs that contain the property `autofill` are initialized through the\n   * {@link Handler} they will try to find their values under the autofill,\n   * however if a value is not defined for them they will assign their input value\n   * to the autofill data automatically.\n   *\n   * @param {string} key - key name used to query the autofill value\n   * @param {*} [defaultValue] - optional default value returned in case\n   * the key does not exist\n   * @return {*}\n   */\n  autofill(key, defaultValue=undefined){\n    assert(TypeCheck.isString(key), 'key needs to defined as string');\n\n    if (key in this[_autofill]){\n      return this[_autofill][key];\n    }\n\n    return defaultValue;\n  }\n\n  /**\n   * Returns a boolean telling if the key exists under the autofill data.\n   *\n   * @param {string} key - key name\n   * @return {boolean}\n   */\n  hasAutofill(key){\n    return (key in this[_autofill]);\n  }\n\n  /**\n   * Sets a key & value under the autofill data\n   *\n   * @param {string} key - key name\n   * @param {*} value - value associated with the key\n   *\n   * @see {@link Session.autofill}\n   */\n  setAutofill(key, value){\n    assert(TypeCheck.isString(key), 'key needs to defined as string');\n\n    this[_autofill][key] = value;\n  }\n\n  /**\n   * Returns the keys included in the autofill data\n   *\n   * @return {Array<string>}\n   */\n  autofillKeys(){\n    return Object.keys(this[_autofill]);\n  }\n\n  /**\n   * Sets a key & value under the arbitrary data. This is used to store data\n   * that may be only available in specific handlers, for instance the\n   * request object created by express is assigned to the session through this\n   * method by the web handler.\n   *\n   * @param {string} key - name of the key\n   * @param {*} value - value for the key\n   */\n  set(key, value){\n    assert(TypeCheck.isString(key), 'key needs to defined as string');\n\n    this[_arbitraryData][key] = value;\n  }\n\n  /**\n   * Returns an value assigned for the key inside of the arbitrary data\n   *\n   * @param {string} key - name of the key\n   * @param {*} [defaultValue] - optional value returned when the key is not assigned\n   * @return {*}\n   */\n  get(key, defaultValue=undefined){\n    if (key in this[_arbitraryData]){\n      return this[_arbitraryData][key];\n    }\n\n    return defaultValue;\n  }\n\n  /**\n   * Returns a boolean telling if the input key is under the arbitrary data\n   *\n   * @param {string} key - key name\n   * @return {boolean}\n   */\n  has(key){\n    return (key in this[_arbitraryData]);\n  }\n\n  /**\n   * Returns the keys included in the arbitrary data\n   *\n   * @return {Array<string>}\n   */\n  keys(){\n    return Object.keys(this[_arbitraryData]);\n  }\n\n  /**\n   * Terminates the session by executing the {@link wrapup}\n   * tasks.\n   *\n   * This is called by the {@link Handler} during the execution of\n   * {@link Handler.output}.\n   *\n   * @return {Promise}\n   */\n  async finalize(){\n\n    const wrapup = this.wrapup();\n    if (!wrapup.isEmpty()){\n\n      await wrapup.run();\n      wrapup.clear();\n    }\n\n    return true;\n  }\n\n  /**\n   * Returns a cloned version of the current session where all autofill\n   * and arbitrary data are transferred to the cloned version.\n   *\n   * This feature is used by the actions during the session assignment\n   * ({@link Action.setSession}) to prevent that modifications done in the session\n   * of nested actions reflect back in the session used by the parent actions.\n   * Therefore, acting as scope for changes in the autofill & arbitrary data.\n   *\n   * The current wrapup is also assigned to the cloned version.\n   *\n   * @return {Session}\n   */\n  clone(){\n    const result = new Session(this.wrapup());\n\n    // transferring autofill data\n    for (const autofillKey in this[_autofill]){\n      result.setAutofill(autofillKey, this[_autofill][autofillKey]);\n    }\n\n    // transferring arbitrary data\n    for (const arbitraryKey in this[_arbitraryData]){\n      result.set(arbitraryKey, this[_arbitraryData][arbitraryKey]);\n    }\n\n    return result;\n  }\n}\n\nmodule.exports = Session;\n",
@@ -14183,7 +14128,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 524,
+    "__docId__": 519,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Session.js",
@@ -14209,7 +14154,7 @@
     }
   },
   {
-    "__docId__": 525,
+    "__docId__": 520,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Session.js",
@@ -14235,7 +14180,7 @@
     }
   },
   {
-    "__docId__": 526,
+    "__docId__": 521,
     "kind": "variable",
     "name": "__import_module__Tasks",
     "memberof": "src/Session.js",
@@ -14261,7 +14206,7 @@
     }
   },
   {
-    "__docId__": 527,
+    "__docId__": 522,
     "kind": "variable",
     "name": "_arbitraryData",
     "memberof": "src/Session.js",
@@ -14287,7 +14232,7 @@
     }
   },
   {
-    "__docId__": 528,
+    "__docId__": 523,
     "kind": "variable",
     "name": "_autofill",
     "memberof": "src/Session.js",
@@ -14313,7 +14258,7 @@
     }
   },
   {
-    "__docId__": 529,
+    "__docId__": 524,
     "kind": "variable",
     "name": "_wrapup",
     "memberof": "src/Session.js",
@@ -14339,7 +14284,7 @@
     }
   },
   {
-    "__docId__": 530,
+    "__docId__": 525,
     "kind": "variable",
     "name": "_terminated",
     "memberof": "src/Session.js",
@@ -14365,7 +14310,7 @@
     }
   },
   {
-    "__docId__": 531,
+    "__docId__": 526,
     "kind": "class",
     "name": "Session",
     "memberof": "src/Session.js",
@@ -14380,7 +14325,7 @@
     "interface": false
   },
   {
-    "__docId__": 532,
+    "__docId__": 527,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Session.js~Session",
@@ -14405,7 +14350,7 @@
     ]
   },
   {
-    "__docId__": 533,
+    "__docId__": 528,
     "kind": "member",
     "name": "[_wrapup]",
     "memberof": "src/Session.js~Session",
@@ -14428,7 +14373,7 @@
     }
   },
   {
-    "__docId__": 534,
+    "__docId__": 529,
     "kind": "member",
     "name": "[_terminated]",
     "memberof": "src/Session.js~Session",
@@ -14451,7 +14396,7 @@
     }
   },
   {
-    "__docId__": 535,
+    "__docId__": 530,
     "kind": "member",
     "name": "[_autofill]",
     "memberof": "src/Session.js~Session",
@@ -14474,7 +14419,7 @@
     }
   },
   {
-    "__docId__": 536,
+    "__docId__": 531,
     "kind": "member",
     "name": "[_arbitraryData]",
     "memberof": "src/Session.js~Session",
@@ -14497,7 +14442,7 @@
     }
   },
   {
-    "__docId__": 537,
+    "__docId__": 532,
     "kind": "method",
     "name": "wrapup",
     "memberof": "src/Session.js~Session",
@@ -14519,7 +14464,7 @@
     }
   },
   {
-    "__docId__": 538,
+    "__docId__": 533,
     "kind": "method",
     "name": "autofill",
     "memberof": "src/Session.js~Session",
@@ -14562,7 +14507,7 @@
     }
   },
   {
-    "__docId__": 539,
+    "__docId__": 534,
     "kind": "method",
     "name": "hasAutofill",
     "memberof": "src/Session.js~Session",
@@ -14595,7 +14540,7 @@
     }
   },
   {
-    "__docId__": 540,
+    "__docId__": 535,
     "kind": "method",
     "name": "setAutofill",
     "memberof": "src/Session.js~Session",
@@ -14633,7 +14578,7 @@
     ]
   },
   {
-    "__docId__": 541,
+    "__docId__": 536,
     "kind": "method",
     "name": "autofillKeys",
     "memberof": "src/Session.js~Session",
@@ -14655,7 +14600,7 @@
     }
   },
   {
-    "__docId__": 542,
+    "__docId__": 537,
     "kind": "method",
     "name": "set",
     "memberof": "src/Session.js~Session",
@@ -14690,7 +14635,7 @@
     ]
   },
   {
-    "__docId__": 543,
+    "__docId__": 538,
     "kind": "method",
     "name": "get",
     "memberof": "src/Session.js~Session",
@@ -14733,7 +14678,7 @@
     }
   },
   {
-    "__docId__": 544,
+    "__docId__": 539,
     "kind": "method",
     "name": "has",
     "memberof": "src/Session.js~Session",
@@ -14766,7 +14711,7 @@
     }
   },
   {
-    "__docId__": 545,
+    "__docId__": 540,
     "kind": "method",
     "name": "keys",
     "memberof": "src/Session.js~Session",
@@ -14788,7 +14733,7 @@
     }
   },
   {
-    "__docId__": 546,
+    "__docId__": 541,
     "kind": "method",
     "name": "finalize",
     "memberof": "src/Session.js~Session",
@@ -14810,7 +14755,7 @@
     }
   },
   {
-    "__docId__": 547,
+    "__docId__": 542,
     "kind": "method",
     "name": "clone",
     "memberof": "src/Session.js~Session",
@@ -14832,7 +14777,7 @@
     }
   },
   {
-    "__docId__": 548,
+    "__docId__": 543,
     "kind": "file",
     "name": "src/Settings.js",
     "content": "const assert = require('assert');\nconst debug = require('debug')('Mebo');\nconst TypeCheck = require('js-typecheck');\nconst path = require('path');\n\n\n/**\n * Provides access to the general configuration used across Mebo.\n *\n * ```javascript\n * const Mebo = require('mebo');\n *\n * // listing the available settings\n * console.log(Mebo.Settings.keys());\n * ```\n */\nclass Settings{\n\n  /**\n   * Sets a value based on key & value under the settings\n   *\n   * @param {string} key - name of the key\n   * @param {*} value - value for the key\n   */\n  static set(key, value){\n    assert(TypeCheck.isString(key), 'key needs to be defined as string');\n\n    this._data[key] = value;\n  }\n\n  /**\n   * Returns the value assigned for the key\n   *\n   * @param {string} key - name of the key\n   * @param {*} [defaultValue] - optional value returned when the key is not assigned\n   * @return {*}\n   */\n  static get(key, defaultValue=undefined){\n    if (key in this._data){\n      return this._data[key];\n    }\n\n    return defaultValue;\n  }\n\n  /**\n   * Returns a boolean telling if the input key is under the arbitrary data\n   *\n   * @param {string} key - key name\n   * @return {boolean}\n   */\n  static has(key){\n    return (key in this._data);\n  }\n\n  /**\n   * Returns the keys included under the settings\n   *\n   * @return {Array<string>}\n   */\n  static keys(){\n    return Object.keys(this._data).sort();\n  }\n\n  static _data = Object.create(null);\n}\n\n// default settings:\n// apiVersion\n// Sets the api version about the application that is using this library, this information\n// is used as part of the request response (default: version found inside of `CWD/package.json`)\n// @see http://semver.org\ntry{\n  Settings.set('apiVersion', require(path.join(process.cwd(), 'package.json')).version); // eslint-disable-line\n}\ncatch(err)/* istanbul ignore next */{\n  debug('Unable to find package.json under the CWD');\n  Settings.set('apiVersion', '');\n}\n\n// exporting the module\nmodule.exports = Settings;\n",
@@ -14843,7 +14788,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 549,
+    "__docId__": 544,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Settings.js",
@@ -14869,7 +14814,7 @@
     }
   },
   {
-    "__docId__": 550,
+    "__docId__": 545,
     "kind": "variable",
     "name": "__import_module__debug",
     "memberof": "src/Settings.js",
@@ -14895,7 +14840,7 @@
     }
   },
   {
-    "__docId__": 551,
+    "__docId__": 546,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Settings.js",
@@ -14921,7 +14866,7 @@
     }
   },
   {
-    "__docId__": 552,
+    "__docId__": 547,
     "kind": "variable",
     "name": "__import_module__path",
     "memberof": "src/Settings.js",
@@ -14947,7 +14892,7 @@
     }
   },
   {
-    "__docId__": 553,
+    "__docId__": 548,
     "kind": "class",
     "name": "Settings",
     "memberof": "src/Settings.js",
@@ -14962,7 +14907,7 @@
     "interface": false
   },
   {
-    "__docId__": 554,
+    "__docId__": 549,
     "kind": "method",
     "name": "set",
     "memberof": "src/Settings.js~Settings",
@@ -14997,7 +14942,7 @@
     ]
   },
   {
-    "__docId__": 555,
+    "__docId__": 550,
     "kind": "method",
     "name": "get",
     "memberof": "src/Settings.js~Settings",
@@ -15040,7 +14985,7 @@
     }
   },
   {
-    "__docId__": 556,
+    "__docId__": 551,
     "kind": "method",
     "name": "has",
     "memberof": "src/Settings.js~Settings",
@@ -15073,7 +15018,7 @@
     }
   },
   {
-    "__docId__": 557,
+    "__docId__": 552,
     "kind": "method",
     "name": "keys",
     "memberof": "src/Settings.js~Settings",
@@ -15095,7 +15040,7 @@
     }
   },
   {
-    "__docId__": 558,
+    "__docId__": 553,
     "kind": "member",
     "name": "_data",
     "memberof": "src/Settings.js~Settings",
@@ -15118,7 +15063,7 @@
     }
   },
   {
-    "__docId__": 559,
+    "__docId__": 554,
     "kind": "file",
     "name": "src/Tasks.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _contents = Symbol('contents');\nconst _executedCount = Symbol('executedIndex');\n\n\n/**\n * Object that holds actions and promises, which are executed at specific events.\n *\n * Inside Mebo tasks are used by the {@link Session.wrapup} to hold actions and\n * promises that are triggered when a {@link Session} is about to be terminated\n * ({@link Session.finalize}).\n */\nclass Tasks{\n\n  /**\n   * Creates a new instance\n   */\n  constructor(){\n    this[_contents] = [];\n    this[_executedCount] = 0;\n  }\n\n  /**\n   * Adds an action to the tasks\n   *\n   * `runOnlyOnce` can be used to avoid the execution of an action that may be triggered\n   * multiple times across nested actions where ideally it should be executed only once,\n   * it's done by using the action's id ({@link Action.id}).\n   *\n   * @param {Action} action - action instance that should be executed in the wrap up\n   * @param {Object} options - custom options\n   * @param {boolean} [options.runOnlyOnce=true] - tells if the action should be ignore in case\n   * it has already been executed previously (it's done by matching the {@link Action.id})\n   * @param {number} [options.priority=100] - tells the priority of the action, this affects\n   * the execution order where a lower numeric value means a higher priority.\n   */\n  grantAction(action, {runOnlyOnce=true, priority=100}={}){\n    assert(TypeCheck.isCallable(action.run), 'Invalid Action');\n\n    this[_contents].push({\n      type: 'action',\n      item: action,\n      onlyOnce: runOnlyOnce,\n      execPriority: priority,\n    });\n  }\n\n  /**\n   * Adds a wrapped promise to the tasks\n   *\n   * @param {function} wrappedPromise - function that should return a promise, ex:\n   * ```javascript\n   * tasks.addWrappedPromise(() => Promise.resolve(3))\n   * ```\n   * @param {Object} options - custom options\n   * @param {number} [options.priority=100] - tells the priority of the action, this affects\n   * the execution order where a lower numeric value means a higher priority.\n   */\n  addWrappedPromise(wrappedPromise, {priority=100}={}){\n    assert(TypeCheck.isCallable(wrappedPromise), 'Promise needs to wrapped into a function');\n\n    this[_contents].push({\n      type: 'promise',\n      item: wrappedPromise,\n      execPriority: priority,\n    });\n  }\n\n  /**\n   * Returns a list sorted by priority and inclusion order about the actions and\n   * promises that are executed through {@link execute}\n   *\n   * @param {boolean} [actions=true] - tells if the result should return the actions\n   * @param {boolean} [promises=true] - tells if the result should return the promises\n   * @return {Promise<Array>}\n   */\n  async contents(actions=true, promises=true){\n    const result = [];\n\n    const taskOrder = this[_contents].map((data, index) => {\n      return {\n        i: index,\n        contents: data,\n      };\n    });\n\n    taskOrder.sort((a, b) => {\n      if (a.contents.execPriority < b.contents.execPriority) return -1;\n      if (a.contents.execPriority > b.contents.execPriority) return 1;\n      return a.i - b.i;\n    });\n\n    const finalTaskOrder = taskOrder.map(x => x.contents);\n\n    let resultIndex = 0;\n    const actionIdMap = new Map();\n    for (const task of finalTaskOrder){\n      // actions\n      if (actions && task.type === 'action'){\n        actionIdMap.set(resultIndex, task.item.id());\n        result.push(task.item);\n      }\n\n      // promises\n      else if (promises && task.type === 'promise'){\n        result.push(task.item);\n      }\n\n      resultIndex++;\n    }\n\n    // the process bellow executes the ids in parallel and removes the duplicated\n    // action id for any action marked as run onlyOnce from the final result\n    const actionIndexes = Array.from(actionIdMap.keys());\n    const actionIdResults = await Promise.all(actionIdMap.values());\n    const alreadyAddedIds = [];\n\n    let keyIndex = 0;\n    let removedCount = 0;\n    for (const actionIndex of actionIndexes){\n\n      const actionId = actionIdResults[keyIndex];\n      const alreadyIncluded = alreadyAddedIds.includes(actionId);\n\n      if (alreadyIncluded && this[_contents][actionIndex].onlyOnce){\n        result.splice(actionIndex - removedCount, 1);\n\n        removedCount++;\n      }\n      else if (!alreadyIncluded){\n        alreadyAddedIds.push(actionId);\n      }\n\n      keyIndex++;\n    }\n\n    return result;\n  }\n\n  /**\n   * Tells if there are no tasks\n   *\n   * @return {boolean}\n   */\n  isEmpty(){\n    return this[_contents].length === 0;\n  }\n\n  /**\n   * Resets the tasks by cleaning all actions and promises\n   *\n   */\n  clear(){\n    this[_contents].length = 0;\n    this[_executedCount] = 0;\n  }\n\n  /**\n   * Executes the actions and promises inside of the tasks\n   * (provided by {@link contents}). All tasks get executed even if an error occurs\n   * during the execution of an specific task. In case this method is triggered\n   * multiple times it ensures each task is only executed once.\n   *\n   * Failed tasks are reported through an exception raised after all tasks have been executed,\n   * this error provides the `taskErrors` member that contains a list about the errors raised\n   * during the execution of the tasks.\n   *\n   * @return {Promise<Array>} Returns an array containing each result of the tasks\n   */\n  async run(){\n\n    const contents = await this.contents();\n    const taskErrors = [];\n    const result = [];\n\n    let currentIndex = 0;\n    for (const task of contents){\n\n      // skipping tasks that have been executed previously\n      currentIndex++;\n      if (this[_executedCount] >= currentIndex){\n        continue;\n      }\n      else{\n        this[_executedCount]++;\n      }\n\n      // executing task\n      try{\n        result.push(\n          await ((TypeCheck.isCallable(task)) ? task() : task.run()), // eslint-disable-line no-await-in-loop\n        );\n      }\n      catch(err){\n        taskErrors.push(err);\n      }\n\n    }\n\n    // throwing a new exception about the failed tasks\n    if (taskErrors.length){\n      const error = new Error(`Failed to execute ${taskErrors.length} tasks (out of ${contents.length})`);\n\n      // including the stack trace information from the failed tasks (debugging purposes)\n      for (const taskError of taskErrors){\n        error.stack += `\\n\\nTask stack trace:\\n${taskError.stack}`;\n      }\n\n      // also, including the task errors to the error itself (debugging purposes)\n      error.taskErrors = taskErrors;\n\n      throw error;\n    }\n\n    return result;\n  }\n}\n\nmodule.exports = Tasks;\n",
@@ -15129,7 +15074,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 560,
+    "__docId__": 555,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Tasks.js",
@@ -15155,7 +15100,7 @@
     }
   },
   {
-    "__docId__": 561,
+    "__docId__": 556,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Tasks.js",
@@ -15181,7 +15126,7 @@
     }
   },
   {
-    "__docId__": 562,
+    "__docId__": 557,
     "kind": "variable",
     "name": "_contents",
     "memberof": "src/Tasks.js",
@@ -15207,7 +15152,7 @@
     }
   },
   {
-    "__docId__": 563,
+    "__docId__": 558,
     "kind": "variable",
     "name": "_executedCount",
     "memberof": "src/Tasks.js",
@@ -15233,7 +15178,7 @@
     }
   },
   {
-    "__docId__": 564,
+    "__docId__": 559,
     "kind": "class",
     "name": "Tasks",
     "memberof": "src/Tasks.js",
@@ -15248,7 +15193,7 @@
     "interface": false
   },
   {
-    "__docId__": 565,
+    "__docId__": 560,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Tasks.js~Tasks",
@@ -15262,7 +15207,7 @@
     "params": []
   },
   {
-    "__docId__": 566,
+    "__docId__": 561,
     "kind": "member",
     "name": "[_contents]",
     "memberof": "src/Tasks.js~Tasks",
@@ -15285,7 +15230,7 @@
     }
   },
   {
-    "__docId__": 567,
+    "__docId__": 562,
     "kind": "member",
     "name": "[_executedCount]",
     "memberof": "src/Tasks.js~Tasks",
@@ -15308,7 +15253,7 @@
     }
   },
   {
-    "__docId__": 568,
+    "__docId__": 563,
     "kind": "method",
     "name": "grantAction",
     "memberof": "src/Tasks.js~Tasks",
@@ -15367,7 +15312,7 @@
     ]
   },
   {
-    "__docId__": 569,
+    "__docId__": 564,
     "kind": "method",
     "name": "addWrappedPromise",
     "memberof": "src/Tasks.js~Tasks",
@@ -15414,7 +15359,7 @@
     ]
   },
   {
-    "__docId__": 570,
+    "__docId__": 565,
     "kind": "method",
     "name": "contents",
     "memberof": "src/Tasks.js~Tasks",
@@ -15461,7 +15406,7 @@
     }
   },
   {
-    "__docId__": 571,
+    "__docId__": 566,
     "kind": "method",
     "name": "isEmpty",
     "memberof": "src/Tasks.js~Tasks",
@@ -15483,7 +15428,7 @@
     }
   },
   {
-    "__docId__": 572,
+    "__docId__": 567,
     "kind": "method",
     "name": "clear",
     "memberof": "src/Tasks.js~Tasks",
@@ -15497,7 +15442,7 @@
     "params": []
   },
   {
-    "__docId__": 573,
+    "__docId__": 568,
     "kind": "member",
     "name": "[_executedCount]",
     "memberof": "src/Tasks.js~Tasks",
@@ -15520,7 +15465,7 @@
     }
   },
   {
-    "__docId__": 574,
+    "__docId__": 569,
     "kind": "method",
     "name": "run",
     "memberof": "src/Tasks.js~Tasks",
@@ -15542,7 +15487,7 @@
     }
   },
   {
-    "__docId__": 575,
+    "__docId__": 570,
     "kind": "file",
     "name": "src/Utils/HierarchicalCollection.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst deepMerge = require('./deepMerge');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _collection = Symbol('collection');\n\n\n/**\n * Provides an interface to deal with data in a multi dimension plain object.\n *\n * It automatically creates the intermediate levels when assigning a value under\n * nested levels to the collection. Also, if the value already exists\n * under the collection then it allows the value to be merged with the\n * existing values.\n * @private\n */\nclass HierarchicalCollection{\n\n  /**\n   * Creates a new instance\n   */\n  constructor(){\n    this[_collection] = {};\n  }\n\n  /**\n   * Inserts a new value to the collection\n   *\n   * @param {string} path - path about where the value should be stored (the levels\n   * must be separated by '.').\n   * @param {*} value - value that is going to be stored under the collection\n   * @param {boolean} [merge=true] - this option is used to decide in case of the\n   * last level is already existing under the collection, if the value should be\n   * either merged (default) or overridden.\n   */\n  insert(path, value, merge=true){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n    assert(path.length, 'path cannot be empty');\n    assert((/^([\\w_\\.\\-])+$/gi).test(path), `Illegal path name: ${path}`); // eslint-disable-line no-useless-escape\n\n    let currentLevel = this[_collection];\n    let finalLevel = path;\n\n    // building the intermediate levels if necessary\n    if (path.indexOf('.') !== -1){\n      const levels = path.split('.');\n      for (const level of levels.slice(0, -1)){\n        if (!(level in currentLevel)){\n          currentLevel[level] = {};\n        }\n\n        currentLevel = currentLevel[level];\n      }\n      finalLevel = levels.slice(-1)[0];\n    }\n\n    // assigning value\n    if (merge && TypeCheck.isPlainObject(value) && finalLevel in currentLevel){\n      const merged = deepMerge(currentLevel[finalLevel], value);\n      Object.assign(currentLevel[finalLevel], merged);\n    }\n    else{\n      currentLevel[finalLevel] = value;\n    }\n  }\n\n  /**\n   * Returns a value under the collection\n   *\n   * @param {string} path - path about where the value is localized (the levels\n   * must be separated by '.'). In case of empty string the entire collection\n   * is returned.\n   * @param {*} [defaultValue] - default value returned in case a value was\n   * not found for the path\n   * @return {*}\n   */\n  query(path, defaultValue=undefined){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    let currentLevel = this[_collection];\n\n    // returning the entire collection\n    if (!path.length){\n      return currentLevel;\n    }\n\n    // no intermediate levels\n    if (path.indexOf('.') === -1){\n      if (!(path in currentLevel)){\n        return defaultValue;\n      }\n      return currentLevel[path];\n    }\n\n    // otherwise find the value going through the intermediate levels\n    const levels = path.split('.');\n    for (const level of levels){\n      if (!(level in currentLevel)){\n        return defaultValue;\n      }\n\n      currentLevel = currentLevel[level];\n    }\n\n    return currentLevel;\n  }\n\n  /**\n   * Returns a list of the root levels\n   *\n   * @return {Array<string>}\n   */\n  root(){\n    return Object.keys(this[_collection]);\n  }\n}\n\nmodule.exports = HierarchicalCollection;\n",
@@ -15553,7 +15498,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 576,
+    "__docId__": 571,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Utils/HierarchicalCollection.js",
@@ -15579,7 +15524,7 @@
     }
   },
   {
-    "__docId__": 577,
+    "__docId__": 572,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Utils/HierarchicalCollection.js",
@@ -15605,7 +15550,7 @@
     }
   },
   {
-    "__docId__": 578,
+    "__docId__": 573,
     "kind": "variable",
     "name": "__import_module__deepMerge",
     "memberof": "src/Utils/HierarchicalCollection.js",
@@ -15631,7 +15576,7 @@
     }
   },
   {
-    "__docId__": 579,
+    "__docId__": 574,
     "kind": "variable",
     "name": "_collection",
     "memberof": "src/Utils/HierarchicalCollection.js",
@@ -15657,7 +15602,7 @@
     }
   },
   {
-    "__docId__": 580,
+    "__docId__": 575,
     "kind": "class",
     "name": "HierarchicalCollection",
     "memberof": "src/Utils/HierarchicalCollection.js",
@@ -15672,7 +15617,7 @@
     "interface": false
   },
   {
-    "__docId__": 581,
+    "__docId__": 576,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Utils/HierarchicalCollection.js~HierarchicalCollection",
@@ -15686,7 +15631,7 @@
     "params": []
   },
   {
-    "__docId__": 582,
+    "__docId__": 577,
     "kind": "member",
     "name": "[_collection]",
     "memberof": "src/Utils/HierarchicalCollection.js~HierarchicalCollection",
@@ -15709,7 +15654,7 @@
     }
   },
   {
-    "__docId__": 583,
+    "__docId__": 578,
     "kind": "method",
     "name": "insert",
     "memberof": "src/Utils/HierarchicalCollection.js~HierarchicalCollection",
@@ -15756,7 +15701,7 @@
     ]
   },
   {
-    "__docId__": 584,
+    "__docId__": 579,
     "kind": "method",
     "name": "query",
     "memberof": "src/Utils/HierarchicalCollection.js~HierarchicalCollection",
@@ -15799,7 +15744,7 @@
     }
   },
   {
-    "__docId__": 585,
+    "__docId__": 580,
     "kind": "method",
     "name": "root",
     "memberof": "src/Utils/HierarchicalCollection.js~HierarchicalCollection",
@@ -15821,7 +15766,7 @@
     }
   },
   {
-    "__docId__": 586,
+    "__docId__": 581,
     "kind": "file",
     "name": "src/Utils/ImmutableMap.js",
     "content": "const TypeCheck = require('js-typecheck');\n\n\n/**\n * Map implementation designed to hold immutable data.\n *\n * This object makes sure that values held by the map cannot have their data\n * modified.\n */\nclass ImmutableMap extends Map{\n\n  /**\n   * Sets a key and value to the map\n   *\n   * @param {*} key - key associated with the value\n   * @param {*} value - value that will be stored immutable\n   */\n  set(key, value){\n    super.set(key, this._deepFreeze(value));\n  }\n\n  /**\n   * Auxiliary method that recursively makes the input object immutable\n   *\n   * @param {object} value - object that should become immutable\n   * @return {object}\n   * @private\n   */\n  _deepFreeze(value){\n\n    if (TypeCheck.isNone(value) || value instanceof Buffer){\n      return value;\n    }\n\n    // freezing all properties\n    for (const propertyName of Object.getOwnPropertyNames(value)){\n      const property = value[propertyName];\n\n      // freeze prop if it is an object\n      if (TypeCheck.isObject(property)){\n        this._deepFreeze(property);\n      }\n    }\n\n    return Object.freeze(value);\n  }\n}\n\nmodule.exports = ImmutableMap;\n",
@@ -15832,7 +15777,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 587,
+    "__docId__": 582,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Utils/ImmutableMap.js",
@@ -15858,7 +15803,7 @@
     }
   },
   {
-    "__docId__": 588,
+    "__docId__": 583,
     "kind": "class",
     "name": "ImmutableMap",
     "memberof": "src/Utils/ImmutableMap.js",
@@ -15876,7 +15821,7 @@
     ]
   },
   {
-    "__docId__": 589,
+    "__docId__": 584,
     "kind": "method",
     "name": "set",
     "memberof": "src/Utils/ImmutableMap.js~ImmutableMap",
@@ -15911,7 +15856,7 @@
     ]
   },
   {
-    "__docId__": 590,
+    "__docId__": 585,
     "kind": "method",
     "name": "_deepFreeze",
     "memberof": "src/Utils/ImmutableMap.js~ImmutableMap",
@@ -15944,7 +15889,7 @@
     }
   },
   {
-    "__docId__": 591,
+    "__docId__": 586,
     "kind": "file",
     "name": "src/Utils/LruCache.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst LruCacheBase = require('lru-cache');\nconst sizeof = require('object-sizeof');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _size = Symbol('size');\nconst _lifespan = Symbol('lifespan');\nconst _cache = Symbol('cache');\n\n\n/**\n * A cache that discards the least recently used items first.\n *\n * This feature is used by the {@link Session} to store the result of\n * cacheable actions ({@link Action.isCacheable}).\n */\nclass LruCache{\n\n  /**\n   * Creates an LruCache\n   *\n   * @param {number} size - Sets in bytes the maximum size of the cache\n   * @param {number} lifespan - Lifespan in milliseconds about amount of time that\n   * an item under LRU cache should be kept alive\n   */\n  constructor(size, lifespan){\n\n    assert(TypeCheck.isNumber(size), 'size requires a number value');\n    assert(TypeCheck.isNumber(lifespan), 'lifespan requires a number value');\n\n    this[_size] = size;\n    this[_lifespan] = lifespan;\n\n    // lazy creation\n    this[_cache] = null;\n  }\n\n  /**\n   * Returns the size of the cache in bytes\n   *\n   * @type {number}\n   */\n  get size(){\n    return this[_size];\n  }\n\n  /**\n   * Returns the lifespan for the values held by the cache in seconds\n   *\n   * @type {number}\n   */\n  get lifespan(){\n    return this[_lifespan];\n  }\n\n  /**\n   * Resets the cache by flushing it\n   *\n   * @param {string} [key] - id associated with the value otherwise flushes the whole\n   * cache\n   */\n  flush(key=null){\n\n    if (this[_cache] === null){\n      return;\n    }\n\n    if (key){\n      this[_cache].del(key);\n    }\n    else{\n      this[_cache].reset();\n    }\n  }\n\n  /**\n   * Returns a list containing the keys of the values held by the cache\n   *\n   * @return {Array<string>}\n   */\n  keys(){\n    return (this[_cache] === null) ? [] : this[_cache].keys();\n  }\n\n  /**\n   * Returns the number of items held by the cache\n   *\n   * @type {number}\n   */\n  get length(){\n    return this.keys().length;\n  }\n\n  /**\n   * Returns a boolean telling if the input key is under the cache\n   *\n   * @param {string} key - id associated with the value\n   * @return {boolean}\n   */\n  has(key){\n    return (this[_cache] !== null && this[_cache].has(key));\n  }\n\n  /**\n   * Returns the value from the lru cache based on the input {@link Action.id},\n   * otherwise if the id is not found under the cache then returns undefined\n   *\n   * @param {string} key - id associated with the value\n   * @param {*} [defaultValue=undefined] - value returned in case the key does not exist\n   * @return {*}\n   */\n  get(key, defaultValue=undefined){\n    assert(TypeCheck.isString(key), 'Invalid action key!');\n\n    return (this.has(key)) ? this[_cache].get(key).data : defaultValue;\n  }\n\n  /**\n   * Sets a result value to the lru cache, this value is associated with the {@link Action.id}\n   *\n   * @param {string} key - id associated with the value\n   * @param {*} value - value that should be store by the cache\n   */\n  set(key, value){\n    assert(TypeCheck.isString(key), 'Invalid action key!');\n\n    if (this[_cache] === null){\n      this[_cache] = new LruCacheBase({\n        max: this[_size],\n        maxAge: this[_lifespan],\n        length: (n, k) => {\n          return n.memorySize;\n        },\n      });\n    }\n\n    const resultHolder = Object.create(null);\n    resultHolder.memorySize = sizeof(value);\n    resultHolder.data = value;\n\n    this[_cache].set(key, resultHolder);\n  }\n}\n\nmodule.exports = LruCache;\n",
@@ -15955,7 +15900,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 592,
+    "__docId__": 587,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Utils/LruCache.js",
@@ -15981,7 +15926,7 @@
     }
   },
   {
-    "__docId__": 593,
+    "__docId__": 588,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Utils/LruCache.js",
@@ -16007,7 +15952,7 @@
     }
   },
   {
-    "__docId__": 594,
+    "__docId__": 589,
     "kind": "variable",
     "name": "__import_module__LruCacheBase",
     "memberof": "src/Utils/LruCache.js",
@@ -16033,7 +15978,7 @@
     }
   },
   {
-    "__docId__": 595,
+    "__docId__": 590,
     "kind": "variable",
     "name": "__import_module__sizeof",
     "memberof": "src/Utils/LruCache.js",
@@ -16059,7 +16004,7 @@
     }
   },
   {
-    "__docId__": 596,
+    "__docId__": 591,
     "kind": "variable",
     "name": "_size",
     "memberof": "src/Utils/LruCache.js",
@@ -16085,7 +16030,7 @@
     }
   },
   {
-    "__docId__": 597,
+    "__docId__": 592,
     "kind": "variable",
     "name": "_lifespan",
     "memberof": "src/Utils/LruCache.js",
@@ -16111,7 +16056,7 @@
     }
   },
   {
-    "__docId__": 598,
+    "__docId__": 593,
     "kind": "variable",
     "name": "_cache",
     "memberof": "src/Utils/LruCache.js",
@@ -16137,7 +16082,7 @@
     }
   },
   {
-    "__docId__": 599,
+    "__docId__": 594,
     "kind": "class",
     "name": "LruCache",
     "memberof": "src/Utils/LruCache.js",
@@ -16152,7 +16097,7 @@
     "interface": false
   },
   {
-    "__docId__": 600,
+    "__docId__": 595,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16187,7 +16132,7 @@
     ]
   },
   {
-    "__docId__": 601,
+    "__docId__": 596,
     "kind": "member",
     "name": "[_size]",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16210,7 +16155,7 @@
     }
   },
   {
-    "__docId__": 602,
+    "__docId__": 597,
     "kind": "member",
     "name": "[_lifespan]",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16233,7 +16178,7 @@
     }
   },
   {
-    "__docId__": 603,
+    "__docId__": 598,
     "kind": "member",
     "name": "[_cache]",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16256,7 +16201,7 @@
     }
   },
   {
-    "__docId__": 604,
+    "__docId__": 599,
     "kind": "get",
     "name": "size",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16277,7 +16222,7 @@
     }
   },
   {
-    "__docId__": 605,
+    "__docId__": 600,
     "kind": "get",
     "name": "lifespan",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16298,7 +16243,7 @@
     }
   },
   {
-    "__docId__": 606,
+    "__docId__": 601,
     "kind": "method",
     "name": "flush",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16323,7 +16268,7 @@
     ]
   },
   {
-    "__docId__": 607,
+    "__docId__": 602,
     "kind": "method",
     "name": "keys",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16345,7 +16290,7 @@
     }
   },
   {
-    "__docId__": 608,
+    "__docId__": 603,
     "kind": "get",
     "name": "length",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16366,7 +16311,7 @@
     }
   },
   {
-    "__docId__": 609,
+    "__docId__": 604,
     "kind": "method",
     "name": "has",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16399,7 +16344,7 @@
     }
   },
   {
-    "__docId__": 610,
+    "__docId__": 605,
     "kind": "method",
     "name": "get",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16444,7 +16389,7 @@
     }
   },
   {
-    "__docId__": 611,
+    "__docId__": 606,
     "kind": "method",
     "name": "set",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16479,7 +16424,7 @@
     ]
   },
   {
-    "__docId__": 612,
+    "__docId__": 607,
     "kind": "member",
     "name": "[_cache]",
     "memberof": "src/Utils/LruCache.js~LruCache",
@@ -16502,7 +16447,7 @@
     }
   },
   {
-    "__docId__": 613,
+    "__docId__": 608,
     "kind": "file",
     "name": "src/Utils/deepMerge.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\n\n\n/**\n * Merges two plain objects recursively and returns a new one\n *\n * @param {Object} objectA - plain object a\n * @param {Object} objectB - plain object b\n * @return {Object}\n * @private\n */\nfunction deepMerge(objectA, objectB){\n\n  assert(TypeCheck.isPlainObject(objectA), 'objectA needs to be a plain object');\n  assert(TypeCheck.isPlainObject(objectB), 'objectB needs to be a plain object');\n\n  const result = Object.assign({}, objectA);\n\n  for (const key in objectB){\n\n    // merging objects\n    if (TypeCheck.isPlainObject(objectB[key]) && key in objectA){\n      result[key] = deepMerge(objectA[key], objectB[key]);\n    }\n    // overriding / assigning\n    else{\n      result[key] = objectB[key];\n    }\n  }\n\n  return result;\n}\n\nmodule.exports = deepMerge;\n",
@@ -16513,7 +16458,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 614,
+    "__docId__": 609,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Utils/deepMerge.js",
@@ -16539,7 +16484,7 @@
     }
   },
   {
-    "__docId__": 615,
+    "__docId__": 610,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Utils/deepMerge.js",
@@ -16565,7 +16510,7 @@
     }
   },
   {
-    "__docId__": 616,
+    "__docId__": 611,
     "kind": "function",
     "name": "deepMerge",
     "memberof": "src/Utils/deepMerge.js",
@@ -16611,7 +16556,7 @@
     }
   },
   {
-    "__docId__": 617,
+    "__docId__": 612,
     "kind": "file",
     "name": "src/Utils/hash.js",
     "content": "const debug = require('debug')('Mebo');\nconst assert = require('assert');\nconst crypto = require('crypto');\n\n// optional dependency (requires node-gyp)\nlet xxhash = null;\ntry{\n  xxhash = require('xxhash'); // eslint-disable-line\n}\ncatch(err){\n  /* istanbul ignore next */\n  debug('xxHash not available');\n}\n\n\n/**\n * Returns a non-cryptographic hash for the buffer. By default it tries to\n * use xxHash, however if it's not available (node-gyp) then it uses SHA256\n * as fallback.\n *\n * @param {Buffer} value - buffer value that should be used to generate the hash\n * @param {Object} options - custom options\n * @param {boolean} [options.forceFallback=false] - when enabled forces to use the\n * fallback hash\n * @param {number} [options.seed=0xA] - seed used by the xxHash\n * @return {string}\n * @private\n */\nfunction hash(value, {forceFallback=false, seed=0xA}={}){\n  assert(value instanceof Buffer, 'Invalid buffer instance');\n\n  let result;\n\n  // whenever possible lets use xxHash\n  if (!forceFallback && xxhash){\n    result = xxhash.XXHash64.hash(value, seed).toString('hex');\n  }\n  // otherwise fallback to sha256\n  else{\n    result = crypto.createHash('sha256').update(value).digest('hex');\n  }\n\n  return result;\n}\n\nmodule.exports = hash;\n",
@@ -16622,7 +16567,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 618,
+    "__docId__": 613,
     "kind": "variable",
     "name": "__import_module__debug",
     "memberof": "src/Utils/hash.js",
@@ -16648,7 +16593,7 @@
     }
   },
   {
-    "__docId__": 619,
+    "__docId__": 614,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Utils/hash.js",
@@ -16674,7 +16619,7 @@
     }
   },
   {
-    "__docId__": 620,
+    "__docId__": 615,
     "kind": "variable",
     "name": "__import_module__crypto",
     "memberof": "src/Utils/hash.js",
@@ -16700,7 +16645,7 @@
     }
   },
   {
-    "__docId__": 621,
+    "__docId__": 616,
     "kind": "variable",
     "name": "xxhash",
     "memberof": "src/Utils/hash.js",
@@ -16726,7 +16671,7 @@
     }
   },
   {
-    "__docId__": 622,
+    "__docId__": 617,
     "kind": "function",
     "name": "hash",
     "memberof": "src/Utils/hash.js",
@@ -16796,7 +16741,7 @@
     }
   },
   {
-    "__docId__": 623,
+    "__docId__": 618,
     "kind": "file",
     "name": "src/Utils/index.js",
     "content": "module.exports.ImmutableMap = require('./ImmutableMap');\nmodule.exports.LruCache = require('./LruCache');\n\n// the following modules are used internally (not exposed by\n// the docgen). Eventually they may become external dependencies\nmodule.exports.hash = require('./hash');\nmodule.exports.mkdirs = require('./mkdirs');\nmodule.exports.deepMerge = require('./deepMerge');\nmodule.exports.HierarchicalCollection = require('./HierarchicalCollection');\n",
@@ -16807,7 +16752,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 624,
+    "__docId__": 619,
     "kind": "file",
     "name": "src/Utils/mkdirs.js",
     "content": "const fs = require('fs');\nconst path = require('path');\nconst util = require('util');\n\n// promisifying\nconst stat = util.promisify(fs.stat);\nconst mkdir = util.promisify(fs.mkdir);\n\n\n/**\n * Creates folders recursively, in case a level already exist then the level is skipped\n *\n * @param {string} fullPath - path that should be created\n * @param {number} [mode] - optional octal value about the permission mode for the created\n * folders\n * @private\n */\nasync function mkdirs(fullPath, mode=0o777){\n  let needsToCreate = false;\n  // in case the stat fails it will try to recreate the folders\n  try{\n    await stat(fullPath);\n  }\n  // otherwise tries to create it\n  catch(err){\n\n    // not found\n    if (err.code === 'ENOENT'){\n      needsToCreate = true;\n    }\n    else{\n      throw err;\n    }\n  }\n\n  // going through all levels and creating them if necessary\n  if (needsToCreate){\n    const pathLevels = path.normalize(fullPath).split(path.sep);\n    const currentLevels = [];\n\n    for (const level of pathLevels){\n      if (level === '' && currentLevels.length === 0){\n        currentLevels.push(path.sep);\n      }\n      else if (level !== ''){\n        currentLevels.push(level);\n        const currentPath = currentLevels.join(path.sep);\n\n        let needsToCreateCurrentLevel = false;\n        try{\n          await stat(currentPath); // eslint-disable-line no-await-in-loop\n        }\n        catch(err){\n          // not found\n          if (err.code === 'ENOENT'){\n            needsToCreateCurrentLevel = true;\n          }\n          else{\n            /* istanbul ignore next */\n            throw err;\n          }\n        }\n\n        if (needsToCreateCurrentLevel){\n          await mkdir(currentPath, mode); // eslint-disable-line no-await-in-loop\n        }\n      }\n    }\n  }\n}\n\nmodule.exports = mkdirs;\n",
@@ -16818,7 +16763,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 625,
+    "__docId__": 620,
     "kind": "variable",
     "name": "__import_module__fs",
     "memberof": "src/Utils/mkdirs.js",
@@ -16844,7 +16789,7 @@
     }
   },
   {
-    "__docId__": 626,
+    "__docId__": 621,
     "kind": "variable",
     "name": "__import_module__path",
     "memberof": "src/Utils/mkdirs.js",
@@ -16870,7 +16815,7 @@
     }
   },
   {
-    "__docId__": 627,
+    "__docId__": 622,
     "kind": "variable",
     "name": "__import_module__util",
     "memberof": "src/Utils/mkdirs.js",
@@ -16896,7 +16841,7 @@
     }
   },
   {
-    "__docId__": 628,
+    "__docId__": 623,
     "kind": "variable",
     "name": "stat",
     "memberof": "src/Utils/mkdirs.js",
@@ -16922,7 +16867,7 @@
     }
   },
   {
-    "__docId__": 629,
+    "__docId__": 624,
     "kind": "variable",
     "name": "mkdir",
     "memberof": "src/Utils/mkdirs.js",
@@ -16948,7 +16893,7 @@
     }
   },
   {
-    "__docId__": 630,
+    "__docId__": 625,
     "kind": "function",
     "name": "mkdirs",
     "memberof": "src/Utils/mkdirs.js",
@@ -16986,7 +16931,7 @@
     ]
   },
   {
-    "__docId__": 631,
+    "__docId__": 626,
     "kind": "file",
     "name": "src/Writer.js",
     "content": "const stream = require('stream');\nconst assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst debug = require('debug')('Mebo');\nconst Utils = require('./Utils');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _options = Symbol('options');\nconst _value = Symbol('value');\n\n\n/**\n * A writer is used to output a value through the {@link Handler}.\n *\n * The output is determined by the kind of value that's passed to the writer where\n * exceptions are interpreted as error output, otherwise the value is interpreted\n * as success value. Therefore, new implements are expected to implement both a success\n * ({@link Writer._successOutput}) and error ({@link Writer._errorOutput}) outputs.\n *\n * **Options:** Custom options can be assigned to writers ({@link Writer.setOption}).\n * They are passed from the handler to the writer during the output process\n * ({@link Handler.output}).\n *\n * ```\n * const myHandler = Mebo.Handler.create('someHandler');\n *\n * // setting output options during the output\n * myHandler.output(value, {\n *  someOption: 10,\n * });\n * ```\n *\n * When an action is executed through a handler it can define options via\n * the {@link Metadata} support. Detailed information about that can be found\n * at {@link Metadata}:\n *\n * ```\n * class MyAction extends Mebo.Action{\n *    _perform(data){\n *\n *      // defining a custom output option\n *      this.setMeta('$myOption', {\n *        someOption: 10,\n *      });\n *\n *      // ...\n *    }\n * }\n * ```\n *\n * <h2>Options Summary</h2>\n *\n * Option Name | Description | Default Value\n * --- | --- | :---:\n * convertBufferToReadableStream | Tells if a buffer value should be converted to a \\\n * readable stream | ::true::\n * result | Overrides the value returned by {@link Writer.value} to an arbitrary \\\n * value (only affects the success output) | ::none::\n */\nclass Writer{\n\n  /**\n   * Creates a writer\n   *\n   * @param {*} value - arbitrary value passed to the writer\n   */\n  constructor(value){\n\n    // note: currently reader & writer are completely separated entities that don't\n    // have a common parent class (aka HandlerOperation). The reason for\n    // that is currently they are so distinctive from each other that the only member in\n    // common is the option. In case they start to share more characteristics in common\n    // then a base class should be created.\n\n    this[_value] = value;\n    this[_options] = new Utils.HierarchicalCollection();\n\n    // default options\n    this.setOption('convertBufferToReadableStream', true);\n  }\n\n  /**\n   * Returns an option\n   *\n   * @param {string} path - path about where the option is localized (the levels\n   * must be separated by '.'). In case of an empty string it returns the\n   * entire options\n   * @param {*} [defaultValue] - default value returned in case a value was\n   * not found for the path\n   * @return {*}\n   */\n  option(path, defaultValue=undefined){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n    return this[_options].query(path, defaultValue);\n  }\n\n  /**\n   * Sets a value under the options\n   *\n   * @param {string} path - path about where the option should be stored under\n   * the options (the levels must be separated by '.')\n   * @param {*} value - value that is going to be stored under the collection\n   * @param {boolean} [merge=true] - this option is used to decide in case of the\n   * last level is already existing under the collection, if the value should be\n   * either merged (default) or overridden.\n   */\n  setOption(path, value, merge=true){\n    assert(TypeCheck.isString(path), 'path needs to be defined as string');\n\n    this[_options].insert(path, value, merge);\n  }\n\n  /**\n   * Returns the value that should be serialized ({@link Writer.serialize}) by the writer.\n   *\n   * @return {*}\n   */\n  value(){\n    return this[_value];\n  }\n\n  /**\n   * Serializes a writer value ({@link Writer.value}) in case the value is an\n   * exception it's serialize as {@link Writer._errorOutput} otherwise it's serialized\n   * as {@link Writer._successOutput}.\n   */\n  serialize(){\n\n    if (this.value() instanceof Error){\n      this._errorOutput();\n    }\n    else{\n      this._successOutput();\n    }\n  }\n\n  /**\n   * Translates an {@link Error} to a data structure that is later serialized by a writer\n   * implementation as output. This method gets triggered when an exception is passed\n   * as value by the {@link Handler.output}.\n   *\n   * By default the contents of the error output are driven by the `err.message`,\n   * however if an error contains `err.toJSON` property ({@link ValidationFail.toJSON})\n   * then that's used instead of the message.\n   *\n   * Also, you can avoid specific errors to be handled via output process by defining the member\n   * `output` assigned with `false` to the error (for instance ```err.output = false;```). If\n   * that is in place the error gets thrown which triggers the event {@link Handler.onErrorDuringOutput}.\n   *\n   * **Tip:** You can set the env variable `NODE_ENV=development` to get the traceback information\n   * included in the error output\n   *\n   * @return {Object}\n   * @protected\n   */\n  _errorOutput(){\n\n    const err = this.value();\n\n    // checking if the error can be handled by the writer\n    if (err.output === false){\n      throw err;\n    }\n\n    // objects with the property 'toJSON' can define a custom representation\n    // when they are serialized using json using (otherwise use the error message), reference:\n    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify\n    const result = (TypeCheck.isCallable(err.toJSON)) ? err.toJSON() : err.message;\n\n    // printing the stack-trace information when running in development mode\n    /* istanbul ignore next */\n    if (process.env.NODE_ENV === 'development'){\n      process.stderr.write(`${err.stack}\\n`);\n      debug(err.stack);\n    }\n\n    return result;\n  }\n\n  /**\n   * Translates the success value to a data structure that is later serialized\n   * by a handler implementation as output.\n   *\n   * /todo:\n   * This value is either driven by the option 'result' (when defined) or by the\n   * value defined at constructor time.\n   *\n   * All writers shipped with Mebo have support for streams where in case of\n   * any readable stream or buffer value are piped to the output,\n   * otherwise the result is encoded using JSON (defined per writer bases).\n   *\n   * Note: any Buffer value passed to this method gets automatically converted to\n   * a readable stream (this behavior is driven by the option\n   * 'convertBufferToReadableStream').\n   *\n   * This method is called by {@link Handler.output}.\n   *\n   * @return {Object|Stream}\n   * @protected\n   */\n  _successOutput(){\n\n    const optionOutput = this.option('result');\n    const result = (optionOutput === undefined) ? this.value() : optionOutput;\n\n    // stream output\n    if (this.option('convertBufferToReadableStream') && result instanceof Buffer){\n      const bufferStream = new stream.PassThrough();\n      bufferStream.end(result);\n\n      return bufferStream;\n    }\n\n    return result;\n  }\n}\n\nmodule.exports = Writer;\n",
@@ -16997,7 +16942,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 632,
+    "__docId__": 627,
     "kind": "variable",
     "name": "__import_module__stream",
     "memberof": "src/Writer.js",
@@ -17023,7 +16968,7 @@
     }
   },
   {
-    "__docId__": 633,
+    "__docId__": 628,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Writer.js",
@@ -17049,7 +16994,7 @@
     }
   },
   {
-    "__docId__": 634,
+    "__docId__": 629,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Writer.js",
@@ -17075,7 +17020,7 @@
     }
   },
   {
-    "__docId__": 635,
+    "__docId__": 630,
     "kind": "variable",
     "name": "__import_module__debug",
     "memberof": "src/Writer.js",
@@ -17101,7 +17046,7 @@
     }
   },
   {
-    "__docId__": 636,
+    "__docId__": 631,
     "kind": "variable",
     "name": "__import_module__Utils",
     "memberof": "src/Writer.js",
@@ -17127,7 +17072,7 @@
     }
   },
   {
-    "__docId__": 637,
+    "__docId__": 632,
     "kind": "variable",
     "name": "_options",
     "memberof": "src/Writer.js",
@@ -17153,7 +17098,7 @@
     }
   },
   {
-    "__docId__": 638,
+    "__docId__": 633,
     "kind": "variable",
     "name": "_value",
     "memberof": "src/Writer.js",
@@ -17179,7 +17124,7 @@
     }
   },
   {
-    "__docId__": 639,
+    "__docId__": 634,
     "kind": "class",
     "name": "Writer",
     "memberof": "src/Writer.js",
@@ -17194,7 +17139,7 @@
     "interface": false
   },
   {
-    "__docId__": 640,
+    "__docId__": 635,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Writer.js~Writer",
@@ -17219,7 +17164,7 @@
     ]
   },
   {
-    "__docId__": 641,
+    "__docId__": 636,
     "kind": "member",
     "name": "[_value]",
     "memberof": "src/Writer.js~Writer",
@@ -17242,7 +17187,7 @@
     }
   },
   {
-    "__docId__": 642,
+    "__docId__": 637,
     "kind": "member",
     "name": "[_options]",
     "memberof": "src/Writer.js~Writer",
@@ -17265,7 +17210,7 @@
     }
   },
   {
-    "__docId__": 643,
+    "__docId__": 638,
     "kind": "method",
     "name": "option",
     "memberof": "src/Writer.js~Writer",
@@ -17308,7 +17253,7 @@
     }
   },
   {
-    "__docId__": 644,
+    "__docId__": 639,
     "kind": "method",
     "name": "setOption",
     "memberof": "src/Writer.js~Writer",
@@ -17355,7 +17300,7 @@
     ]
   },
   {
-    "__docId__": 645,
+    "__docId__": 640,
     "kind": "method",
     "name": "value",
     "memberof": "src/Writer.js~Writer",
@@ -17377,7 +17322,7 @@
     }
   },
   {
-    "__docId__": 646,
+    "__docId__": 641,
     "kind": "method",
     "name": "serialize",
     "memberof": "src/Writer.js~Writer",
@@ -17391,7 +17336,7 @@
     "params": []
   },
   {
-    "__docId__": 647,
+    "__docId__": 642,
     "kind": "method",
     "name": "_errorOutput",
     "memberof": "src/Writer.js~Writer",
@@ -17413,7 +17358,7 @@
     }
   },
   {
-    "__docId__": 648,
+    "__docId__": 643,
     "kind": "method",
     "name": "_successOutput",
     "memberof": "src/Writer.js~Writer",
@@ -17436,7 +17381,7 @@
     }
   },
   {
-    "__docId__": 649,
+    "__docId__": 644,
     "kind": "file",
     "name": "src/Writers/CliOutput.js",
     "content": "const assert = require('assert');\nconst stream = require('stream');\nconst Handler = require('../Handler');\nconst Writer = require('../Writer');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _stdout = Symbol('stdout');\nconst _stderr = Symbol('stderr');\n\n\n/**\n * Command output writer.\n *\n * This writer is used by the output of the cli handler\n * ({@link Cli}).\n *\n * In case the value is an exception then it's treated as\n * {@link CliOutput._errorOutput} otherwise the value is treated as\n * {@link CliOutput._successOutput}.\n *\n * <h2>Options Summary</h2>\n *\n * Option Name | Description | Default Value\n * --- | --- | :---:\n * result | Overrides the value returned by {@link Writer.value} to an arbitrary \\\n * value (only affects the success output) | ::none::\n * parsingErrorStatusCode | Custom error status code used to identify when the \\\n * cli args could not be parsed | `700`\n */\nclass CliOutput extends Writer{\n\n  /**\n   * Creates the cli output writer\n   *\n   * @param {*} value - arbitrary value passed to the writer\n   * @param {stream} stdout - stream used as stdout\n   * @param {stream} stderr - stream used as stderr\n   */\n  constructor(value, stdout, stderr){\n    super(value);\n\n    this._setStdout(stdout);\n    this._setStderr(stderr);\n\n    // default options\n    this.setOption('parsingErrorStatusCode', 700);\n  }\n\n  /**\n   * Returns the stream used as stdout\n   *\n   * @return {stream}\n   */\n  stdout(){\n    return this[_stdout];\n  }\n\n  /**\n   * Returns the stream used as stderr\n   *\n   * @return {stream}\n   */\n  stderr(){\n    return this[_stderr];\n  }\n\n  /**\n   * Implements the response for an error value.\n   *\n   * The error output writes the error message under the stderr.\n   *\n   * @protected\n   */\n  _errorOutput(){\n\n    process.exitCode = 1;\n    const message = super._errorOutput();\n\n    if (this.value().status === this.option('parsingErrorStatusCode')){\n      this.stderr().write(`${message}\\n`);\n    }\n    else{\n      this.stderr().write(message);\n    }\n  }\n\n  /**\n   * Implements the response for a success value.\n   *\n   * Readable streams are piped to {@link Cli.stdout}, otherwise\n   * the value is serialized using json.\n   *\n   * @protected\n   */\n  _successOutput(){\n\n    let result = super._successOutput();\n\n    /* istanbul ignore next */\n    if (result === undefined){\n      return;\n    }\n\n    // readable stream\n    if (result instanceof stream.Readable){\n      result.pipe(this.stdout());\n      return;\n    }\n\n    // json result\n    result = JSON.stringify(result, null, ' ');\n    result += '\\n';\n\n    this.stdout().write(result);\n  }\n\n  /**\n   * Sets the stdout stream\n   *\n   * @param {stream} value - stream used as stdout\n   * @private\n   */\n  _setStdout(value){\n    assert(value instanceof stream, 'Invalid stream type');\n\n    this[_stdout] = value;\n  }\n\n  /**\n   * Sets the stderr stream\n   *\n   * @param {stream} value - stream used as stderr\n   * @private\n   */\n  _setStderr(value){\n    assert(value instanceof stream, 'Invalid stream type');\n\n    this[_stderr] = value;\n  }\n}\n\n// registering writer\nHandler.registerWriter(CliOutput, 'cli');\n\nmodule.exports = CliOutput;\n",
@@ -17447,7 +17392,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 650,
+    "__docId__": 645,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Writers/CliOutput.js",
@@ -17473,7 +17418,7 @@
     }
   },
   {
-    "__docId__": 651,
+    "__docId__": 646,
     "kind": "variable",
     "name": "__import_module__stream",
     "memberof": "src/Writers/CliOutput.js",
@@ -17499,7 +17444,7 @@
     }
   },
   {
-    "__docId__": 652,
+    "__docId__": 647,
     "kind": "variable",
     "name": "__import_module__Handler",
     "memberof": "src/Writers/CliOutput.js",
@@ -17525,7 +17470,7 @@
     }
   },
   {
-    "__docId__": 653,
+    "__docId__": 648,
     "kind": "variable",
     "name": "__import_module__Writer",
     "memberof": "src/Writers/CliOutput.js",
@@ -17551,7 +17496,7 @@
     }
   },
   {
-    "__docId__": 654,
+    "__docId__": 649,
     "kind": "variable",
     "name": "_stdout",
     "memberof": "src/Writers/CliOutput.js",
@@ -17577,7 +17522,7 @@
     }
   },
   {
-    "__docId__": 655,
+    "__docId__": 650,
     "kind": "variable",
     "name": "_stderr",
     "memberof": "src/Writers/CliOutput.js",
@@ -17603,7 +17548,7 @@
     }
   },
   {
-    "__docId__": 656,
+    "__docId__": 651,
     "kind": "class",
     "name": "CliOutput",
     "memberof": "src/Writers/CliOutput.js",
@@ -17621,7 +17566,7 @@
     ]
   },
   {
-    "__docId__": 657,
+    "__docId__": 652,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17666,7 +17611,7 @@
     ]
   },
   {
-    "__docId__": 658,
+    "__docId__": 653,
     "kind": "method",
     "name": "stdout",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17688,7 +17633,7 @@
     }
   },
   {
-    "__docId__": 659,
+    "__docId__": 654,
     "kind": "method",
     "name": "stderr",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17710,7 +17655,7 @@
     }
   },
   {
-    "__docId__": 660,
+    "__docId__": 655,
     "kind": "method",
     "name": "_errorOutput",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17724,7 +17669,7 @@
     "params": []
   },
   {
-    "__docId__": 661,
+    "__docId__": 656,
     "kind": "method",
     "name": "_successOutput",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17738,7 +17683,7 @@
     "params": []
   },
   {
-    "__docId__": 662,
+    "__docId__": 657,
     "kind": "method",
     "name": "_setStdout",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17763,7 +17708,7 @@
     ]
   },
   {
-    "__docId__": 663,
+    "__docId__": 658,
     "kind": "member",
     "name": "[_stdout]",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17786,7 +17731,7 @@
     }
   },
   {
-    "__docId__": 664,
+    "__docId__": 659,
     "kind": "method",
     "name": "_setStderr",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17811,7 +17756,7 @@
     ]
   },
   {
-    "__docId__": 665,
+    "__docId__": 660,
     "kind": "member",
     "name": "[_stderr]",
     "memberof": "src/Writers/CliOutput.js~CliOutput",
@@ -17834,7 +17779,7 @@
     }
   },
   {
-    "__docId__": 666,
+    "__docId__": 661,
     "kind": "file",
     "name": "src/Writers/WebResponse.js",
     "content": "const assert = require('assert');\nconst stream = require('stream');\nconst TypeCheck = require('js-typecheck');\nconst Settings = require('../Settings');\nconst Handler = require('../Handler');\nconst Writer = require('../Writer');\n\n// symbols used for private instance variables to avoid any potential clashing\n// caused by re-implementations\nconst _response = Symbol('response');\n\n\n/**\n * Web output writer.\n *\n * This writer is used by the output of the web handler ({@link Web}).\n *\n * In case the value is an exception then it's treated as\n * {@link WebResponse._errorOutput} otherwise the value is treated as\n * {@link WebResponse._successOutput}.\n *\n * <h2>Options Summary</h2>\n *\n * Option Name | Description | Default Value\n * --- | --- | :---:\n * headers | plain object containing the header names (in camel case convention) \\\n * that should be used in the response | `{}`\n * headersOnly | if enabled ends the response without any data | ::false::\n * status | success status code (the error status code is driven by the status \\\n * defined as a member of the exception) | `200`\n * root | plain object that gets deep merged at the root of the json output\\\n * of a success result, for instance:<br>`{data: {...}, <rootContentsA>: ..., \\\n * <rootContentsB> : ...}` | `{}`\n * result | Overrides the value returned by {@link Writer.value} to an \\\n * arbitrary value (only affects the success output) | ::none::\n * resultLabel | custom label used by the success output when the value is \\\n * serialized using json. This label is used to hold the result \\\n * under data, for instance:<br>`{data: {<resultLabel>: value}}`<br><br>In case of \\\n * undefined (default) then a fallback label is used based on the value type: \\\n * <br>- primitive values are held under 'value' \\\n * <br>- array value is held under 'items' \\\n * <br>- object is assigned with '' (empty string) \\\n * <br>* when an empty string is used, the value gets merged to the \\\n * result.data | ::none::\n *\n * <br>When defining options through the metadata support, it can done using\n * `option vars`. Mebo comes bundled with pre-defined option vars\n * for most of the options available for the readers & writers. The complete list\n * of the option vars can be found at {@link Metadata} documentation.\n *\n * Example of defining the `headers` option from inside of an action through\n * the metadata support:\n *\n * ```\n * // defining 'Content-Type' header\n * class MyAction extends Mebo.Action{\n *    _perform(data){\n *\n *      // 'Content-Type' header\n *      this.setMeta('$webHeaders', {\n *        contentType: 'application/octet-stream',\n *      });\n *\n *      // ...\n *    }\n * }\n * ```\n *\n * Also, headers can be defined through 'before action middlewares'\n * ({@link Web.addBeforeAction} and {@link Web.addBeforeAuthAction})\n */\nclass WebResponse extends Writer{\n\n  /**\n   * Creates a web response writer\n   *\n   * @param {*} value - arbitrary value passed to the writer\n   * @param {Object} res - express res object\n   */\n  constructor(value, res){\n    super(value);\n    this._setResponse(res);\n\n    // default options\n    this.setOption('headersOnly', false);\n    this.setOption('headers', {});\n    this.setOption('root', {\n      apiVersion: Settings.get('apiVersion'),\n    });\n    this.setOption('status', 200);\n  }\n\n  /**\n   * Returns the response object created by express\n   *\n   * @return {Object}\n   * @see http://expressjs.com/en/api.html#res\n   */\n  response(){\n    return this[_response];\n  }\n\n  /**\n   * Implements the response for an error value.\n   *\n   * Any error can carry a HTTP status code. It is done by defining `status` to any error\n   * (for instance ```err.status = 501;```).\n   * This practice can be found in all errors shipped with mebo ({@link Conflict}, {@link NoContent},\n   * {@link NotFound} and {@link ValidationFail}). In case none status is found in the error then `500`\n   * is used automatically.\n   *\n   * The error response gets automatically encoded using json, following the basics\n   * of google's json style guide. In case of an error status `500` the standard\n   * result is ignored and a message `Internal Server Error` is used instead.\n   *\n   * Further information can be found at base class documentation\n   * {@link Writer._errorOutput}.\n   *\n   * @protected\n   */\n  _errorOutput(){\n\n    const status = this.value().status || 500;\n\n    // setting the status code for the response\n    this.response().status(status);\n\n    const result = {\n      error: {\n        code: status,\n        message: super._errorOutput(),\n      },\n    };\n\n    // adding the stack-trace information when running in development mode\n    /* istanbul ignore next */\n    if (process.env.NODE_ENV === 'development'){\n      result.error.stacktrace = this.value().stack.split('\\n');\n    }\n\n    // should not leak any error message for the status code 500\n    if (status === 500){\n      result.error.message = 'Internal Server Error';\n    }\n\n    this._genericOutput(result);\n  }\n\n  /**\n   * Implements the response for a success value.\n   *\n   * A readable stream value is piped using 'application/octet-stream' by default\n   * (if it has not been defined by the header option 'contentType'),\n   * otherwise for non-readable stream value it's automatically encoded\n   * using json, following the basics of google's json style guide.\n   *\n   * Further information can be found at base class documentation\n   * {@link Writer._successOutput}.\n   *\n   * @see https://google.github.io/styleguide/jsoncstyleguide.xml\n   * @protected\n   */\n  _successOutput(){\n\n    const result = super._successOutput();\n\n    // setting the status code for the response\n    this.response().status(this.option('status'));\n\n    // setting header\n    this._setResponseHeaders();\n\n    // readable stream\n    if (result instanceof stream.Readable){\n      this._successStreamOutput(result);\n      return;\n    }\n\n    this._successJSONOutput(result);\n  }\n\n  /**\n   * Sets the response object created by express\n   *\n   * @param {Object} value - res object\n   * @see http://expressjs.com/en/api.html#res\n   * @private\n   */\n  _setResponse(value){\n    assert(TypeCheck.isObject(value) && TypeCheck.isObject(value.locals), 'Invalid response object');\n\n    this[_response] = value;\n  }\n\n  /**\n   * Results a stream through the success output\n   *\n   * @param {stream} value - output value\n   * @private\n   */\n  _successStreamOutput(value){\n    // setting a default content-type for readable stream in case\n    // it has not been set previously\n    const headers = this.option('headers');\n    if (!(headers && headers.contentType)){\n      this.response().setHeader('Content-Type', 'application/octet-stream');\n    }\n\n    value.pipe(this.response());\n  }\n\n  /**\n   * Results the default success output through google's json style guide\n   *\n   * @param {*} result - output value\n   * @private\n   */\n  _successJSONOutput(result){\n\n    const output = {};\n\n    // including the root options\n    Object.assign(output, this.option('root'));\n\n    // automatic result, it is done by figuring out the response based on\n    // the value returned by the action, otherwise if output contains data\n    // returns that instead\n    output.data = {};\n\n    if (result !== undefined){\n\n      // in case the value has defined 'toJSON' calling that to get result\n      // value that should be used for the output, reference:\n      // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify\n      let finalResult = result;\n      if (TypeCheck.isCallable(result.toJSON)){\n        finalResult = JSON.parse(JSON.stringify(result));\n      }\n\n      // resolving the result label\n      const resultLabel = this._resultLabel(finalResult);\n\n      if (resultLabel){\n        output.data[resultLabel] = finalResult;\n      }\n      else{\n        assert(!TypeCheck.isPrimitive(finalResult), \"Can't output a primitive value without a 'resultLabel'\");\n        assert(TypeCheck.isPlainObject(finalResult), \"Can't output a non-plain object value\");\n        output.data = finalResult;\n      }\n    }\n\n    this._genericOutput(output);\n  }\n\n  /**\n   * Generic output routine shared by both success and error outputs\n   *\n   * @param {*} output - arbitrary data used as output\n   * @private\n   */\n  _genericOutput(output){\n\n    // ending response without any data\n    if (this.option('headersOnly')){\n      this.response().end();\n      return;\n    }\n\n    // json output\n    this.response().json(output);\n  }\n\n  /**\n   * Returns the label used to hold the result under data. In case of undefined\n   * (default) it uses a fallback label based on the value type:\n   *\n   * - primitive values are held under 'value'\n   * - array value is held under 'items'\n   * - object is assigned with `null`\n   * * when an empty string is used, the value gets merged to the result.data\n   *\n   * @param {*} value - value that should be used by the result entry\n   * @return {string}\n   * @private\n   */\n  _resultLabel(value){\n    let resultLabel = this.option('resultLabel');\n    if (resultLabel === undefined){\n      if (TypeCheck.isPrimitive(value)){\n        resultLabel = 'value';\n      }\n      else if (TypeCheck.isList(value)){\n        resultLabel = 'items';\n      }\n      else{\n        resultLabel = '';\n      }\n    }\n\n    return resultLabel;\n  }\n\n  /**\n   * Looks for any header member defined as part of the options and sets them\n   * to the response header. It expects a camelCase name convention for the header name\n   *  where it gets translated to the header name convention, for instance:\n   * 'options.headers.contentType' translates to 'Content-Type'.\n   *\n   * @param {*} options - options passed to the output\n   * @private\n   */\n  _setResponseHeaders(){\n\n    const headers = this.option('headers');\n    const response = this.response();\n    if (headers){\n      for (const headerName in headers){\n        const convertedHeaderName = headerName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();\n\n        // assigning a header value to the response\n        response.setHeader(convertedHeaderName, headers[headerName]);\n      }\n    }\n  }\n}\n\n// registering writer\nHandler.registerWriter(WebResponse, 'web');\n\nmodule.exports = WebResponse;\n",
@@ -17845,7 +17790,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 667,
+    "__docId__": 662,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/Writers/WebResponse.js",
@@ -17871,7 +17816,7 @@
     }
   },
   {
-    "__docId__": 668,
+    "__docId__": 663,
     "kind": "variable",
     "name": "__import_module__stream",
     "memberof": "src/Writers/WebResponse.js",
@@ -17897,7 +17842,7 @@
     }
   },
   {
-    "__docId__": 669,
+    "__docId__": 664,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/Writers/WebResponse.js",
@@ -17923,7 +17868,7 @@
     }
   },
   {
-    "__docId__": 670,
+    "__docId__": 665,
     "kind": "variable",
     "name": "__import_module__Settings",
     "memberof": "src/Writers/WebResponse.js",
@@ -17949,7 +17894,7 @@
     }
   },
   {
-    "__docId__": 671,
+    "__docId__": 666,
     "kind": "variable",
     "name": "__import_module__Handler",
     "memberof": "src/Writers/WebResponse.js",
@@ -17975,7 +17920,7 @@
     }
   },
   {
-    "__docId__": 672,
+    "__docId__": 667,
     "kind": "variable",
     "name": "__import_module__Writer",
     "memberof": "src/Writers/WebResponse.js",
@@ -18001,7 +17946,7 @@
     }
   },
   {
-    "__docId__": 673,
+    "__docId__": 668,
     "kind": "variable",
     "name": "_response",
     "memberof": "src/Writers/WebResponse.js",
@@ -18027,7 +17972,7 @@
     }
   },
   {
-    "__docId__": 674,
+    "__docId__": 669,
     "kind": "class",
     "name": "WebResponse",
     "memberof": "src/Writers/WebResponse.js",
@@ -18045,7 +17990,7 @@
     ]
   },
   {
-    "__docId__": 675,
+    "__docId__": 670,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18080,7 +18025,7 @@
     ]
   },
   {
-    "__docId__": 676,
+    "__docId__": 671,
     "kind": "method",
     "name": "response",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18105,7 +18050,7 @@
     }
   },
   {
-    "__docId__": 677,
+    "__docId__": 672,
     "kind": "method",
     "name": "_errorOutput",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18119,7 +18064,7 @@
     "params": []
   },
   {
-    "__docId__": 678,
+    "__docId__": 673,
     "kind": "method",
     "name": "_successOutput",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18136,7 +18081,7 @@
     "params": []
   },
   {
-    "__docId__": 679,
+    "__docId__": 674,
     "kind": "method",
     "name": "_setResponse",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18164,7 +18109,7 @@
     ]
   },
   {
-    "__docId__": 680,
+    "__docId__": 675,
     "kind": "member",
     "name": "[_response]",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18187,7 +18132,7 @@
     }
   },
   {
-    "__docId__": 681,
+    "__docId__": 676,
     "kind": "method",
     "name": "_successStreamOutput",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18212,7 +18157,7 @@
     ]
   },
   {
-    "__docId__": 682,
+    "__docId__": 677,
     "kind": "method",
     "name": "_successJSONOutput",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18237,7 +18182,7 @@
     ]
   },
   {
-    "__docId__": 683,
+    "__docId__": 678,
     "kind": "method",
     "name": "_genericOutput",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18262,7 +18207,7 @@
     ]
   },
   {
-    "__docId__": 684,
+    "__docId__": 679,
     "kind": "method",
     "name": "_resultLabel",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18295,7 +18240,7 @@
     }
   },
   {
-    "__docId__": 685,
+    "__docId__": 680,
     "kind": "method",
     "name": "_setResponseHeaders",
     "memberof": "src/Writers/WebResponse.js~WebResponse",
@@ -18320,7 +18265,7 @@
     ]
   },
   {
-    "__docId__": 686,
+    "__docId__": 681,
     "kind": "file",
     "name": "src/Writers/index.js",
     "content": "module.exports.CliOutput = require('./CliOutput');\nmodule.exports.WebResponse = require('./WebResponse');\n",
@@ -18331,7 +18276,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 687,
+    "__docId__": 682,
     "kind": "file",
     "name": "src/decorators.js",
     "content": "const assert = require('assert');\nconst TypeCheck = require('js-typecheck');\nconst Action = require('./Action');\nconst Input = require('./Input');\nconst Handler = require('./Handler');\n\n\n/**\n * Generic registration, can be used for {@link Input}, {@link Action} and {@link Handler}\n *\n * @param {...args} args - arguments passed to the registration\n * @return {function}\n */\nfunction register(...args){\n  return (target) => {\n    target.register(target, ...args);\n  };\n}\n\n/**\n * Allows the action to be executed through the handler\n *\n * @param {string} handlerName - name of the handler\n * @param {...args} args - arguments passed to the registration\n * @return {function}\n */\nfunction grant(handlerName, ...args){\n  return (target) => {\n    assert(TypeCheck.isSubClassOf(target, Action), 'grant decorator requires an action');\n    const registeredActionName = Action.registeredActionName(target);\n    Handler.grantAction(handlerName, registeredActionName, ...args);\n  };\n}\n\n/**\n * Registers a property to an input\n *\n * @param {string} propertyName - property name to be registered\n * @returns {function}\n */\nfunction property(propertyName, ...args){\n  return (target) => {\n    assert(TypeCheck.isSubClassOf(target, Input), 'property decorator requires an input');\n\n    Input.registerProperty(target, propertyName, ...args);\n  };\n}\n\nmodule.exports.register = register;\nmodule.exports.grant = grant;\nmodule.exports.property = property;\n",
@@ -18342,7 +18287,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 688,
+    "__docId__": 683,
     "kind": "variable",
     "name": "__import_module__assert",
     "memberof": "src/decorators.js",
@@ -18368,7 +18313,7 @@
     }
   },
   {
-    "__docId__": 689,
+    "__docId__": 684,
     "kind": "variable",
     "name": "__import_module__TypeCheck",
     "memberof": "src/decorators.js",
@@ -18394,7 +18339,7 @@
     }
   },
   {
-    "__docId__": 690,
+    "__docId__": 685,
     "kind": "variable",
     "name": "__import_module__Action",
     "memberof": "src/decorators.js",
@@ -18420,7 +18365,7 @@
     }
   },
   {
-    "__docId__": 691,
+    "__docId__": 686,
     "kind": "variable",
     "name": "__import_module__Input",
     "memberof": "src/decorators.js",
@@ -18446,7 +18391,7 @@
     }
   },
   {
-    "__docId__": 692,
+    "__docId__": 687,
     "kind": "variable",
     "name": "__import_module__Handler",
     "memberof": "src/decorators.js",
@@ -18472,7 +18417,7 @@
     }
   },
   {
-    "__docId__": 693,
+    "__docId__": 688,
     "kind": "function",
     "name": "register",
     "memberof": "src/decorators.js",
@@ -18508,7 +18453,7 @@
     }
   },
   {
-    "__docId__": 694,
+    "__docId__": 689,
     "kind": "function",
     "name": "grant",
     "memberof": "src/decorators.js",
@@ -18554,7 +18499,7 @@
     }
   },
   {
-    "__docId__": 695,
+    "__docId__": 690,
     "kind": "function",
     "name": "property",
     "memberof": "src/decorators.js",
@@ -18596,7 +18541,7 @@
     }
   },
   {
-    "__docId__": 696,
+    "__docId__": 691,
     "kind": "file",
     "name": "src/index.js",
     "content": "const modules = {};\n\n// main modules\nmodules.Errors = require('./Errors');\nmodules.Utils = require('./Utils');\nmodules.Tasks = require('./Tasks');\nmodules.Input = require('./Input');\nmodules.Metadata = require('./Metadata');\nmodules.Settings = require('./Settings');\nmodules.Action = require('./Action');\nmodules.Session = require('./Session');\nmodules.Handler = require('./Handler');\nmodules.Reader = require('./Reader');\nmodules.Writer = require('./Writer');\n\n// decorators for the main modules\nObject.assign(\n  modules, require('./decorators'),\n);\n\n// implementations bundled with mebo\nmodules.Inputs = require('./Inputs');\nmodules.Handlers = require('./Handlers');\nmodules.Readers = require('./Readers');\nmodules.Writers = require('./Writers');\n\nmodule.exports = modules;\n",
@@ -18607,7 +18552,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 697,
+    "__docId__": 692,
     "kind": "variable",
     "name": "modules",
     "memberof": "src/index.js",
@@ -18633,7 +18578,7 @@
     }
   },
   {
-    "__docId__": 699,
+    "__docId__": 694,
     "kind": "external",
     "name": "Infinity",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
@@ -18645,7 +18590,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 700,
+    "__docId__": 695,
     "kind": "external",
     "name": "NaN",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
@@ -18657,7 +18602,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 701,
+    "__docId__": 696,
     "kind": "external",
     "name": "undefined",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
@@ -18669,7 +18614,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 702,
+    "__docId__": 697,
     "kind": "external",
     "name": "null",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
@@ -18681,7 +18626,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 703,
+    "__docId__": 698,
     "kind": "external",
     "name": "Object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -18693,7 +18638,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 704,
+    "__docId__": 699,
     "kind": "external",
     "name": "object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -18705,7 +18650,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 705,
+    "__docId__": 700,
     "kind": "external",
     "name": "Function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -18717,7 +18662,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 706,
+    "__docId__": 701,
     "kind": "external",
     "name": "function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -18729,7 +18674,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 707,
+    "__docId__": 702,
     "kind": "external",
     "name": "Boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -18741,7 +18686,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 708,
+    "__docId__": 703,
     "kind": "external",
     "name": "boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -18753,7 +18698,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 709,
+    "__docId__": 704,
     "kind": "external",
     "name": "Symbol",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
@@ -18765,7 +18710,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 710,
+    "__docId__": 705,
     "kind": "external",
     "name": "Error",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
@@ -18777,7 +18722,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 711,
+    "__docId__": 706,
     "kind": "external",
     "name": "EvalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
@@ -18789,7 +18734,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 712,
+    "__docId__": 707,
     "kind": "external",
     "name": "InternalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
@@ -18801,7 +18746,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 713,
+    "__docId__": 708,
     "kind": "external",
     "name": "RangeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
@@ -18813,7 +18758,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 714,
+    "__docId__": 709,
     "kind": "external",
     "name": "ReferenceError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
@@ -18825,7 +18770,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 715,
+    "__docId__": 710,
     "kind": "external",
     "name": "SyntaxError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
@@ -18837,7 +18782,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 716,
+    "__docId__": 711,
     "kind": "external",
     "name": "TypeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
@@ -18849,7 +18794,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 717,
+    "__docId__": 712,
     "kind": "external",
     "name": "URIError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
@@ -18861,7 +18806,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 718,
+    "__docId__": 713,
     "kind": "external",
     "name": "Number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -18873,7 +18818,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 719,
+    "__docId__": 714,
     "kind": "external",
     "name": "number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -18885,7 +18830,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 720,
+    "__docId__": 715,
     "kind": "external",
     "name": "Date",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
@@ -18897,7 +18842,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 721,
+    "__docId__": 716,
     "kind": "external",
     "name": "String",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -18909,7 +18854,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 722,
+    "__docId__": 717,
     "kind": "external",
     "name": "string",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -18921,7 +18866,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 723,
+    "__docId__": 718,
     "kind": "external",
     "name": "RegExp",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
@@ -18933,7 +18878,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 724,
+    "__docId__": 719,
     "kind": "external",
     "name": "Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
@@ -18945,7 +18890,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 725,
+    "__docId__": 720,
     "kind": "external",
     "name": "Int8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
@@ -18957,7 +18902,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 726,
+    "__docId__": 721,
     "kind": "external",
     "name": "Uint8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
@@ -18969,7 +18914,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 727,
+    "__docId__": 722,
     "kind": "external",
     "name": "Uint8ClampedArray",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
@@ -18981,7 +18926,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 728,
+    "__docId__": 723,
     "kind": "external",
     "name": "Int16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
@@ -18993,7 +18938,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 729,
+    "__docId__": 724,
     "kind": "external",
     "name": "Uint16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
@@ -19005,7 +18950,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 730,
+    "__docId__": 725,
     "kind": "external",
     "name": "Int32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
@@ -19017,7 +18962,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 731,
+    "__docId__": 726,
     "kind": "external",
     "name": "Uint32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
@@ -19029,7 +18974,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 732,
+    "__docId__": 727,
     "kind": "external",
     "name": "Float32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
@@ -19041,7 +18986,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 733,
+    "__docId__": 728,
     "kind": "external",
     "name": "Float64Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
@@ -19053,7 +18998,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 734,
+    "__docId__": 729,
     "kind": "external",
     "name": "Map",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
@@ -19065,7 +19010,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 735,
+    "__docId__": 730,
     "kind": "external",
     "name": "Set",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
@@ -19077,7 +19022,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 736,
+    "__docId__": 731,
     "kind": "external",
     "name": "WeakMap",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
@@ -19089,7 +19034,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 737,
+    "__docId__": 732,
     "kind": "external",
     "name": "WeakSet",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
@@ -19101,7 +19046,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 738,
+    "__docId__": 733,
     "kind": "external",
     "name": "ArrayBuffer",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
@@ -19113,7 +19058,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 739,
+    "__docId__": 734,
     "kind": "external",
     "name": "DataView",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
@@ -19125,7 +19070,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 740,
+    "__docId__": 735,
     "kind": "external",
     "name": "JSON",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
@@ -19137,7 +19082,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 741,
+    "__docId__": 736,
     "kind": "external",
     "name": "Promise",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
@@ -19149,7 +19094,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 742,
+    "__docId__": 737,
     "kind": "external",
     "name": "Generator",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
@@ -19161,7 +19106,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 743,
+    "__docId__": 738,
     "kind": "external",
     "name": "GeneratorFunction",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
@@ -19173,7 +19118,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 744,
+    "__docId__": 739,
     "kind": "external",
     "name": "Reflect",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
@@ -19185,7 +19130,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 745,
+    "__docId__": 740,
     "kind": "external",
     "name": "Proxy",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
@@ -19198,7 +19143,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 747,
+    "__docId__": 742,
     "kind": "external",
     "name": "CanvasRenderingContext2D",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
@@ -19210,7 +19155,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 748,
+    "__docId__": 743,
     "kind": "external",
     "name": "DocumentFragment",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
@@ -19222,7 +19167,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 749,
+    "__docId__": 744,
     "kind": "external",
     "name": "Element",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
@@ -19234,7 +19179,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 750,
+    "__docId__": 745,
     "kind": "external",
     "name": "Event",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
@@ -19246,7 +19191,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 751,
+    "__docId__": 746,
     "kind": "external",
     "name": "Node",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
@@ -19258,7 +19203,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 752,
+    "__docId__": 747,
     "kind": "external",
     "name": "NodeList",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
@@ -19270,7 +19215,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 753,
+    "__docId__": 748,
     "kind": "external",
     "name": "XMLHttpRequest",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
@@ -19282,7 +19227,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 754,
+    "__docId__": 749,
     "kind": "external",
     "name": "AudioContext",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",

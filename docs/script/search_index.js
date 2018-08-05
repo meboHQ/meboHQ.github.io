@@ -1752,36 +1752,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/outputs/buf.js",
-    "file/src/Outputs/Buf.js.html",
-    "src/Outputs/Buf.js",
-    "file"
-  ],
-  [
-    "src/outputs/none.js",
-    "file/src/Outputs/None.js.html",
-    "src/Outputs/None.js",
-    "file"
-  ],
-  [
-    "src/outputs/numeric.js",
-    "file/src/Outputs/Numeric.js.html",
-    "src/Outputs/Numeric.js",
-    "file"
-  ],
-  [
-    "src/outputs/object.js",
-    "file/src/Outputs/Object.js.html",
-    "src/Outputs/Object.js",
-    "file"
-  ],
-  [
-    "src/outputs/text.js",
-    "file/src/Outputs/Text.js.html",
-    "src/Outputs/Text.js",
-    "file"
-  ],
-  [
     "src/reader.js",
     "file/src/Reader.js.html",
     "src/Reader.js",
