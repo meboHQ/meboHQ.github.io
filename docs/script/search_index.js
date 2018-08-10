@@ -763,13 +763,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/errors/validationfail.js~validationfail#code",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-code",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-code",
     "src/Errors/ValidationFail.js~ValidationFail#code",
     "member"
   ],
   [
     "src/errors/validationfail.js~validationfail#code",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-code",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-code",
     "src/Errors/ValidationFail.js~ValidationFail#code",
     "member"
   ],
@@ -787,13 +787,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
     "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
   [
     "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
     "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
@@ -1980,6 +1980,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/tasks.js~tasks#addaction",
+    "class/src/Tasks.js~Tasks.html#instance-method-addAction",
+    "src/Tasks.js~Tasks#addAction",
+    "method"
+  ],
+  [
     "src/tasks.js~tasks#addwrappedpromise",
     "class/src/Tasks.js~Tasks.html#instance-method-addWrappedPromise",
     "src/Tasks.js~Tasks#addWrappedPromise",
@@ -2001,12 +2007,6 @@ window.esdocSearchIndex = [
     "src/tasks.js~tasks#contents",
     "class/src/Tasks.js~Tasks.html#instance-method-contents",
     "src/Tasks.js~Tasks#contents",
-    "method"
-  ],
-  [
-    "src/tasks.js~tasks#grantaction",
-    "class/src/Tasks.js~Tasks.html#instance-method-grantAction",
-    "src/Tasks.js~Tasks#grantAction",
     "method"
   ],
   [

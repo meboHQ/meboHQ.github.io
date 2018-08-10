@@ -172,6 +172,34 @@ promises that are triggered when a <span><a href="class/src/Session.js~Session.h
         <p>
           
           
+          <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-addAction">addAction</a></span></span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Adds an action to the tasks</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
           <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-addWrappedPromise">addWrappedPromise</a></span></span><span data-ice="signature">(wrappedPromise: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
         </p>
       </div>
@@ -236,34 +264,6 @@ promises that are triggered when a <span><a href="class/src/Session.js~Session.h
         
         <div data-ice="description"><p>Returns a list sorted by priority and inclusion order about the actions and
 promises that are executed through <span>execute</span></p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          <span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html#instance-method-grantAction">grantAction</a></span></span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Adds an action to the tasks</p>
 </div>
       </div>
     </td>
@@ -387,6 +387,95 @@ promises that are executed through <span>execute</span></p>
 
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-addAction">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">addAction</span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber41">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Adds an action to the tasks</p>
+<p><code>runOnlyOnce</code> can be used to avoid the execution of an action that may be triggered
+multiple times across nested actions where ideally it should be executed only once,
+it&apos;s done by using the action&apos;s id (<span><a href="class/src/Action.js~Action.html#instance-method-id">Action.id</a></span>).</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">action</td>
+      <td data-ice="type"><span><a href="class/src/Action.js~Action.html">Action</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>action instance that should be executed in the wrap up</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">options</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>custom options</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.runOnlyOnce</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: true</li></ul></td>
+      <td data-ice="description"><p>tells if the action should be ignore in case
+it has already been executed previously (it&apos;s done by matching the <span><a href="class/src/Action.js~Action.html#instance-method-id">Action.id</a></span>)</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.priority</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: 100</li></ul></td>
+      <td data-ice="description"><p>tells the priority of the action, this affects
+the execution order where a lower numeric value means a higher priority.</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
 <div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-addWrappedPromise">
     <span class="access" data-ice="access">public</span>
@@ -577,95 +666,6 @@ promises that are executed through <span>execute</span></p>
     <div data-ice="returnProperties">
 </div>
   </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-grantAction">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span data-ice="name">grantAction</span><span data-ice="signature">(action: <span><a href="class/src/Action.js~Action.html">Action</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Tasks.js.html#lineNumber41">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Adds an action to the tasks</p>
-<p><code>runOnlyOnce</code> can be used to avoid the execution of an action that may be triggered
-multiple times across nested actions where ideally it should be executed only once,
-it&apos;s done by using the action&apos;s id (<span><a href="class/src/Action.js~Action.html#instance-method-id">Action.id</a></span>).</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">action</td>
-      <td data-ice="type"><span><a href="class/src/Action.js~Action.html">Action</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>action instance that should be executed in the wrap up</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">options</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>custom options</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="1">
-      <td data-ice="name" data-depth="1">options.runOnlyOnce</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
-      <td data-ice="appendix"><ul><li>optional</li>
-<li>default: true</li></ul></td>
-      <td data-ice="description"><p>tells if the action should be ignore in case
-it has already been executed previously (it&apos;s done by matching the <span><a href="class/src/Action.js~Action.html#instance-method-id">Action.id</a></span>)</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="1">
-      <td data-ice="name" data-depth="1">options.priority</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
-      <td data-ice="appendix"><ul><li>optional</li>
-<li>default: 100</li></ul></td>
-      <td data-ice="description"><p>tells the priority of the action, this affects
-the execution order where a lower numeric value means a higher priority.</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
 
   
 
