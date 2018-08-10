@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cli from &apos;<span><a href="file/src/Handlers/Cli.js.html#lineNumber90">mebo/src/Handlers/Cli.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cli from &apos;<span><a href="file/src/Handlers/Cli.js.html#lineNumber92">mebo/src/Handlers/Cli.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handlers/Cli.js.html#lineNumber90">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handlers/Cli.js.html#lineNumber92">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -109,7 +109,8 @@ The result of this handler (<span><a href="class/src/Handler.js~Handler.html#ins
 the <span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a></span> writer.</p>
 <p>Using cli handler:</p>
 <p><strong>Creating an action that is going be executed through the cli handler</strong></p>
-<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+<pre><code><code class="source-code prettyprint">@Mebo.register(&apos;myAction&apos;)
+class MyAction extends Mebo.Action{
   constructor(){
     super();
     this.createInput(&apos;myArgument: text&apos;, {elementType: &apos;argument&apos;, description: &apos;my argument&apos;});
@@ -123,10 +124,7 @@ the <span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a><
     };
     return Promise.resolve(result);
   }
-}
-
-// registering the action
-Mebo.Action.register(MyAction, &apos;myAction&apos;);</code>
+}</code>
 </code></pre><p><strong>Executing the action through the handler</strong></p>
 <pre><code><code class="source-code prettyprint">// making sure the script is called directly
 if (require.main === module) {
@@ -158,7 +156,9 @@ Arguments:
 
 Options:
   --my-option    my option (bool type).</code>
-</code></pre></div>
+</code></pre><p>In case you want to provide multiple actions through cli, take
+a look at the example: <a href="https://github.com/meboHQ/example-cli">https://github.com/meboHQ/example-cli</a></p>
+</div>
   
 
   <div data-ice="see"><h4>See:</h4><ul><li><span><a href="http://docopt.org">http://docopt.org</a></span></li></ul></div>
@@ -1158,7 +1158,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber232">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber234">source</a></span></span>
     </span>
   </h3>
 
@@ -1293,7 +1293,7 @@ initialization is done, it passes the value used by the output</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber310">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber312">source</a></span></span>
     </span>
   </h3>
 
@@ -1380,7 +1380,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber99">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber101">source</a></span></span>
     </span>
   </h3>
 
@@ -1459,7 +1459,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber126">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber128">source</a></span></span>
     </span>
   </h3>
 
@@ -1516,7 +1516,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber113">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber115">source</a></span></span>
     </span>
   </h3>
 
@@ -1578,7 +1578,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber155">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber157">source</a></span></span>
     </span>
   </h3>
 
@@ -1639,7 +1639,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber135">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber137">source</a></span></span>
     </span>
   </h3>
 
@@ -1700,7 +1700,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber166">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber168">source</a></span></span>
     </span>
   </h3>
 
@@ -1756,7 +1756,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber146">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber148">source</a></span></span>
     </span>
   </h3>
 
@@ -1814,7 +1814,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber331">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber333">source</a></span></span>
     </span>
   </h3>
 
@@ -1895,7 +1895,7 @@ This passes the <span><a href="class/src/Handlers/Cli.js~Cli.html#instance-metho
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber351">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber353">source</a></span></span>
     </span>
   </h3>
 
