@@ -118,12 +118,12 @@ class MyAction extends Mebo.Action{
     this.createInput(&apos;myOption: bool&apos;, {description: &apos;my option&apos;});
   }
 
-  _perform(data){
+  async _perform(data){
     const result = {
       myArgument: data.myArgument,
       myOption: data.myOption,
     };
-    return Promise.resolve(result);
+    return result;
   }
 }</code>
 </code></pre><p><strong>Executing the action through the handler</strong></p>

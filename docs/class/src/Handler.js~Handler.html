@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Handler from &apos;<span><a href="file/src/Handler.js.html#lineNumber95">mebo/src/Handler.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Handler from &apos;<span><a href="file/src/Handler.js.html#lineNumber111">mebo/src/Handler.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handler.js.html#lineNumber95">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handler.js.html#lineNumber111">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -124,15 +124,31 @@ class MyAction extends Mebo.Action{
      super();
 
      // change &apos;name&apos; for the registration name of the handler you
-     // want to define the read &amp; write options
-     this.setMeta(&apos;handler.name&apos;, {
-       readOptions: {
-         someReadOption: true,
-       },
-       writeOptions: {
-         someWriteOption: 10,
-       },
+     // want to define the read options
+     this.setMeta(&apos;handler.name.readOptions&apos;, {
+       someReadOption: true
      });
+   }
+
+   async _perform(data){
+     // ...
+   }
+
+   _finalize(err, value){
+
+     // change &apos;name&apos; for the registration name of the handler you
+     // want to define the write options
+     if (!err){
+       // defining the write option inside of the _finalize to keep _perform as
+       // abstract as possible. Since, _finalize is always called (even during
+       // an error) after the execution of the action, it provides a way to
+       // hook and define custom metadata related with the result.
+       this.setMeta(&apos;handler.name.writeOptions&apos;, {
+           someWriteOption: 10,
+       });
+     }
+
+     super._finalize(err, value);
    }
 }</code>
 </code></pre><p>Defining options directly through the handler:</p>
@@ -874,7 +890,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber299">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber315">source</a></span></span>
     </span>
   </h3>
 
@@ -969,7 +985,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber373">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber389">source</a></span></span>
     </span>
   </h3>
 
@@ -1050,7 +1066,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber475">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber491">source</a></span></span>
     </span>
   </h3>
 
@@ -1125,7 +1141,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber502">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber518">source</a></span></span>
     </span>
   </h3>
 
@@ -1198,7 +1214,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber533">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber549">source</a></span></span>
     </span>
   </h3>
 
@@ -1269,7 +1285,7 @@ Mebo.Handler.onErrorDuringOutput((err, handlerName, handlerMask =&gt; {
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber327">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber343">source</a></span></span>
     </span>
   </h3>
 
@@ -1349,7 +1365,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber343">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber359">source</a></span></span>
     </span>
   </h3>
 
@@ -1427,7 +1443,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber358">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber374">source</a></span></span>
     </span>
   </h3>
 
@@ -1505,7 +1521,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber387">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber403">source</a></span></span>
     </span>
   </h3>
 
@@ -1588,7 +1604,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber454">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber470">source</a></span></span>
     </span>
   </h3>
 
@@ -1661,7 +1677,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber438">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber454">source</a></span></span>
     </span>
   </h3>
 
@@ -1717,7 +1733,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber405">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber421">source</a></span></span>
     </span>
   </h3>
 
@@ -1799,7 +1815,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber423">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber439">source</a></span></span>
     </span>
   </h3>
 
@@ -1883,7 +1899,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber546">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber562">source</a></span></span>
     </span>
   </h3>
 
@@ -1962,7 +1978,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber100">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber116">source</a></span></span>
     </span>
   </h3>
 
@@ -2010,7 +2026,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber142">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber158">source</a></span></span>
     </span>
   </h3>
 
@@ -2094,7 +2110,7 @@ not found for the path</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber258">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber274">source</a></span></span>
     </span>
   </h3>
 
@@ -2188,7 +2204,7 @@ by the output where each handler implementation contains their own set of option
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber188">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber204">source</a></span></span>
     </span>
   </h3>
 
@@ -2280,7 +2296,7 @@ for the handler should be fetched.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber121">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber137">source</a></span></span>
     </span>
   </h3>
 
@@ -2336,7 +2352,7 @@ for the handler should be fetched.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber162">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber178">source</a></span></span>
     </span>
   </h3>
 
@@ -2418,7 +2434,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber110">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber126">source</a></span></span>
     </span>
   </h3>
 
@@ -2482,7 +2498,7 @@ the handler is cloned during the assignment (<span><a href="class/src/Session.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber559">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber575">source</a></span></span>
     </span>
   </h3>
 
@@ -2570,7 +2586,7 @@ constructor during factoring of the reader (should be used by derived classes)</
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber585">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber601">source</a></span></span>
     </span>
   </h3>
 

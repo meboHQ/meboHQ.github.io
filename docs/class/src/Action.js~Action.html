@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Action from &apos;<span><a href="file/src/Action.js.html#lineNumber75">mebo/src/Action.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Action from &apos;<span><a href="file/src/Action.js.html#lineNumber144">mebo/src/Action.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Action.js.html#lineNumber75">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Action.js.html#lineNumber144">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -105,8 +105,8 @@
 <p>By implementing an evaluation through an action, the evaluation is wrapped by an
 interface that can be triggered from many different forms (<span><a href="class/src/Handler.js~Handler.html">Handler</a></span>).</p>
 <pre><code><code class="source-code prettyprint">class HelloWorld extends Mebo.Action{
-  _perform(data){
-    return Promise.resolve(&apos;Hello World&apos;);
+  async _perform(data){
+    return &apos;Hello World&apos;;
   }
 }
 
@@ -120,9 +120,10 @@ The available properties can be found under the documentation for each input typ
     super();
     this.createInput(&apos;repeat: numeric&apos;, {max: 100});
   }
-  _perform(data){
+
+  async _perform(data){
     const result = &apos;HelloWorld &apos;.repeat(data.repeat);
-    return Promise.resolve(result);
+    return result;
   }
 }
 
@@ -130,20 +131,75 @@ const action = new HelloWorld();
 action.input(&apos;repeat&apos;).setValue(3);
 action.run().then(...) //  HelloWorld HelloWorld HelloWorld</code>
 </code></pre><p>An evaluation is triggered through <span><a href="class/src/Action.js~Action.html#instance-method-run">Action.run</a></span> which internally calls
-<span><a href="class/src/Action.js~Action.html#instance-method-_perform">Action._perform</a></span>. Use <code>perform</code> to implement the evaluation of your action.
+<span><a href="class/src/Action.js~Action.html#instance-method-_perform">Action._perform</a></span>. Use <code>_perform</code> to implement the evaluation of your action.
 Also, you can implement <span><a href="class/src/Action.js~Action.html#instance-method-_finalize">Action._finalize</a></span> to execute secondary routines.</p>
-<p>Actions are registered via <span><a href="class/src/Action.js~Action.html#static-method-register">Action.register</a></span>, in case you want
-to use a compound name with a prefix common across some group of
-actions you can use &apos;.&apos; as separator. Also, there are two ways to create actions:</p>
+<p>Make sure actions are always created through the factory function create
+(<span><a href="class/src/Action.js~Action.html#static-method-create">Action.create</a></span>). For that you need to register the action
+that can be done in two ways:</p>
+<p>Decorator support:</p>
+<pre><code><code class="source-code prettyprint">@Mebo.register(&apos;helloWorld&apos;) // &lt;- registering action
+class HelloWorld extends Mebo.Action{
+  constructor(){
+    super();
+    this.createInput(&apos;repeat: numeric&apos;, {max: 100});
+  }
+
+  async _perform(data){
+    return &apos;HelloWorld &apos;.repeat(data.repeat);
+  }
+}
+
+const action = Mebo.Action.create(&apos;helloWorld&apos;);
+action.input(&apos;repeat&apos;).setValue(3);
+action.run().then(...) //  HelloWorld HelloWorld HelloWorld</code>
+</code></pre><p>Registration api (<span><a href="class/src/Action.js~Action.html#static-method-register">Action.register</a></span>):</p>
+<pre><code><code class="source-code prettyprint">class HelloWorld extends Mebo.Action{
+  constructor(){
+    super();
+    this.createInput(&apos;repeat: numeric&apos;, {max: 100});
+  }
+
+  async _perform(data){
+    return &apos;HelloWorld &apos;.repeat(data.repeat);
+  }
+}
+
+Mebo.Action.register(HelloWorld, &apos;helloWorld&apos;); // &lt;- registering action
+
+const action = Mebo.Action.create(&apos;helloWorld&apos;);
+action.input(&apos;repeat&apos;).setValue(3);
+action.run().then(...) //  HelloWorld HelloWorld HelloWorld</code>
+</code></pre><p>In case you have an action that may need to call another actions during
+<code>_perform</code>, it can be done through:</p>
 <ul>
-<li><p><span><a href="class/src/Action.js~Action.html#instance-method-createAction">Action.createAction</a></span> - allows actions to be created from inside of another action.
-By doing that it creates actions that share the same <span><a href="class/src/Session.js~Session.html">Session</a></span>.</p>
-</li>
-<li><p><span><a href="class/src/Action.js~Action.html#static-method-create">Action.create</a></span> - factory an action with custom session when supplied
-otherwise it creates a new session.</p>
-</li>
+<li><span><a href="class/src/Action.js~Action.html#instance-method-createAction">Action.createAction</a></span> - allows actions to be created from inside of another action.
+By doing that it creates an action that shares the same <span><a href="class/src/Session.js~Session.html">Session</a></span>.</li>
 </ul>
-<p>Also, actions can take advantage of the caching mechanism designed to improve the performance
+<pre><code><code class="source-code prettyprint">class HelloWorld extends Mebo.Action{
+  // ...
+  async _perform(data){
+    const fooAction = this.createAction(&apos;foo&apos;);
+    const fooResult = await fooAction.run();
+    // ...
+  }
+}
+// ...</code>
+</code></pre><ul>
+<li><span><a href="class/src/Action.js~Action.html#static-method-create">Action.create</a></span> - factory an action with using a specific session when supplied
+otherwise, creates an action with a new session.</li>
+</ul>
+<pre><code><code class="source-code prettyprint">class HelloWorld extends Mebo.Action{
+  // ...
+  async _perform(data){
+    // in case you are planning to share the same session please
+    // use the &quot;sugary&quot; `this.createAction` instead.
+    const fooAction = Mebo.Action.create(&apos;foo&apos;);
+    const fooResult = await fooAction.run();
+    // ...
+  }
+}
+// ...</code>
+</code></pre><p>Also, actions can take advantage of the caching mechanism designed to improve the performance
 by avoiding re-evaluations in actions that might be executed multiple times. This can enabled
 through <span><a href="class/src/Action.js~Action.html#instance-method-isCacheable">Action.isCacheable</a></span>.</p>
 </div>
@@ -883,7 +939,7 @@ on the input types, input values and meta data information about the action.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber342">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber411">source</a></span></span>
     </span>
   </h3>
 
@@ -964,7 +1020,7 @@ not exist <code>null</code> is returned instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber375">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber444">source</a></span></span>
     </span>
   </h3>
 
@@ -1047,7 +1103,7 @@ loaded</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber483">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber552">source</a></span></span>
     </span>
   </h3>
 
@@ -1120,7 +1176,7 @@ of the type.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber504">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber573">source</a></span></span>
     </span>
   </h3>
 
@@ -1193,7 +1249,7 @@ of the type.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber523">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber592">source</a></span></span>
     </span>
   </h3>
 
@@ -1267,7 +1323,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber540">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber609">source</a></span></span>
     </span>
   </h3>
 
@@ -1326,7 +1382,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber80">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber149">source</a></span></span>
     </span>
   </h3>
 
@@ -1374,7 +1430,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber106">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber175">source</a></span></span>
     </span>
   </h3>
 
@@ -1435,7 +1491,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber239">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber308">source</a></span></span>
     </span>
   </h3>
 
@@ -1523,7 +1579,7 @@ should be ignored</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber324">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber393">source</a></span></span>
     </span>
   </h3>
 
@@ -1598,7 +1654,7 @@ Therefore creating an action that shares the same session.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber94">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber163">source</a></span></span>
     </span>
   </h3>
 
@@ -1681,7 +1737,7 @@ or <code>name?: type</code> in case of optional <span><a href="class/src/Input.j
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber273">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber342">source</a></span></span>
     </span>
   </h3>
 
@@ -1751,7 +1807,7 @@ be loaded</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber289">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber358">source</a></span></span>
     </span>
   </h3>
 
@@ -1810,7 +1866,7 @@ the factory method (<span><a href="class/src/Action.js~Action.html#static-method
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber136">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber205">source</a></span></span>
     </span>
   </h3>
 
@@ -1891,7 +1947,7 @@ input does not exist</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber124">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber193">source</a></span></span>
     </span>
   </h3>
 
@@ -1947,7 +2003,7 @@ input does not exist</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber165">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber234">source</a></span></span>
     </span>
   </h3>
 
@@ -2006,7 +2062,7 @@ is cacheable. This information is used by <span><a href="class/src/Action.js~Act
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber445">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber514">source</a></span></span>
     </span>
   </h3>
 
@@ -2090,7 +2146,7 @@ not found for the path</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber176">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber245">source</a></span></span>
     </span>
   </h3>
 
@@ -2165,7 +2221,7 @@ cache to avoid the execution. This option is only used when the action is <span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber424">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber493">source</a></span></span>
     </span>
   </h3>
 
@@ -2221,7 +2277,7 @@ cache to avoid the execution. This option is only used when the action is <span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber465">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber534">source</a></span></span>
     </span>
   </h3>
 
@@ -2303,7 +2359,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber400">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber469">source</a></span></span>
     </span>
   </h3>
 
@@ -2368,7 +2424,7 @@ during the factoring (<span><a href="class/src/Action.js~Action.html#static-meth
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber151">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber220">source</a></span></span>
     </span>
   </h3>
 
@@ -2426,7 +2482,7 @@ during the factoring (<span><a href="class/src/Action.js~Action.html#static-meth
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber589">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber658">source</a></span></span>
     </span>
   </h3>
 
@@ -2514,7 +2570,7 @@ been successfully executed</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber570">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber639">source</a></span></span>
     </span>
   </h3>
 
