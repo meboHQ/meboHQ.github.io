@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cli from &apos;<span><a href="file/src/Handlers/Cli.js.html#lineNumber92">mebo/src/Handlers/Cli.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cli from &apos;<span><a href="file/src/Handlers/Cli.js.html#lineNumber93">mebo/src/Handlers/Cli.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handlers/Cli.js.html#lineNumber92">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handlers/Cli.js.html#lineNumber93">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -109,7 +109,8 @@ The result of this handler (<span><a href="class/src/Handler.js~Handler.html#ins
 the <span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a></span> writer.</p>
 <p>Using cli handler:</p>
 <p><strong>Creating an action that is going be executed through the cli handler</strong></p>
-<pre><code><code class="source-code prettyprint">@Mebo.register(&apos;myAction&apos;)
+<pre><code><code class="source-code prettyprint">@Mebo.grant(&apos;cli&apos;)
+@Mebo.register(&apos;myAction&apos;)
 class MyAction extends Mebo.Action{
   constructor(){
     super();
@@ -1158,7 +1159,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber234">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber235">source</a></span></span>
     </span>
   </h3>
 
@@ -1293,7 +1294,7 @@ initialization is done, it passes the value used by the output</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber312">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber313">source</a></span></span>
     </span>
   </h3>
 
@@ -1380,7 +1381,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber101">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber102">source</a></span></span>
     </span>
   </h3>
 
@@ -1459,7 +1460,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber128">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber129">source</a></span></span>
     </span>
   </h3>
 
@@ -1516,7 +1517,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber115">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber116">source</a></span></span>
     </span>
   </h3>
 
@@ -1578,7 +1579,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber157">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber158">source</a></span></span>
     </span>
   </h3>
 
@@ -1639,7 +1640,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber137">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber138">source</a></span></span>
     </span>
   </h3>
 
@@ -1700,7 +1701,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber168">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber169">source</a></span></span>
     </span>
   </h3>
 
@@ -1756,7 +1757,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber148">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber149">source</a></span></span>
     </span>
   </h3>
 
@@ -1814,7 +1815,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber333">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber334">source</a></span></span>
     </span>
   </h3>
 
@@ -1895,7 +1896,7 @@ This passes the <span><a href="class/src/Handlers/Cli.js~Cli.html#instance-metho
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber353">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber354">source</a></span></span>
     </span>
   </h3>
 

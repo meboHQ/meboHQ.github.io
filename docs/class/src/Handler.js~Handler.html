@@ -118,7 +118,8 @@ like to know more about the available options check out the respective
 you are interested.</p>
 <p>Defining options through actions (detailed information can be found at
 <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>):</p>
-<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+<pre><code><code class="source-code prettyprint">@Mebo.register(&apos;myAction&apos;)
+class MyAction extends Mebo.Action{
    constructor(){
      super();
 
@@ -133,8 +134,7 @@ you are interested.</p>
        },
      });
    }
-}
-Mebo.Action.register(MyAction, &apos;myAction&apos;);</code>
+}</code>
 </code></pre><p>Defining options directly through the handler:</p>
 <pre><code><code class="source-code prettyprint">// read options
 myHandler.runAction(&apos;myAction&apos;, {

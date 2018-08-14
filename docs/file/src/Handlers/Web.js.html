@@ -101,6 +101,16 @@ const _response = Symbol(&apos;response&apos;);
  * be registered beforehand via a webfication process that describes their
  * request method, rest route and if it requires authentication.
  *
+ * Through decorator support:
+ * ```
+ * @Mebo.grant(&apos;web&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true})
+ * @Mebo.register(&apos;myAction&apos;)
+ * class MyAction extends Mebo.Action{
+ *   // ...
+ * }
+ * ```
+ *
+ * Through registration api:
  * ```
  * Mebo.Handler.grantAction(&apos;web&apos;, &apos;myRegisteredAction&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true});
  * ```

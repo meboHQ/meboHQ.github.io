@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CliOutput from &apos;<span><a href="file/src/Writers/CliOutput.js.html#lineNumber29">mebo/src/Writers/CliOutput.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CliOutput from &apos;<span><a href="file/src/Writers/CliOutput.js.html#lineNumber63">mebo/src/Writers/CliOutput.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Writers/CliOutput.js.html#lineNumber29">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Writers/CliOutput.js.html#lineNumber63">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -107,7 +107,37 @@
 <p>In case the value is an exception then it&apos;s treated as
 <span><a href="class/src/Writers/CliOutput.js~CliOutput.html#instance-method-_errorOutput">CliOutput._errorOutput</a></span> otherwise the value is treated as
 <span><a href="class/src/Writers/CliOutput.js~CliOutput.html#instance-method-_successOutput">CliOutput._successOutput</a></span>.</p>
-<p></p><h2>Options Summary</h2>
+<p>When an action is executed through a handler it can define options for
+readers and writers via <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> support. For instance,
+you can use it to provide a custom result for a specific handler:</p>
+<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+
+   // ...
+
+   _perform(data){
+     // ...
+   }
+
+   _finalize(err, value){
+     // defining a custom result that only affects the web handler
+     // this call could be done inside of the _perform method. However, we
+     // are defining it inside of the _finalize to keep _perform as
+     // abstract as possible. Since, _finalize is always called (even during
+     // an error) after the execution of the action, it provides a way to
+     // hook and define custom metadata related with the result.
+     if (!err){
+         // defining a custom output option
+         this.setMeta(&apos;$cliResult&apos;, {
+             message: &apos;My custom cli result!&apos;,
+         });
+     }
+
+     return super._finalize(err, value);
+   }
+
+   // ...
+}</code>
+</code></pre><p></p><h2>Options Summary</h2>
 
 <p></p>
 <table>
@@ -503,7 +533,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber38">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber72">source</a></span></span>
     </span>
   </h3>
 
@@ -582,7 +612,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber62">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber96">source</a></span></span>
     </span>
   </h3>
 
@@ -638,7 +668,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber53">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber87">source</a></span></span>
     </span>
   </h3>
 
@@ -696,7 +726,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber73">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber107">source</a></span></span>
     </span>
   </h3>
 
@@ -741,7 +771,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber94">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber128">source</a></span></span>
     </span>
   </h3>
 

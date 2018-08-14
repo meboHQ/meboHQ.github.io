@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Handlers/Web.js.html#lineNumber90">mebo/src/Handlers/Web.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Handlers/Web.js.html#lineNumber100">mebo/src/Handlers/Web.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handlers/Web.js.html#lineNumber90">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handlers/Web.js.html#lineNumber100">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,6 +110,13 @@ through the <span><a href="class/src/Writers/WebResponse.js~WebResponse.html">We
 <p>In order to tell which actions are visible by this handler, they are required to
 be registered beforehand via a webfication process that describes their
 request method, rest route and if it requires authentication.</p>
+<p>Through decorator support:</p>
+<pre><code><code class="source-code prettyprint">@Mebo.grant(&apos;web&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true})
+@Mebo.register(&apos;myAction&apos;)
+class MyAction extends Mebo.Action{
+  // ...
+}</code>
+</code></pre><p>Through registration api:</p>
 <pre><code><code class="source-code prettyprint">Mebo.Handler.grantAction(&apos;web&apos;, &apos;myRegisteredAction&apos;, {restRoute: &apos;/myApi/action&apos;, auth: true});</code>
 </code></pre><p>In case of actions that require authentication (<code>auth: true</code>) Mebo checks if
 the authentication has been executed before executing the action. Therefore,
@@ -1240,7 +1247,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber224">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber234">source</a></span></span>
     </span>
   </h3>
 
@@ -1321,7 +1328,7 @@ before the action</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber267">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber277">source</a></span></span>
     </span>
   </h3>
 
@@ -1403,7 +1410,7 @@ before an action that requires authentication</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber282">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber292">source</a></span></span>
     </span>
   </h3>
 
@@ -1462,7 +1469,7 @@ the middlewares added through <span><a href="class/src/Handlers/Web.js~Web.html#
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber295">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber305">source</a></span></span>
     </span>
   </h3>
 
@@ -1521,7 +1528,7 @@ the middlewares added through <span><a href="class/src/Handlers/Web.js~Web.html#
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber184">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber194">source</a></span></span>
     </span>
   </h3>
 
@@ -1615,7 +1622,7 @@ function(err, result, req, res, next){...}</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber320">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber330">source</a></span></span>
     </span>
   </h3>
 
@@ -1696,7 +1703,7 @@ registration of the rest routes</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber366">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber376">source</a></span></span>
     </span>
   </h3>
 
@@ -1805,7 +1812,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber98">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
@@ -1877,7 +1884,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber111">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber121">source</a></span></span>
     </span>
   </h3>
 
@@ -1933,7 +1940,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber142">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber152">source</a></span></span>
     </span>
   </h3>
 
@@ -1989,7 +1996,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber123">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber133">source</a></span></span>
     </span>
   </h3>
 
@@ -2051,7 +2058,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber154">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber164">source</a></span></span>
     </span>
   </h3>
 
@@ -2115,7 +2122,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber432">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber442">source</a></span></span>
     </span>
   </h3>
 
@@ -2196,7 +2203,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber452">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber462">source</a></span></span>
     </span>
   </h3>
 

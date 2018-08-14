@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Writer from &apos;<span><a href="file/src/Writer.js.html#lineNumber59">mebo/src/Writer.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Writer from &apos;<span><a href="file/src/Writer.js.html#lineNumber44">mebo/src/Writer.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Writer.js.html#lineNumber59">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Writer.js.html#lineNumber44">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -103,7 +103,7 @@
   
   <div class="description" data-ice="description"><p>A writer is used to output a value through the <span><a href="class/src/Handler.js~Handler.html">Handler</a></span>.</p>
 <p>The output is determined by the kind of value that&apos;s passed to the writer where
-exceptions are interpreted as error output, otherwise the value is interpreted
+exceptions are interpreted as error output otherwise, the value is interpreted
 as success value. Therefore, new implements are expected to implement both a success
 (<span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput">Writer._successOutput</a></span>) and error (<span><a href="class/src/Writer.js~Writer.html#instance-method-_errorOutput">Writer._errorOutput</a></span>) outputs.</p>
 <p><strong>Options:</strong> Custom options can be assigned to writers (<span><a href="class/src/Writer.js~Writer.html#instance-method-setOption">Writer.setOption</a></span>).
@@ -115,21 +115,9 @@ They are passed from the handler to the writer during the output process
 myHandler.output(value, {
  someOption: 10,
 });</code>
-</code></pre><p>When an action is executed through a handler it can define options via
-the <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> support. Detailed information about that can be found
-at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>:</p>
-<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
-   _perform(data){
-
-     // defining a custom output option
-     this.setMeta(&apos;$myOption&apos;, {
-       someOption: 10,
-     });
-
-     // ...
-   }
-}</code>
-</code></pre><p></p><h2>Options Summary</h2>
+</code></pre><p>When an action is executed through a handler it can define options for
+readers and writers via <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> support.</p>
+<p></p><h2>Options Summary</h2>
 
 <p></p>
 <table>
@@ -407,7 +395,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber66">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
@@ -472,7 +460,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber91">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber76">source</a></span></span>
     </span>
   </h3>
 
@@ -555,7 +543,7 @@ not found for the path</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber126">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber111">source</a></span></span>
     </span>
   </h3>
 
@@ -601,7 +589,7 @@ as <span><a href="class/src/Writer.js~Writer.html#instance-method-_successOutput
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber106">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber91">source</a></span></span>
     </span>
   </h3>
 
@@ -680,7 +668,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber117">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber102">source</a></span></span>
     </span>
   </h3>
 
@@ -738,7 +726,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber155">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber140">source</a></span></span>
     </span>
   </h3>
 
@@ -804,7 +792,7 @@ included in the error output</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber200">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writer.js.html#lineNumber185">source</a></span></span>
     </span>
   </h3>
 
