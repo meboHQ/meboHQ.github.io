@@ -558,9 +558,15 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/action.js~action#_finalize",
-    "class/src/Action.js~Action.html#instance-method-_finalize",
-    "src/Action.js~Action#_finalize",
+    "src/action.js~action#_after",
+    "class/src/Action.js~Action.html#instance-method-_after",
+    "src/Action.js~Action#_after",
+    "method"
+  ],
+  [
+    "src/action.js~action#_before",
+    "class/src/Action.js~Action.html#instance-method-_before",
+    "src/Action.js~Action#_before",
     "method"
   ],
   [
@@ -787,13 +793,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
     "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
   [
     "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
     "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],

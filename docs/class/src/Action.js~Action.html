@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Action from &apos;<span><a href="file/src/Action.js.html#lineNumber144">mebo/src/Action.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Action from &apos;<span><a href="file/src/Action.js.html#lineNumber132">mebo/src/Action.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Action.js.html#lineNumber144">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Action.js.html#lineNumber132">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -103,36 +103,27 @@
   
   <div class="description" data-ice="description"><p>An action is used to perform an evaluation.</p>
 <p>By implementing an evaluation through an action, the evaluation is wrapped by an
-interface that can be triggered from many different forms (<span><a href="class/src/Handler.js~Handler.html">Handler</a></span>).</p>
-<pre><code><code class="source-code prettyprint">class HelloWorld extends Mebo.Action{
-  async _perform(data){
-    return &apos;Hello World&apos;;
-  }
-}
-
-const action = new HelloWorld();
-action.run().then(...) //  HelloWorld</code>
-</code></pre><p>The data used to perform an evaluation is held by inputs (<span><a href="class/src/Action.js~Action.html#instance-method-createInput">Action.createInput</a></span>).
+agnostic interface which can be triggered through different domains (<span><a href="class/src/Handler.js~Handler.html">Handler</a></span>).</p>
+<p>The data used to perform an evaluation is held by inputs (<span><a href="class/src/Action.js~Action.html#instance-method-createInput">Action.createInput</a></span>).
 These inputs can be widely configured to enforce quality control via properties.
 The available properties can be found under the documentation for each input type.</p>
 <pre><code><code class="source-code prettyprint">class HelloWorld extends Mebo.Action{
   constructor(){
     super();
-    this.createInput(&apos;repeat: numeric&apos;, {max: 100});
+    this.createInput(&apos;repeat: numeric&apos;, {max: 100}); &lt;- input
   }
 
   async _perform(data){
-    const result = &apos;HelloWorld &apos;.repeat(data.repeat);
-    return result;
+    return &apos;HelloWorld &apos;.repeat(data.repeat);
   }
 }
 
 const action = new HelloWorld();
 action.input(&apos;repeat&apos;).setValue(3);
 action.run().then(...) //  HelloWorld HelloWorld HelloWorld</code>
-</code></pre><p>An evaluation is triggered through <span><a href="class/src/Action.js~Action.html#instance-method-run">Action.run</a></span> which internally calls
+</code></pre><p>An action is triggered through <span><a href="class/src/Action.js~Action.html#instance-method-run">Action.run</a></span> which internally calls
 <span><a href="class/src/Action.js~Action.html#instance-method-_perform">Action._perform</a></span>. Use <code>_perform</code> to implement the evaluation of your action.
-Also, you can implement <span><a href="class/src/Action.js~Action.html#instance-method-_finalize">Action._finalize</a></span> to execute secondary routines.</p>
+Also, you can implement <span><a href="class/src/Action.js~Action.html#instance-method-_after">Action._after</a></span> to execute secondary routines.</p>
 <p>Make sure actions are always created through the factory function create
 (<span><a href="class/src/Action.js~Action.html#static-method-create">Action.create</a></span>). For that you need to register the action
 that can be done in two ways:</p>
@@ -873,9 +864,9 @@ on the input types, input values and meta data information about the action.</p>
     <td>
       <div>
         <p>
+          <span data-ice="async">async</span>
           
-          
-          <span data-ice="name"><span><a href="class/src/Action.js~Action.html#instance-method-_finalize">_finalize</a></span></span><span data-ice="signature">(err: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span>, value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Action.js~Action.html#instance-method-_after">_after</a></span></span><span data-ice="signature">(err: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span>, value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
         </p>
       </div>
       <div>
@@ -895,13 +886,41 @@ on the input types, input values and meta data information about the action.</p>
       <span class="access" data-ice="access">protected</span>
       
       
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          <span data-ice="async">async</span>
+          
+          <span data-ice="name"><span><a href="class/src/Action.js~Action.html#instance-method-_before">_before</a></span></span><span data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>This method is called before the execution of the action.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
       <span class="abstract" data-ice="abstract">abstract</span>
       <span class="override" data-ice="override"></span>
     </td>
     <td>
       <div>
         <p>
-          
+          <span data-ice="async">async</span>
           
           <span data-ice="name"><span><a href="class/src/Action.js~Action.html#instance-method-_perform">_perform</a></span></span><span data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>*</span>&gt;</span>
         </p>
@@ -909,7 +928,7 @@ on the input types, input values and meta data information about the action.</p>
       <div>
         
         
-        <div data-ice="description"><p>This method should be used to implement the evaluation of the action.</p>
+        <div data-ice="description"><p>This method should be used to implement the evaluation for the action.</p>
 </div>
       </div>
     </td>
@@ -939,7 +958,7 @@ on the input types, input values and meta data information about the action.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber411">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber399">source</a></span></span>
     </span>
   </h3>
 
@@ -1020,7 +1039,7 @@ not exist <code>null</code> is returned instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber444">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber432">source</a></span></span>
     </span>
   </h3>
 
@@ -1103,7 +1122,7 @@ loaded</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber552">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber540">source</a></span></span>
     </span>
   </h3>
 
@@ -1176,7 +1195,7 @@ of the type.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber573">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber561">source</a></span></span>
     </span>
   </h3>
 
@@ -1249,7 +1268,7 @@ of the type.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber592">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber580">source</a></span></span>
     </span>
   </h3>
 
@@ -1323,7 +1342,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber609">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber597">source</a></span></span>
     </span>
   </h3>
 
@@ -1382,7 +1401,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber149">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber137">source</a></span></span>
     </span>
   </h3>
 
@@ -1430,7 +1449,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber175">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber163">source</a></span></span>
     </span>
   </h3>
 
@@ -1491,7 +1510,7 @@ registered name</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber308">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber296">source</a></span></span>
     </span>
   </h3>
 
@@ -1579,7 +1598,7 @@ should be ignored</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber393">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber381">source</a></span></span>
     </span>
   </h3>
 
@@ -1654,7 +1673,7 @@ Therefore creating an action that shares the same session.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber163">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber151">source</a></span></span>
     </span>
   </h3>
 
@@ -1737,7 +1756,7 @@ or <code>name?: type</code> in case of optional <span><a href="class/src/Input.j
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber342">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber330">source</a></span></span>
     </span>
   </h3>
 
@@ -1807,7 +1826,7 @@ be loaded</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber358">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber346">source</a></span></span>
     </span>
   </h3>
 
@@ -1866,7 +1885,7 @@ the factory method (<span><a href="class/src/Action.js~Action.html#static-method
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber205">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber193">source</a></span></span>
     </span>
   </h3>
 
@@ -1947,7 +1966,7 @@ input does not exist</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber193">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber181">source</a></span></span>
     </span>
   </h3>
 
@@ -2003,7 +2022,7 @@ input does not exist</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber234">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber222">source</a></span></span>
     </span>
   </h3>
 
@@ -2062,7 +2081,7 @@ is cacheable. This information is used by <span><a href="class/src/Action.js~Act
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber514">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber502">source</a></span></span>
     </span>
   </h3>
 
@@ -2146,7 +2165,7 @@ not found for the path</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber245">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber233">source</a></span></span>
     </span>
   </h3>
 
@@ -2221,7 +2240,7 @@ cache to avoid the execution. This option is only used when the action is <span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber493">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber481">source</a></span></span>
     </span>
   </h3>
 
@@ -2277,7 +2296,7 @@ cache to avoid the execution. This option is only used when the action is <span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber534">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber522">source</a></span></span>
     </span>
   </h3>
 
@@ -2359,7 +2378,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber469">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber457">source</a></span></span>
     </span>
   </h3>
 
@@ -2424,7 +2443,7 @@ during the factoring (<span><a href="class/src/Action.js~Action.html#static-meth
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber220">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber208">source</a></span></span>
     </span>
   </h3>
 
@@ -2471,18 +2490,18 @@ during the factoring (<span><a href="class/src/Action.js~Action.html#static-meth
 <h2 data-ice="title">Protected Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-_finalize">
+  <h3 data-ice="anchor" id="instance-method-_after">
     <span class="access" data-ice="access">protected</span>
     
     
     
+    <span data-ice="async">async</span>
     
-    
-    <span data-ice="name">_finalize</span><span data-ice="signature">(err: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span>, value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+    <span data-ice="name">_after</span><span data-ice="signature">(err: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span>, value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber658">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber680">source</a></span></span>
     </span>
   </h3>
 
@@ -2559,27 +2578,119 @@ been successfully executed</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-_perform">
+  <h3 data-ice="anchor" id="instance-method-_before">
     <span class="access" data-ice="access">protected</span>
     
     
-    <span class="abstract" data-ice="abstract">abstract</span>
     
+    <span data-ice="async">async</span>
     
-    <span data-ice="name">_perform</span><span data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>*</span>&gt;</span>
+    <span data-ice="name">_before</span><span data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber639">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber630">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>This method should be used to implement the evaluation of the action. It&apos;s called
-by <span><a href="class/src/Action.js~Action.html#instance-method-run">Action.run</a></span> after all inputs have been validated. It&apos;s expected to return
-a Promise containing the result of the evaluation.</p>
+  <div data-ice="description"><p>This method is called before the execution of the action.</p>
+<p>In case you need to check data against multiple inputs a recommended strategy
+to tackle this scenario is to implement a special input type where compound data
+can be represented (like json input type). However, for cases where the data cannot
+be coupled you can use this method to provide a way to check them before the
+execution of the action by raising an error in case the check fails. Therefore,
+avoiding to have any special verification inside of <code>_perform</code>.</p>
+<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+   // ...
+   async _before(data){
+       // if (...){
+           throw new Mebo.Error.NotFound(&apos;my error message&apos;);
+       // }
+   }
+   // ...
+}</code>
+</code></pre></div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">data</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>plain object containing the value of the inputs, this is just to
+provide a more convenient way to query the value of the inputs
+<code>data.myInput</code> instead of <code>this.input(&apos;myInput&apos;).value()</code>.</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>resolved promise (any result passed to the promise is ignored)</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-_perform">
+    <span class="access" data-ice="access">protected</span>
+    
+    
+    <span class="abstract" data-ice="abstract">abstract</span>
+    <span data-ice="async">async</span>
+    
+    <span data-ice="name">_perform</span><span data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>*</span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Action.js.html#lineNumber661">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>This method should be used to implement the evaluation for the action. It&apos;s called
+by <span><a href="class/src/Action.js~Action.html#instance-method-run">Action.run</a></span> after all inputs have been validated (<span><a href="class/src/Action.js~Action.html#instance-method-validate">Action.validate</a></span>
+and <span><a href="class/src/Action.js~Action.html#instance-method-_before">Action._before</a></span>). It&apos;s expected to return a Promise containing
+the result for the evaluation.</p>
 <p>During the execution of the action all inputs are assigned as read-only (<span><a href="class/src/Input.js~Input.html#instance-method-readOnly">Input.readOnly</a></span>),
 this is done to prevent any modification in the input while the execution is happening,
 by the end of the execution the inputs are assigned back with the read-only state

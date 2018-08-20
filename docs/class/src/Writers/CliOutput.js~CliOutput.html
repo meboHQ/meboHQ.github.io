@@ -75,13 +75,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CliOutput from &apos;<span><a href="file/src/Writers/CliOutput.js.html#lineNumber63">mebo/src/Writers/CliOutput.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CliOutput from &apos;<span><a href="file/src/Writers/CliOutput.js.html#lineNumber61">mebo/src/Writers/CliOutput.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Writers/CliOutput.js.html#lineNumber63">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Writers/CliOutput.js.html#lineNumber61">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -118,11 +118,11 @@ you can use it to provide a custom result for a specific handler:</p>
      // ...
    }
 
-   _finalize(err, value){
+   async _after(err, value){
      // defining a custom result that only affects the web handler
      // this call could be done inside of the _perform method. However, we
-     // are defining it inside of the _finalize to keep _perform as
-     // abstract as possible. Since, _finalize is always called (even during
+     // are defining it inside of the _after to keep _perform as
+     // abstract as possible. Since, _after is always called (even during
      // an error) after the execution of the action, it provides a way to
      // hook and define custom metadata related with the result.
      if (!err){
@@ -131,8 +131,6 @@ you can use it to provide a custom result for a specific handler:</p>
              message: &apos;My custom cli result!&apos;,
          });
      }
-
-     return super._finalize(err, value);
    }
 
    // ...
@@ -533,7 +531,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber72">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber70">source</a></span></span>
     </span>
   </h3>
 
@@ -612,7 +610,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber96">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber94">source</a></span></span>
     </span>
   </h3>
 
@@ -668,7 +666,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber87">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber85">source</a></span></span>
     </span>
   </h3>
 
@@ -726,7 +724,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber107">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber105">source</a></span></span>
     </span>
   </h3>
 
@@ -771,7 +769,7 @@ by a handler implementation as output.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber128">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Writers/CliOutput.js.html#lineNumber126">source</a></span></span>
     </span>
   </h3>
 

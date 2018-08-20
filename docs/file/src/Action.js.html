@@ -97,18 +97,7 @@ class InvalidActionError extends Error{
  * An action is used to perform an evaluation.
  *
  * By implementing an evaluation through an action, the evaluation is wrapped by an
- * interface that can be triggered from many different forms ({@link Handler}).
- *
- * ```
-  * class HelloWorld extends Mebo.Action{
- *   async _perform(data){
- *     return &apos;Hello World&apos;;
- *   }
- * }
- *
- * const action = new HelloWorld();
- * action.run().then(...) //  HelloWorld
- * ```
+ * agnostic interface which can be triggered through different domains ({@link Handler}).
  *
  * The data used to perform an evaluation is held by inputs ({@link Action.createInput}).
  * These inputs can be widely configured to enforce quality control via properties.
@@ -118,12 +107,11 @@ class InvalidActionError extends Error{
  * class HelloWorld extends Mebo.Action{
  *   constructor(){
  *     super();
- *     this.createInput(&apos;repeat: numeric&apos;, {max: 100});
+ *     this.createInput(&apos;repeat: numeric&apos;, {max: 100}); &lt;- input
  *   }
  *
  *   async _perform(data){
- *     const result = &apos;HelloWorld &apos;.repeat(data.repeat);
- *     return result;
+ *     return &apos;HelloWorld &apos;.repeat(data.repeat);
  *   }
  * }
  *
@@ -132,9 +120,9 @@ class InvalidActionError extends Error{
  * action.run().then(...) //  HelloWorld HelloWorld HelloWorld
  * ```
  *
- * An evaluation is triggered through {@link Action.run} which internally calls
+ * An action is triggered through {@link Action.run} which internally calls
  * {@link Action._perform}. Use `_perform` to implement the evaluation of your action.
- * Also, you can implement {@link Action._finalize} to execute secondary routines.
+ * Also, you can implement {@link Action._after} to execute secondary routines.
  *
  * Make sure actions are always created through the factory function create
  * ({@link Action.create}). For that you need to register the action
@@ -345,7 +333,7 @@ class Action{
       }
     }
 
-    // the action is performed inside of a try/catch block to call the _finalize
+    // the action is performed inside of a try/catch block to call the _after
     // no matter what, since that can be used to perform clean-up operations...
     let result = null;
     let err = null;
@@ -359,7 +347,7 @@ class Action{
     }
     // running the finalize
     finally{
-      await this._finalize(err, result);
+      await this._after(err, result);
     }
 
     // adding the result to the cache
@@ -688,9 +676,43 @@ class Action{
   }
 
   /**
-   * This method should be used to implement the evaluation of the action. It&apos;s called
-   * by {@link Action.run} after all inputs have been validated. It&apos;s expected to return
-   * a Promise containing the result of the evaluation.
+   * This method is called before the execution of the action.
+   *
+   * In case you need to check data against multiple inputs a recommended strategy
+   * to tackle this scenario is to implement a special input type where compound data
+   * can be represented (like json input type). However, for cases where the data cannot
+   * be coupled you can use this method to provide a way to check them before the
+   * execution of the action by raising an error in case the check fails. Therefore,
+   * avoiding to have any special verification inside of `_perform`.
+   *
+   * ```
+   * class MyAction extends Mebo.Action{
+   *    // ...
+   *    async _before(data){
+   *        // if (...){
+   *            throw new Mebo.Error.NotFound(&apos;my error message&apos;);
+   *        // }
+   *    }
+   *    // ...
+   * }
+   * ```
+   *
+   * @param {Object} data - plain object containing the value of the inputs, this is just to
+   * provide a more convenient way to query the value of the inputs
+   * ```data.myInput``` instead of ```this.input(&apos;myInput&apos;).value()```.
+   * @return {Promise} resolved promise (any result passed to the promise is ignored)
+   *
+   * @protected
+   */
+  async _before(data){
+    return null;
+  }
+
+  /**
+   * This method should be used to implement the evaluation for the action. It&apos;s called
+   * by {@link Action.run} after all inputs have been validated ({@link Action.validate}
+   * and {@link Action._before}). It&apos;s expected to return a Promise containing
+   * the result for the evaluation.
    *
    * During the execution of the action all inputs are assigned as read-only ({@link Input.readOnly}),
    * this is done to prevent any modification in the input while the execution is happening,
@@ -713,8 +735,8 @@ class Action{
    * @abstract
    * @protected
    */
-  _perform(data){
-    return Promise.reject(new Error(&apos;Not implemented error!&apos;));
+  async _perform(data){
+    throw new Error(&apos;Not implemented error!&apos;);
   }
 
   /**
@@ -732,8 +754,8 @@ class Action{
    *
    * @protected
    */
-  _finalize(err, value){
-    return Promise.resolve(null);
+  async _after(err, value){
+    return null;
   }
 
   /**
@@ -769,6 +791,7 @@ class Action{
     // checking if the inputs are valid (it throws an exception in case an input fails)
     try{
       await this.validate();
+      await this._before(data);
     }
     finally{
       // restoring the read-only
@@ -777,7 +800,7 @@ class Action{
       }
     }
 
-    // the action is performed inside of a try/catch block to call the _finalize
+    // the action is performed inside of a try/catch block to call the _after
     // no matter what, since that can be used to perform clean-up operations...
     try{
       // performing the action

@@ -86,13 +86,11 @@
 <a href="https://codecov.io/github/meboHQ/mebo?branch=master"><img src="https://codecov.io/github/meboHQ/mebo/coverage.svg?branch=master" alt="codecov.io"></a>
 <a href="https://mebohq.github.io/"><img src="https://mebohq.github.io/badge.svg?v=1" alt=Esdocs"></a> <a class="github-button" href="https://github.com/meboHQ/mebo" data-icon="octicon-star" data-style="mega" data-count-href="/meboHQ/mebo/stargazers" data-count-api="/repos/meboHQ/mebo#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Mebo on GitHub">Star</a>
 </p><p></p>
-<h3 id="what-is-it-">What is it ?</h3>
-<p>Mebo is a framework focused to provide an unified interface across multiple domains.
-It can be employed in the development of the most common applications.</p>
-<h3 id="how-does-it-work-">How does it work ?</h3>
-<p>It works by providing an abstracted interface focused to describe evaluations that can be triggered
-across multiple domains. This interface is designed to be fairly extendable and comprehensible through a process that minimizes repetitive routines (<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>) and produces a more versatile code base.</p>
-<p>You write once and Mebo takes care of getting the evaluations up running across the domains.</p>
+<h2 id="what-is-mebo-">What is Mebo ?</h2>
+<p><a href="https://github.com/meboHQ/mebo/issues"><img src="http://badges.github.io/stability-badges/dist/experimental.svg" alt="experimental"></a></p>
+<p>Mebo is an experimental framework focused to provide an unified interface across multiple domains. Although, most applications are designed with a specific domain in mind, mebo can still be employed to provide an easy way to interact with bits of your application through command-line, coming handy during the development &amp; debugging process.</p>
+<p>The support for multiple domains is done by promoting abstracted implementations which don&apos;t need to know too much about the specifics of each domain instead, the specifics are delegated to mebo. The idea of going through this process is to simplify the development process by minimizing repetitive routines (<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>).</p>
+<p>It comes bundled with support for web(rest/middlewares) and command-line (docopt) domains which was one of the reasons why I wanted to try to find a common ground to provide an unified interface for such distinctive domains that turned out to be extremely challenge.</p>
 <p></p><p>
   <img src="data/hi.png?v=2">
 </p>
@@ -102,7 +100,7 @@ across multiple domains. This interface is designed to be fairly extendable and 
 <ul>
 <li><p><strong>Flexible architeture</strong>. Mebo can be integrated to existing applications. Also, it&apos;s designed from ground up to be customizable and extendable</p>
 </li>
-<li><p><strong>Reliable executions</strong>. Mebo enforces quality control over the data used in the evaluations by performing a wide range of verifications</p>
+<li><p><strong>Reliable executions</strong>. Mebo enforces validating the data used in the evaluations by performing a wide range of verifications</p>
 </li>
 <li><p><strong>Agnostic execution platform</strong>. Evaluations in Mebo can be executed across multiple domains</p>
 </li>
