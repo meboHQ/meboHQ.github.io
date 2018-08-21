@@ -189,7 +189,7 @@ a look at the example: <a href="https://github.com/meboHQ/example-cli">https://g
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html#static-method-init">init</a></span></span><span data-ice="signature">(defaultCliName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html#static-method-init">init</a></span></span><span data-ice="signature">(options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -1155,11 +1155,11 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     
     
     
-    <span data-ice="name">init</span><span data-ice="signature">(defaultCliName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+    <span data-ice="name">init</span><span data-ice="signature">(options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber235">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber234">source</a></span></span>
     </span>
   </h3>
 
@@ -1170,6 +1170,8 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
 <p><em><code>CliActions/Default.js</code>: defining an action as cli:</em></p>
 <pre><code><code class="source-code prettyprint">const Mebo = require(&apos;mebo&apos;);
 
+@Mebo.grant(&apos;cli&apos;, &apos;cli.default&apos;, {initName: &apos;default&apos;})
+@Mebo.register(&apos;cli.default&apos;)
 class Default extends Mebo.Action{
 
  constructor(){
@@ -1180,10 +1182,7 @@ class Default extends Mebo.Action{
  async _perform(data){
    // ...
  }
-}
-
-Mebo.Action.register(Default, &apos;cli.default&apos;);
-Mebo.Handler.grantAction(&apos;cli&apos;, &apos;cli.default&apos;, {initName: &apos;default&apos;});</code>
+}</code>
 </code></pre><p><em><code>index.js</code>:</em></p>
 <pre><code><code class="source-code prettyprint">const Mebo = require(&apos;mebo&apos;);
 require(&apos;Clis/Default.js&apos;);
@@ -1212,18 +1211,18 @@ node myFile.js --cli --help</code>
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">defaultCliName</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>default name used when none
-cli is specified through <code>--cli &lt;name&gt;</code></p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">options</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>plain object containing custom options</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.defaultCliName</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>default name used when none
+cli is specified through <code>--cli &lt;name&gt;</code></p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="1">
@@ -1251,11 +1250,11 @@ it uses the <code>process.argv</code> (this information is passed to the creatio
 </td>
     </tr>
 <tr data-ice="property" data-depth="1">
-      <td data-ice="name" data-depth="1">options.initializedCallback</td>
+      <td data-ice="name" data-depth="1">options.finalizeCallback</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>callback executed when the
-initialization is done, it passes the value used by the output</p>
+      <td data-ice="description"><p>callback executed after the
+initialization, it passes the value used by the output</p>
 </td>
     </tr>
 </tbody>
@@ -1294,7 +1293,7 @@ initialization is done, it passes the value used by the output</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber313">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber312">source</a></span></span>
     </span>
   </h3>
 
@@ -1815,7 +1814,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber334">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber333">source</a></span></span>
     </span>
   </h3>
 
@@ -1896,7 +1895,7 @@ This passes the <span><a href="class/src/Handlers/Cli.js~Cli.html#instance-metho
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber354">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber353">source</a></span></span>
     </span>
   </h3>
 
