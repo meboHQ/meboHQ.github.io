@@ -73,13 +73,42 @@
 <li><a href="https://github.com/meboHQ/example-json-actions">JSON serialized actions</a></li>
 </ul>
 <h2 id="what-is-an-action-">What is an Action ?</h2>
-<p>An action is used to implement evalutations</p>
+<p>An action is used to implement evalutations that can be performed accross multiple domains</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">const Mebo = require(&apos;mebo&apos;);
+const express = require(&apos;express&apos;);
 
-class MyAction extends Mebo.Action{
-  async _perform(data){
-    return &apos;hello world&apos;;
+@Mebo.grant(&apos;cli&apos;)
+@Mebo.grant(&apos;web&apos;, {restRoute: &apos;/sum&apos;})
+@Mebo.register(&apos;sum&apos;)
+class Sum extends Mebo.Action{
+  constructor(){
+    super();
+
+    this.createInput(&apos;valueX: numeric&apos;);
+    this.createInput(&apos;valueY: numeric&apos;);
   }
+
+  async _perform(data){
+    return data.valueX + data.valueY;
+  }
+}
+
+// Command-line support: node . --cli sum --value-x=5 --value-y=2
+if (process.argv.includes(&apos;--cli&apos;)){
+  Mebo.Handler.get(&apos;cli&apos;).init();
+}
+// Web support: node . (http://localhost:8080/sum?valueX=5&amp;valueY=2)
+else{
+  const app = express();
+
+  // providing Mebo&apos;s restful support
+  Mebo.Handler.get(&apos;web&apos;).restful(app);
+
+  // starting the server
+  const port = process.env.PORT || 8080; // set our port
+  app.listen(port, () =&gt; {
+    console.log(`listening on port ${port}!\n`);
+  });
 }</code>
 </code></pre>
 <p><a href="class/src/Action.js~Action.html">Action Documentation</a></p>
@@ -166,17 +195,16 @@ the input inplementations bundled with Mebo</p>
 <p><strong>Creating inputs</strong></p>
 <p>Inputs are created using a <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> that describes their
 name and type (aka <a href="https://www.typescriptlang.org/">TypeScript</a>), for instance:</p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">const Mebo = require(&apos;mebo&apos;);
-
-class MyAction extends Mebo.Action {
+<pre><code class="lang-javascript"><code class="source-code prettyprint">class Sum extends Mebo.Action{
   constructor(){
     super();
 
-    this.createInput(&apos;myInput: text&apos;); // &lt;--- Creating an input
+    this.createInput(&apos;valueX: numeric&apos;); // &lt;- Input
+    this.createInput(&apos;valueY: numeric&apos;); // &lt;- Input
   }
 
   async _perform(data){
-    return `hello ${data.myInput}`;
+    return data.valueX + data.valueY;
   }
 }</code>
 </code></pre>
@@ -229,11 +257,7 @@ class MyAction extends Mebo.Action{
 myAction.input(&apos;myInput&apos;).setValue(&apos;Some Text&apos;);
 
 // executing the action
-myAction.run().then((result) =&gt; {
-  console.log(result);
-}).catch((err) =&gt; {
-  throw err;
-})</code>
+console.log(await myAction.run());</code>
 </code></pre>
 <p><strong>Executing from Web</strong></p>
 <p>First we need to tell our Action to be available through

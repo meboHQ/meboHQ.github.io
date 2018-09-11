@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -75,13 +76,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import WebRequest from &apos;<span><a href="file/src/Readers/WebRequest.js.html#lineNumber108">mebo/src/Readers/WebRequest.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import WebRequest from &apos;<span><a href="file/src/Readers/WebRequest.js.html#lineNumber121">mebo/src/Readers/WebRequest.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Readers/WebRequest.js.html#lineNumber108">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Readers/WebRequest.js.html#lineNumber121">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -125,6 +126,15 @@ to find out about how a value is serialized for an specific input type you could
 set an arbitrary value to the input you are interested then query it back through
 <span><a href="class/src/Input.js~Input.html#instance-method-serializeValue">Input.serializeValue</a></span>. Also, Mebo provides a reference datasheet
 about the serialization forms for the inputs bundled with it, found at <span><a href="class/src/Reader.js~Reader.html">Reader</a></span>.</p>
+<p>As supported for the cli handler (--help/-h) you can also query a basic help page
+for any action through the web handler by including: <code>help</code> to the query string:
+<code>http://.../?help</code>
+By doing that it renders a page with the description of the action and helpful
+information about the inputs. This setting is available through <code>handler/web/allowHelp</code>
+(default true).</p>
+<p>You can define the description displayed in the help of each input by
+setting the input&apos;s property <code>description</code>. Also, the description for the action
+itself can be defined by setting the action&apos;s metadata <code>description</code>.</p>
 <p><strong>Route parameters:</strong>
 If an webfied action contains route parameters defined (<code>/users/:userId/books/:bookId</code>)
 this reader is going to try to find them under the action input names.
@@ -295,6 +305,34 @@ action through the metadata support:</p>
         
         
         <div data-ice="description"><p>Implements the web request reader</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          <span data-ice="async">async</span>
+          
+          <span data-ice="name"><span><a href="class/src/Readers/WebRequest.js~WebRequest.html#instance-method-_renderHelp">_renderHelp</a></span></span><span data-ice="signature">(inputList: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="class/src/Input.js~Input.html">Input</a></span>&gt;): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Computes the contents displayed as help</p>
 </div>
       </div>
     </td>
@@ -527,7 +565,7 @@ action through the metadata support:</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber116">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber129">source</a></span></span>
     </span>
   </h3>
 
@@ -599,7 +637,7 @@ action through the metadata support:</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber137">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber150">source</a></span></span>
     </span>
   </h3>
 
@@ -657,7 +695,7 @@ action through the metadata support:</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber149">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber162">source</a></span></span>
     </span>
   </h3>
 
@@ -696,6 +734,79 @@ the parsing</p>
       <tbody>
         <tr>
           <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>&gt;</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-_renderHelp">
+    <span class="access" data-ice="access">protected</span>
+    
+    
+    
+    <span data-ice="async">async</span>
+    
+    <span data-ice="name">_renderHelp</span><span data-ice="signature">(inputList: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="class/src/Input.js~Input.html">Input</a></span>&gt;): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Readers/WebRequest.js.html#lineNumber225">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Computes the contents displayed as help</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">inputList</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="class/src/Input.js~Input.html">Input</a></span>&gt;</td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Valid list of inputs</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</td>
           
         </tr>
       </tbody>

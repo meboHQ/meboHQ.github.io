@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -86,6 +87,9 @@ const Handler = require(&apos;../Handler&apos;);
 // caused by re-implementations
 const _request = Symbol(&apos;request&apos;);
 const _response = Symbol(&apos;response&apos;);
+
+// handler name (used for registration)
+const _handlerName = &apos;web&apos;;
 
 
 /**
@@ -165,6 +169,11 @@ const _response = Symbol(&apos;response&apos;);
  *    })
  * );
  * ```
+ *
+ * You can access a basic help page by passing help as part of the querystring. This feature
+ * generates a help page automatically for the action, for instance:
+ * `http://.../?help`
+ *
  *
  * **Express req and res**
  *
@@ -439,7 +448,7 @@ class Web extends Handler{
    * @param {string} handlerName - registered handler name
    * @param {string} actionName - registered action name
    * @param {Object} options - custom options
-   * @param {string|Array&lt;string&gt;} [method=&apos;get&apos;] - tells the request method about how the action should
+   * @param {string|Array&lt;string&gt;} [options.method=&apos;get&apos;] - tells the request method about how the action should
    * be available, for instance: `get`, `post`, `put`, `delete` (...). Multiples methods
    * can be defined through an array of method names
    * @param {boolean} [options.auth=null] - boolean telling if the action requires authentication
@@ -455,7 +464,6 @@ class Web extends Handler{
     // registering action
     let methods = (TypeCheck.isString(method)) ? [method] : method;
     methods = methods.map(x =&gt; x.toLowerCase());
-    const actionNameFinal = actionName.toLowerCase();
 
     // finding duplicated items
     const removeIndexes = [];
@@ -485,21 +493,21 @@ class Web extends Handler{
     }
 
     // storing the action under the auxiliary data struct &apos;action method to webfied index&apos;
-    if (!(actionNameFinal in this._actionMethodToWebfiedIndex)){
-      this._actionMethodToWebfiedIndex[actionNameFinal] = Object.create(null);
+    if (!(actionName in this._actionMethodToWebfiedIndex)){
+      this._actionMethodToWebfiedIndex[actionName] = Object.create(null);
     }
 
     // adding the routes
     for (const addMethod of methods){
       const webfiedAction = Object.create(null);
-      webfiedAction.actionName = actionNameFinal;
+      webfiedAction.actionName = actionName;
       webfiedAction.method = addMethod;
       webfiedAction.auth = auth;
       webfiedAction.restRoute = restRoute;
 
       // adding the index about where the webfied action is localized
       // under the &apos;action method to webfied index&apos;
-      this._actionMethodToWebfiedIndex[actionNameFinal][addMethod] = this._webActions.length;
+      this._actionMethodToWebfiedIndex[actionName][addMethod] = this._webActions.length;
 
       // adding the webfied action information
       this._webActions.push(webfiedAction);
@@ -583,8 +591,7 @@ class Web extends Handler{
       const method = req.method.toLowerCase();
 
       // checking if the action is webfied for the current request method
-      const normalizedName = actionName.toLowerCase();
-      if (!(method in this._actionMethodToWebfiedIndex[normalizedName])){
+      if (!(method in this._actionMethodToWebfiedIndex[actionName])){
         return res.sendStatus(404);
       }
 
@@ -592,13 +599,13 @@ class Web extends Handler{
       // can be accessed later by the action
       res.locals.web = Handler.create(
         &apos;web&apos;,
-        normalizedName,
+        actionName,
         // passed to the handler
         req,
         res,
       );
 
-      const actionDataIndex = this._actionMethodToWebfiedIndex[normalizedName][method];
+      const actionDataIndex = this._actionMethodToWebfiedIndex[actionName][method];
       res.locals.web.requireAuth = this._webActions[actionDataIndex].auth;
 
       next();
@@ -660,9 +667,11 @@ class Web extends Handler{
 
 // default settings
 Settings.set(&apos;handler/web/requireAuthByDefault&apos;, false); // &#x26A0; BE CAREFUL
+Settings.set(&apos;handler/web/allowHelp&apos;, true);
 
 // registering input properties
 Input.registerProperty(&apos;filePath&apos;, &apos;restrictWebAccess&apos;, true);
+Input.registerProperty(&apos;filePath&apos;, &apos;webTypeHint&apos;, &apos;Expects a file input when manipulated through the web&apos;);
 
 // registering option vars
 Metadata.registerOptionVar(&apos;$web&apos;, &apos;handler.web&apos;);
@@ -679,7 +688,7 @@ Metadata.registerOptionVar(&apos;$webStatus&apos;, &apos;$web.writeOptions.statu
 Metadata.registerOptionVar(&apos;$webResultLabel&apos;, &apos;$web.writeOptions.resultLabel&apos;);
 
 // registering handler
-Handler.register(Web);
+Handler.register(Web, _handlerName);
 
 // exporting module
 module.exports = Web;

@@ -78,6 +78,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "mebo/src/errors/help.js~help",
+    "class/src/Errors/Help.js~Help.html",
+    "<span>Help</span> <span class=\"search-result-import-path\">mebo/src/Errors/Help.js</span>",
+    "class"
+  ],
+  [
     "mebo/src/inputs/hex.js~hex",
     "class/src/Inputs/Hex.js~Hex.html",
     "<span>Hex</span> <span class=\"search-result-import-path\">mebo/src/Inputs/Hex.js</span>",
@@ -726,6 +732,24 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/errors/help.js",
+    "file/src/Errors/Help.js.html",
+    "src/Errors/Help.js",
+    "file"
+  ],
+  [
+    "src/errors/help.js~help#disableoutputinnested",
+    "class/src/Errors/Help.js~Help.html#instance-member-disableOutputInNested",
+    "src/Errors/Help.js~Help#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/errors/help.js~help#status",
+    "class/src/Errors/Help.js~Help.html#instance-member-status",
+    "src/Errors/Help.js~Help#status",
+    "member"
+  ],
+  [
     "src/errors/nocontent.js",
     "file/src/Errors/NoContent.js.html",
     "src/Errors/NoContent.js",
@@ -793,13 +817,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
     "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
   [
     "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
+    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
     "src/Errors/ValidationFail.js~ValidationFail#inputName",
     "member"
   ],
@@ -1035,6 +1059,12 @@ window.esdocSearchIndex = [
     "src/handlers/cli.js~cli._grantingaction",
     "class/src/Handlers/Cli.js~Cli.html#static-method-_grantingAction",
     "src/Handlers/Cli.js~Cli._grantingAction",
+    "method"
+  ],
+  [
+    "src/handlers/cli.js~cli.actionclinames",
+    "class/src/Handlers/Cli.js~Cli.html#static-method-actionCliNames",
+    "src/Handlers/Cli.js~Cli.actionCliNames",
     "method"
   ],
   [
@@ -1308,15 +1338,27 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/input.js~input._decode",
-    "class/src/Input.js~Input.html#static-method-_decode",
-    "src/Input.js~Input._decode",
+    "src/input.js~input._decodescalar",
+    "class/src/Input.js~Input.html#static-method-_decodeScalar",
+    "src/Input.js~Input._decodeScalar",
     "method"
   ],
   [
-    "src/input.js~input._encode",
-    "class/src/Input.js~Input.html#static-method-_encode",
-    "src/Input.js~Input._encode",
+    "src/input.js~input._decodevector",
+    "class/src/Input.js~Input.html#static-method-_decodeVector",
+    "src/Input.js~Input._decodeVector",
+    "method"
+  ],
+  [
+    "src/input.js~input._encodescalar",
+    "class/src/Input.js~Input.html#static-method-_encodeScalar",
+    "src/Input.js~Input._encodeScalar",
+    "method"
+  ],
+  [
+    "src/input.js~input._encodevector",
+    "class/src/Input.js~Input.html#static-method-_encodeVector",
+    "src/Input.js~Input._encodeVector",
     "method"
   ],
   [
@@ -1392,6 +1434,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/inputs/basetext.js~basetext._decodevector",
+    "class/src/Inputs/BaseText.js~BaseText.html#static-method-_decodeVector",
+    "src/Inputs/BaseText.js~BaseText._decodeVector",
+    "method"
+  ],
+  [
+    "src/inputs/basetext.js~basetext._encodevector",
+    "class/src/Inputs/BaseText.js~BaseText.html#static-method-_encodeVector",
+    "src/Inputs/BaseText.js~BaseText._encodeVector",
+    "method"
+  ],
+  [
     "src/inputs/bool.js",
     "file/src/Inputs/Bool.js.html",
     "src/Inputs/Bool.js",
@@ -1404,15 +1458,27 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/inputs/bool.js~bool._decode",
-    "class/src/Inputs/Bool.js~Bool.html#static-method-_decode",
-    "src/Inputs/Bool.js~Bool._decode",
+    "src/inputs/bool.js~bool._decodescalar",
+    "class/src/Inputs/Bool.js~Bool.html#static-method-_decodeScalar",
+    "src/Inputs/Bool.js~Bool._decodeScalar",
     "method"
   ],
   [
-    "src/inputs/bool.js~bool._encode",
-    "class/src/Inputs/Bool.js~Bool.html#static-method-_encode",
-    "src/Inputs/Bool.js~Bool._encode",
+    "src/inputs/bool.js~bool._decodevector",
+    "class/src/Inputs/Bool.js~Bool.html#static-method-_decodeVector",
+    "src/Inputs/Bool.js~Bool._decodeVector",
+    "method"
+  ],
+  [
+    "src/inputs/bool.js~bool._encodescalar",
+    "class/src/Inputs/Bool.js~Bool.html#static-method-_encodeScalar",
+    "src/Inputs/Bool.js~Bool._encodeScalar",
+    "method"
+  ],
+  [
+    "src/inputs/bool.js~bool._encodevector",
+    "class/src/Inputs/Bool.js~Bool.html#static-method-_encodeVector",
+    "src/Inputs/Bool.js~Bool._encodeVector",
     "method"
   ],
   [
@@ -1434,15 +1500,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/inputs/buf.js~buf._decode",
-    "class/src/Inputs/Buf.js~Buf.html#static-method-_decode",
-    "src/Inputs/Buf.js~Buf._decode",
+    "src/inputs/buf.js~buf._decodescalar",
+    "class/src/Inputs/Buf.js~Buf.html#static-method-_decodeScalar",
+    "src/Inputs/Buf.js~Buf._decodeScalar",
     "method"
   ],
   [
-    "src/inputs/buf.js~buf._encode",
-    "class/src/Inputs/Buf.js~Buf.html#static-method-_encode",
-    "src/Inputs/Buf.js~Buf._encode",
+    "src/inputs/buf.js~buf._encodescalar",
+    "class/src/Inputs/Buf.js~Buf.html#static-method-_encodeScalar",
+    "src/Inputs/Buf.js~Buf._encodeScalar",
     "method"
   ],
   [
@@ -1578,9 +1644,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/inputs/numeric.js~numeric._decode",
-    "class/src/Inputs/Numeric.js~Numeric.html#static-method-_decode",
-    "src/Inputs/Numeric.js~Numeric._decode",
+    "src/inputs/numeric.js~numeric._decodescalar",
+    "class/src/Inputs/Numeric.js~Numeric.html#static-method-_decodeScalar",
+    "src/Inputs/Numeric.js~Numeric._decodeScalar",
+    "method"
+  ],
+  [
+    "src/inputs/numeric.js~numeric._decodevector",
+    "class/src/Inputs/Numeric.js~Numeric.html#static-method-_decodeVector",
+    "src/Inputs/Numeric.js~Numeric._decodeVector",
+    "method"
+  ],
+  [
+    "src/inputs/numeric.js~numeric._encodevector",
+    "class/src/Inputs/Numeric.js~Numeric.html#static-method-_encodeVector",
+    "src/Inputs/Numeric.js~Numeric._encodeVector",
     "method"
   ],
   [
@@ -1626,9 +1704,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/inputs/timestamp.js~timestamp._decode",
-    "class/src/Inputs/Timestamp.js~Timestamp.html#static-method-_decode",
-    "src/Inputs/Timestamp.js~Timestamp._decode",
+    "src/inputs/timestamp.js~timestamp._decodescalar",
+    "class/src/Inputs/Timestamp.js~Timestamp.html#static-method-_decodeScalar",
+    "src/Inputs/Timestamp.js~Timestamp._decodeScalar",
     "method"
   ],
   [
@@ -1824,6 +1902,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/readers/cliargs.js~cliargs#_renderhelp",
+    "class/src/Readers/CliArgs.js~CliArgs.html#instance-method-_renderHelp",
+    "src/Readers/CliArgs.js~CliArgs#_renderHelp",
+    "method"
+  ],
+  [
     "src/readers/cliargs.js~cliargs#args",
     "class/src/Readers/CliArgs.js~CliArgs.html#instance-method-args",
     "src/Readers/CliArgs.js~CliArgs#args",
@@ -1851,6 +1935,12 @@ window.esdocSearchIndex = [
     "src/readers/webrequest.js~webrequest#_perform",
     "class/src/Readers/WebRequest.js~WebRequest.html#instance-method-_perform",
     "src/Readers/WebRequest.js~WebRequest#_perform",
+    "method"
+  ],
+  [
+    "src/readers/webrequest.js~webrequest#_renderhelp",
+    "class/src/Readers/WebRequest.js~WebRequest.html#instance-method-_renderHelp",
+    "src/Readers/WebRequest.js~WebRequest#_renderHelp",
     "method"
   ],
   [

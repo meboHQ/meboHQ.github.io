@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 273,
-  "actualCount": 273,
+  "expectCount": 287,
+  "actualCount": 287,
   "files": {
     "src/Action.js": {
       "expectCount": 26,
@@ -14,13 +14,13 @@
       "undocumentLines": []
     },
     "src/Inputs/BaseText.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/Inputs/Bool.js": {
-      "expectCount": 4,
-      "actualCount": 4,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "src/Inputs/Buf.js": {
@@ -29,13 +29,13 @@
       "undocumentLines": []
     },
     "src/Handlers/Cli.js": {
-      "expectCount": 12,
-      "actualCount": 12,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/Readers/CliArgs.js": {
-      "expectCount": 5,
-      "actualCount": 5,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "src/Writers/CliOutput.js": {
@@ -68,6 +68,11 @@
       "actualCount": 3,
       "undocumentLines": []
     },
+    "src/Errors/Help.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
     "src/Inputs/Hex.js": {
       "expectCount": 4,
       "actualCount": 4,
@@ -79,8 +84,8 @@
       "undocumentLines": []
     },
     "src/Input.js": {
-      "expectCount": 36,
-      "actualCount": 36,
+      "expectCount": 38,
+      "actualCount": 38,
       "undocumentLines": []
     },
     "src/Inputs/Ip.js": {
@@ -109,8 +114,8 @@
       "undocumentLines": []
     },
     "src/Inputs/Numeric.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/Reader.js": {
@@ -174,8 +179,8 @@
       "undocumentLines": []
     },
     "src/Readers/WebRequest.js": {
-      "expectCount": 4,
-      "actualCount": 4,
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/Writers/WebResponse.js": {

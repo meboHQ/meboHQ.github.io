@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -164,13 +165,13 @@ input.setValue(Buffer.from(&apos;test&apos;, &apos;ascii&apos;);</code>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Inputs/Buf.js~Buf.html#static-method-_decode">_decode</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>bool</span></span>
+          <span data-ice="name"><span><a href="class/src/Inputs/Buf.js~Buf.html#static-method-_decodeScalar">_decodeScalar</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>bool</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Decodes the input value from the string representation (<span><a href="class/src/Input.js~Input.html#static-method-_encode">_encode</a></span>) to the
+        <div data-ice="description"><p>Decodes the input value from the string representation (<span><a href="class/src/Input.js~Input.html#static-method-_encodeScalar">_encodeScalar</a></span>) to the
 data type of the input.</p>
 </div>
       </div>
@@ -193,14 +194,14 @@ data type of the input.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Inputs/Buf.js~Buf.html#static-method-_encode">_encode</a></span></span><span data-ice="signature">(value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Inputs/Buf.js~Buf.html#static-method-_encodeScalar">_encodeScalar</a></span></span><span data-ice="signature">(value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
         
         
         <div data-ice="description"><p>Encodes the input value to a string representation that can be later decoded
-through <span><a href="class/src/Input.js~Input.html#static-method-_decode">_decode</a></span>.</p>
+through <span><a href="class/src/Input.js~Input.html#static-method-_decodeScalar">_decodeScalar</a></span>.</p>
 </div>
       </div>
     </td>
@@ -470,13 +471,13 @@ the input type</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Input.js~Input.html#static-method-_decode">_decode</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>*</span></span>
+          <span data-ice="name"><span><a href="class/src/Input.js~Input.html#static-method-_decodeScalar">_decodeScalar</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Decodes the input value from the string representation (<span><a href="class/src/Input.js~Input.html#static-method-_encode">Input._encode</a></span>) to the
+        <div data-ice="description"><p>Decodes the input value from the string representation (<span><a href="class/src/Input.js~Input.html#static-method-_encodeScalar">Input._encodeScalar</a></span>) to the
 data type of the input.</p>
 </div>
       </div>
@@ -499,14 +500,73 @@ data type of the input.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Input.js~Input.html#static-method-_encode">_encode</a></span></span><span data-ice="signature">(value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Input.js~Input.html#static-method-_decodeVector">_decodeVector</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Decodes a vector value from the string representation ({<span><a href="class/src/Input.js~Input.html#static-method-_encodeScalar">Input._encodeScalar</a></span> &amp;
+<span><a href="class/src/Input.js~Input.html#static-method-_encodeVector">Input._encodeVector</a></span>) to the
+data type of the input.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Input.js~Input.html#static-method-_encodeScalar">_encodeScalar</a></span></span><span data-ice="signature">(value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
         
         
         <div data-ice="description"><p>Encodes the input value to a string representation that can be later decoded
-through <span><a href="class/src/Input.js~Input.html#static-method-_decode">Input._decode</a></span>.</p>
+through <span>Input._decode</span>.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Input.js~Input.html#static-method-_encodeVector">_encodeVector</a></span></span><span data-ice="signature">(values: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Encodes a vector value to a string representation that can be later decoded
+through <span><a href="class/src/Input.js~Input.html#static-method-_decodeVector">Input._decodeVector</a></span>.</p>
 </div>
       </div>
     </td>
@@ -1261,14 +1321,14 @@ for your input implementation.</p>
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Protected Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-_decode">
+  <h3 data-ice="anchor" id="static-method-_decodeScalar">
     <span class="access" data-ice="access">protected</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span data-ice="name">_decode</span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>bool</span></span>
+    <span data-ice="name">_decodeScalar</span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>bool</span></span>
     <span class="right-info">
       
       
@@ -1279,11 +1339,11 @@ for your input implementation.</p>
   
   
   
-  <div data-ice="description"><p>Decodes the input value from the string representation (<span><a href="class/src/Input.js~Input.html#static-method-_encode">_encode</a></span>) to the
+  <div data-ice="description"><p>Decodes the input value from the string representation (<span><a href="class/src/Input.js~Input.html#static-method-_encodeScalar">_encodeScalar</a></span>) to the
 data type of the input. This method is called internally during <span><a href="class/src/Input.js~Input.html#instance-method-parseValue">parseValue</a></span></p>
 </div>
 
-  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/Input.js~Input.html#static-method-_decode">Input#_decode</a></span></div>
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/Input.js~Input.html#static-method-_decodeScalar">Input#_decodeScalar</a></span></div>
 
   <div data-ice="properties"><div data-ice="properties">
   <h4 data-ice="title">Params:</h4>
@@ -1335,14 +1395,14 @@ data type of the input. This method is called internally during <span><a href="c
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-_encode">
+  <h3 data-ice="anchor" id="static-method-_encodeScalar">
     <span class="access" data-ice="access">protected</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span data-ice="name">_encode</span><span data-ice="signature">(value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span data-ice="name">_encodeScalar</span><span data-ice="signature">(value: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
@@ -1354,11 +1414,11 @@ data type of the input. This method is called internally during <span><a href="c
   
   
   <div data-ice="description"><p>Encodes the input value to a string representation that can be later decoded
-through <span><a href="class/src/Input.js~Input.html#static-method-_decode">_decode</a></span>. This method is called internally during the
+through <span><a href="class/src/Input.js~Input.html#static-method-_decodeScalar">_decodeScalar</a></span>. This method is called internally during the
 <span><a href="class/src/Input.js~Input.html#instance-method-serializeValue">serializeValue</a></span></p>
 </div>
 
-  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/Input.js~Input.html#static-method-_encode">Input#_encode</a></span></div>
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/Input.js~Input.html#static-method-_encodeScalar">Input#_encodeScalar</a></span></div>
 
   <div data-ice="properties"><div data-ice="properties">
   <h4 data-ice="title">Params:</h4>

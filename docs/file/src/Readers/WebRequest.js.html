@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -82,10 +83,12 @@ const path = require(&apos;path&apos;);
 const assert = require(&apos;assert&apos;);
 const formidable = require(&apos;formidable&apos;);
 const TypeCheck = require(&apos;js-typecheck&apos;);
+const ejs = require(&apos;ejs&apos;);
 const Settings = require(&apos;../Settings&apos;);
 const Handler = require(&apos;../Handler&apos;);
 const Reader = require(&apos;../Reader&apos;);
 const Utils = require(&apos;../Utils&apos;);
+const Errors = require(&apos;../Errors&apos;);
 
 // promisifying
 const mkdtemp = util.promisify(fs.mkdtemp);
@@ -132,6 +135,17 @@ const _request = Symbol(&apos;request&apos;);
  * set an arbitrary value to the input you are interested then query it back through
  * {@link Input.serializeValue}. Also, Mebo provides a reference datasheet
  * about the serialization forms for the inputs bundled with it, found at {@link Reader}.
+ *
+ * As supported for the cli handler (--help/-h) you can also query a basic help page
+ * for any action through the web handler by including: `help` to the query string:
+ * `http://.../?help`
+ * By doing that it renders a page with the description of the action and helpful
+ * information about the inputs. This setting is available through `handler/web/allowHelp`
+ * (default true).
+ *
+ * You can define the description displayed in the help of each input by
+ * setting the input&apos;s property `description`. Also, the description for the action
+ * itself can be defined by setting the action&apos;s metadata `description`.
  *
  * **Route parameters:**
  * If an webfied action contains route parameters defined (`/users/:userId/books/:bookId`)
@@ -238,6 +252,11 @@ class WebRequest extends Reader{
     const result = Object.create(null);
     const request = this.request();
 
+    // when help is requested
+    if (Settings.get(&apos;handler/web/allowHelp&apos;) &amp;&amp; &apos;help&apos; in request.query){
+      throw new Errors.Help(await this._renderHelp(inputList));
+    }
+
     // handling body fields
     let bodyFields = null;
     if ([&apos;POST&apos;, &apos;PUT&apos;, &apos;PATCH&apos;].includes(request.method)){
@@ -283,6 +302,55 @@ class WebRequest extends Reader{
     }
 
     return result;
+  }
+
+  /**
+   * Computes the contents displayed as help
+   *
+   * @param {Array&lt;Input&gt;} inputList - Valid list of inputs
+   * @return {Promise&lt;string&gt;}
+   * @protected
+   */
+  async _renderHelp(inputList){
+
+    const inputData = [];
+
+    /* eslint-disable no-await-in-loop */
+    for (const input of inputList){
+      // computing description
+      let inputDescription = await input.property(&apos;description&apos;);
+      if (TypeCheck.isNone(inputDescription)){
+        inputDescription = &apos;&apos;;
+      }
+
+      // querying any type hint defined for the input
+      let webTypeHint = &apos;&apos;;
+      if (input.hasProperty(&apos;webTypeHint&apos;)){
+        webTypeHint = input.property(&apos;webTypeHint&apos;);
+      }
+
+      // input data passed to the help
+      inputData.push({
+        name: input.name(),
+        type: input.property(&apos;type&apos;),
+        required: input.isRequired() &amp;&amp; input.isEmpty(),
+        vector: input.isVector(),
+        description: inputDescription,
+        typeHint: webTypeHint,
+      });
+    }
+
+    const data = {
+      method: this.request().method,
+      routePath: this.request().route.path,
+      description: this.action().meta(&apos;description&apos;, &apos;&apos;),
+      inputs: inputData,
+    };
+
+    return ejs.renderFile(
+      Settings.get(&apos;reader/webRequest/helpTemplate&apos;),
+      data,
+    );
   }
 
   /**
@@ -549,6 +617,10 @@ Settings.set(&apos;reader/webRequest/uploadMaxFileSize&apos;, 4 * 1024 * 1024);
 Settings.set(&apos;reader/webRequest/uploadPreserveName&apos;, true);
 Settings.set(&apos;reader/webRequest/maxFields&apos;, 1000);
 Settings.set(&apos;reader/webRequest/maxFieldsSize&apos;, 2 * 1024 * 1024);
+Settings.set(
+  &apos;reader/webRequest/helpTemplate&apos;,
+  path.join(path.dirname(path.dirname(path.dirname(__filename))), &apos;data&apos;, &apos;handlers&apos;, &apos;web&apos;, &apos;help.ejs&apos;),
+);
 
 // registering reader
 Handler.registerReader(WebRequest, &apos;web&apos;);

@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -200,7 +201,8 @@ myHandler.runAction(&apos;myAction&apos;, {
 </code></pre><p>When an action is executed through a handler it can define options via
 the <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span> support. Detailed information about that can be found
 at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>:</p>
-<pre><code><code class="source-code prettyprint">class MyAction extends Mebo.Action{
+<pre><code><code class="source-code prettyprint">@Mebo.register(&apos;myAction&apos;)
+class MyAction extends Mebo.Action{
    constructor(){
      super();
 
@@ -211,8 +213,7 @@ at <span><a href="class/src/Metadata.js~Metadata.html">Metadata</a></span>:</p>
 
      // ...
    }
-}
-Mebo.Action.register(MyAction, &apos;myAction&apos;);</code>
+}</code>
 </code></pre><p><strong>Hiding inputs from readers:</strong>
 A reader only sees inputs that are capable of serialization
 (<span><a href="class/src/Input.js~Input.html#instance-method-isSerializable">Input.isSerializable</a></span>) or visible inputs. Therefore, any input assigned

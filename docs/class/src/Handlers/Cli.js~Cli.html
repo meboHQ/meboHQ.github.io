@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -75,13 +76,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cli from &apos;<span><a href="file/src/Handlers/Cli.js.html#lineNumber93">mebo/src/Handlers/Cli.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cli from &apos;<span><a href="file/src/Handlers/Cli.js.html#lineNumber95">mebo/src/Handlers/Cli.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handlers/Cli.js.html#lineNumber93">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handlers/Cli.js.html#lineNumber95">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -114,6 +115,7 @@ the <span><a href="class/src/Writers/CliOutput.js~CliOutput.html">CliOutput</a><
 class MyAction extends Mebo.Action{
   constructor(){
     super();
+    this.setMeta(&apos;description&apos;, &apos;Welcome!&apos;);
     this.createInput(&apos;myArgument: text&apos;, {elementType: &apos;argument&apos;, description: &apos;my argument&apos;});
     this.createInput(&apos;myOption: bool&apos;, {description: &apos;my option&apos;});
   }
@@ -135,7 +137,7 @@ if (require.main === module) {
   const cli = Mebo.Handler.create(&apos;cli&apos;);
 
   // loading the parsed information to the action
-  cli.runAction(&apos;myAction&apos;, {description: &apos;Welcome&apos;}).then((result) =&gt; {
+  cli.runAction(&apos;myAction&apos;).then((result) =&gt; {
 
   // success output
   cli.output(result);
@@ -231,6 +233,34 @@ a look at the example: <a href="https://github.com/meboHQ/example-cli">https://g
         
         <div data-ice="description"><p>This method can be re-implemented by derived classes to hook when an <span><a href="class/src/Action.js~Action.html">Action</a></span>
 is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#static-method-grantAction">Handler.grantAction</a></span>)</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Handlers/Cli.js~Cli.html#static-method-actionCliNames">actionCliNames</a></span></span><span data-ice="signature">(actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Return list of cli names used to execute the action.</p>
 </div>
       </div>
     </td>
@@ -1159,7 +1189,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber234">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber236">source</a></span></span>
     </span>
   </h3>
 
@@ -1170,7 +1200,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
 <p><em><code>CliActions/Default.js</code>: defining an action as cli:</em></p>
 <pre><code><code class="source-code prettyprint">const Mebo = require(&apos;mebo&apos;);
 
-@Mebo.grant(&apos;cli&apos;, &apos;cli.default&apos;, {initName: &apos;default&apos;})
+@Mebo.grant(&apos;cli&apos;, &apos;cli.default&apos;, {name: &apos;default&apos;})
 @Mebo.register(&apos;cli.default&apos;)
 class Default extends Mebo.Action{
 
@@ -1293,7 +1323,7 @@ initialization, it passes the value used by the output</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber312">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber333">source</a></span></span>
     </span>
   </h3>
 
@@ -1336,7 +1366,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
 </td>
     </tr>
 <tr data-ice="property" data-depth="1">
-      <td data-ice="name" data-depth="1">options.initName</td>
+      <td data-ice="name" data-depth="1">options.name</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
       <td data-ice="description"><p>custom name used to initialize the cli, otherwise
@@ -1349,6 +1379,80 @@ if not defined the actionName is used instead</p>
 </div>
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-actionCliNames">
+    <span class="access" data-ice="access">protected</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span data-ice="name">actionCliNames</span><span data-ice="signature">(actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber306">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Return list of cli names used to execute the action. Those are the
+names passed through &quot;--cli &lt;name&gt;&quot;.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">actionName</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>registered action name</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -1380,7 +1484,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber102">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber104">source</a></span></span>
     </span>
   </h3>
 
@@ -1459,7 +1563,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber129">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber131">source</a></span></span>
     </span>
   </h3>
 
@@ -1516,7 +1620,7 @@ if not defined the actionName is used instead</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber116">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber118">source</a></span></span>
     </span>
   </h3>
 
@@ -1578,7 +1682,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber158">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber160">source</a></span></span>
     </span>
   </h3>
 
@@ -1639,7 +1743,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber138">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber140">source</a></span></span>
     </span>
   </h3>
 
@@ -1700,7 +1804,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber169">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber171">source</a></span></span>
     </span>
   </h3>
 
@@ -1756,7 +1860,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber149">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber151">source</a></span></span>
     </span>
   </h3>
 
@@ -1814,7 +1918,7 @@ the same pattern found at <code>process.argv</code></p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber333">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber357">source</a></span></span>
     </span>
   </h3>
 
@@ -1895,7 +1999,7 @@ This passes the <span><a href="class/src/Handlers/Cli.js~Cli.html#instance-metho
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber353">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Cli.js.html#lineNumber377">source</a></span></span>
     </span>
   </h3>
 

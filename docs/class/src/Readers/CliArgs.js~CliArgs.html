@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -75,13 +76,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CliArgs from &apos;<span><a href="file/src/Readers/CliArgs.js.html#lineNumber58">mebo/src/Readers/CliArgs.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CliArgs from &apos;<span><a href="file/src/Readers/CliArgs.js.html#lineNumber53">mebo/src/Readers/CliArgs.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Readers/CliArgs.js.html#lineNumber58">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Readers/CliArgs.js.html#lineNumber53">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -109,8 +110,9 @@ missing arguments.</p>
 <p>All serializable inputs are supported by this handler, they can be displayed
 either as <code>argument</code> or <code>option</code> element. This is done by setting the input
 property <code>elementType</code> (option is the default one).</p>
-<p>You can define the description displayed in the help of the element by
-setting the input property <code>description</code>.</p>
+<p>You can define the description displayed in the help of each input by
+setting the input&apos;s property <code>description</code>. Also, the description for the action
+itself can be defined by setting the action&apos;s metadata <code>description</code>.</p>
 <p>The <code>option</code> elements support <code>short option</code> by setting the input property
 <code>shortOption</code>.</p>
 <p>In order to accommodate how vector values are represented in a command-line
@@ -126,30 +128,6 @@ to find out about how a value is serialized for an specific input type you could
 set an arbitrary value to the input you are interested then query it back through
 <span><a href="class/src/Input.js~Input.html#instance-method-serializeValue">Input.serializeValue</a></span>. Also, Mebo provides a reference datasheet
 about the serialization forms for the inputs bundled with it, found at <span><a href="class/src/Reader.js~Reader.html">Reader</a></span>.</p>
-<p></p><h2>Options Summary</h2>
-
-<p></p>
-<table>
-<thead>
-<tr>
-<th>Option Name</th>
-<th>Description</th>
-<th style="text-align:center">Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>description</td>
-<td>description about the program displayed at the header of the help</td>
-<td style="text-align:center"><img src="data/docs/value/none.png" title="none"></td>
-</tr>
-<tr>
-<td>parsingErrorStatusCode</td>
-<td>Custom error status code used to identify when the  app args could not be parsed</td>
-<td style="text-align:center"><code>700</code></td>
-</tr>
-</tbody>
-</table>
 </div>
   
 
@@ -246,7 +224,7 @@ about the serialization forms for the inputs bundled with it, found at <span><a 
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html#instance-method-executableName">executableName</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html#instance-method-executableName">executableName</a></span></span><span data-ice="signature">(placeHolder: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -287,6 +265,34 @@ about the serialization forms for the inputs bundled with it, found at <span><a 
         
         
         <div data-ice="description"><p>Implements the reader</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">protected</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/Readers/CliArgs.js~CliArgs.html#instance-method-_renderHelp">_renderHelp</a></span></span><span data-ice="signature">(elements: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Computes the contents displayed as help</p>
 </div>
       </div>
     </td>
@@ -519,7 +525,7 @@ about the serialization forms for the inputs bundled with it, found at <span><a 
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber62">source</a></span></span>
     </span>
   </h3>
 
@@ -592,7 +598,7 @@ the reader</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber83">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber74">source</a></span></span>
     </span>
   </h3>
 
@@ -645,11 +651,11 @@ the reader</p>
     
     
     
-    <span data-ice="name">executableName</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span data-ice="name">executableName</span><span data-ice="signature">(placeHolder: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber85">source</a></span></span>
     </span>
   </h3>
 
@@ -661,7 +667,25 @@ the reader</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">placeHolder</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>when placeHolder is enabled it returns an uuid string
+that can be used later to replace for the real executable name returned by default</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -707,7 +731,7 @@ the reader</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber114">source</a></span></span>
     </span>
   </h3>
 
@@ -746,6 +770,79 @@ the parsing</p>
       <tbody>
         <tr>
           <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>&gt;</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-_renderHelp">
+    <span class="access" data-ice="access">protected</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">_renderHelp</span><span data-ice="signature">(elements: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Readers/CliArgs.js.html#lineNumber204">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Computes the contents displayed as help</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">elements</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>object generated by the method _helpElements</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</td>
           
         </tr>
       </tbody>

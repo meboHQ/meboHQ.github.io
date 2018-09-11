@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -487,7 +488,7 @@ class Action{
     }
 
     // adding the action name used to create the action under the metadata
-    action.setMeta(&apos;action.name&apos;, actionName.toLowerCase());
+    action.setMeta(&apos;action.name&apos;, actionName);
 
     // adding a metadata information telling the action is a top level one
     // it has not being created inside of another action through the
@@ -620,13 +621,11 @@ class Action{
     assert(TypeCheck.isString(name), &apos;name needs to defined as string&apos;);
     assert(name.length, &apos;name cannot be empty&apos;);
 
-    const nameFinal = name.toLowerCase();
-
     // validating name
-    assert(nameFinal.length, &apos;action name cannot be empty&apos;);
-    assert((/^([\w_\.\-])+$/gi).test(nameFinal), `Illegal action name: ${nameFinal}`); // eslint-disable-line no-useless-escape
+    assert(name.length, &apos;action name cannot be empty&apos;);
+    assert((/^([\w_\.\-])+$/gi).test(name), `Illegal action name: ${name}`); // eslint-disable-line no-useless-escape
 
-    this._registeredActions.set(nameFinal, actionClass);
+    this._registeredActions.set(name, actionClass);
   }
 
   /**
@@ -638,10 +637,8 @@ class Action{
   static registeredAction(name){
     assert(TypeCheck.isString(name), &apos;Invalid name!&apos;);
 
-    const normalizedName = name.toLowerCase();
-
-    if (this._registeredActions.has(normalizedName)){
-      return this._registeredActions.get(normalizedName);
+    if (this._registeredActions.has(name)){
+      return this._registeredActions.get(name);
     }
 
     throw new Error(`Action ${name} is not registered!`);

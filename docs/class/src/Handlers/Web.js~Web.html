@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -75,13 +76,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Handlers/Web.js.html#lineNumber100">mebo/src/Handlers/Web.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Web from &apos;<span><a href="file/src/Handlers/Web.js.html#lineNumber108">mebo/src/Handlers/Web.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handlers/Web.js.html#lineNumber100">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handlers/Web.js.html#lineNumber108">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -160,6 +161,9 @@ app.get(
 </code></pre>
 </li>
 </ul>
+<p>You can access a basic help page by passing help as part of the querystring. This feature
+generates a help page automatically for the action, for instance:
+<code>http://.../?help</code></p>
 <p><strong>Express req and res</strong></p>
 <p>The request and the response used by this handler are available
 under the <span><a href="class/src/Session.js~Session.html">Session</a></span> as: <code>session.get(&apos;req&apos;)</code> and <code>session.get(&apos;res&apos;)</code>.</p>
@@ -369,7 +373,7 @@ based on an arbitrary express route.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/Handlers/Web.js~Web.html#static-method-_grantingAction">_grantingAction</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, method: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;)</span>
+          <span data-ice="name"><span><a href="class/src/Handlers/Web.js~Web.html#static-method-_grantingAction">_grantingAction</a></span></span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -1247,7 +1251,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber234">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber242">source</a></span></span>
     </span>
   </h3>
 
@@ -1328,7 +1332,7 @@ before the action</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber277">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber285">source</a></span></span>
     </span>
   </h3>
 
@@ -1410,7 +1414,7 @@ before an action that requires authentication</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber292">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber300">source</a></span></span>
     </span>
   </h3>
 
@@ -1469,7 +1473,7 @@ the middlewares added through <span><a href="class/src/Handlers/Web.js~Web.html#
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber305">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber313">source</a></span></span>
     </span>
   </h3>
 
@@ -1528,7 +1532,7 @@ the middlewares added through <span><a href="class/src/Handlers/Web.js~Web.html#
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber194">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber202">source</a></span></span>
     </span>
   </h3>
 
@@ -1622,7 +1626,7 @@ function(err, result, req, res, next){...}</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber330">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber338">source</a></span></span>
     </span>
   </h3>
 
@@ -1699,11 +1703,11 @@ registration of the rest routes</p>
     
     
     
-    <span data-ice="name">_grantingAction</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, method: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;)</span>
+    <span data-ice="name">_grantingAction</span><span data-ice="signature">(handlerName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, actionName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber376">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber384">source</a></span></span>
     </span>
   </h3>
 
@@ -1746,8 +1750,8 @@ registration of the rest routes</p>
       <td data-ice="description"><p>custom options</p>
 </td>
     </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">method</td>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" data-depth="1">options.method</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>&gt;</td>
       <td data-ice="appendix"><ul><li>optional</li>
 <li>default: &apos;get&apos;</li></ul></td>
@@ -1812,7 +1816,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber108">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber116">source</a></span></span>
     </span>
   </h3>
 
@@ -1884,7 +1888,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber121">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber129">source</a></span></span>
     </span>
   </h3>
 
@@ -1940,7 +1944,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber152">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber160">source</a></span></span>
     </span>
   </h3>
 
@@ -1996,7 +2000,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber133">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber141">source</a></span></span>
     </span>
   </h3>
 
@@ -2058,7 +2062,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber164">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber172">source</a></span></span>
     </span>
   </h3>
 
@@ -2122,7 +2126,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber442">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber449">source</a></span></span>
     </span>
   </h3>
 
@@ -2203,7 +2207,7 @@ input values to further information take a look at (<span><a href="class/src/Rea
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber462">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handlers/Web.js.html#lineNumber469">source</a></span></span>
     </span>
   </h3>
 

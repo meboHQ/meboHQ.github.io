@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -79,6 +80,7 @@
 const neodoc = require(&apos;neodoc&apos;);
 const assert = require(&apos;assert&apos;);
 const TypeCheck = require(&apos;js-typecheck&apos;);
+const Errors = require(&apos;../Errors&apos;);
 const Inputs = require(&apos;../Inputs&apos;);
 const Settings = require(&apos;../Settings&apos;);
 const Handler = require(&apos;../Handler&apos;);
@@ -101,8 +103,9 @@ const _args = Symbol(&apos;args&apos;);
  * either as `argument` or `option` element. This is done by setting the input
  * property `elementType` (option is the default one).
  *
- * You can define the description displayed in the help of the element by
- * setting the input property `description`.
+ * You can define the description displayed in the help of each input by
+ * setting the input&apos;s property `description`. Also, the description for the action
+ * itself can be defined by setting the action&apos;s metadata `description`.
  *
  * The `option` elements support `short option` by setting the input property
  * `shortOption`.
@@ -123,15 +126,6 @@ const _args = Symbol(&apos;args&apos;);
  * {@link Input.serializeValue}. Also, Mebo provides a reference datasheet
  * about the serialization forms for the inputs bundled with it, found at {@link Reader}.
  *
- * &lt;h2&gt;Options Summary&lt;/h2&gt;
- *
- * Option Name | Description | Default Value
- * --- | --- | :---:
- * description | description about the program displayed at the header of the help \
- * | <img src="data/docs/value/none.png" title="none">
- * parsingErrorStatusCode | Custom error status code used to identify when the \
- * app args could not be parsed | `700`
- *
  * @see http://docopt.org
  */
 class CliArgs extends Reader{
@@ -147,10 +141,6 @@ class CliArgs extends Reader{
     super(action);
 
     this._setArgs(argv);
-
-    // default options
-    this.setOption(&apos;description&apos;, &apos;&apos;);
-    this.setOption(&apos;parsingErrorStatusCode&apos;, 700);
   }
 
   /**
@@ -165,11 +155,30 @@ class CliArgs extends Reader{
 
   /**
    * Returns the executable name based on the args
+   * @param {string} placeHolder - when placeHolder is enabled it returns an uuid string
+   * that can be used later to replace for the real executable name returned by default
    *
    * @return {string}
    */
-  executableName(){
-    return path.basename(this.args()[1]);
+  executableName(placeHolder=false){
+
+    if (placeHolder){
+      return this.constructor._executableNamePlaceHolder;
+    }
+
+    let executableScript = this.args()[1];
+    if (executableScript === process.cwd()){
+      executableScript = &apos;.&apos;;
+    }
+
+    const executableName = path.basename(this.args()[0]);
+    const cliNames = Handler.get(&apos;cli&apos;).actionCliNames(this.action().meta(&apos;action.name&apos;));
+    let cliSuffix = &apos;&apos;;
+    if (cliNames.length){
+      cliSuffix = ` --cli ${cliNames[0]}`;
+    }
+
+    return `${executableName} ${executableScript}${cliSuffix}`;
   }
 
   /**
@@ -182,7 +191,7 @@ class CliArgs extends Reader{
    */
   async _perform(inputList){
     const helpElements = await this.constructor._helpElements(inputList);
-    const helpString = await this._helpInterface(helpElements);
+    const helpString = await this._renderHelp(helpElements);
 
     let parsedArgs = Object.create(null);
     // it thrown an exception if something went wrong (like missing a required parameter)
@@ -196,18 +205,16 @@ class CliArgs extends Reader{
       });
     }
     catch(err){
-      // adding a custom status code for the parsing error
-      // the error does not come as an instance of error, for this reason
-      // creating a new error and copying the contents
-      const error = Object.assign(new Error(), err);
-      error.status = this.option(&apos;parsingErrorStatusCode&apos;);
+      const error = new Errors.Help(err.message);
+      error.message = error.message.replace(new RegExp(this.executableName(true), &apos;g&apos;), this.executableName());
       throw error;
     }
 
-    // however when the user asks for the help it does not raises an exception
+    // however when the user asks for the help it should raise an exception
+    // without the stack
     if (&apos;.help&apos; in parsedArgs){
-      const error = new Error(parsedArgs[&apos;.help&apos;]);
-      error.status = this.option(&apos;parsingErrorStatusCode&apos;);
+      const error = new Errors.Help(parsedArgs[&apos;.help&apos;]);
+      error.message = error.message.replace(new RegExp(this.executableName(true), &apos;g&apos;), this.executableName());
       throw error;
     }
 
@@ -266,6 +273,22 @@ class CliArgs extends Reader{
   }
 
   /**
+   * Computes the contents displayed as help
+   *
+   * @param {Object} elements - object generated by the method _helpElements
+   * @return {Promise&lt;string&gt;}
+   * @protected
+   */
+  _renderHelp(elements){
+    let output = &apos;&apos;;
+    output += this._buildDescription(elements);
+    output += this._buildUsage(elements);
+    output += this.constructor._buildColumns(elements);
+
+    return output;
+  }
+
+  /**
    * Sets a list of argument values used by the reader. It must follow
    * the same pattern found at `process.argv`
    *
@@ -274,7 +297,7 @@ class CliArgs extends Reader{
    */
   _setArgs(value){
     assert(TypeCheck.isList(value), &apos;value needs to be a list&apos;);
-    assert(value.length &gt;= 2, &apos;missing first argument process.execPath and second argument javaScript file being executed&apos;);
+    assert(value.length &gt;= 2, &apos;missing first argument process.execPath and second argument java-script file being executed&apos;);
 
     this[_args] = value.slice(0);
   }
@@ -337,22 +360,6 @@ class CliArgs extends Reader{
   }
 
   /**
-   * Returns the help interface displayed when `-h\--help` is required
-   *
-   * @param {Object} elements - elements holder object
-   * @return {string}
-   * @private
-   */
-  _helpInterface(elements){
-    let output = &apos;&apos;;
-    output += this._buildDescription(elements);
-    output += this._buildUsage(elements);
-    output += this.constructor._buildColumns(elements);
-
-    return output;
-  }
-
-  /**
    * Returns a string containing the full assembled info for the input
    *
    * @param {Input} input - input that should be used
@@ -366,6 +373,15 @@ class CliArgs extends Reader{
     // adding the value type to the argument
     const isBoolInput = input instanceof Inputs.Bool;
     let description = input.property(&apos;description&apos;) || &apos;&apos;;
+
+    // querying any type hint defined for the input
+    if (input.hasProperty(&apos;cliTypeHint&apos;)){
+      if (description.length){
+        description += &apos; &apos;;
+      }
+
+      description += `(* ${input.property(&apos;cliTypeHint&apos;)})`;
+    }
 
     if ((isBoolInput &amp;&amp; input.isVector()) || !isBoolInput){
 
@@ -527,7 +543,7 @@ class CliArgs extends Reader{
    */
   _buildDescription(elements){
     let output = &apos;&apos;;
-    const description = this.option(&apos;description&apos;);
+    const description = this.action().meta(&apos;description&apos;, &apos;&apos;);
     if (description.length){
       output += description;
       if (!description.endsWith(&apos;.&apos;)){
@@ -547,7 +563,7 @@ class CliArgs extends Reader{
    * @private
    */
   _buildUsage(elements){
-    let output = `Usage: ${this.executableName()} `;
+    let output = `Usage: ${this.executableName(true)} `;
 
     const requiredArguments = Object.create(null);
     const optionalArguments = Object.create(null);
@@ -629,7 +645,7 @@ class CliArgs extends Reader{
     for (const inputName in elements.option){
 
       if (elements.option[inputName].vector){
-        output += `\n       ${this.executableName()} `;
+        output += `\n       ${this.executableName(true)} `;
 
         for (const requiredArg of argumentNames){
           output += elements.argument[requiredArg].usageDisplay;
@@ -734,6 +750,8 @@ class CliArgs extends Reader{
   static _camelCaseToArgument(text){
     return text.replace(/([a-z])([A-Z])/g, &apos;$1-$2&apos;).toLowerCase();
   }
+
+  static _executableNamePlaceHolder = &apos;f4d33b27-d6f3-42b6-ba98-5254bdf3b307&apos;;
 }
 
 // registering reader

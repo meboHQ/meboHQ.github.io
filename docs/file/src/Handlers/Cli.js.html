@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -81,6 +82,7 @@ const TypeCheck = require(&apos;js-typecheck&apos;);
 const Input = require(&apos;../Input&apos;);
 const Metadata = require(&apos;../Metadata&apos;);
 const Handler = require(&apos;../Handler&apos;);
+const Errors = require(&apos;../Errors&apos;);
 
 // symbols used for private instance variables to avoid any potential clashing
 // caused by re-implementations
@@ -110,6 +112,7 @@ const _handlerName = &apos;cli&apos;;
 * class MyAction extends Mebo.Action{
 *   constructor(){
 *     super();
+*     this.setMeta(&apos;description&apos;, &apos;Welcome!&apos;);
 *     this.createInput(&apos;myArgument: text&apos;, {elementType: &apos;argument&apos;, description: &apos;my argument&apos;});
 *     this.createInput(&apos;myOption: bool&apos;, {description: &apos;my option&apos;});
 *   }
@@ -135,7 +138,7 @@ const _handlerName = &apos;cli&apos;;
 *   const cli = Mebo.Handler.create(&apos;cli&apos;);
 *
 *   // loading the parsed information to the action
-*   cli.runAction(&apos;myAction&apos;, {description: &apos;Welcome&apos;}).then((result) =&gt; {
+*   cli.runAction(&apos;myAction&apos;).then((result) =&gt; {
 *
 *   // success output
 *   cli.output(result);
@@ -254,7 +257,7 @@ class Cli extends Handler{
    * ```
    * const Mebo = require(&apos;mebo&apos;);
    *
-   * @Mebo.grant(&apos;cli&apos;, &apos;cli.default&apos;, {initName: &apos;default&apos;})
+   * @Mebo.grant(&apos;cli&apos;, &apos;cli.default&apos;, {name: &apos;default&apos;})
    * @Mebo.register(&apos;cli.default&apos;)
    * class Default extends Mebo.Action{
    *
@@ -335,44 +338,63 @@ class Cli extends Handler{
       }
     };
 
-    let useCliName = (cliIndex !== -1) ? argv[cliIndex + 1] : defaultCliName;
-    if (useCliName){
-      useCliName = useCliName.toLowerCase();
-    }
+    const useCliName = (cliIndex !== -1) ? argv[cliIndex + 1] : defaultCliName;
 
     // list the available action names grated for cli
-    const availableClis = this._initNames[_handlerName] || {};
+    const availableClis = this._cliNames[_handlerName] || {};
     if ([&apos;-h&apos;, &apos;--help&apos;, undefined].includes(useCliName)){
       const result = [];
       result.push(&apos;Available actions granted for command-line:&apos;);
-      const initNames = Object.keys(availableClis);
+      const cliNames = Object.keys(availableClis);
 
-      for (const initName of initNames.sort()){
-        const defaultCli = (initName === defaultCliName) ? &apos;(Default)&apos; : &apos;&apos;;
+      for (const name of cliNames.sort()){
+        const defaultCli = (name === defaultCliName) ? &apos;(Default)&apos; : &apos;&apos;;
 
         const item = (defaultCli.length) ? &apos;&#x25C9;&apos; : &apos;&#x25EF;&apos;;
-        result.push(`  ${item} ${initName} ${defaultCli}`);
+        result.push(`  ${item} ${name} ${defaultCli}`);
       }
 
-      const error = new Error(result.join(&apos;\n&apos;));
-      error.status = 700;
+      const error = new Errors.Help(result.join(&apos;\n&apos;));
       _handlerOutput(error);
     }
     // cli not found
     else if (!(useCliName in availableClis)){
 
-      const error = new Error(`Could not initialize &apos;${useCliName}&apos;, cli not found!`);
-      error.status = 700;
+      const error = new Errors.Help(`Could not initialize &apos;${useCliName}&apos;, cli not found!`);
       _handlerOutput(error);
     }
     // found cli, initializing from it
     else{
-      handler.runAction(availableClis[useCliName]).then((result) =&gt; {
+      handler.runAction(availableClis[useCliName].actionName).then((result) =&gt; {
         _handlerOutput(result);
       }).catch(/* istanbul ignore next */ (err) =&gt; {
         _handlerOutput(err);
       });
     }
+  }
+
+  /**
+   * Return list of cli names used to execute the action. Those are the
+   * names passed through &quot;--cli &lt;name&gt;&quot;.
+   *
+   * @param {string} actionName - registered action name
+   * @return {Array&lt;string&gt;}
+   * @protected
+   */
+  static actionCliNames(actionName){
+    assert(TypeCheck.isString(actionName), &apos;actionName needs to be defined as string&apos;);
+
+    const result = [];
+
+    if (_handlerName in this._cliNames){
+      for (const name in this._cliNames[_handlerName]){
+        if (this._cliNames[_handlerName][name].actionName === actionName){
+          result.push(name);
+        }
+      }
+    }
+
+    return result;
   }
 
   /**
@@ -382,20 +404,23 @@ class Cli extends Handler{
    * @param {string} handlerName - registered handler name
    * @param {string} actionName - registered action name
    * @param {object} options - custom options passed during {@link Handler.grantAction}
-   * @param {string} [options.initName] - custom name used to initialize the cli, otherwise
+   * @param {string} [options.name] - custom name used to initialize the cli, otherwise
    * if not defined the actionName is used instead
    * @protected
    */
-  static _grantingAction(handlerName, actionName, {initName=null}={}){
+  static _grantingAction(handlerName, actionName, {name=null}={}){
 
-    const useInitName = (initName || actionName);
-    assert(TypeCheck.isString(useInitName), &apos;initName needs to be defined as string&apos;);
+    const useCliName = (name || actionName);
+    assert(TypeCheck.isString(useCliName), &apos;name needs to be defined as string&apos;);
 
-    if (!(handlerName in this._initNames)){
-      this._initNames[handlerName] = {};
+    if (!(handlerName in this._cliNames)){
+      this._cliNames[handlerName] = {};
     }
 
-    this._initNames[handlerName][useInitName] = actionName;
+    const options = {};
+    options.actionName = actionName;
+
+    this._cliNames[handlerName][useCliName] = options;
   }
 
   /**
@@ -437,7 +462,7 @@ class Cli extends Handler{
     );
   }
 
-  static _initNames = {};
+  static _cliNames = {};
 }
 
 // registering properties
@@ -446,7 +471,6 @@ Input.registerProperty(Input, &apos;shortOption&apos;);
 
 // registering option vars
 Metadata.registerOptionVar(&apos;$cli&apos;, `handler.${_handlerName}`);
-Metadata.registerOptionVar(&apos;$cliDescription&apos;, &apos;$cli.readOptions.description&apos;);
 Metadata.registerOptionVar(&apos;$cliResult&apos;, &apos;$cli.writeOptions.result&apos;);
 
 // registering handler

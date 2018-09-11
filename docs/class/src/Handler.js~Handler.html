@@ -43,6 +43,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Tasks.js~Tasks.html">Tasks</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Writer.js~Writer.html">Writer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Errors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Conflict.js~Conflict.html">Conflict</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/Help.js~Help.html">Help</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NoContent.js~NoContent.html">NoContent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Errors/ValidationFail.js~ValidationFail.html">ValidationFail</a></span></span></li>
@@ -75,13 +76,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Handler from &apos;<span><a href="file/src/Handler.js.html#lineNumber109">mebo/src/Handler.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Handler from &apos;<span><a href="file/src/Handler.js.html#lineNumber113">mebo/src/Handler.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Handler.js.html#lineNumber109">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Handler.js.html#lineNumber113">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -176,6 +177,9 @@ handler.runAction(&apos;actionName&apos;).then((result) =&gt; {
 });</code>
 </code></pre><p><strong>Tip:</strong> You can set the env variable <code>NODE_ENV=development</code> to get the
 traceback information included in the error output.</p>
+<p><strong>Tip:</strong> In case you want to know the name of the handler from inside of
+the action you can retrieved this information from the session
+<code>session().get(&apos;handler&apos;)</code> (<span><a href="class/src/Action.js~Action.html#instance-method-session">Action.session</a></span>).</p>
 </div>
   
 
@@ -888,7 +892,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber313">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber317">source</a></span></span>
     </span>
   </h3>
 
@@ -983,7 +987,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber387">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber390">source</a></span></span>
     </span>
   </h3>
 
@@ -1064,7 +1068,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber489">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber490">source</a></span></span>
     </span>
   </h3>
 
@@ -1212,7 +1216,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber547">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber545">source</a></span></span>
     </span>
   </h3>
 
@@ -1283,7 +1287,7 @@ Mebo.Handler.onErrorDuringOutput((err, handlerName, handlerMask =&gt; {
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber341">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber344">source</a></span></span>
     </span>
   </h3>
 
@@ -1363,7 +1367,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber357">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber360">source</a></span></span>
     </span>
   </h3>
 
@@ -1441,7 +1445,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber372">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber375">source</a></span></span>
     </span>
   </h3>
 
@@ -1519,7 +1523,7 @@ custom handler implementations for specific masks)</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber401">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber404">source</a></span></span>
     </span>
   </h3>
 
@@ -1602,7 +1606,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber468">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber471">source</a></span></span>
     </span>
   </h3>
 
@@ -1675,7 +1679,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber452">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber455">source</a></span></span>
     </span>
   </h3>
 
@@ -1731,7 +1735,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber419">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber422">source</a></span></span>
     </span>
   </h3>
 
@@ -1813,7 +1817,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber437">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber440">source</a></span></span>
     </span>
   </h3>
 
@@ -1897,7 +1901,7 @@ to match a custom registered handler</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber560">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber558">source</a></span></span>
     </span>
   </h3>
 
@@ -1976,7 +1980,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber114">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber118">source</a></span></span>
     </span>
   </h3>
 
@@ -2024,7 +2028,7 @@ is granted for a handler (<span><a href="class/src/Handler.js~Handler.html#stati
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber156">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber160">source</a></span></span>
     </span>
   </h3>
 
@@ -2108,7 +2112,7 @@ not found for the path</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber272">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber276">source</a></span></span>
     </span>
   </h3>
 
@@ -2202,7 +2206,7 @@ by the output where each handler implementation contains their own set of option
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber202">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber206">source</a></span></span>
     </span>
   </h3>
 
@@ -2294,7 +2298,7 @@ for the handler should be fetched.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber135">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber139">source</a></span></span>
     </span>
   </h3>
 
@@ -2350,7 +2354,7 @@ for the handler should be fetched.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber176">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber180">source</a></span></span>
     </span>
   </h3>
 
@@ -2432,7 +2436,7 @@ either merged (default) or overridden.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber124">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber128">source</a></span></span>
     </span>
   </h3>
 
@@ -2496,7 +2500,7 @@ the handler is cloned during the assignment (<span><a href="class/src/Session.js
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber573">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber571">source</a></span></span>
     </span>
   </h3>
 
@@ -2584,7 +2588,7 @@ constructor during factoring of the reader (should be used by derived classes)</
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber599">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Handler.js.html#lineNumber597">source</a></span></span>
     </span>
   </h3>
 
