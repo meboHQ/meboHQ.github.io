@@ -48,9 +48,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/errors/conflict.js~conflict",
-    "class/src/Errors/Conflict.js~Conflict.html",
-    "<span>Conflict</span> <span class=\"search-result-import-path\">mebo/src/Errors/Conflict.js</span>",
+    "mebo/src/meboerrors/conflict.js~conflict",
+    "class/src/MeboErrors/Conflict.js~Conflict.html",
+    "<span>Conflict</span> <span class=\"search-result-import-path\">mebo/src/MeboErrors/Conflict.js</span>",
     "class"
   ],
   [
@@ -78,9 +78,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/errors/help.js~help",
-    "class/src/Errors/Help.js~Help.html",
-    "<span>Help</span> <span class=\"search-result-import-path\">mebo/src/Errors/Help.js</span>",
+    "mebo/src/meboerrors/help.js~help",
+    "class/src/MeboErrors/Help.js~Help.html",
+    "<span>Help</span> <span class=\"search-result-import-path\">mebo/src/MeboErrors/Help.js</span>",
     "class"
   ],
   [
@@ -114,21 +114,27 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "mebo/src/meboerror.js~meboerror",
+    "class/src/MeboError.js~MeboError.html",
+    "<span>MeboError</span> <span class=\"search-result-import-path\">mebo/src/MeboError.js</span>",
+    "class"
+  ],
+  [
     "mebo/src/metadata.js~metadata",
     "class/src/Metadata.js~Metadata.html",
     "<span>Metadata</span> <span class=\"search-result-import-path\">mebo/src/Metadata.js</span>",
     "class"
   ],
   [
-    "mebo/src/errors/nocontent.js~nocontent",
-    "class/src/Errors/NoContent.js~NoContent.html",
-    "<span>NoContent</span> <span class=\"search-result-import-path\">mebo/src/Errors/NoContent.js</span>",
+    "mebo/src/meboerrors/nocontent.js~nocontent",
+    "class/src/MeboErrors/NoContent.js~NoContent.html",
+    "<span>NoContent</span> <span class=\"search-result-import-path\">mebo/src/MeboErrors/NoContent.js</span>",
     "class"
   ],
   [
-    "mebo/src/errors/notfound.js~notfound",
-    "class/src/Errors/NotFound.js~NotFound.html",
-    "<span>NotFound</span> <span class=\"search-result-import-path\">mebo/src/Errors/NotFound.js</span>",
+    "mebo/src/meboerrors/notfound.js~notfound",
+    "class/src/MeboErrors/NotFound.js~NotFound.html",
+    "<span>NotFound</span> <span class=\"search-result-import-path\">mebo/src/MeboErrors/NotFound.js</span>",
     "class"
   ],
   [
@@ -192,9 +198,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mebo/src/errors/validationfail.js~validationfail",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html",
-    "<span>ValidationFail</span> <span class=\"search-result-import-path\">mebo/src/Errors/ValidationFail.js</span>",
+    "mebo/src/meboerrors/validationfail.js~validationfail",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html",
+    "<span>ValidationFail</span> <span class=\"search-result-import-path\">mebo/src/MeboErrors/ValidationFail.js</span>",
     "class"
   ],
   [
@@ -714,144 +720,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/errors/conflict.js",
-    "file/src/Errors/Conflict.js.html",
-    "src/Errors/Conflict.js",
-    "file"
-  ],
-  [
-    "src/errors/conflict.js~conflict#disableoutputinnested",
-    "class/src/Errors/Conflict.js~Conflict.html#instance-member-disableOutputInNested",
-    "src/Errors/Conflict.js~Conflict#disableOutputInNested",
-    "member"
-  ],
-  [
-    "src/errors/conflict.js~conflict#status",
-    "class/src/Errors/Conflict.js~Conflict.html#instance-member-status",
-    "src/Errors/Conflict.js~Conflict#status",
-    "member"
-  ],
-  [
-    "src/errors/help.js",
-    "file/src/Errors/Help.js.html",
-    "src/Errors/Help.js",
-    "file"
-  ],
-  [
-    "src/errors/help.js~help#disableoutputinnested",
-    "class/src/Errors/Help.js~Help.html#instance-member-disableOutputInNested",
-    "src/Errors/Help.js~Help#disableOutputInNested",
-    "member"
-  ],
-  [
-    "src/errors/help.js~help#status",
-    "class/src/Errors/Help.js~Help.html#instance-member-status",
-    "src/Errors/Help.js~Help#status",
-    "member"
-  ],
-  [
-    "src/errors/nocontent.js",
-    "file/src/Errors/NoContent.js.html",
-    "src/Errors/NoContent.js",
-    "file"
-  ],
-  [
-    "src/errors/nocontent.js~nocontent#disableoutputinnested",
-    "class/src/Errors/NoContent.js~NoContent.html#instance-member-disableOutputInNested",
-    "src/Errors/NoContent.js~NoContent#disableOutputInNested",
-    "member"
-  ],
-  [
-    "src/errors/nocontent.js~nocontent#status",
-    "class/src/Errors/NoContent.js~NoContent.html#instance-member-status",
-    "src/Errors/NoContent.js~NoContent#status",
-    "member"
-  ],
-  [
-    "src/errors/notfound.js",
-    "file/src/Errors/NotFound.js.html",
-    "src/Errors/NotFound.js",
-    "file"
-  ],
-  [
-    "src/errors/notfound.js~notfound#disableoutputinnested",
-    "class/src/Errors/NotFound.js~NotFound.html#instance-member-disableOutputInNested",
-    "src/Errors/NotFound.js~NotFound#disableOutputInNested",
-    "member"
-  ],
-  [
-    "src/errors/notfound.js~notfound#status",
-    "class/src/Errors/NotFound.js~NotFound.html#instance-member-status",
-    "src/Errors/NotFound.js~NotFound#status",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js",
-    "file/src/Errors/ValidationFail.js.html",
-    "src/Errors/ValidationFail.js",
-    "file"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#code",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-code",
-    "src/Errors/ValidationFail.js~ValidationFail#code",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#code",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-code",
-    "src/Errors/ValidationFail.js~ValidationFail#code",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#constructor",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-constructor-constructor",
-    "src/Errors/ValidationFail.js~ValidationFail#constructor",
-    "method"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#disableoutputinnested",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-member-disableOutputInNested",
-    "src/Errors/ValidationFail.js~ValidationFail#disableOutputInNested",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
-    "src/Errors/ValidationFail.js~ValidationFail#inputName",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#inputname",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
-    "src/Errors/ValidationFail.js~ValidationFail#inputName",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#status",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-member-status",
-    "src/Errors/ValidationFail.js~ValidationFail#status",
-    "member"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail#tojson",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#instance-method-toJSON",
-    "src/Errors/ValidationFail.js~ValidationFail#toJSON",
-    "method"
-  ],
-  [
-    "src/errors/validationfail.js~validationfail.fromjson",
-    "class/src/Errors/ValidationFail.js~ValidationFail.html#static-method-fromJSON",
-    "src/Errors/ValidationFail.js~ValidationFail.fromJSON",
-    "method"
-  ],
-  [
-    "src/errors/index.js",
-    "file/src/Errors/index.js.html",
-    "src/Errors/index.js",
-    "file"
-  ],
-  [
     "src/handler.js",
     "file/src/Handler.js.html",
     "src/Handler.js",
@@ -915,6 +783,12 @@ window.esdocSearchIndex = [
     "src/handler.js~handler._grantingaction",
     "class/src/Handler.js~Handler.html#static-method-_grantingAction",
     "src/Handler.js~Handler._grantingAction",
+    "method"
+  ],
+  [
+    "src/handler.js~handler.clearerrorduringoutput",
+    "class/src/Handler.js~Handler.html#static-method-clearErrorDuringOutput",
+    "src/Handler.js~Handler.clearErrorDuringOutput",
     "method"
   ],
   [
@@ -1062,15 +936,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/handlers/cli.js~cli.actionclinames",
-    "class/src/Handlers/Cli.js~Cli.html#static-method-actionCliNames",
-    "src/Handlers/Cli.js~Cli.actionCliNames",
+    "src/handlers/cli.js~cli.actioncommands",
+    "class/src/Handlers/Cli.js~Cli.html#static-method-actionCommands",
+    "src/Handlers/Cli.js~Cli.actionCommands",
     "method"
   ],
   [
     "src/handlers/cli.js~cli.init",
     "class/src/Handlers/Cli.js~Cli.html#static-method-init",
     "src/Handlers/Cli.js~Cli.init",
+    "method"
+  ],
+  [
+    "src/handlers/cli.js~cli.issupported",
+    "class/src/Handlers/Cli.js~Cli.html#static-method-isSupported",
+    "src/Handlers/Cli.js~Cli.isSupported",
     "method"
   ],
   [
@@ -1149,6 +1029,18 @@ window.esdocSearchIndex = [
     "src/handlers/web.js~web.beforeauthaction",
     "class/src/Handlers/Web.js~Web.html#static-method-beforeAuthAction",
     "src/Handlers/Web.js~Web.beforeAuthAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.clearbeforeaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-clearBeforeAction",
+    "src/Handlers/Web.js~Web.clearBeforeAction",
+    "method"
+  ],
+  [
+    "src/handlers/web.js~web.clearbeforeauthaction",
+    "class/src/Handlers/Web.js~Web.html#static-method-clearBeforeAuthAction",
+    "src/Handlers/Web.js~Web.clearBeforeAuthAction",
     "method"
   ],
   [
@@ -1779,6 +1671,162 @@ window.esdocSearchIndex = [
     "src/inputs/index.js",
     "file/src/Inputs/index.js.html",
     "src/Inputs/index.js",
+    "file"
+  ],
+  [
+    "src/meboerror.js",
+    "file/src/MeboError.js.html",
+    "src/MeboError.js",
+    "file"
+  ],
+  [
+    "src/meboerror.js~meboerror#disableoutputinnested",
+    "class/src/MeboError.js~MeboError.html#instance-member-disableOutputInNested",
+    "src/MeboError.js~MeboError#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/meboerror.js~meboerror#status",
+    "class/src/MeboError.js~MeboError.html#instance-member-status",
+    "src/MeboError.js~MeboError#status",
+    "member"
+  ],
+  [
+    "src/meboerrors/conflict.js",
+    "file/src/MeboErrors/Conflict.js.html",
+    "src/MeboErrors/Conflict.js",
+    "file"
+  ],
+  [
+    "src/meboerrors/conflict.js~conflict#disableoutputinnested",
+    "class/src/MeboErrors/Conflict.js~Conflict.html#instance-member-disableOutputInNested",
+    "src/MeboErrors/Conflict.js~Conflict#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/meboerrors/conflict.js~conflict#status",
+    "class/src/MeboErrors/Conflict.js~Conflict.html#instance-member-status",
+    "src/MeboErrors/Conflict.js~Conflict#status",
+    "member"
+  ],
+  [
+    "src/meboerrors/help.js",
+    "file/src/MeboErrors/Help.js.html",
+    "src/MeboErrors/Help.js",
+    "file"
+  ],
+  [
+    "src/meboerrors/help.js~help#disableoutputinnested",
+    "class/src/MeboErrors/Help.js~Help.html#instance-member-disableOutputInNested",
+    "src/MeboErrors/Help.js~Help#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/meboerrors/help.js~help#status",
+    "class/src/MeboErrors/Help.js~Help.html#instance-member-status",
+    "src/MeboErrors/Help.js~Help#status",
+    "member"
+  ],
+  [
+    "src/meboerrors/nocontent.js",
+    "file/src/MeboErrors/NoContent.js.html",
+    "src/MeboErrors/NoContent.js",
+    "file"
+  ],
+  [
+    "src/meboerrors/nocontent.js~nocontent#disableoutputinnested",
+    "class/src/MeboErrors/NoContent.js~NoContent.html#instance-member-disableOutputInNested",
+    "src/MeboErrors/NoContent.js~NoContent#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/meboerrors/nocontent.js~nocontent#status",
+    "class/src/MeboErrors/NoContent.js~NoContent.html#instance-member-status",
+    "src/MeboErrors/NoContent.js~NoContent#status",
+    "member"
+  ],
+  [
+    "src/meboerrors/notfound.js",
+    "file/src/MeboErrors/NotFound.js.html",
+    "src/MeboErrors/NotFound.js",
+    "file"
+  ],
+  [
+    "src/meboerrors/notfound.js~notfound#disableoutputinnested",
+    "class/src/MeboErrors/NotFound.js~NotFound.html#instance-member-disableOutputInNested",
+    "src/MeboErrors/NotFound.js~NotFound#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/meboerrors/notfound.js~notfound#status",
+    "class/src/MeboErrors/NotFound.js~NotFound.html#instance-member-status",
+    "src/MeboErrors/NotFound.js~NotFound#status",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js",
+    "file/src/MeboErrors/ValidationFail.js.html",
+    "src/MeboErrors/ValidationFail.js",
+    "file"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#code",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-set-code",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#code",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#code",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-get-code",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#code",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#constructor",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-constructor-constructor",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#constructor",
+    "method"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#disableoutputinnested",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-member-disableOutputInNested",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#disableOutputInNested",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#inputname",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-set-inputName",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#inputName",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#inputname",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-get-inputName",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#inputName",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#status",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-member-status",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#status",
+    "member"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail#tojson",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#instance-method-toJSON",
+    "src/MeboErrors/ValidationFail.js~ValidationFail#toJSON",
+    "method"
+  ],
+  [
+    "src/meboerrors/validationfail.js~validationfail.fromjson",
+    "class/src/MeboErrors/ValidationFail.js~ValidationFail.html#static-method-fromJSON",
+    "src/MeboErrors/ValidationFail.js~ValidationFail.fromJSON",
+    "method"
+  ],
+  [
+    "src/meboerrors/index.js",
+    "file/src/MeboErrors/index.js.html",
+    "src/MeboErrors/index.js",
     "file"
   ],
   [
