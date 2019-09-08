@@ -352,7 +352,7 @@
                     "trailingComments": [
                       {
                         "type": "CommentBlock",
-                        "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `409`)\n     *\n     * @type {number}\n     ",
+                        "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `500`)\n     *\n     * @type {number}\n     ",
                         "start": 196,
                         "end": 502,
                         "loc": {
@@ -539,7 +539,7 @@
                     "leadingComments": [
                       {
                         "type": "CommentBlock",
-                        "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `409`)\n     *\n     * @type {number}\n     ",
+                        "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `500`)\n     *\n     * @type {number}\n     ",
                         "start": 196,
                         "end": 502,
                         "loc": {
@@ -1283,7 +1283,7 @@
                       "trailingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `409`)\n     *\n     * @type {number}\n     ",
+                          "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `500`)\n     *\n     * @type {number}\n     ",
                           "start": 196,
                           "end": 502,
                           "loc": {
@@ -1470,7 +1470,7 @@
                       "leadingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `409`)\n     *\n     * @type {number}\n     ",
+                          "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `500`)\n     *\n     * @type {number}\n     ",
                           "start": 196,
                           "end": 502,
                           "loc": {
@@ -1760,7 +1760,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `409`)\n     *\n     * @type {number}\n     ",
+      "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `500`)\n     *\n     * @type {number}\n     ",
       "start": 196,
       "end": 502,
       "loc": {
@@ -2426,7 +2426,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `409`)\n     *\n     * @type {number}\n     ",
+      "value": "*\n     * Status code used by the {@link Handler} when this error is raised from inside of a top\n     * level action (an action that has not been created from another action).\n     *\n     * Value driven by:\n     * `Settings.get('error/status')`\n     * (default: `500`)\n     *\n     * @type {number}\n     ",
       "start": 196,
       "end": 502,
       "loc": {
