@@ -91,8 +91,18 @@
 <h2 id="what-is-mebo-">What is Mebo ?</h2>
 <p><a href="https://github.com/meboHQ/mebo/issues"><img src="https://badges.github.io/stability-badges/dist/experimental.svg" alt="experimental"></a></p>
 <p>Mebo is an experimental framework focused in providing a unified interface across multiple domains.</p>
-<p>The support for multiple domains is done by promoting abstracted implementations which don&apos;t need to know too much about the specifics of each domain. Instead, the specifics are delegated to Mebo.</p>
-<p>It comes bundled with support for web (rest/middlewares) and command-line (docopt) domains which was one of the reasons why I wanted to try to find a common ground to provide an unified interface for such distinctive domains that turned out to be extremely challenge.</p>
+<p>The idea behing mebo is to provide a platform where <a href="https://mebohq.github.io/docs/class/src/Action.js~Action.html">evaluations</a> and 
+their requirements are defined in a simple matter. The way it is done 
+lets you to build strict specifications with validations in a fairly 
+expressive way.</p>
+<p>Evaluations in Mebo are exposed by promoting implementations that don&apos;t need to be too coupled to a specific 
+domain instead, most of the boilerplate code needed when <a href="https://mebohq.github.io/docs/class/src/Handler.js~Handler.html">bridging</a> a domain 
+(for instance on the web: request &amp; response) to an evaluation is 
+avoided and automatically handled by mebo (<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>).</p>
+<p>By using mebo you can easily expose your evaluations through the <a href="https://mebohq.github.io/docs/class/src/Handlers/Web.js~Web.html">web</a> via 
+REST/middlewares and also without much effort expose them through <a href="https://mebohq.github.io/docs/class/src/Handlers/Cli.js~Cli.html">command-line</a> (CLI coming handy during development/debugging to interact 
+with your evaluations quickly).</p>
+<p>So, you can use Mebo for desktop apps, web apps or all together.</p>
 <p></p><p>
   <img src="data/hi.png?v=2">
 </p>
